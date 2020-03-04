@@ -1,0 +1,3258 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 3: Working in Google Sheets
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 3: Working in Google Sheets" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/03-05.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-3-working-in-google-sheets"><strong>Empirical Project 3</strong> Working in Google Sheets</h1>
+<h2 class="save-2" id="google-sheets-specific-learning-objectives">Google Sheets-specific learning objectives</h2>
+<p class="tighten-15">In addition to the learning objectives for this project, in this section you will learn how to create summary tables using Google Sheets’ PivotTable option.</p>
+<h2 id="part-31-before-and-after-comparisons-of-retail-prices">Part 3.1 Before-and-after comparisons of retail prices</h2>
+<p>We will first look at price data from the treatment group (stores in Berkeley) to see what happened to the price of sugary and non-sugary beverages after the tax.</p>
+<ul>
+  <li>Download the data from the <a href="https://tinyco.re/5269171" class="show-url">Global Food Research Program’s website</a>, and select the ‘Berkeley Store Price Survey’ Google Sheets dataset.</li>
+  <li>The first tab of the Google Sheets file contains the data dictionary. Make sure you read the data description column carefully, and check that each variable is in the Data tab.</li>
+</ul>
+<ol class="text-question">
+  <li>Read <a href="https://tinyco.re/9522240" class="show-url">‘S1 Text’</a>, from the journal paper’s supporting information, which explains how the Store Price Survey data was collected.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>In your own words, explain how the product information was recorded, and the measures that researchers took to ensure that the data was accurate and representative of the treatment group. What were some of the data collection issues that they encountered?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Instead of using the name of the store, each store was given a unique ID number (recorded as store_id on the spreadsheet). Using Google Sheets’ filter function, verify that the number of stores in the dataset is the same as that stated in the ‘S1 Text’ (26). Similarly, each product was given a unique ID number (product_id). How many different products are in the dataset?</li>
+</ul>
+<p class="keep-together">Following the approach described in ‘S1 Text’, we will compare the variable price per ounce in US$ cents (price_per_oz_c). We will look at what happened to prices in the two treatment groups before the tax (time = DEC2014) and after the tax (time = JUN2015):</p>
+<ul>
+  <li><em>treatment group one</em>: large supermarkets (store_type = 1)</li>
+  <li><em>treatment group two</em>: pharmacies (store_type = 3).</li>
+</ul>
+<p>Before doing this analysis, we will use summary measures to see how many observations are in the treatment and control group, and how the two groups differ across some variables of interest. For example, if there are very few observations in a group, we might be concerned about the precision of our estimates and will need to interpret our results in light of this fact.</p>
+<p>Instead of calculating summary measures one by one (as we did in Empirical Project 2), we will use Google Sheets’ PivotTable option to make frequency tables containing the summary measures that we are interested in. The tables should be in a different tab to the data (either all in the same tab, or in separate tabs).</p>
+<ol class="text-question">
+  <li>Use Google Sheets’ PivotTable option to create the following tables:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>A frequency table showing the number (count) of store observations (store type) in December 2014 and June 2015, with ‘store type’ as the row variable and ‘time period’ as the column variable. For each store type, is the number of observations similar in each time period?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>A frequency table showing the number of taxed and non-taxed beverages in December 2014 and June 2015, with ‘store type’ as the row variable and ‘taxed’ as the column variable. (‘Taxed’ equals 1 if the sugar tax applied to that product, and 0 if the tax did not apply). For each store type, is the number of taxed and non-taxed beverages similar?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>A frequency table showing the number of each product type (type), with ‘product type’ as the row variable and ‘time period’ as the column variables. Which product types have the highest number of observations and which have the lowest number of observations? Why might some products have more observations than others?</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-31-making-a-frequency-table-using-the-pivottable-option"><strong>Google Sheets walk-through 3.1</strong> Making a frequency table using the PivotTable option</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-3-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to make a frequency table using Google Sheets’ PivotTable option.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to make a frequency table using Google Sheets’ PivotTable option.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 3.2 </span>
+How to make a frequency table using Google Sheets’ PivotTable option.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-2a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: The data will look like this. We will be making a pivot table using Column C (store type) and Column K (time). It will show how many observations of each store type there are in 2 time periods (Dec2014 and Jun2015).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: The data will look like this. We will be making a pivot table using Column C (store type) and Column K (time). It will show how many observations of each store type there are in 2 time periods (Dec2014 and Jun2015).
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+The data will look like this. We will be making a pivot table using Column C (store type) and Column K (time). It will show how many observations of each store type there are in 2 time periods (Dec2014 and Jun2015).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.2a </span>
+The data will look like this. We will be making a pivot table using Column C (store type) and Column K (time). It will show how many observations of each store type there are in 2 time periods (Dec2014 and Jun2015).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-2b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Insert a blank pivot table
+: After step 2, a new sheet named ‘Pivot Table’ will appear.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Insert a blank pivot table
+: After step 2, a new sheet named ‘Pivot Table’ will appear.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Insert a blank pivot table
+</p>
+<p class="description">
+After step 2, a new sheet named ‘Pivot Table’ will appear.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.2b </span>
+After step 2, a new sheet named ‘Pivot Table’ will appear.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-2c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Insert a blank pivot table
+: A sidebar will appear in the newly created sheet. The pivot table is currently blank. In order to create the table, we will select the relevant row variable(s), column variable(s), and values in the sidebar.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Insert a blank pivot table
+: A sidebar will appear in the newly created sheet. The pivot table is currently blank. In order to create the table, we will select the relevant row variable(s), column variable(s), and values in the sidebar.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Insert a blank pivot table
+</p>
+<p class="description">
+A sidebar will appear in the newly created sheet. The pivot table is currently blank. In order to create the table, we will select the relevant row variable(s), column variable(s), and values in the sidebar.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.2c </span>
+A sidebar will appear in the newly created sheet. The pivot table is currently blank. In order to create the table, we will select the relevant row variable(s), column variable(s), and values in the sidebar.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-2d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Choose the variables to put in the pivot table
+: After step 5, your pivot table will look like the one above.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Choose the variables to put in the pivot table
+: After step 5, your pivot table will look like the one above.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Choose the variables to put in the pivot table
+</p>
+<p class="description">
+After step 5, your pivot table will look like the one above.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.2d </span>
+After step 5, your pivot table will look like the one above.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-2e">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: The table shown does not have any blank cells, but if there are any, then you can remove them by filtering the data. You can also filter the data so that your table will show specific time periods only.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-02-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: The table shown does not have any blank cells, but if there are any, then you can remove them by filtering the data. You can also filter the data so that your table will show specific time periods only.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the values of each variable
+</p>
+<p class="description">
+The table shown does not have any blank cells, but if there are any, then you can remove them by filtering the data. You can also filter the data so that your table will show specific time periods only.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.2e </span>
+The table shown does not have any blank cells, but if there are any, then you can remove them by filtering the data. You can also filter the data so that your table will show specific time periods only.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">conditional mean</dt><dd class="definition-description">An average of a variable, taken over a subgroup of observations that satisfy certain conditions, rather than all observations.</dd>
+</dl>
+<p>Besides counting the number of observations in a particular group, we can also use the PivotTable option to calculate the mean by only using observations that satisfy certain conditions (known as the <strong data-term="conditional mean">conditional mean</strong>). In this case, we are interested in comparing the mean price of taxed and non-taxed beverages, before and after the tax.</p>
+<ol class="text-question">
+  <li>Calculate and compare conditional means:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table similar to Figure 3.3, showing the average price per ounce (in cents) for taxed and non-taxed beverages separately, with ‘store type’ as the row variable, and ‘taxed’ and ‘time’ as the column variables. To follow the methodology used in the journal paper, make sure to only include products that are present in all time periods, and non-supplementary products (supp = 0).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Without doing any calculations, summarize any differences or general patterns between December 2014 and June 2015 that you find in the table.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Would we be able to assess the effect of sugar taxes on product prices by comparing the average price of non-taxed goods with that of taxed goods in any given period? Why or why not?</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-3-3">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th></th>
+    <th colspan="2">Non-taxed</th>
+    <th colspan="2">Taxed</th>
+  </tr>
+  <tr>
+    <td>Store type</td>
+    <td>Dec 2014</td>
+    <td>Jun 2015</td>
+    <td>Dec 2014</td>
+    <td>Jun 2015</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+The average price of taxed and non-taxed beverages, according to time period and store type.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.3 </span>
+The average price of taxed and non-taxed beverages, according to time period and store type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><span> </span></p>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-32-making-a-pivot-table-with-more-than-two-variables"><strong>Google Sheets walk-through 3.2</strong> Making a pivot table with more than two variables</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-3-4">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to make a pivot table with more than two variables.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to make a pivot table with more than two variables.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 3.4 </span>
+How to make a pivot table with more than two variables.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: The data will look like this. We will be making a pivot table using Column C (store type), Column K (time), and Column I (taxed). It will show the average price of taxed and non-taxed beverages in Dec2014 and Jun2015, according to store type.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: The data will look like this. We will be making a pivot table using Column C (store type), Column K (time), and Column I (taxed). It will show the average price of taxed and non-taxed beverages in Dec2014 and Jun2015, according to store type.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+The data will look like this. We will be making a pivot table using Column C (store type), Column K (time), and Column I (taxed). It will show the average price of taxed and non-taxed beverages in Dec2014 and Jun2015, according to store type.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4a </span>
+The data will look like this. We will be making a pivot table using Column C (store type), Column K (time), and Column I (taxed). It will show the average price of taxed and non-taxed beverages in Dec2014 and Jun2015, according to store type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Count the number of times each product appears in the dataset
+: We only want to look at products that were present in all time periods, to ensure we are comparing the same group of products over time. We will create a new variable (called ‘Number’, shown in Column M) that shows how many periods of data are available for each product. The COUNTIFS function will help us count the number of observations that satisfy certain conditions.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Count the number of times each product appears in the dataset
+: We only want to look at products that were present in all time periods, to ensure we are comparing the same group of products over time. We will create a new variable (called ‘Number’, shown in Column M) that shows how many periods of data are available for each product. The COUNTIFS function will help us count the number of observations that satisfy certain conditions.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Count the number of times each product appears in the dataset
+</p>
+<p class="description">
+We only want to look at products that were present in all time periods, to ensure we are comparing the same group of products over time. We will create a new variable (called ‘Number’, shown in Column M) that shows how many periods of data are available for each product. The COUNTIFS function will help us count the number of observations that satisfy certain conditions.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4b </span>
+We only want to look at products that were present in all time periods, to ensure we are comparing the same group of products over time. We will create a new variable (called ‘Number’, shown in Column M) that shows how many periods of data are available for each product. The COUNTIFS function will help us count the number of observations that satisfy certain conditions.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Insert a blank pivot table
+: We will make and store the frequency table in a new tab in the spreadsheet.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Insert a blank pivot table
+: We will make and store the frequency table in a new tab in the spreadsheet.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Insert a blank pivot table
+</p>
+<p class="description">
+We will make and store the frequency table in a new tab in the spreadsheet.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4c </span>
+We will make and store the frequency table in a new tab in the spreadsheet.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Fill in the Pivot Table
+: After step 6, your pivot table will look like the one above. By default, Google Sheets uses all the available data.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Fill in the Pivot Table
+: After step 6, your pivot table will look like the one above. By default, Google Sheets uses all the available data.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Fill in the Pivot Table
+</p>
+<p class="description">
+After step 6, your pivot table will look like the one above. By default, Google Sheets uses all the available data.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4d </span>
+After step 6, your pivot table will look like the one above. By default, Google Sheets uses all the available data.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4e">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Round cell values to two decimal places
+: To make the table easier to read, we will round the cell values to two decimal places.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Round cell values to two decimal places
+: To make the table easier to read, we will round the cell values to two decimal places.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Round cell values to two decimal places
+</p>
+<p class="description">
+To make the table easier to read, we will round the cell values to two decimal places.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4e </span>
+To make the table easier to read, we will round the cell values to two decimal places.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4f">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values inside the table
+: We will filter the data according to the values of ‘store_type’, ‘time’, ‘Number’ and ‘supp’.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-f.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values inside the table
+: We will filter the data according to the values of ‘store_type’, ‘time’, ‘Number’ and ‘supp’.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the values inside the table
+</p>
+<p class="description">
+We will filter the data according to the values of ‘store_type’, ‘time’, ‘Number’ and ‘supp’.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4f </span>
+We will filter the data according to the values of ‘store_type’, ‘time’, ‘Number’ and ‘supp’.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4g">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values inside the table
+: We will filter the data so that only the store types we want (1 and 3) are visible.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-g.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values inside the table
+: We will filter the data so that only the store types we want (1 and 3) are visible.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the values inside the table
+</p>
+<p class="description">
+We will filter the data so that only the store types we want (1 and 3) are visible.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4g </span>
+We will filter the data so that only the store types we want (1 and 3) are visible.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4h">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: We will filter the data so that only the time periods we want (Dec2014 and Jun2015) are visible.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-h.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: We will filter the data so that only the time periods we want (Dec2014 and Jun2015) are visible.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the values of each variable
+</p>
+<p class="description">
+We will filter the data so that only the time periods we want (Dec2014 and Jun2015) are visible.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4h </span>
+We will filter the data so that only the time periods we want (Dec2014 and Jun2015) are visible.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4i">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: We now filter the data so that only products that are available in all time periods (Number = 3) are visible.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-i.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: We now filter the data so that only products that are available in all time periods (Number = 3) are visible.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the values of each variable
+</p>
+<p class="description">
+We now filter the data so that only products that are available in all time periods (Number = 3) are visible.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4i </span>
+We now filter the data so that only products that are available in all time periods (Number = 3) are visible.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4j">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: We filter the data so that only non-supplementary products (supp = 0) are visible.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-j.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the values of each variable
+: We filter the data so that only non-supplementary products (supp = 0) are visible.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the values of each variable
+</p>
+<p class="description">
+We filter the data so that only non-supplementary products (supp = 0) are visible.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4j </span>
+We filter the data so that only non-supplementary products (supp = 0) are visible.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-4k">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Remove the grand total row and column
+: After step 15, your table should look like the one above.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-04-k.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Remove the grand total row and column
+: After step 15, your table should look like the one above.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Remove the grand total row and column
+</p>
+<p class="description">
+After step 15, your table should look like the one above.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4k </span>
+After step 15, your table should look like the one above.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<p>In order to make a before-and-after comparison, we will make a chart similar to <a href="https://tinyco.re/8127041" class="show-url">Figure 2</a> in the journal paper, to show the change in prices for each store type.</p>
+<ol class="text-question">
+  <li>Using your table from Question 3:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the change in the mean price after the tax (price in June 2015 minus price in December 2014) for taxed and non-taxed beverages, by store type.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using the values you calculated in Question 4<em>(a)</em>, plot a column chart to show this information (as done in Figure 2 of the journal paper) with store type on the horizontal axis and price change on the vertical axis. Label each axis and data series appropriately. You should get the same values as shown in Figure 2.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-33-making-a-column-chart-to-compare-two-groups"><strong>Google Sheets walk-through 3.3</strong> Making a column chart to compare two groups</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-3-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to make a column chart to compare two groups.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to make a column chart to compare two groups.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 3.5 </span>
+How to make a column chart to compare two groups.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-5a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Create a table showing differences in means
+: We will display the calculated differences in the table highlighted in blue. The labels on the rows are in the same order as in the pivot table, but the rows are flipped, since 0 corresponds to ‘Non-taxed’ and 1 to ‘Taxed’ in the pivot table.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Create a table showing differences in means
+: We will display the calculated differences in the table highlighted in blue. The labels on the rows are in the same order as in the pivot table, but the rows are flipped, since 0 corresponds to ‘Non-taxed’ and 1 to ‘Taxed’ in the pivot table.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Create a table showing differences in means
+</p>
+<p class="description">
+We will display the calculated differences in the table highlighted in blue. The labels on the rows are in the same order as in the pivot table, but the rows are flipped, since 0 corresponds to ‘Non-taxed’ and 1 to ‘Taxed’ in the pivot table.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.5a </span>
+We will display the calculated differences in the table highlighted in blue. The labels on the rows are in the same order as in the pivot table, but the rows are flipped, since 0 corresponds to ‘Non-taxed’ and 1 to ‘Taxed’ in the pivot table.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-5b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Create a table showing differences in means
+: Fill in the table by using cell formulas to calculate the differences required. After step 2, your table will look like the one shown above.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Create a table showing differences in means
+: Fill in the table by using cell formulas to calculate the differences required. After step 2, your table will look like the one shown above.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Create a table showing differences in means
+</p>
+<p class="description">
+Fill in the table by using cell formulas to calculate the differences required. After step 2, your table will look like the one shown above.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.5b </span>
+Fill in the table by using cell formulas to calculate the differences required. After step 2, your table will look like the one shown above.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-5c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Draw a column chart
+: We will use the table we created to make a column chart.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Draw a column chart
+: We will use the table we created to make a column chart.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Draw a column chart
+</p>
+<p class="description">
+We will use the table we created to make a column chart.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.5c </span>
+We will use the table we created to make a column chart.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-3-5d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Add chart and axis titles, and move the chart legend
+: After step 7, your chart will look like the bottom chart of Figure 2 in the journal paper.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-03-05-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Add chart and axis titles, and move the chart legend
+: After step 7, your chart will look like the bottom chart of Figure 2 in the journal paper.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Add chart and axis titles, and move the chart legend
+</p>
+<p class="description">
+After step 7, your chart will look like the bottom chart of Figure 2 in the journal paper.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.5d </span>
+After step 7, your chart will look like the bottom chart of Figure 2 in the journal paper.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">statistically significant</dt><dd class="definition-description">When a relationship between two or more variables is unlikely to be due to chance, given the assumptions made about the variables (for example, having the same mean). Statistical significance does not tell us whether there is a causal link between the variables.</dd>
+</dl>
+<p class="loosen-10">To assess whether the difference in mean prices before and after the tax could have happened by chance due to the samples chosen (and there are no differences in the population means), we could calculate the p-value. (Here, ‘population means’ refer to the mean prices before/after the tax that we would calculate if we had all prices for all stores in Berkeley.) The authors of the journal article calculate p-values, and use the idea of statistical significance to interpret them. Whenever they get a p-value of less than 5%, they conclude that the assumption of no differences in the population is unlikely to be true: they say that the price difference is <strong data-term="statistically significant">statistically significant</strong>. If they get a p-value higher than 5%, they say that the difference is not statistically significant, meaning that they think it could be due to chance variation in prices.</p>
+<p class="tighten-10">Using a particular cutoff level for the p-value, and concluding that a result is only statistically significant if the p-value is below the cutoff, is common in statistical studies, and 5% is often used as the cutoff level. But <a href="https://tinyco.re/6156097">this approach has been criticized recently by statisticians and social scientists</a>. The main criticisms raised are that any cutoffs are arbitrary. Instead of using a cutoff, we prefer to calculate p-values and use them to assess the strength of the evidence against our assumption that there are no differences in the population means. Whether the statistical evidence is strong enough for us to draw a conclusion about a policy, such as a sugar tax, will always be a matter of judgement.</p>
+<p>According to the journal paper, the p-value is 0.02 for large supermarkets, and 0.99 for pharmacies.</p>
+<ol class="text-question">
+  <li>Based on these p-values and your chart from Question 4, what can you conclude about the difference in means?  (You may find the discussion in <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour" class="show-page-number">Part 2.3</a> helpful.)</li>
+</ol>
+<h2 id="part-32-before-and-after-comparisons-with-prices-in-other-areas">Part 3.2 Before-and-after comparisons with prices in other areas</h2>
+<p>When looking for any price patterns, it is possible that the observed changes were not due to the tax, but instead were due to other events that happened in Berkeley and in neighbouring areas. If prices changed in a similar way in nearby areas, then what we observed in Berkeley may not be a result of the tax. To investigate whether this is the case, the researchers collected price data from stores in the surrounding areas and compared them with prices in Berkeley.</p>
+<p>Download the following files:</p>
+<ul>
+  <li><a href="https://tinyco.re/6625315" class="show-url">The Excel file</a> containing the price data they collected, including information on the date (year and month), location (Berkeley or Non-Berkeley), beverage group (soda, fruit drinks, milk substitutes, milk, and water), and the average price for that month.</li>
+  <li><a href="https://tinyco.re/7724734" class="show-url">‘S5 Table’</a> comparing the neighbourhood characteristics of the Berkeley and non-Berkeley stores.</li>
+</ul>
+<ol class="text-question">
+  <li>Based on ‘S5 Table’, do you think the researchers chose suitable comparison stores? Why or why not?</li>
+</ol>
+<p class="keep-together">We will now plot a line chart similar to <a href="https://tinyco.re/6367345" class="show-url">Figure 3</a> in the journal paper, to compare prices of similar goods in different locations and see how they have changed over time. To do this, we will need to summarize the data using Google Sheets’ PivotTable option, so that there is one value (the mean price) for each location and type of good in each month.</p>
+<ol class="text-question keep-with-next">
+  <li>Assess the effects of a tax on prices:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table similar to Figure 3.6 to show the average price in each month for taxed and non-taxed beverages, according to location. Use ‘year and month’ as the row variables, and ‘tax’ and ‘location’ as the column variables. (You may find <a href="#google-sheets-walk-through-32-making-a-pivot-table-with-more-than-two-variables" class="show-page-number">Google Sheets walk-through 3.2</a> helpful.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot the four columns of your table on the same line chart, with average price on the vertical axis and time (months) on the horizontal axis. Describe any differences you see between the prices of non-taxed goods in Berkeley and those outside Berkeley, both before the tax (January 2013 to December 2014) and after the tax (March 2015 onwards). Do the same for prices of taxed goods.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Based on your chart, is it reasonable to conclude that the sugar tax had an effect on prices?</li>
+</ul>
+<div class="figure figure-no-source" id="figure-3-6">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th></th>
+    <th colspan="2" class="align-center">Non-taxed</th>
+    <th colspan="2" class="align-center">Taxed</th>
+  </tr>
+  <tr>
+    <td>Year/Month</td>
+    <td class="align-center">Berkeley</td>
+    <td class="align-center">Non-Berkeley</td>
+    <td class="align-center">Berkeley</td>
+    <td class="align-center">Non-Berkeley</td>
+  </tr>
+  <tr>
+    <td>January 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>February 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>March 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>…</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>December 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>January 2014</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>…</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>February 2016</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+The average price of taxed and non-taxed beverages, according to location and month.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.6 </span>
+The average price of taxed and non-taxed beverages, according to location and month.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p>How strong is the evidence that the sugar tax affected prices? According to the journal paper, when comparing the mean Berkeley and non-Berkeley price of sugary beverages after the tax, the p-value is smaller than 0.00001, and it is 0.63 for non-sugary beverages after the tax.</p>
+<ol class="text-question">
+  <li>What do the p-values tell us about the difference in means and the effect of the sugar tax on the price of sugary beverages? (You may find the discussion in <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour" class="show-page-number">Part 2.3</a> helpful.)</li>
+</ol>
+<p class="keep-with-next">The aim of the sugar tax was to decrease consumption of sugary beverages. <a href="#figure-3-7" class="show-page-number">Figure 3.7</a> shows the mean number of calories consumed and the mean volume consumed before and after the tax. The researchers reported the p-values for the difference in means before and after the tax in the last column.</p>
+<div class="figure" id="figure-3-7">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th rowspan="2">Usual intake</th>
+    <th colspan="1">Pre-tax (Nov–Dec&#160;2014), <br /> <em>n</em> = 623</th>
+    <th colspan="1">Post-tax (Nov–Dec&#160;2015), <br /> <em>n</em> = 613 </th>
+    <th rowspan="1">Pre-tax–post-tax difference</th>
+  </tr>
+  <tr>
+    <td colspan="3"><strong>Caloric intake (kilocalories/capita/day)</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Taxed beverages</td>
+    <td class="align-right">45.1</td>
+    <td class="align-right">38.7</td>
+    <td class="align-right">−6.4, <em>p</em> = 0.56</td>
+  </tr>
+  <tr>
+    <td>Non-taxed beverages</td>
+    <td class="align-right">115.7</td>
+    <td class="align-right">147.6</td>
+    <td class="align-right">31.9, <em>p</em> = 0.04</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td colspan="3"><strong>Volume of intake (grams/capita/day)</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Taxed beverages</td>
+    <td class="align-right">121.0</td>
+    <td class="align-right">97.0</td>
+    <td class="align-right">−24.0, <em>p</em> = 0.24</td>
+  </tr>
+  <tr>
+    <td>Non-taxed beverages</td>
+    <td class="align-right">1,839.4</td>
+    <td class="align-right">1,896.5</td>
+    <td class="align-right">57.1, <em>p</em> = 0.22</td>
+  </tr>
+  <tr>
+    <td colspan="6">Models account for age, gender, race/ethnicity, income level, and educational attainment. <em>n</em> is the sample size at each round of the survey after excluding participants with missing values on self-reported race/ethnicity, age, education, income, or monthly intake of sugar-sweetened beverages.</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.7 </span>
+Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+<div class="figure-source">
+<p class="source">
+Lynn D. Silver, Shu Wen Ng, Suzanne Ryan-Ibarra, Lindsey Smith Taillie, Marta Induni, Donna R. Miles, Jennifer M. Poti, and Barry M. Popkin. 2017. Table 1 in <a href="https://tinyco.re/8147535" class="show-url">‘Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study’</a>. <em>PLoS Med 14</em> (4): e1002283.
+</p>
+</div><!--.figure-source-->
+</div>
+<ol class="text-question keep-with-next">
+  <li>Based on Figure 3.7, what can you say about consumption behaviour in Berkeley after the tax? Suggest some explanations for the evidence.</li>
+</ol>
+<ol class="text-question">
+  <li>Read the ‘Limitations’ in the <a href="https://tinyco.re/6616217" class="show-url">‘Discussions’ section</a> of the paper and discuss the limitations of this study. How could future studies on the sugar tax in Berkeley address these problems? (Some issues you may want to discuss are: the number of stores observed, number of people surveyed, and the reliability of the price data collected.)</li>
+</ol>
+<ol class="text-question">
+  <li>Suppose that you have the authority to conduct your own sugar tax natural experiment in two neighbouring towns, Town A and Town B. Outline how you would conduct the experiment to ensure that any changes in outcomes (prices, consumption of sugary beverages) are due to the tax and not due to other factors. (<em>Hint:</em> think about what factors you need to hold constant.)</li>
+</ol>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in Google Sheets
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="03-05.html"
+               class="active">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="active">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="active">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

@@ -1,0 +1,2921 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 2: Working in R
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 2: Working in R" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/02-03.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-2-working-in-r"><strong>Empirical Project 2</strong> Working in R</h1>
+<blockquote class="info web-full-width">
+  <h3 id="download-the-code">Download the code</h3>
+  <p>To <a href="https://tinyco.re/3278623">download the code chunks used in this project</a>, right-click on the download link and select ‘Save Link As…’. You’ll need to save the code download to your working directory, and open it in RStudio.</p>
+  <p>Don’t forget to also download the data into your working directory by following the steps in this project.</p>
+</blockquote>
+<h2 id="getting-started-in-r">Getting started in R</h2>
+<p>For this project you will need the following packages:</p>
+<ul>
+  <li><code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code>, to help with data manipulation</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">readxl</span></code>, to import an Excel spreadsheet.</li>
+</ul>
+<p>If you need to install either of these packages, run the following code:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"readxl"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tidyverse"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p>You can import the libraries now, or when they are used in the R walk-throughs below.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">  
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="part-21-collecting-data-by-playing-a-public-goods-game">Part 2.1 Collecting data by playing a public goods game</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>collect data from an experiment and enter it into a spreadsheet</li>
+    <li>use summary measures, for example, mean and standard deviation, and line charts to describe and compare data.</li>
+  </ul>
+</blockquote>
+<blockquote class="info">
+  <h3 id="note">Note</h3>
+  <p>You can still do Parts 2.2 and 2.3 without completing this part of the project.</p>
+</blockquote>
+<p>Before taking a closer look at the experimental data, you will play a public goods game like the one in the introduction with your classmates to learn how experimental data can be collected. If your instructor has not set up a game, follow the instructions below to set up your own game.</p>
+<blockquote class="economists">
+  <h3 id="instructions-how-to-set-up-the-public-goods-game"><strong>Instructions</strong> How to set up the public goods game</h3>
+  <p>Form a group of at least four people. (You may also want to set a maximum of 8 or 10 players to make the game easier to play). Choose one person to be the game administrator. The administrator will monitor the game, while the other people play the game.</p>
+  <h4 id="administrator">Administrator</h4>
+  <ol>
+    <li><em>Create the game:</em> Go to <a href="https://tinyco.re/2938847" class="show-url">the ‘Economics Games’ website</a>, scroll down to the bottom of the page, and click ‘Create a Multiplayer Game and Get Logins’. Then click ‘Externalities and public goods’. Under the heading ‘Voluntary contribution to a public good’, click ‘Choose this Game’. Enter in the number of people playing the game, and select ‘1’ for the number of universes. Then click ‘Get Logins’. A pop-up will appear, showing the login IDs and passwords for the players and for the administrator.</li>
+    <li><em>Start the game:</em> Give each player a different login ID. The game should be played anonymously, so make sure that players do not know the login IDs of other players. You are now ready to start the first round of the game. There are ten rounds in total.</li>
+    <li><em>Confirm that all the rounds are complete:</em> On the top right corner of the webpage, click ‘Login’, enter your login ID and password, and then click the green ‘Login’ button. You will be taken to the game administration page, which will show the average contribution in each round, and the results of the round just played. Wait until all the players have finished playing ten rounds before refreshing this page.</li>
+    <li><em>Collect the game results:</em> Once the players have finished playing ten rounds, refresh this page. The table at the top of the page will now show the average contribution (in euros) for each of the ten rounds played. Select the whole table, then copy and paste it into a new worksheet in Excel.</li>
+  </ol>
+  <h4 id="players">Players</h4>
+  <ol>
+    <li class="loosen-10"><em>Login:</em> Once the administrator has created the game, go to <a href="https://tinyco.re/2938847" class="show-url">the ‘Economics Games’ website</a>. On the top right corner, click ‘Login’, enter the login ID and password that your administrator has given you, then click the green ‘Login’ button. You will be taken to the public goods game that your administrator has set up.</li>
+    <li><em>Play the first round of the game:</em> Read the instructions at top of the page carefully before starting the game. In each round, you must decide how much to contribute to the public good. Enter your choice for each universe (group of players) that you are a part of (if the same players are in two universes, then make the same contribution in both), then click ‘Validate’.</li>
+    <li class="loosen-10"><em>View the results of the first round:</em> You will then be shown the results of the first round, including how much each player (including yourself) contributed, the payoffs, and the profits. Click ‘Next’ to start the next round.</li>
+    <li><em>Complete all the rounds of the game:</em> Repeat steps 2 and 3 until you have played ten rounds in total, then collect the results of the game from your administrator.</li>
+  </ol>
+</blockquote>
+<p class="keep-with-next">Use the results of the game you have played to answer the following questions.</p>
+<ol class="text-question">
+  <li>Make a line chart with average contribution as the vertical axis variable, and period (from 1 to 10) on the horizontal axis. Describe how average contributions have changed over the course of the game.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-21-plotting-a-line-chart-with-multiple-variables"><strong>R walk-through 2.1</strong> Plotting a line chart with multiple variables</h3>
+  <p>Use the data from your own experiment to answer Question 1. As an example, we will use the data for the first three cities of the dataset that will be introduced in Part 2.2.</p>
+  <p class="sidenote">Here you can see commands to R which are spread across two lines. You can spread a command across multiple lines, but you must adhere to the following two rules for this to work. First, the line break should come inside a set of parenthesis (i.e. between <code class="language-r highlighter-rouge"><span class="p">(</span></code> and <code class="language-r highlighter-rouge"><span class="p">)</span></code> or straight after the assignment operator (<code class="language-r highlighter-rouge"><span class="o">&lt;-</span></code>). Second, the line break must not be inside a string (whatever is inside quotes) or in the middle of a word or number.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Period</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+
+</span><span class="n">Copenhagen</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">14.1</span><span class="p">,</span><span class="w"> </span><span class="m">14.1</span><span class="p">,</span><span class="w"> </span><span class="m">13.7</span><span class="p">,</span><span class="w"> </span><span class="m">12.9</span><span class="p">,</span><span class="w"> </span><span class="m">12.3</span><span class="p">,</span><span class="w"> 
+  </span><span class="m">11.7</span><span class="p">,</span><span class="w"> </span><span class="m">10.8</span><span class="p">,</span><span class="w"> </span><span class="m">10.6</span><span class="p">,</span><span class="w"> </span><span class="m">9.8</span><span class="p">,</span><span class="w"> </span><span class="m">5.3</span><span class="p">)</span><span class="w">
+</span><span class="n">Dniprop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11.0</span><span class="p">,</span><span class="w"> </span><span class="m">12.6</span><span class="p">,</span><span class="w"> </span><span class="m">12.1</span><span class="p">,</span><span class="w"> </span><span class="m">11.2</span><span class="p">,</span><span class="w"> </span><span class="m">11.3</span><span class="p">,</span><span class="w"> 
+  </span><span class="m">10.5</span><span class="p">,</span><span class="w"> </span><span class="m">9.5</span><span class="p">,</span><span class="w"> </span><span class="m">10.3</span><span class="p">,</span><span class="w"> </span><span class="m">9.0</span><span class="p">,</span><span class="w"> </span><span class="m">8.7</span><span class="p">)</span><span class="w">
+</span><span class="n">Minsk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">12.8</span><span class="p">,</span><span class="w"> </span><span class="m">12.3</span><span class="p">,</span><span class="w"> </span><span class="m">12.6</span><span class="p">,</span><span class="w"> </span><span class="m">12.3</span><span class="p">,</span><span class="w"> </span><span class="m">11.8</span><span class="p">,</span><span class="w"> 
+  </span><span class="m">9.9</span><span class="p">,</span><span class="w"> </span><span class="m">9.9</span><span class="p">,</span><span class="w"> </span><span class="m">8.4</span><span class="p">,</span><span class="w"> </span><span class="m">8.3</span><span class="p">,</span><span class="w"> </span><span class="m">6.9</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Put the data into a data frame</span><span class="w">
+</span><span class="n">data_ex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">Copenhagen</span><span class="p">,</span><span class="w"> </span><span class="n">Dniprop</span><span class="p">,</span><span class="w"> </span><span class="n">Minsk</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">data_ex</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">data_ex</span><span class="o">$</span><span class="n">Copenhagen</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average contribution"</span><span class="p">,</span><span class="w">
+  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Select colour and line width</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_ex</span><span class="o">$</span><span class="n">Dniprop</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_ex</span><span class="o">$</span><span class="n">Minsk</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Average contribution to public goods game: without punishment"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Copenhagen"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Dniprop"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Minsk"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"green"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-2-1">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-02-01.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-01.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-01-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-01-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-01-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-01.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average contributions in different locations.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-01.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-01-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-01-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-01-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-01.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average contributions in different locations.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average contributions in different locations.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.1  </span>
+Average contributions in different locations.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>Compare your line chart with Figure 3 of Herrmann et al. (2008).<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> Comment on any similarities or differences between the results (for example, the amount contributed at the start and end, or the change in average contributions over the course of the game).</li>
+</ol>
+<ol class="text-question">
+  <li>Can you think of any reasons why your results are similar to (or different from) those in Figure 3? You may find it helpful to read the ‘Experiments’ section of the <a href="https://tinyco.re/3969457" class="show-url">Herrmann et al. (2008) study</a> for a more detailed description of how the experiments were conducted.</li>
+</ol>
+<h2 id="part-22-describing-the-data">Part 2.2 Describing the data</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>use summary measures, for example, mean and standard deviation, and column charts to describe and compare data.</li>
+  </ul>
+</blockquote>
+<blockquote class="info">
+  <h3 id="note-1">Note</h3>
+  <p>You can still do Parts 2.2 and 2.3 without completing this part of the project.</p>
+</blockquote>
+<p>We will now use the data used in Figures 2A and 3 of Herrmann et al. (2008), and evaluate the effect of the punishment option on average contributions. Rather than compare two charts showing all of the data from each experiment, as the authors of the study did, we will use summary measures to compare the data, and show the data from both experiments (with and without punishment) on the same chart.</p>
+<p>First, download and save <a href="https://tinyco.re/6011816" class="show-url">the data</a>. The spreadsheet contains two tables:</p>
+<ul>
+  <li>The first table shows average contributions in a public goods game without punishment (Figure 3).</li>
+  <li>The second table shows average contributions in a public goods game with punishment (Figure 2A).</li>
+</ul>
+<p>You can see that in each period (row), the average contribution varies across countries, in other words, there is a distribution of average contributions in each period.</p>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-22-importing-the-datafile-into-r"><strong>R walk-through 2.2</strong> Importing the datafile into R</h3>
+  <p>Both the tables you need are in a single Excel worksheet. Note down the cell ranges of each table, in this case <code class="language-r highlighter-rouge"><span class="n">A</span><span class="m">2</span><span class="o">:</span><span class="n">Q</span><span class="m">12</span></code> for the without punishment data and <code class="language-r highlighter-rouge"><span class="n">A</span><span class="m">16</span><span class="o">:</span><span class="n">Q</span><span class="m">26</span></code> for the punishment data. We will now use this range information to import the data into two dataframes (<code class="language-r highlighter-rouge"><span class="n">data_N</span></code> and <code class="language-r highlighter-rouge"><span class="n">data_P</span></code> respectively).</p>
+  <dl class="definition">
+<dt class="definition-term">mean</dt><dd class="definition-description">A summary statistic for a set of observations, calculated by adding all values in the set and dividing by the number of observations.</dd><dt class="definition-term">variance</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the mean of the squares of the deviations from the arithmetic mean of the distribution. The variance is used to indicate how ‘spread out’ the data is. A higher variance means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has zero variance (no variation), while the set of numbers 1, 1, 999 has a high variance of 221,334 (large spread).</span></dd>
+</dl>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This package provides useful functionality later.</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Set your working directory to the correct folder.</span><span class="w">
+</span><span class="c1"># Insert your file path for 'YOURFILEPATH'.</span><span class="w">
+</span><span class="n">setwd</span><span class="p">(</span><span class="s2">"YOURFILEPATH"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">data_N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"Public-goods-experimental-data.xlsx"</span><span class="p">,</span><span class="w">
+  </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A2:Q12"</span><span class="p">)</span><span class="w">
+</span><span class="n">data_P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"Public-goods-experimental-data.xlsx"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A16:Q26"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Look at the data either by opening the dataframes from the Environment window or by typing <code class="language-r highlighter-rouge"><span class="n">data_N</span></code> or <code class="language-r highlighter-rouge"><span class="n">data_P</span></code> into the Console.</p>
+  <p>You can see that in each period (row), the average contribution varies across countries; in other words, there is a distribution of average contributions in each period.</p>
+</blockquote>
+<p>The <strong data-term="mean">mean</strong> and <strong data-term="variance">variance</strong> are two ways to summarize distributions. We will now use these measures, along with other measures (range and standard deviation) to summarize and compare the distribution of contributions in both experiments.</p>
+<ol class="text-question">
+  <li>Using the data for Figures 2A and 3 of Herrmann et al. (2008):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the mean contribution in each period (row) separately for both experiments.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a line chart of mean contribution on the vertical axis and time period (from 1 to 10) on the horizontal axis (with a separate line for each experiment). Make sure the lines in the legend are clearly labelled according to the experiment (with punishment or without punishment).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Describe any differences and similarities you see in the mean contribution over time in both experiments.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-23-calculating-the-mean-using-a-loop-or-the-apply-function"><strong>R walk-through 2.3</strong> Calculating the mean using a loop or the <code class="language-r highlighter-rouge"><span class="n">apply</span></code> function</h3>
+  <h4 class="add-1" id="calculate-mean-contribution">Calculate mean contribution</h4>
+  <p>We calculate the mean using two different methods, to illustrate that there are usually many ways of achieving the same thing. We apply the first method on <code class="language-r highlighter-rouge"><span class="n">data_N</span></code>, which uses a loop to calculate the average separately over each column except the first (<code class="language-r highlighter-rouge"><span class="n">data_P</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">]</span></code> or <code class="language-r highlighter-rouge"><span class="n">data_P</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="m">-1</span><span class="p">]</span></code>). We use the second method (the <code class="language-r highlighter-rouge"><span class="n">apply</span></code> function) on <code class="language-r highlighter-rouge"><span class="n">data_P</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Use a loop for data_N</span><span class="w">
+
+</span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">data_N</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rowMeans</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1"># Use the apply function for data_P</span><span class="w">
+</span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>As the name suggests, the <code class="language-r highlighter-rouge"><span class="n">apply</span></code> function applies another function (the <code class="language-r highlighter-rouge"><span class="n">mean</span></code> function in this case) to all rows or columns in a dataframe. The second input, <code class="language-r highlighter-rouge"><span class="m">1</span></code>, applies the specified function to all rows in <code class="language-r highlighter-rouge"><span class="n">data_P</span><span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">]</span></code>. Typing <code class="language-r highlighter-rouge"><span class="m">2</span></code> would have calculated column means instead (check and see for yourself). Type <code class="language-r highlighter-rouge"><span class="o">?</span><span class="n">apply</span></code> in your console for more details, or see <a href="#r-walk-through-25-calculating-and-understanding-the-standard-deviation" class="show-page-number">R walk-through 2.5</a> for further practice.</p>
+  <h4 id="plot-the-mean-contribution">Plot the mean contribution</h4>
+  <p>Now we will produce a line chart showing the mean contributions.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">data_N</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Round"</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">14</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average contribution"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Average contribution to public goods game"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Without punishment"</span><span class="p">,</span><span class="w"> </span><span class="s2">"With punishment"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-2-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-02-02.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-02.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-02-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-02-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-02-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average contribution to public goods game, with and without punishment.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-02.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-02-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-02-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-02-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average contribution to public goods game, with and without punishment.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average contribution to public goods game, with and without punishment.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.2 </span>
+Average contribution to public goods game, with and without punishment.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>The difference between experiments is stark, as the contributions increase and then stabilize at around $13 when there is punishment, but decrease consistently from around $11 to $4 across the rounds when there is no punishment.</p>
+</blockquote>
+<ol class="text-question">
+  <li>Instead of looking at all periods, we can focus on contributions in the first and last period. Plot a column chart showing the mean contribution in the first and last period for both experiments. Your chart should look like <a href="#figure-2-3" class="show-page-number">Figure 2.3</a>.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-24-drawing-a-column-chart-to-compare-two-groups"><strong>R walk-through 2.4</strong> Drawing a column chart to compare two groups</h3>
+  <p>To make a column chart, we will use the <code class="language-r highlighter-rouge"><span class="n">barplot</span></code> function. We first extract the four data points we need (Periods 1 and 10, with and without punishment) and place them into a matrix, which we then input into the <code class="language-r highlighter-rouge"><span class="n">barplot</span></code> function.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp_d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="p">[</span><span class="m">10</span><span class="p">],</span><span class="w">
+  </span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="p">[</span><span class="m">10</span><span class="p">])</span><span class="w">
+</span><span class="n">temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="n">temp_d</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">byrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">temp</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##          [,1]      [,2]</span><span class="w">
+</span><span class="c1">## [1,] 10.57831  4.383769</span><span class="w">
+</span><span class="c1">## [2,] 10.63876 12.869879</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">barplot</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Mean contributions in a public goods game"</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Contribution"</span><span class="p">,</span><span class="w">
+  </span><span class="n">beside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">),</span><span class="w"> 
+  </span><span class="n">names.arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Round 1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Round 10"</span><span class="p">))</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">),</span><span class="w">
+  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Without punishment"</span><span class="p">,</span><span class="w"> </span><span class="s2">"With punishment"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-2-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-02-03.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-03.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-03-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-03-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-03-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Mean contributions in a public goods game.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-03.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-03-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-03-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-03-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Mean contributions in a public goods game.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Mean contributions in a public goods game.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.3 </span>
+Mean contributions in a public goods game.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <blockquote class="box fixed">
+    <h3 id="tip">Tip</h3>
+    <p>Experimenting with these charts will help you to learn how to use R. The details of how to specify the column chart may look complicated, but you can see from Figure 2.3 what the options <code class="language-r highlighter-rouge"><span class="n">main</span></code>, <code class="language-r highlighter-rouge"><span class="n">ylab</span></code>, <code class="language-r highlighter-rouge"><span class="n">col</span></code> and <code class="language-r highlighter-rouge"><span class="n">names.arg</span></code> do. To figure out what the <code class="language-r highlighter-rouge"><span class="n">beside</span></code> option does, try switching the option from <code class="language-r highlighter-rouge"><span class="kc">TRUE</span></code> to <code class="language-r highlighter-rouge"><span class="kc">FALSE</span></code> and see what happens.</p>
+  </blockquote>
+</blockquote>
+<dl class="definition wide">
+<dt class="definition-term">variance</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the mean of the squares of the deviations from the arithmetic mean of the distribution. The variance is used to indicate how ‘spread out’ the data is. A higher variance means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has zero variance (no variation), while the set of numbers 1, 1, 999 has a high variance of 221,334 (large spread).</span></dd>
+</dl>
+<p>The mean is one useful measure of the ‘middle’ of a distribution, but is not a complete description of what our data looks like. We also need to know how ‘spread out’ the data is in order to get a clearer picture and make comparisons between distributions. The <strong data-term="variance">variance</strong> is one way to measure spread: the higher the variance, the more spread out the data is.</p>
+<dl class="definition wide">
+<dt class="definition-term">standard deviation</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the square root of the variance. The standard deviation has a similar interpretation to the variance. A larger standard deviation means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has a standard deviation of zero (no variation or spread), while the set of numbers 1, 1, 999 has a standard deviation of 46.7 (large spread).</span></dd>
+</dl>
+<p>A similar measure is <strong data-term="standard deviation">standard deviation</strong>, which is the square root of the variance and is commonly used because there is a handy rule of thumb for large datasets, which is that most of the data (95% if there are many observations) will be less than two standard deviations away from the mean.</p>
+<ol class="text-question">
+  <li>Using the data for Figures 2A and 3 of Herrmann et al. (2008):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the standard deviation for Periods 1 and 10 separately, for both experiments. Does the rule of thumb apply? (In other words, are most values within two standard deviations of the mean?)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>As shown in <a href="#figure-2-3" class="show-page-number">Figure 2.3</a>, the mean contribution for both experiments was 10.6 in Period 1. With reference to your standard deviation calculations, explain whether this means that the two sets of data are the same.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-25-calculating-and-understanding-the-standard-deviation"><strong>R walk-through 2.5</strong> Calculating and understanding the standard deviation</h3>
+  <p>In order to calculate these standard deviations and variances, we will use the <code class="language-r highlighter-rouge"><span class="n">apply</span></code> function, which we introduced in <a href="#r-walk-through-23-calculating-the-mean-using-a-loop-or-the-apply-function" class="show-page-number">R walk-through 2.3</a>. As we saw, <code class="language-r highlighter-rouge"><span class="n">apply</span></code> is a command asking R to apply the same function to all the rows or columns of a dataframe, and the basic structure is as follows: <code class="language-r highlighter-rouge"><span class="n">apply</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="p">(</span><span class="n">rows</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">columns</span><span class="p">),</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">apply</span><span class="p">)</span></code>. So to calculate the variances, we use the following command:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_N</span><span class="o">$</span><span class="n">varC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_N</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Here we take <code class="language-r highlighter-rouge"><span class="n">data_N</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">]</span></code> and apply the <code class="language-r highlighter-rouge"><span class="n">var</span></code> function to each row (recall that the second input <code class="language-r highlighter-rouge"><span class="m">1</span></code> does this; <code class="language-r highlighter-rouge"><span class="m">2</span></code> would indicate columns). Note that as in R walk-through 2.3, we exclude the first column from the calculation, as that contains the period numbers. The result is saved as a new variable called <code class="language-r highlighter-rouge"><span class="n">varC</span></code>.</p>
+  <p class="keep-with-next">We then apply the same principle to the standard deviation calculation and the <code class="language-r highlighter-rouge"><span class="n">data_P</span></code> dataframe.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_N</span><span class="o">$</span><span class="n">sdC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_N</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">)</span><span class="w">
+</span><span class="n">data_P</span><span class="o">$</span><span class="n">varC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w">
+</span><span class="n">data_P</span><span class="o">$</span><span class="n">sdC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>To determine whether 95% of the observations fall within two standard deviations of the mean, we can use a line chart. As we have 16 countries in every period, we would expect about one observation (0.05 × 16 = 0.8) to fall outside this interval.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">citylist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">data_N</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Round"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average contribution"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># mean + 2 sd</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data_N</span><span class="o">$</span><span class="n">sdC</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># mean – 2 sd</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_N</span><span class="o">$</span><span class="n">meanC</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data_N</span><span class="o">$</span><span class="n">sdC</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">citylist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">points</span><span class="p">(</span><span class="n">data_N</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span><span class="w"> </span><span class="n">data_N</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Contribution to public goods game without punishment"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Mean"</span><span class="p">,</span><span class="w"> </span><span class="s2">"+/- 2 sd"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">),</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-2-4">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-02-04.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-04.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-04-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-04-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-04-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Contribution to public goods game without punishment.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-04.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-04-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-04-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-04-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Contribution to public goods game without punishment.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Contribution to public goods game without punishment.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.4 </span>
+Contribution to public goods game without punishment.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>None of the observations fall outside the mean ± two standard deviations interval for the public goods game without punishment. Let’s see the equivalent chart for the version with punishment.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">citylist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">data_P</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Round"</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">22</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average contribution"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># mean + 2 sd</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data_P</span><span class="o">$</span><span class="n">sdC</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># mean – 2 sd</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_P</span><span class="o">$</span><span class="n">meanC</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data_P</span><span class="o">$</span><span class="n">sdC</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+
+</span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">citylist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">points</span><span class="p">(</span><span class="n">data_P</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span><span class="w"> </span><span class="n">data_P</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Contribution to public goods game with punishment"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Mean"</span><span class="p">,</span><span class="w"> </span><span class="s2">"+/- 2 sd"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">),</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-2-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-02-05.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-05.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-05-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-05-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-05-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Contribution to public goods game with punishment.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-05.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-05-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-05-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-05-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Contribution to public goods game with punishment.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Contribution to public goods game with punishment.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.5 </span>
+Contribution to public goods game with punishment.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>Here it looks as if we only have one observation outside the interval (in Period 8). In that aspect the two experiments look similar. However, from comparing these two charts, we see that the game with punishment displays a greater variation of responses than the game without punishment. In other words, there is a larger standard deviation and variance for the observations coming from the game with punishment.</p>
+</blockquote>
+<dl class="definition wide=">
+<dt class="definition-term">range</dt><dd class="definition-description">The interval formed by the smallest (minimum) and the largest (maximum) value of a particular variable. The range shows the two most extreme values in the distribution, and can be used to check whether there are any outliers in the data. (Outliers are a few observations in the data that are very different from the rest of the observations.)</dd>
+</dl>
+<p>Another measure of spread is the <strong data-term="range">range</strong>, which is the interval formed by the smallest (minimum) and the largest (maximum) values of a particular variable. For example, we might say that the number of periods in the public goods experiment ranges from 1 to 10. Once we know the most extreme values in our dataset, we have a better picture of what our data looks like.</p>
+<ol class="text-question">
+  <li>Calculate the maximum and minimum value for Periods 1 and 10 separately, for both experiments.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-26-finding-the-minimum-maximum-and-range-of-a-variable"><strong>R walk-through 2.6</strong> Finding the minimum, maximum, and range of a variable</h3>
+  <p>To calculate the range for both experiments and for all periods, we will use the <code class="language-r highlighter-rouge"><span class="n">apply</span></code> function again. You might think it makes sense to use the following command:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_P</span><span class="o">$</span><span class="n">rangeC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Unfortunately, when you execute this command you are likely to get an error message that reads something like this: <code class="language-r highlighter-rouge"><span class="n">Error</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">$&lt;-</span><span class="n">.data.frame</span><span class="p">(</span><span class="o">*</span><span class="n">tmp</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">"rangeC"</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5.81818199157715</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="m">10</span></code>.</p>
+  <p>Let’s investigate why we get this error message, by picking one data row and calculating the range.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">range</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 7.958333 14.102941</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>You can see that we get two values - the maximum and the minimum. However, we need the range as a single value (maximum–minimum). The error arises because we tried to save two variables as a single variable. So we first need to calculate the maximum and minimum for our whole dataset (using the <code class="language-r highlighter-rouge"><span class="n">apply</span></code> function) and save this in a new variable called <code class="language-r highlighter-rouge"><span class="n">temp</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_N</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">)</span><span class="w">
+</span><span class="n">temp</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##           [,1]      [,2]     [,3]     [,4]     [,5]      [,6]      [,7]</span><span class="w">
+</span><span class="c1">## [1,]  7.958333  6.272727  6.25000  5.97500  5.42500  4.546875  3.921875</span><span class="w">
+</span><span class="c1">## [2,] 14.102941 14.132353 13.72059 12.89706 12.33824 11.676471 10.779412</span><span class="w">
+</span><span class="c1">##          [,8]     [,9]    [,10]</span><span class="w">
+</span><span class="c1">## [1,]  3.15625 2.171875 1.300000</span><span class="w">
+</span><span class="c1">## [2,] 10.63235 9.764706 8.681818</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="tighten-10">Now we use the difference between the respective maximums (Column 2) and minimums (Column 1) to define our new range variable <code class="language-r highlighter-rouge"><span class="n">rangeC</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_N</span><span class="o">$</span><span class="n">rangeC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temp</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">temp</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>And now we do the same for <code class="language-r highlighter-rouge"><span class="n">data_P</span></code>:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">)</span><span class="w">
+</span><span class="n">data_P</span><span class="o">$</span><span class="n">rangeC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temp</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">temp</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Let’s create a chart of the ranges for both experiments for all periods in order to compare them.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">data_N</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">data_N</span><span class="o">$</span><span class="n">rangeC</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Round"</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">14</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Range of contributions"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">lines</span><span class="p">(</span><span class="n">data_P</span><span class="o">$</span><span class="n">rangeC</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Range of contributions to public goods game"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Without punishment"</span><span class="p">,</span><span class="w"> </span><span class="s2">"With punishment"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">),</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-2-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-02-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-02-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Range of contributions to public goods game.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-02-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-02-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-02-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Range of contributions to public goods game.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Range of contributions to public goods game.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.6 </span>
+Range of contributions to public goods game.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>This chart confirms what we found in R walk-through 2.5, which is that there is a greater spread (variation) of contributions in the game with punishment.</p>
+</blockquote>
+<ol class="text-question">
+  <li>A concise way to describe the data is in a summary table. With just four numbers (mean, standard deviation, minimum value, maximum value), we can get a general idea of what the data looks like.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table of summary statistics that displays mean, variance, standard deviation, minimum, maximum and range for Periods 1 and 10 and for both experiments.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Comment on any similarities and differences in the distributions, both across time and across experiments.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-27-creating-a-table-of-summary-statistics"><strong>R walk-through 2.7</strong> Creating a table of summary statistics</h3>
+  <p>We have already done most of the work for creating this summary table in <a href="#r-walk-through-26-finding-the-minimum-maximum-and-range-of-a-variable" class="show-page-number">R walk-through 2.6</a>. Since we also want to display the minimum and maximum values, we should add these to the dataframes <code class="language-r highlighter-rouge"><span class="n">data_N</span></code> and <code class="language-r highlighter-rouge"><span class="n">data_P</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_N</span><span class="o">$</span><span class="n">minC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_N</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">)</span><span class="w">
+</span><span class="n">data_N</span><span class="o">$</span><span class="n">maxC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_N</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w">
+</span><span class="n">data_P</span><span class="o">$</span><span class="n">minC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">)</span><span class="w">
+</span><span class="n">data_P</span><span class="o">$</span><span class="n">maxC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">data_P</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now we display the summary statistics in a table. We enclose our command in the <code class="language-r highlighter-rouge"><span class="n">round</span></code> function, which reduces the number of digits displayed after the decimal point (2 in our case) and makes the table easier to read.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">print</span><span class="p">(</span><span class="s2">"Public goods game without punishment"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Public goods game without punishment"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># We want to see Rows 1 and 10 and Column 1 (which contains the period number) as well as Columns 18 to 23 (which contain the statistics). </span><span class="w">
+</span><span class="nf">round</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">18</span><span class="o">:</span><span class="m">23</span><span class="p">)],</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 2 x 7</span><span class="w">
+</span><span class="c1">##   Period meanC  varC   sdC rangeC  minC  maxC</span><span class="w">
+</span><span class="c1">##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1      1 10.58  4.08  2.02   6.14  7.96 14.10 </span><span class="w">
+</span><span class="c1">## 2     10  4.38  4.78  2.19   7.38  1.30  8.68</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We repeat this command for the version with punishment.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Show two digits</span><span class="w">
+</span><span class="n">options</span><span class="p">(</span><span class="n">signif</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="s2">"Public goods game with punishment"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Public goods game with punishment"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">round</span><span class="p">(</span><span class="n">data_P</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">18</span><span class="o">:</span><span class="m">23</span><span class="p">)],</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 2 x 7</span><span class="w">
+</span><span class="c1">##   Period meanC  varC   sdC rangeC  minC  maxC</span><span class="w">
+</span><span class="c1">##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1      1 10.64  10.29 3.21  10.20  5.82 16.02</span><span class="w">
+</span><span class="c1">## 2     10 12.87  15.19 3.90  11.31  6.20 17.51</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<h2 id="part-23-did-changing-the-rules-of-the-game-affect-behaviour">Part 2.3 Did changing the rules of the game affect behaviour?</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-2">Learning objectives for this part</h3>
+  <ul>
+    <li>calculate and interpret the p-value</li>
+    <li>evaluate the usefulness of experiments for determining causality, and the limitations of these experiments.</li>
+  </ul>
+</blockquote>
+<p>The punishment option was introduced into the public goods game in order to see whether it could help sustain contributions, compared to the game without a punishment option. We will now use a calculation called a p-value to compare the results from both experiments more formally.</p>
+<p>By comparing the results in Period 10 of both experiments, we can see that the mean contribution in the experiment with punishment is 8.5 units higher than in the experiment without punishment (see <a href="#figure-2-6" class="show-page-number">Figure 2.6</a>). Is it more likely that this behaviour is due to chance, or is it more likely to be due to the difference in experimental conditions?</p>
+<ol class="text-question">
+  <li>You can conduct another experiment to understand why we might see differences in behaviour that are due to chance.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>First, flip a coin six times, using one hand only, and record the results (for example, Heads, Heads, Tails, etc.). Then, using the same hand, flip a coin six times and record the results again.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Compare the outcomes from Question 1<em>(a)</em>. Did you get the same number of heads in both cases? Even if you did, was the sequence of the outcomes (for example, Heads, Tails, Tails …) the same in both cases?</li>
+</ul>
+<p>The important point to note is that even when we conduct experiments under the same controlled conditions, due to an element of randomness, we may not observe the exact same behaviour each time we do the experiment.</p>
+<p>Randomness arises because the statistical analysis is conducted on a sample of data (for example, a small group of people from the entire population), and the sample we observe is only one of many possible samples. Whatever differences we calculate between two samples would almost certainly change if we had observed another pair of samples. Importantly, economists aren’t really interested in whether two samples are actually different, but rather whether the underlying populations, from which the samples were drawn, differ in the characteristics we are interested in (for example, age, income, contributions to the public good). And this is the challenge faced by the empirical economist.</p>
+<p>When we are interested in whether a treatment works — in this case, whether having the punishment option makes a difference in how much people contribute to the public good — we want a way to check whether any observed differences could just be due to sample variation.</p>
+<p class="tighten-15">The size of the difference alone cannot tell us whether it might just be due to chance. Even if the observed difference seems large, it could be small relative to how much the data vary. Figures 2.7 and 2.8 show the mean exam score of two groups of high school students and the size of house in which they live (represented by the height of the columns, and reported in the boxes above the columns), with the dots representing the underlying data. Figure 2.7 shows a relatively large difference in means that could have arisen by chance because the data is widely spread out (the standard deviation is large), while Figure 2.8 shows a relatively small difference that looks unlikely to be due to chance because the data is tightly clustered together (the standard deviation is very small). Note that we are looking at two distinct questions here: first, is there a large or small difference in exam score associated with the size of house of the student and second, is that difference likely to have arisen by chance. A social scientist is interested in the answer to both questions. If the difference is large but could easily have occurred by chance or if the difference is very small and unlikely to have occurred by chance, then the results are not suggestive of an important relationship between size of house and exam grade.</p>
+<div class="figure fixed figure-no-source" id="figure-2-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a large difference in means that is likely to have happened by chance.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a large difference in means that is likely to have happened by chance.
+" class="" />
+        </a>
+</div>
+<p class="description">
+An example of a large difference in means that is likely to have happened by chance.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.7 </span>
+An example of a large difference in means that is likely to have happened by chance.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="figure-2-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-11-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-11-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-11-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a small difference in means that is unlikely to have happened by chance.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-11-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-11-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-11-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a small difference in means that is unlikely to have happened by chance.
+" class="" />
+        </a>
+</div>
+<p class="description">
+An example of a small difference in means that is unlikely to have happened by chance.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.8 </span>
+An example of a small difference in means that is unlikely to have happened by chance.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<dl class="definition">
+<dt class="definition-term">p-value</dt><dd class="definition-description">The probability of observing data at least as extreme as the data collected if a particular hypothesis about the population is true. The p-value ranges from 0 to 1: the lower the probability (the lower the p-value), the less likely it is to observe the given data, and therefore the less compatible the data are with the hypothesis.</dd>
+</dl>
+<p>To help us decide, we consider the hypothesis that the difference occurred by chance – in other words, we start by hypothesizing that house size does not matter for exam scores. Then we ask how likely it is that we would observe differences at least as extreme as those we actually observe in our sample groups, <em>assuming</em> that our hypothesis is true. The answer to this question is called a <strong data-term="p-value">p-value</strong>. The smaller the p-value, the less likely that we would observe differences at least as extreme as those we did, given our hypothesis. So the smaller this p-value, the smaller our confidence will be in the hypothesis that in the population house size does not matter for exam grades.</p>
+<p>Notice that the p-value is not the probability that the hypothesis is correct – the data cannot tell us that probability.  It is the probability that we would find a difference as big as the one we have observed <em>if</em> the hypothesis were correct.</p>
+<p>We can estimate the p-value from the data, using the sample means and sample deviations. It is calculated by comparing the difference in the means with the amount of variation in the data as measured by the standard deviations. This is a well-established method, although some other statistical assumptions, which we do not discuss, are required to ensure that it gives a good estimate.</p>
+<p>When we look at the data in Figure 2.7, we cannot be absolutely certain that there really is a link between house size and exam scores. But if the p-value for the difference in means is very small (for example, 0.02) then we know that there would only be a 2% probability of seeing differences at least as extreme as those we did observe in the sample, given our hypothesis that in the population there was no relationship between house size and exam scores.</p>
+<dl class="definition">
+<dt class="definition-term">hypothesis test</dt><dd class="definition-description">A test in which a null (default) and an alternative hypothesis are posed about some characteristic of the population. Sample data is then used to test how likely it is that these sample data would be seen if the null hypothesis was true.</dd>
+</dl>
+<blockquote class="expandable-box allow-break">
+  <h3 id="find-out-more-hypothesis-testing-and-p-values"><strong>Find out more</strong> Hypothesis testing and p-values</h3>
+  <p>The process of formulating a hypothesis about the data, calculating the p-value, and using it to assess whether what we observe is consistent with the hypothesis, is known as a <strong data-term="hypothesis test">hypothesis test</strong>. When we conduct a hypothesis test, we consider two hypotheses: either there is no difference between the populations, in which case the differences we observe must have happened by chance (known as the ‘null hypothesis’); or the populations really are different (known as the ‘alternative hypothesis’). The smaller the p-value, the lower the probability that the differences we observe could have happened simply by chance, i.e. if the null hypothesis were true. The smaller the p-value, the stronger the evidence in favour of the alternative hypothesis.</p>
+  <p>It is a common, but highly debatable practice, to pick a cutoff level for the p-value, and reject the null hypothesis if the p-value is below this cutoff. <a href="https://tinyco.re/6156097">This approach has been criticized recently by statisticians and social scientists</a> because the cutoff level is quite arbitrary.</p>
+  <p>Instead of using a cutoff, we prefer to calculate p-values and use them to assess the strength of the evidence. Whether the statistical evidence is strong enough for us to draw a firm conclusion about the data will always be a matter of judgement.</p>
+  <p class="tighten-10">In particular, you want to make sure that you understand the consequences of concluding that the null hypothesis is not true, and hence that the alternative is true. You may be quite easily prepared to conclude that house sizes and exam scores are related, but much more cautious about deciding that a new medication is more effective than an existing one if you know that this new medication has severe side effects. In the case of the medication, you might want to see stronger evidence against the null hypothesis before deciding that doctors should be advised to prescribe the new medication.</p>
+</blockquote>
+<p>We will calculate the p-value and use it to assess how likely it is that the differences we observe are due to chance.</p>
+<ol class="text-question">
+  <li>Using the data for Figures 2A and 3:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Use the <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function to calculate the p-value for the difference in means in Period 1 (with and without punishment).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>What does this p-value tell us about the difference in means in Period 1?</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-28-calculating-the-p-value-for-the-difference-in-means"><strong>R walk-through 2.8</strong> Calculating the p-value for the difference in means</h3>
+  <p>We need to extract the observations in Period 1 for the data for with and without punishment, and then feed the observations into the <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function. The <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function is extremely flexible: if you input two variables (<code class="language-r highlighter-rouge"><span class="n">x</span></code> and <code class="language-r highlighter-rouge"><span class="n">y</span></code>) as shown below, it will automatically test whether the difference in means is due to chance or not (formally speaking, it tests the null hypothesis that the means of both variables are equal).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data_N</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">]</span><span class="w">
+</span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data_P</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">]</span><span class="w">
+</span><span class="n">t.test</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Unfortunately, if you run this code, you are likely to get an error message like this:</p>
+  <p><code class="language-r highlighter-rouge"><span class="n">Error</span><span class="o">:</span><span class="w"> </span><span class="n">Unsupported</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">array</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="n">indexing.</span></code></p>
+  <p>The reason for this is that <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span></code> and <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span></code> are still ‘tibbles’ (dataframes) with one observation (row) and 16 variables (columns). However, the <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function requires both <code class="language-r highlighter-rouge"><span class="n">x</span></code> and <code class="language-r highlighter-rouge"><span class="n">y</span></code> to be variables (with one column and many rows), so we need to reformat <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span></code> and <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span></code>. One way to do this is to use the <code class="language-r highlighter-rouge"><span class="n">t</span></code> function (which switches the rows and columns; if you are familiar with matrices, this is the same idea as a vector transpose).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+</span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">data_P</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+</span><span class="n">t.test</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##</span><span class="w">
+</span><span class="c1">## Welch Two Sample t-test</span><span class="w">
+</span><span class="c1">##</span><span class="w">
+</span><span class="c1">## data: p1_N and p1_P</span><span class="w">
+</span><span class="c1">## t = -0.063782, df = 25.288, p-value = 0.9496</span><span class="w">
+</span><span class="c1">## alternative hypothesis: true difference in means is not equal to 0</span><span class="w">
+</span><span class="c1">## 95 percent confidence interval:</span><span class="w">
+</span><span class="c1">## -2.011123 1.890231</span><span class="w">
+</span><span class="c1">## sample estimates:</span><span class="w">
+</span><span class="c1">## mean of x mean of y</span><span class="w">
+</span><span class="c1">## 10.57831 10.63876</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>This result delivers a p-value of 0.9496. This means it is very likely that the assumption that there are no differences in the populations is likely to be true (formally speaking, we cannot reject the null hypothesis).</p>
+  <p>The <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function automatically assumes that both variables were generated by different groups of people. When calculating the p-value, it assumes that the observed differences are partly due to some variation in characteristics between these two groups, and not just the differences in experimental conditions. However, in this case, the same groups of people did both experiments, so there will not be any variation in characteristics between the groups. When calculating the p-value, we account for this fact with the <code class="language-r highlighter-rouge"><span class="n">paired</span></code> option.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">data_N</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+</span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">data_P</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">17</span><span class="p">])</span><span class="w">
+</span><span class="n">t.test</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="n">paired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##</span><span class="w">
+</span><span class="c1">## Paired t-test</span><span class="w">
+</span><span class="c1">##</span><span class="w">
+</span><span class="c1">## data: p1_N and p1_P</span><span class="w">
+</span><span class="c1">## t = -0.14996, df = 15, p-value = 0.8828</span><span class="w">
+</span><span class="c1">## alternative hypothesis: true difference in means is not equal to 0</span><span class="w">
+</span><span class="c1">## 95 percent confidence interval:</span><span class="w">
+</span><span class="c1">## -0.9195942 0.7987027</span><span class="w">
+</span><span class="c1">## sample estimates:</span><span class="w">
+</span><span class="c1">## mean of the differences</span><span class="w">
+</span><span class="c1">## -0.06044576</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>As you can see, the p-value becomes smaller as we can attribute more of the differences to the ‘with punishment’ treatment, but the p-value is still very large (0.8828), so we still conclude that the differences in Period 1 are likely to be due to chance.</p>
+</blockquote>
+<ol class="text-question">
+  <li>Using the data for Period 10:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Use the <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function to calculate the p-value for the difference in means in Period 10 (with and without punishment).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>What does this p-value tell us about the relationship between punishment, and behaviour in the public goods game?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>With reference to <a href="#figure-2-7" class="show-page-number">Figure 2.7</a> and <a href="#figure-2-8" class="show-page-number">Figure 2.8</a>, explain why we cannot use the size of the difference to directly conclude whether the difference could be due to chance.</li>
+</ul>
+<dl class="definition">
+<dt class="definition-term">spurious correlation</dt><dd class="definition-description">A strong linear association between two variables that does not result from any direct relationship, but instead may be due to coincidence or to another unseen factor.</dd>
+</dl>
+<p class="tighten-15">An important point to note is that calculating p-values may not tell us anything about causation. The example of house size and exam scores shown in <a href="#figure-2-8" class="show-page-number">Figure 2.8</a>, gives us evidence that some kind of relationship between house size and exam scores is very likely. However, we would not conclude that building an extra room automatically makes someone smarter. P-values cannot help us detect these <strong data-term="spurious correlation">spurious correlations</strong>.</p>
+<p class="keep-together">However, calculating p-values for experimental evidence can help us determine whether there is a causal link between two variables. If we conduct an experiment and find a difference in outcomes with a low p-value, then we may conclude that the change in experimental conditions is likely to have caused the difference.</p>
+<ol class="text-question keep-with-next">
+  <li>Refer to the results from the public goods games.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Which characteristics of the experimental setting make it likely that the with punishment option was the cause of the change in behaviour?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using <a href="#figure-2-6" class="show-page-number">Figure 2.6</a>, explain why we need to compare the two groups in Period 1 in order to conclude that there is a causal link between the with punishment option and behaviour in the game.</li>
+</ul>
+<p>Experiments can be useful for identifying causal links. However, if people’s behaviour in experimental conditions were different from their behaviour in the real world, our results would not be applicable anywhere outside the experiment.</p>
+<ol class="text-question">
+  <li>Discuss some limitations of experiments, and suggest some ways to address (or partially address) them. (You may find pages 158–171 of the paper <a href="https://tinyco.re/2593698" class="show-url">‘What do laboratory experiments measuring social preferences reveal about the real world?’</a> helpful, as well as the discussion on free riding and altruism in <a href="https://tinyco.re/8816977" class="show-url">Section 2.6</a> of <em>Economy, Society, and Public Policy</em>.)</li>
+</ol>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Benedikt Herrmann, Christian Thöni, and Simon Gächter. 2008. Figure 3 in <a href="https://tinyco.re/3969457" class="show-url">‘Antisocial punishment across societies’</a>. <em>Science</em> Magazine 319 (5868): p. 1365. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in R
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="02-03.html"
+               class="active">
+                Getting started in R
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="active">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="active">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="active">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

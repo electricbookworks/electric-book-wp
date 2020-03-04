@@ -1,0 +1,3165 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 6: Working in R
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 6: Working in R" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/06-03.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-6-working-in-r"><strong>Empirical Project 6</strong> Working in R</h1>
+<blockquote class="info web-full-width">
+  <h3 id="download-the-code">Download the code</h3>
+  <p>To <a href="https://tinyco.re/3846276">download the code chunks used in this project</a>, right-click on the download link and select ‘Save Link As…’. You’ll need to save the code download to your working directory, and open it in RStudio.</p>
+  <p>Don’t forget to also download the data into your working directory by following the steps in this project.</p>
+</blockquote>
+<h2 id="getting-started-in-r">Getting started in R</h2>
+<p>For this project you will need the following packages:</p>
+<ul>
+  <li><code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code>, to help with data manipulation</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">ggthemes</span></code>, to change the look of charts easily.</li>
+</ul>
+<p>We will also use the <code class="language-r highlighter-rouge"><span class="n">ggplot2</span></code> package to produce graphs, but that does come as part of the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package.</p>
+<p>If you need to install either of these packages, run the following code:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"tidyverse"</span><span class="p">,</span><span class="s2">"ggthemes"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p>You can import the libraries now, or when they are used in the R walk-throughs below.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">  
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggthemes</span><span class="p">)</span><span class="w">  
+</span></code></pre></div></div>
+<h2 id="part-61-looking-for-patterns-in-the-survey-data">Part 6.1 Looking for patterns in the survey data</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>explain how survey data is collected, and describe measures that can increase the reliability and validity of survey data</li>
+    <li class="tighten-10">use column charts and box and whisker plots to compare distributions</li>
+    <li>calculate conditional means for one or more conditions, and compare them on a bar chart</li>
+    <li class="loosen-10">use line charts to describe the behaviour of real-world variables over time.</li>
+  </ul>
+</blockquote>
+<p>First download the data used in the paper to understand how this information was collected. The data is publicly available and free of charge, but you will need to create a user account in order to access it.</p>
+<ul>
+  <li>Go to the <a href="https://tinyco.re/5974894" class="show-url">World Management Survey data registration page</a>.</li>
+  <li>On the middle right-hand side of the page, click the ‘Register’ button.</li>
+  <li>Fill in the form with the required details, then click ‘Register’.</li>
+  <li>An account activation link will be sent to the email you provided. Click on it to activate your account.</li>
+  <li>Now go to the <a href="https://tinyco.re/9952446" class="show-url">World Management Survey data download page</a>.</li>
+  <li>In the subsection ‘Download the public WMS data now’, click the ‘Download Now’ button.</li>
+  <li>In the ‘Login’ section, enter your account’s email and password, then click ‘Login’.</li>
+  <li>Under the heading ‘Manufacturing: 2004–2010 combined survey data (AMP)’, click the ‘Download’ button.</li>
+  <li>Unzip the files in the downloaded zip folder into your working directory (the folder you will be working from).</li>
+  <li>You may also find it helpful to download the Bloom et al. paper <a href="https://tinyco.re/6438551" class="show-url">‘Management practices across firms and countries’</a>.</li>
+</ul>
+<ol class="text-question">
+  <li>To learn about how Bloom et al. (2012) conducted their survey, read the sections ‘How Can Management Practices Be Measured?’ and ‘Validating the Management Data’ (pages 5–9) of their paper.</li>
+</ol>
+<ul class="text-sub-question tighten-15">
+  <li>Briefly describe how the interviews with managers were conducted, and explain some methods the researchers used to improve the reliability and validity of their data. (There are a few technical terms that you may not understand, but these are not necessary for answering this question.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Three aspects of management practices were evaluated: monitoring, targets, and incentives. Do you think that these are the best criteria for assessing management practices? What (if any) important aspects of management are not included in this assessment? (You may also find it helpful to refer to the ‘Contingent Management’ section on pages 23–25 of the paper.)</li>
+</ul>
+<p>Now we will create some charts to summarize the data and make comparisons across countries, industries (manufacturing, healthcare, retail, and education), and firm characteristics.</p>
+<ol class="text-question">
+  <li>In ‘Manufacturing: 2004–2010 combined survey data (AMP)’, open the file ‘AMP_graph_manufacturing.csv’. Use this data on manufacturing firms to do the following:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table like Figure 6.2a, showing the average management scores for all the firms in each of the twenty countries, and fill it in with the required values. The variables for the overall score and three individual criteria are ‘management’, ‘monitor’, ‘target’, and ‘people’. You may find it helpful to refer to <a href="03-03.html#r-walk-through-33-creating-frequency-tables" class="show-page-number">R walk-through 3.3</a> if you need guidance. For each criterion, rank countries from highest to lowest, then create and fill in a table like Figure 6.2b (see <a href="04-03.html#r-walk-through-48-creating-your-own-hdi" class="show-page-number">R walk-through 4.8</a> for help on how to assign ranks). Do countries with a high overall rank also tend to rank highly on individual criteria?</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-6-2a">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Overall management (mean)</th>
+      <th>Monitoring management (mean)</th>
+      <th>Targets management (mean)</th>
+      <th>Incentives management (mean)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Mean of management scores.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.2a </span>
+Mean of management scores.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="figure-6-2b">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Overall management (rank)</th>
+      <th>Monitoring management (rank)</th>
+      <th>Targets management (rank)</th>
+      <th>Incentives management (rank)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Rank according to management scores.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.2b </span>
+Rank according to management scores.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Create a bar chart showing the average overall management score (the variable <code class="language-r highlighter-rouge"><span class="n">management</span></code>) for each country, ordered from highest to lowest. (<em>Hint</em>: You will need to sort your data from highest to lowest so it appears correctly in the chart.) Your chart should look similar to <a href="06-01.html#figure-6-1" class="show-page-number">Figure 6.1</a>.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Compare your chart with Figure 1 in Bloom et al. (2012). Can you explain why your chart is slightly different? (<em>Hint</em>: See the note at the bottom of Figure 1.)</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-61-importing-data-into-r-and-creating-tables-and-charts"><strong>R walk-through 6.1</strong> Importing data into R and creating tables and charts</h3>
+  <p>Before uploading an Excel or csv file into R, first open the file in a spreadsheet software (like Excel) to understand how the file is structured. From looking at the file we learn that:</p>
+  <ul>
+    <li class="loosen-10">the variable names are in the first row (no need to use the <code class="language-r highlighter-rouge"><span class="n">skip</span></code> option)</li>
+    <li>missing values are represented by empty cells (hence we will use the option <code class="language-r highlighter-rouge"><span class="n">na.strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span></code>)</li>
+    <li>the last variable is in Column S, with short variable descriptions in Column U: it is easier to import everything first and remove the unnecessary data afterwards.</li>
+  </ul>
+  <p>We will call our imported data <code class="language-r highlighter-rouge"><span class="n">man_data</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set your working directory to the correct folder.</span><span class="w">
+</span><span class="c1"># Insert your file path for 'YOURFILEPATH'.</span><span class="w">
+</span><span class="n">setwd</span><span class="p">(</span><span class="s2">"YOURFILEPATH"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">man_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"AMP_graph_manufacturing.csv"</span><span class="p">,</span><span class="w">
+  </span><span class="n">na.strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="n">str</span><span class="p">(</span><span class="n">man_data</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r print-wrap-words highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## 'data.frame':    9207 obs. of  21 variables:</span><span class="w">
+</span><span class="c1">##  $ management                : num  3.5 3.17 3 2.41 4.44 ...</span><span class="w">
+</span><span class="c1">##  $ monitor                   : num  3.6 3.8 2.8 2.75 4.6 4.8 4.6 4.8 4.8 3.8 ...</span><span class="w">
+</span><span class="c1">##  $ target                    : num  3.6 2.6 3.6 2.4 4.4 4.4 4.6 4.2 4.8 3 ...</span><span class="w">
+</span><span class="c1">##  $ people                    : num  3.5 2.5 3 2.67 4.33 ...</span><span class="w">
+</span><span class="c1">##  $ lemp_firm                 : num  5.99 6.4 7.6 8.04 5.24 ...</span><span class="w">
+</span><span class="c1">##  $ export                    : num  NA NA 70 NA NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ competition               : int  NA 2 4 NA NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ ownership                 : Factor w/ 9 levels "Dispersed Shareholders",..: NA 1 1 NA NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ mne_country               : Factor w/ 77 levels "Argentina","Australia",..: NA NA 72 NA NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ mne_f                     : int  0 0 0 0 0 0 0 0 0 0 ...</span><span class="w">
+</span><span class="c1">##  $ mne_d                     : int  0 0 1 0 0 0 0 0 0 0 ...</span><span class="w">
+</span><span class="c1">##  $ degree_m                  : int  NA 100 100 NA NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ degree_nm                 : int  NA 75 5 NA NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ country                   : Factor w/ 20 levels "Argentina","Australia",..: 20 20 20 20 20 20 20 20 20 20 ...</span><span class="w">
+</span><span class="c1">##  $ competition2004           : int  3 NA NA NA 3 3 3 3 3 3 ...</span><span class="w">
+</span><span class="c1">##  $ year                      : int  2004 2006 2006 2002 2004 2004 2004 2004 2004 2004 ...</span><span class="w">
+</span><span class="c1">##  $ sic                       : int  382 382 382 308 281 281 366 366 357 382 ...</span><span class="w">
+</span><span class="c1">##  $ lb_employindex            : int  0 0 0 NA 0 0 0 0 0 0 ...</span><span class="w">
+</span><span class="c1">##  $ pppgdp                    : num  11868 13399 14119 10642 11868 ...</span><span class="w">
+</span><span class="c1">##  $ X                         : logi  NA NA NA NA NA NA ...</span><span class="w">
+</span><span class="c1">##  $ storage..display.....value: Factor w/ 22 levels "----------------------------------------------------------------------------------------------------------------------",..: 21 1 11 15 20 17 10 8 3 16 ...</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="loosen-10 keep-together">You can see that Column U was imported as two variables, <code class="language-r highlighter-rouge"><span class="n">X</span></code> (which only contains ‘NAs’) and <code class="language-r highlighter-rouge"><span class="n">storage..display.....value</span></code> (which contains variable information). We will store the variable information in a new vector (<code class="language-r highlighter-rouge"><span class="n">man_varinfo</span></code>) and remove both variables from the <code class="language-r highlighter-rouge"><span class="n">man_data</span></code> dataset.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Keep the variable information</span><span class="w">
+</span><span class="n">man_varinfo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">man_data</span><span class="o">$</span><span class="w">
+  </span><span class="n">storage..display.....value</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">23</span><span class="p">])</span><span class="w">
+
+</span><span class="c1"># Delete last two variables</span><span class="w">
+</span><span class="n">man_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">man_data</span><span class="p">[,</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">man_data</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> 
+  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"X"</span><span class="p">,</span><span class="w"> </span><span class="s2">"storage..display.....value"</span><span class="p">))]</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <p>Let’s look at the variable information.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">man_varinfo</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r print-wrap-words highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  [1] variable name   type   format      label      variable label</span><span class="w">
+</span><span class="c1">##  [2] ----------------------------------------------------------------------------------------------------------------------</span><span class="w">
+</span><span class="c1">##  [3] management      float  %9.0g                * Average of all management questions                                     </span><span class="w">
+</span><span class="c1">##  [4] monitor         float  %9.0g                  Average of perf1 to perf5                                               </span><span class="w">
+</span><span class="c1">##  [5] target          float  %9.0g                  Average of perf6 to perf10                                              </span><span class="w">
+</span><span class="c1">##  [6] people          float  %9.0g                  Average of talent1 to talent6                                           </span><span class="w">
+</span><span class="c1">##  [7] lemp_firm       float  %9.0g                  Log of 'No. of firm employees as declared in interview'                 </span><span class="w">
+</span><span class="c1">##  [8] export          double %10.0g               * % of production exported</span><span class="w">
+</span><span class="c1">##  [9] competition     byte   %12.0g               * No. of competitors</span><span class="w">
+</span><span class="c1">## [10] ownership       str33  %33s                 * Who owns the firm?</span><span class="w">
+</span><span class="c1">## [11] mne_country     str19  %19s                 * Country of origin of multinational (best guess)                         </span><span class="w">
+</span><span class="c1">## [12] mne_f           byte   %9.0g                  = 1 if foreign MNE</span><span class="w">
+</span><span class="c1">## [13] mne_d           byte   %9.0g                  = 1 if domestic MNE</span><span class="w">
+</span><span class="c1">## [14] degree_m        byte   %8.0g                * % of managers with a college degree                                     </span><span class="w">
+</span><span class="c1">## [15] degree_nm       float  %8.0g                * % of non-managers with a college degree                                 </span><span class="w">
+</span><span class="c1">## [16] country         str19  %19s                   Country in which plant is located</span><span class="w">
+</span><span class="c1">## [17] competition2004 byte   %9.0g                  1=No competitors, 2=A few competitors, 3=Many competitors               </span><span class="w">
+</span><span class="c1">## [18] year            int    %9.0g                * SENSITIVE: Accts: Year of Accounts Data                                 </span><span class="w">
+</span><span class="c1">## [19] sic             int    %8.0g                * Three digit US SIC 1987 code (999 is missing)                           </span><span class="w">
+</span><span class="c1">## [20] lb_employindex  byte   %10.0g               * WB: Rigidity of employment index (0-100)                                </span><span class="w">
+</span><span class="c1">## [21] pppgdp          float  %9.0g                * IMF: GDP based on PPP valuation of cty GDP (Current international $ -   </span><span class="w">
+</span><span class="c1">## [22]                                                 Billions)</span><span class="w">
+</span><span class="c1">## [23] &lt;NA&gt;</span><span class="w">
+</span><span class="c1">## 22 Levels: ---------------------------------------------------------------------------------------------------------------------- ...</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>A few of the variables that have been imported as numbers are actually categorical (‘factor’) variables ( <code class="language-r highlighter-rouge"><span class="n">mne_f</span></code> , <code class="language-r highlighter-rouge"><span class="n">mne_d</span></code>, and <code class="language-r highlighter-rouge"><span class="n">competition2004</span></code>). The reason R thought they were numerical variables was because each category was represented by a number (instead of text). We use the <code class="language-r highlighter-rouge"><span class="n">factor</span></code> function to tell R how to treat these variables, and the <code class="language-r highlighter-rouge"><span class="n">labels</span></code> option to define what each number in those variables represents.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Indicates what to call 0 and 1 entries</span><span class="w">
+</span><span class="n">man_data</span><span class="o">$</span><span class="n">mne_f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">man_data</span><span class="o">$</span><span class="n">mne_f</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"no MNE_f"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MNE_f"</span><span class="p">))</span><span class="w">
+</span><span class="n">man_data</span><span class="o">$</span><span class="n">mne_d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">man_data</span><span class="o">$</span><span class="n">mne_d</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"no MNE_d"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MNE_d"</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Indicates what to call 1, 2, and 3 entries</span><span class="w">
+</span><span class="n">man_data</span><span class="o">$</span><span class="n">competition2004</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="w">
+  </span><span class="n">man_data</span><span class="o">$</span><span class="n">competition2004</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"No competitors"</span><span class="p">,</span><span class="w"> </span><span class="s2">"A few competitors"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Many competitors"</span><span class="p">))</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <p class="loosen-10">When you create new labels, check that the labels have been attached to the correct entries (the labels should be ordered from the lowest to highest entry).</p>
+  <p class="loosen-5">To create the tables, we use piping operators (<code class="language-r highlighter-rouge"><span class="o">%&gt;%</span></code>) from the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package, which allow us to run a series of commands on the same data all at once. For more information on how piping works, refer to <a href="https://tinyco.re/5531433" class="show-url">a short introduction on using piping operators</a>.<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> First, we will group data by country (<code class="language-r highlighter-rouge"><span class="n">group_by</span></code>), then calculate the required summary statistics for each of these groups (<code class="language-r highlighter-rouge"><span class="n">summarize</span></code>), then order the countries according to their overall score (highest to lowest) (<code class="language-r highlighter-rouge"><span class="n">arrange</span></code>). When summarizing the data, in addition to the mean values for the different categories and the overall score, we add a variable recording how many observations we have for each country (<code class="language-r highlighter-rouge"><span class="n">obs</span></code>).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">table_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">man_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_overall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">monitor</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">target</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_incentives</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">people</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">m_overall</span><span class="p">))</span><span class="w">
+
+</span><span class="n">table_mean</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 20 x 6</span><span class="w">
+</span><span class="c1">##    country               obs m_overall m_monitor m_target m_incentives</span><span class="w">
+</span><span class="c1">##    &lt;fct&gt;               &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">##  1 United States        1225      3.35      3.58     3.26         3.25</span><span class="w">
+</span><span class="c1">##  2 Germany               646      3.23      3.57     3.22         2.98</span><span class="w">
+</span><span class="c1">##  3 Japan                 176      3.23      3.50     3.34         2.92</span><span class="w">
+</span><span class="c1">##  4 Sweden                388      3.21      3.64     3.19         2.83</span><span class="w">
+</span><span class="c1">##  5 Canada                385      3.17      3.55     3.07         2.94</span><span class="w">
+</span><span class="c1">##  6 UK                   1242      3.03     NA        2.98         2.86</span><span class="w">
+</span><span class="c1">##  7 France                613      3.03      3.43     2.97         2.74</span><span class="w">
+</span><span class="c1">##  8 Italy                 289      3.03      3.26     3.10         2.76</span><span class="w">
+</span><span class="c1">##  9 Australia             392      3.02      3.29     3.02         2.74</span><span class="w">
+</span><span class="c1">## 10 New Zealand           106      2.93      3.18     2.96         2.63</span><span class="w">
+</span><span class="c1">## 11 Mexico                189      2.92      3.29     2.88         2.71</span><span class="w">
+</span><span class="c1">## 12 Poland                351      2.90      3.12     2.94         2.83</span><span class="w">
+</span><span class="c1">## 13 Republic of Ireland   106      2.89      3.14     2.81         2.79</span><span class="w">
+</span><span class="c1">## 14 Portugal              247      2.87      3.27     2.83         2.59</span><span class="w">
+</span><span class="c1">## 15 Chile                 317      2.83      3.14     2.72         2.67</span><span class="w">
+</span><span class="c1">## 16 Argentina             249      2.76      3.08     2.68         2.56</span><span class="w">
+</span><span class="c1">## 17 Greece                251      2.73      2.97     2.66         2.58</span><span class="w">
+</span><span class="c1">## 18 China                 746      2.71      2.90     2.63         2.69</span><span class="w">
+</span><span class="c1">## 19 Brazil                569      2.71      3.06     2.69         2.55</span><span class="w">
+</span><span class="c1">## 20 India                 720      2.67      2.91     2.66         2.63</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>You can see that <code class="language-r highlighter-rouge"><span class="n">m_monitor</span></code> for the UK is recorded as <code class="language-r highlighter-rouge"><span class="kc">NA</span></code>, because there is a <code class="language-r highlighter-rouge"><span class="kc">NA</span></code> entry for the monitor variable. The <code class="language-r highlighter-rouge"><span class="n">mean</span></code> function, by default, will not produce a mean value if any observations are missing. Doing so allows you to investigate if there is a data issue. Here, this missing observation isn’t really an issue for our analysis⁠—in the code above, we simply add the option <code class="language-r highlighter-rouge"><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span></code> in the <code class="language-r highlighter-rouge"><span class="n">mean</span></code> function to calculate the mean, ignoring the missing observation(s).</p>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">man_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_overall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">monitor</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">target</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_incentives</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">people</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">m_overall</span><span class="p">))</span><span class="w">
+
+</span><span class="n">table_mean</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 20 x 6</span><span class="w">
+</span><span class="c1">##    country               obs m_overall m_monitor m_target m_incentives</span><span class="w">
+</span><span class="c1">##    &lt;fct&gt;               &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">##  1 United States        1225      3.35      3.58     3.26         3.25</span><span class="w">
+</span><span class="c1">##  2 Germany               646      3.23      3.57     3.22         2.98</span><span class="w">
+</span><span class="c1">##  3 Japan                 176      3.23      3.50     3.34         2.92</span><span class="w">
+</span><span class="c1">##  4 Sweden                388      3.21      3.64     3.19         2.83</span><span class="w">
+</span><span class="c1">##  5 Canada                385      3.17      3.55     3.07         2.94</span><span class="w">
+</span><span class="c1">##  6 UK                   1242      3.03      3.34     2.98         2.86</span><span class="w">
+</span><span class="c1">##  7 France                613      3.03      3.43     2.97         2.74</span><span class="w">
+</span><span class="c1">##  8 Italy                 289      3.03      3.26     3.10         2.76</span><span class="w">
+</span><span class="c1">##  9 Australia             392      3.02      3.29     3.02         2.74</span><span class="w">
+</span><span class="c1">## 10 New Zealand           106      2.93      3.18     2.96         2.63</span><span class="w">
+</span><span class="c1">## 11 Mexico                189      2.92      3.29     2.88         2.71</span><span class="w">
+</span><span class="c1">## 12 Poland                351      2.90      3.12     2.94         2.83</span><span class="w">
+</span><span class="c1">## 13 Republic of Ireland   106      2.89      3.14     2.81         2.79</span><span class="w">
+</span><span class="c1">## 14 Portugal              247      2.87      3.27     2.83         2.59</span><span class="w">
+</span><span class="c1">## 15 Chile                 317      2.83      3.14     2.72         2.67</span><span class="w">
+</span><span class="c1">## 16 Argentina             249      2.76      3.08     2.68         2.56</span><span class="w">
+</span><span class="c1">## 17 Greece                251      2.73      2.97     2.66         2.58</span><span class="w">
+</span><span class="c1">## 18 China                 746      2.71      2.90     2.63         2.69</span><span class="w">
+</span><span class="c1">## 19 Brazil                569      2.71      3.06     2.69         2.55</span><span class="w">
+</span><span class="c1">## 20 India                 720      2.67      2.91     2.66         2.63</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Let’s make the table showing the ranks. We use the <code class="language-r highlighter-rouge"><span class="n">mutate</span></code> function, which adds variables calculated from existing variables.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_rank</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">table_mean</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">r_overall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">m_overall</span><span class="p">)),</span><span class="w"> 
+    </span><span class="n">r_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">m_monitor</span><span class="p">)),</span><span class="w"> 
+    </span><span class="n">r_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">m_target</span><span class="p">)),</span><span class="w"> 
+    </span><span class="n">r_incentives</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">m_incentives</span><span class="p">)))</span><span class="w">
+
+</span><span class="c1"># Select the country variable (Column 1) and the columns </span><span class="w">
+</span><span class="c1"># with rank information (7 to 10)                        </span><span class="w">
+</span><span class="n">table_rank</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="o">:</span><span class="m">10</span><span class="p">)]</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 20 x 5</span><span class="w">
+</span><span class="c1">##    country             r_overall r_monitor r_target r_incentives</span><span class="w">
+</span><span class="c1">##    &lt;fct&gt;                   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">##  1 United States               1         2        2            1</span><span class="w">
+</span><span class="c1">##  2 Germany                     2         3        3            2</span><span class="w">
+</span><span class="c1">##  3 Japan                       3         5        1            4</span><span class="w">
+</span><span class="c1">##  4 Sweden                      4         1        4            6</span><span class="w">
+</span><span class="c1">##  5 Canada                      5         4        6            3</span><span class="w">
+</span><span class="c1">##  6 UK                          6         7        8            5</span><span class="w">
+</span><span class="c1">##  7 France                      7         6        9           11</span><span class="w">
+</span><span class="c1">##  8 Italy                       8        11        5            9</span><span class="w">
+</span><span class="c1">##  9 Australia                   9         8        7           10</span><span class="w">
+</span><span class="c1">## 10 New Zealand                10        12       10           16</span><span class="w">
+</span><span class="c1">## 11 Mexico                     11         9       12           12</span><span class="w">
+</span><span class="c1">## 12 Poland                     12        15       11            7</span><span class="w">
+</span><span class="c1">## 13 Republic of Ireland        13        14       14            8</span><span class="w">
+</span><span class="c1">## 14 Portugal                   14        10       13           17</span><span class="w">
+</span><span class="c1">## 15 Chile                      15        13       15           14</span><span class="w">
+</span><span class="c1">## 16 Argentina                  16        16       17           19</span><span class="w">
+</span><span class="c1">## 17 Greece                     17        18       19           18</span><span class="w">
+</span><span class="c1">## 18 China                      18        20       20           13</span><span class="w">
+</span><span class="c1">## 19 Brazil                     19        17       16           20</span><span class="w">
+</span><span class="c1">## 20 India                      20        19       18           15</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now we use the <code class="language-r highlighter-rouge"><span class="n">ggplot</span></code> set of functions (part of the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package uploaded earlier) to create a bar chart using the <code class="language-r highlighter-rouge"><span class="n">m_overall</span></code> value in <code class="language-r highlighter-rouge"><span class="n">table_mean</span></code>. To present countries in order of their management score, we specified <code class="language-r highlighter-rouge"><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">m_overall</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span></code> (using <code class="language-r highlighter-rouge"><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">country</span></code> would have ordered the countries alphabetically, which is R’s default option). To switch the horizontal and vertical axis (as in <a href="06-01.html#figure-6-1" class="show-page-number">Figure 6.1</a>), we used the <code class="language-r highlighter-rouge"><span class="n">coord_flip</span></code> option.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">table_mean</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">m_overall</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_overall</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">xlab</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Average management practice score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-6-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-06-03.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-03.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-03-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-03-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-03-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Management practices in manufacturing firms around the world.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-03.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-03-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-03-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-03-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Management practices in manufacturing firms around the world.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Management practices in manufacturing firms around the world.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.3 </span>
+Management practices in manufacturing firms around the world.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>If you want to switch the order of the bars, use <code class="language-r highlighter-rouge"><span class="n">rev</span><span class="p">(</span><span class="n">table_mean</span><span class="o">$</span><span class="n">m_overall</span><span class="p">)</span></code> and <code class="language-r highlighter-rouge"><span class="n">rev</span><span class="p">(</span><span class="n">table_mean</span><span class="o">$</span><span class="n">country</span><span class="p">)</span></code> to reverse the order of the values.</p>
+</blockquote>
+<p class="keep-together loosen-10">To look at how management quality varies within countries, instead of just looking at the mean we can use column charts to visualize the entire distribution of scores (as in <a href="01-03.html#r-walk-through-14-creating-frequency-tables-and-histograms" class="show-page-number">Empirical Project 1</a>). To compare distributions, we have to use the same horizontal axis, so we will first need to make a frequency table for each distribution to be used. Also, since each country has a different number of observations, we will use percentages instead of frequencies as the vertical axis variable.</p>
+<ol class="text-question tighten-15">
+  <li>For three countries of your choice and for the US, carry out the following:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Using the overall management score (variable ‘management’), create and fill in a frequency table similar to Figure 6.4 below for the US, and separately for each chosen country. The values in the first column should range from 1 to 5, in intervals of 0.2.</li>
+</ul>
+<div class="figure figure-no-source" id="figure-6-4">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th>Range of management score</th>
+    <th>Frequency</th>
+    <th>Percentage of firms (%)</th>
+  </tr>
+  <tr>
+    <td class="align-center">1.00</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="align-center">1.20</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="align-center">…</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="align-center">4.80</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="align-center">5.00</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Frequency table for overall management score.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.4 </span>
+Frequency table for overall management score.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Plot a column chart for each country to show the distribution of management scores, with the percentage of firms on the vertical axis and the range of management scores on the horizontal axis. On each country’s chart, plot the distribution of the US on top of that country’s distribution, as shown in R walk-through 6.2.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Describe any visual similarities and differences between the distributions of your chosen countries and that of the US. (<em>Hint</em>: For example, look at where the distribution is centred, the percentage of observations on the left tail or the right tail of the distribution, and how spread out the scores are.)</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-62-obtaining-frequency-counts-and-plotting-overlapping-histograms"><strong>R walk-through 6.2</strong> Obtaining frequency counts and plotting overlapping histograms</h3>
+  <p>To get frequency counts, use the <code class="language-r highlighter-rouge"><span class="n">cut</span></code> function. This function will count the number of observations that fall within the intervals specified in the <code class="language-r highlighter-rouge"><span class="n">breaks</span></code> option (here we specified intervals of 0.2). We store this information in the vector <code class="language-r highlighter-rouge"><span class="n">temp_counts</span></code> and use the <code class="language-r highlighter-rouge"><span class="n">table</span></code> function to display the table of frequencies.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp_counts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">man_data</span><span class="o">$</span><span class="n">management</span><span class="w">
+  </span><span class="p">[</span><span class="n">man_data</span><span class="o">$</span><span class="n">country</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Chile"</span><span class="p">],</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">))</span><span class="w">  
+
+</span><span class="n">table</span><span class="p">(</span><span class="n">temp_counts</span><span class="p">)</span><span class="w">  
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## temp_counts</span><span class="w">
+</span><span class="c1">##   (0,0.2] (0.2,0.4] (0.4,0.6] (0.6,0.8]   (0.8,1]   (1,1.2] (1.2,1.4] </span><span class="w">
+</span><span class="c1">##         0         0         0         0         0         0         1 </span><span class="w">
+</span><span class="c1">## (1.4,1.6] (1.6,1.8]   (1.8,2]   (2,2.2] (2.2,2.4] (2.4,2.6] (2.6,2.8] </span><span class="w">
+</span><span class="c1">##         3         6        24        15        30        25        49 </span><span class="w">
+</span><span class="c1">##   (2.8,3]   (3,3.2] (3.2,3.4] (3.4,3.6] (3.6,3.8]   (3.8,4]   (4,4.2] </span><span class="w">
+</span><span class="c1">##        52        28        27        21        20         9         6 </span><span class="w">
+</span><span class="c1">## (4.2,4.4] (4.4,4.6] (4.6,4.8]   (4.8,5] </span><span class="w">
+</span><span class="c1">##         1         0         0         0</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>To create the required chart, we will use <code class="language-r highlighter-rouge"><span class="n">geom_histogram</span></code>, part of the <code class="language-r highlighter-rouge"><span class="n">ggplot</span></code> set of functions.</p>
+  <p>Let’s first collect one pair of countries, Chile and the US. If you wanted to produce a histogram for the overall (<code class="language-r highlighter-rouge"><span class="n">management</span></code>) rating, use the following code.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">subset</span><span class="p">(</span><span class="n">man_data</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Chile"</span><span class="p">),</span><span class="w">
+  </span><span class="n">aes</span><span class="p">(</span><span class="n">management</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">xlab</span><span class="p">(</span><span class="s2">"Management score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Frequency Count"</span><span class="p">)</span><span class="w"> 
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">g</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-6-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-06-05.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-05.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-05-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-05-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-05-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Distribution of management scores, Chile.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-05.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-05-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-05-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-05-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Distribution of management scores, Chile.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Distribution of management scores, Chile.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.5 </span>
+Distribution of management scores, Chile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p><em>Tip:</em> Using <code class="language-r highlighter-rouge"><span class="n">ggplot</span></code>, it is straightforward to add a second country to the chart. The way to learn is usually to search the Internet (here we searched for ‘r ggplot multiple histograms’).</p>
+  <p>To plot two countries on the same chart, we added the following options:</p>
+  <ul>
+    <li><code class="language-r highlighter-rouge"><span class="n">..density..</span></code> gives a chart with a total area of 1, which ensures the histograms are plotted using the same scale (the result is a graph with an area of 1). For proportions, we need to scale by multiplying by the bin width (0.2 in this case).</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">country</span></code> plots one histogram for each country</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span></code> sets the breakpoints (intervals) at 0.2, starting from 0 and ending at 5</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span></code> makes the bars semi-transparent (so we can see both histograms at once)</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span></code> overlays the two histograms</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">scale_fill_discrete</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">)</span></code> gives a legend title.</li>
+  </ul>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">subset</span><span class="p">(</span><span class="n">man_data</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">%in%</span><span class="w"> 
+  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Chile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">management</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">..density..</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">country</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span><span class="p">,</span><span class="w">
+    </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">xlab</span><span class="p">(</span><span class="s2">"Management score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Density"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Histogram for management score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">scale_fill_discrete</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">g</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-6-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-06-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Comparing the distribution of management scores for the US and Chile.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Comparing the distribution of management scores for the US and Chile.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Comparing the distribution of management scores for the US and Chile.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.6 </span>
+Comparing the distribution of management scores for the US and Chile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">box and whisker plot</dt><dd class="definition-description">A graphic display of the range and quartiles of a distribution, where the first and third quartile form the ‘box’ and the maximum and minimum values form the ‘whiskers’.</dd>
+</dl>
+<p>Another way to visualize distributions is a <strong data-term="box and whisker plot">box and whisker plot</strong>, which shows some parts of a distribution rather than the whole distribution. We can use box and whisker plots to compare particular aspects of distributions more easily than when looking at the entire distribution.</p>
+<p>As shown in Figure 6.7, the ‘box’ consists of the first quartile (value corresponding to the bottom 25 per cent, or 25th percentile, of all values), the median, and the third quartile (75th percentile). The ‘whiskers’ are the minimum and maximum values. (In R, the ‘whiskers’ may not be the actual maximum or minimum, since any values larger than 1.5 times the width of the box are considered outliers and are shown as separate points.)</p>
+<div class="figure fixed figure-no-source" id="figure-6-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-06-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-06-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-06-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-06-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-06-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-06-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Example of a box and whisker plot. (Note: The mean is not shown in R’s default chart setting, but is denoted here by X. In general, the median may not be in the centre of the box, and can differ greatly from the mean. Using the data shown in Figure 6.7 for a variable from the dataset, the mean and median are very similar.)
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-06-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-06-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-06-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-06-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-06-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Example of a box and whisker plot. (Note: The mean is not shown in R’s default chart setting, but is denoted here by X. In general, the median may not be in the centre of the box, and can differ greatly from the mean. Using the data shown in Figure 6.7 for a variable from the dataset, the mean and median are very similar.)
+" class="" />
+        </a>
+</div>
+<p class="description">
+Example of a box and whisker plot. <br />(<em>Note</em>: The mean is not shown in R’s default chart setting, but is denoted here by X. In general, the median may not be in the centre of the box, and can differ greatly from the mean. Using the data shown in Figure 6.7 for a variable from the dataset, the mean and median are very similar.)
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.7 </span>
+Example of a box and whisker plot. <br />(<em>Note</em>: The mean is not shown in R’s default chart setting, but is denoted here by X. In general, the median may not be in the centre of the box, and can differ greatly from the mean. Using the data shown in Figure 6.7 for a variable from the dataset, the mean and median are very similar.)
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li>Using the same countries you chose in Question 3:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Make a box and whisker plot for each country and the US, showing the distribution of management scores. You can either make a separate chart for each country or show all countries in the same plot. To check that your plots make sense, compare your box and whisker plots to the distributions from Question 3.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use your box and whisker plots to add to your comparisons from Question 3(<em>c</em>).</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-63-creating-box-and-whisker-plots"><strong>R walk-through 6.3</strong> Creating box and whisker plots</h3>
+  <p>We use exactly the same structure as for the overlapping histograms, this time plotting countries on the horizontal axis (<code class="language-r highlighter-rouge"><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">country</span></code>) and management scores on the vertical axis (<code class="language-r highlighter-rouge"><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">management</span></code>). A useful feature of <code class="language-r highlighter-rouge"><span class="n">ggplot</span></code> is that using more or less the same structure, you can create a variety of graphs. In this example, we include a few more countries, as this can be done without overcrowding the figure. To change the look of our chart, we use the option <code class="language-r highlighter-rouge"><span class="n">theme_solarized</span><span class="p">()</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggthemes</span><span class="p">)</span><span class="w">
+
+</span><span class="n">g</span><span class="m">2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">subset</span><span class="p">(</span><span class="n">man_data</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">%in%</span><span class="w"> 
+  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Chile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Germany"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">management</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Management score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Box and whisker plots for management score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">theme_solarized</span><span class="p">()</span><span class="w">
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">g</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-6-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-06-08.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-08.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-08-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-08-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-08-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plots for a selection of countries.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-08.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-08-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-08-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-08-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plots for a selection of countries.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plots for a selection of countries.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.8 </span>
+Box and whisker plots for a selection of countries.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<p>From the manufacturing data, firms in the US seem to be managed better (on average) than firms in other countries. To investigate whether this is the case in other sectors, we will use data gathered on hospitals and schools.</p>
+<ol class="text-question keep-with-next">
+  <li>Using the data for hospitals and schools (AMP_graph_public.csv):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table for hospitals and schools, showing the mean management score and criteria score (monitoring, targets, incentives) for each country, as in <a href="#figure-6-2a" class="show-page-number">Figure 6.2a</a>.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Make separate bar charts for hospitals and schools showing the mean overall management score for each country, sorted from highest to lowest, as in <a href="06-01.html#figure-6-1" class="show-page-number">Figure 6.1</a>. Are the country rankings similar to those in manufacturing?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using your average criteria scores from Question 5(<em>a</em>), suggest some explanations for the observed rankings in either hospitals or schools. (You may find it helpful to research healthcare or educational policies and reforms in those countries to support your explanations.)</li>
+</ul>
+<h2 id="part-62-do-management-practices-differ-between-countries">Part 6.2 Do management practices differ between countries?</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>calculate conditional means for one or more conditions, and compare them on a bar chart</li>
+    <li>construct confidence intervals and use them to assess differences between groups.</li>
+  </ul>
+</blockquote>
+<p>Using the management survey data collected by Bloom et al. (2012), we can compare average management scores across countries and industries. When we find differences between groups in the survey, we are interested in what that tells us about the true differences in management practices between the countries.</p>
+<dl class="definition">
+<dt class="definition-term">confidence interval</dt><dd class="definition-description">A range of values centred around the sample mean value, with a corresponding percentage (usually 90%, 95%, or 99%). When we use a sample to calculate a 95% confidence interval, there is a probability of 0.95 that we will get an interval containing the true value of interest.</dd>
+</dl>
+<p>In <a href="02-01.html" class="show-page-number">Empirical Project 2</a>, we used p-values to assess differences between groups. A p-value tells us how unusual it would be to observe the differences between groups that we did, assuming our hypothesis is correct (and additional model assumptions about the data hold). If the p-value is small, we might then conclude that the data is not compatible with our assumptions (e.g. that the two groups were drawn from populations with the same mean), and that there is a real difference between the underlying populations. Now we will use another method that helps us to allow for random variation when we interpret data, called a <strong data-term="confidence interval">confidence interval</strong>.</p>
+<p>When we work with data we usually have only a small sample from the entire population of interest. For example, the World Management Survey collects information from a selection of all the firms in a particular country. If we calculate the average management score for the sample, we have an estimate of the average management score across all firms in the country (the ‘true value’) but it may not be a very accurate estimate⁠—especially if the sample is small and management scores vary a lot between firms.</p>
+<p>A 95% confidence interval is a range of possible values within which the true value might lie. It is estimated from the mean and standard deviation of the data. As in the process of calculating p-values, we use a standard method that gives a good estimate provided that certain statistical conditions are satisfied. We cannot be certain that the true value lies in the range; we might have the bad luck to pick an atypical sample, in which case our estimate of the confidence interval would be atypical too. But we can say that when we use this method, there is a 95% probability that we will find an interval that contains the true value.  One way to interpret this is to say that if we were able to repeat the process of sampling and calculating confidence intervals many times, roughly 95% of these confidence intervals would contain the true value.</p>
+<p class="tighten-10">As the name suggests, confidence intervals tell us how much confidence we can place in our estimates, or in other words, how precisely the sample mean is estimated. The confidence interval gives us a margin of error for our estimate of the true value. If the data varies a lot, the 95% confidence interval may be quite wide. If we have plenty of data, and the standard deviation is low, the estimate will be more precise and the 95% interval will be narrow.</p>
+<blockquote class="info wide">
+  <h3 id="rule-of-thumb-for-comparing-means">Rule of thumb for comparing means</h3>
+  <p>When comparing two distributions, if neither mean is in the 95% confidence interval for the other mean, the p-value for the difference in means is less than 5%.</p>
+  <p>This rule of thumb is handy when looking at charts. If two 95% confidence intervals don’t overlap, we can say immediately that the observed difference between the means for the two groups is unlikely to have arisen by chance alone (given that our hypothesis that there were no differences in the populations from which these groups were drawn and that our other assumptions about the data, such as random sampling, are correct). For a more definite conclusion, we can calculate the actual p-value (see <a href="02-03.html" class="show-page-number">Empirical Project 2</a>) or construct a confidence interval for the difference in means. (This method involves more mathematics so we will discuss that in <a href="08-03.html" class="show-page-number">Empirical Project 8</a>.)</p>
+</blockquote>
+<p class="tighten-10">It is possible to calculate a confidence interval for any probability: however wide the 95% confidence interval, a 99% confidence interval would be wider, and an 80% one would be narrower. 95% is a common choice: it gives us quite a high degree of confidence, and to go higher tends to lead to very wide intervals. We will use 95% confidence intervals throughout this project.</p>
+<p>To sum up: A confidence interval is a range of values centred around the sample mean value, with a corresponding percentage (usually 90%, 95%, or 99%). When we use a sample to calculate a 95% confidence interval, there is a probability of 0.95 that we will get an interval containing the true value of interest.</p>
+<p>We will now build on the results from the Bloom et al. (2012) paper by using 95% confidence intervals to make comparisons between the mean overall management score for different countries and types of firms. The confidence interval for the population mean (mean management score for that country) is centred around the sample mean. To determine the width of the interval, we use the standard deviation and number of firms.</p>
+<ol class="text-question">
+  <li>First look at manufacturing firms in different countries. Using the manufacturing data (AMP_graph_manufacturing.csv) for three countries of your choice and for the US:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a summary table for the overall management score as shown in Figure 6.9 below, with one row for each country.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-6-9">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Mean</th>
+      <th>Standard deviation</th>
+      <th>Number of firms</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Summary table for manufacturing firms.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.9 </span>
+Summary table for manufacturing firms.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Determine the width of the 95% confidence interval (this is the distance from the mean to one end of the interval). See <a href="#r-walk-through-64-calculating-confidence-intervals-and-adding-them-to-a-chart" class="show-page-number">R walk-through 6.4</a> for help on how to do this. You should get a different number for each country.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a bar chart showing the mean management score and add the confidence intervals to your chart.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use the width of the confidence intervals to describe how precisely each mean was estimated.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using your chart from Question 1(<em>c</em>) and the rule of thumb, what can you say about the differences between the US management score, and the scores of other countries? How would your results change if you use a different specified probability (for example, 99%)?</li>
+</ul>
+<blockquote class="expandable-box page-break-before">
+  <h3 id="r-walk-through-64-calculating-confidence-intervals-and-adding-them-to-a-chart"><strong>R walk-through 6.4</strong> Calculating confidence intervals and adding them to a chart</h3>
+  <p>As in <a href="#r-walk-through-61-importing-data-into-r-and-creating-tables-and-charts" class="show-page-number">R walk-through 6.1</a>, we use piping operators (<code class="language-r highlighter-rouge"><span class="o">%&gt;%</span></code>) from the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package. First, we take <code class="language-r highlighter-rouge"><span class="n">man_data</span></code> and extract the countries we need (<code class="language-r highlighter-rouge"><span class="n">filter</span></code>). Then, we group the data by country (<code class="language-r highlighter-rouge"><span class="n">group_by</span></code>), calculate the required summary measures (<code class="language-r highlighter-rouge"><span class="n">summarize</span></code>), and arrange the data according to the values of <code class="language-r highlighter-rouge"><span class="n">mean_m</span></code> (<code class="language-r highlighter-rouge"><span class="n">rev</span></code> sorts from highest to lowest). We save the final result in <code class="language-r highlighter-rouge"><span class="n">table_stats</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_stats</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">man_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Chile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Germany"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">mean_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">sd_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">(</span><span class="n">management</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">rev</span><span class="p">(</span><span class="n">mean_m</span><span class="p">))</span><span class="w">
+
+</span><span class="n">table_stats</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 5 x 4</span><span class="w">
+</span><span class="c1">##   country         obs mean_m  sd_m</span><span class="w">
+</span><span class="c1">##   &lt;fct&gt;         &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1 United States  1225   3.35 0.643</span><span class="w">
+</span><span class="c1">## 2 UK             1242   3.03 0.679</span><span class="w">
+</span><span class="c1">## 3 Chile           317   2.83 0.599</span><span class="w">
+</span><span class="c1">## 4 Germany         646   3.23 0.569</span><span class="w">
+</span><span class="c1">## 5 Brazil          569   2.71 0.685</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>To get the confidence intervals, we use the <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function, which calculates them automatically (along with a lot of other information). The confidence interval is stored as <code class="language-r highlighter-rouge"><span class="n">conf.int</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># tUS contains a lot of information; $conf.int[1:2] is the </span><span class="w">
+</span><span class="c1"># confidence interval.</span><span class="w">
+</span><span class="n">tUS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t.test</span><span class="p">(</span><span class="n">subset</span><span class="p">(</span><span class="n">man_data</span><span class="p">,</span><span class="w">
+  </span><span class="n">country</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">management</span><span class="p">))</span><span class="w">
+
+</span><span class="n">tUS</span><span class="o">$</span><span class="n">conf.int</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 3.312379 3.384448</span><span class="w">
+</span></code></pre></div>  </div>
+  <dl class="definition">
+<dt class="definition-term">standard error</dt><dd class="definition-description">A measure of the degree to which the sample mean deviates from the population mean. It is calculated by dividing the standard deviation of the sample by the square root of the number of observations.</dd>
+</dl>
+  <p>We want to add these interval values to <code class="language-r highlighter-rouge"><span class="n">table_stats</span></code>. In order for R to plot the confidence intervals, instead of the actual values, we need to store the interval values as the amount to add/subtract from the mean value. The easiest way is to calculate the <strong data-term="standard error">standard error</strong> for the sample mean and multiply this by 1.96 (<code class="language-r highlighter-rouge"><span class="n">m_err</span></code> <script type="math/tex">= 1.96 \times \sqrt{s^2/(n − 1)}</script>), where 1.96 is the factor required to get a 95% confidence interval (assuming a normal distribution). The confidence interval is then [mean_m − m_err, mean_m + m_err].</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_stats</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">man_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Chile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Germany"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">mean_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">sd_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">(</span><span class="n">management</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">m_err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.96</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">sd_m</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">obs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">rev</span><span class="p">(</span><span class="n">mean_m</span><span class="p">))</span><span class="w">
+
+</span><span class="n">table_stats</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 5 x 5</span><span class="w">
+</span><span class="c1">##   country         obs mean_m  sd_m  m_err</span><span class="w">
+</span><span class="c1">##   &lt;fct&gt;         &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1 United States  1225   3.35 0.643 0.0360</span><span class="w">
+</span><span class="c1">## 2 UK             1242   3.03 0.679 0.0378</span><span class="w">
+</span><span class="c1">## 3 Chile           317   2.83 0.599 0.0660</span><span class="w">
+</span><span class="c1">## 4 Germany         646   3.23 0.569 0.0439</span><span class="w">
+</span><span class="c1">## 5 Brazil          569   2.71 0.685 0.0563</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now we can use this information to make a bar chart:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">table_stats</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean_m</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">country</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position_dodge</span><span class="p">(),</span><span class="w"> 
+    </span><span class="c1"># Use black outlines and add thinner bar outlines</span><span class="w">
+    </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Mean management score"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">xlab</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_errorbar</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean_m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m_err</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean_m</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_err</span><span class="p">),</span><span class="w">
+    </span><span class="c1"># Thinner lines for confidence intervals</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.6</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position_dodge</span><span class="p">(</span><span class="m">.9</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_cartesian</span><span class="p">(</span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1.5</span><span class="p">)),</span><span class="w">
+    </span><span class="n">axis.text.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1.3</span><span class="p">)))</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-6-10">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-06-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-06-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score in manufacturing firms for a selection of countries, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-06-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-06-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-06-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score in manufacturing firms for a selection of countries, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bar chart of mean management score in manufacturing firms for a selection of countries, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 6.10 </span>
+Bar chart of mean management score in manufacturing firms for a selection of countries, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>Using the data for hospitals or schools (AMP_graph_public.csv), using all available countries:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a summary table like <a href="#figure-6-9" class="show-page-number">Figure 6.9</a> for the overall management score, with one row for each country. Add a column containing the widths of the confidence intervals for the country means.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a column chart, showing the confidence intervals. Compare the management practices in the US with those in other countries. Are there any countries for which you can be confident that management practices are either better, or worse, on average than in the US? Explain your answer.</li>
+</ul>
+<ol class="text-question">
+  <li>Look at the width of your confidence intervals and the corresponding standard deviation and number of observations for each one. Explain whether or not the relationship between them is what you would expect.</li>
+</ol>
+<h2 class="page-break-before" id="part-63-what-factors-affect-the-quality-of-management">Part 6.3 What factors affect the quality of management?</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-2">Learning objectives for this part</h3>
+  <ul>
+    <li>calculate conditional means for one or more conditions, and compare them on a bar chart</li>
+    <li>construct confidence intervals and use them to assess differences between groups</li>
+    <li>evaluate the usefulness and limitations of survey data for determining causality.</li>
+  </ul>
+</blockquote>
+<p>Besides documenting and comparing management practices across industries and countries, another purpose of the World Management Survey was to investigate factors that affect management quality.</p>
+<p class="tighten-15">One possible factor affecting differences in management is firm ownership. To look at the data for this factor in the healthcare and education sectors, we will focus on broad groups (public vs privately-owned firms), and for manufacturing firms we will focus on different kinds of private ownership.</p>
+<ol class="text-question">
+  <li>Using the data for hospitals and schools (AMP_graph_public.csv):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table for hospitals and schools, showing the average management score, standard deviation (StdDev), and number of observations, with <code class="language-r highlighter-rouge"><span class="n">country</span></code> as the row variable, and <code class="language-r highlighter-rouge"><span class="n">ownership</span></code> (public or private) and <code class="language-r highlighter-rouge"><span class="n">ind</span></code> as the column variables.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use your table from Question 1<em>(a)</em> to calculate the confidence interval widths for management in public and private hospitals. Then do the same for schools.</li>
+</ul>
+<ul class="text-sub-question tighten-10">
+  <li>Plot a bar chart (one for hospitals and another for schools) showing the means and the confidence intervals for the management score. Describe the differences between public and private firms within countries and compare management scores for the same firm type across countries. (For example, is one type of firm generally better managed than the other? Are there similar patterns for hospitals and schools? If you have done Question 5 in <a href="#part-61-looking-for-patterns-in-the-survey-data" class="show-page-number">Part 6.1</a>, you may want to discuss whether the rankings change after conditioning on ownership type.</li>
+</ul>
+<p>Besides ownership type, management practices may vary depending on firm size, though it is difficult to predict what the relationship between these variables might be. Larger firms have more employees and could be more difficult to manage well, but may also attract more experienced managers. We will look at the conditional means for manufacturing firms, depending on whether they are above or below the median number of employees (calculated from the data), and see if there is a clear relationship.</p>
+<ol class="text-question page-break-before tighten-10">
+  <li>Using the data for manufacturing firms (AMP_graph_manufacturing.csv):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a new variable that equals ‘Smaller’ if a firm has less than the median number of employees (330), and ‘Larger’ otherwise. In natural log terms, ‘Smaller’ corresponds to log employment of less than 5.80.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>For two countries of your choice and the US, create a table showing the mean overall management score, standard deviation, and number of observations, with <code class="language-r highlighter-rouge"><span class="n">country</span></code> and <code class="language-r highlighter-rouge"><span class="n">ownership</span></code> as the row variables, and firm size as the column variable. (<em>Note:</em> When there is only one observation in a group, there is no standard deviation.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use your table to calculate the confidence interval width for each firm size and ownership type.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a bar chart for each country, showing the means and the confidence intervals. Describe any patterns you observe across ownership types and firm size in each country.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-65-calculating-and-adding-conditional-summary-statistics-and-confidence-intervals-to-a-chart"><strong>R walk-through 6.5</strong> Calculating and adding conditional summary statistics and confidence intervals to a chart</h3>
+  <p>We will use many techniques encountered previously, but first we have to create a new variable that indicates whether a firm is larger or smaller (<code class="language-r highlighter-rouge"><span class="n">size</span></code>). A firm with <code class="language-r highlighter-rouge"><span class="n">lemp_firm</span></code> &gt; 5.8 is considered larger. We use the <code class="language-r highlighter-rouge"><span class="n">factor</span></code> function to do this.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">man_data</span><span class="o">$</span><span class="n">size</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">man_data</span><span class="o">$</span><span class="n">lemp_firm</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5.8</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"small"</span><span class="p">,</span><span class="w"> </span><span class="s2">"large"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We choose Canada, Brazil, and the United States. Again, we use the piping technique to make the table. In the <code class="language-r highlighter-rouge"><span class="n">group_by</span></code> command, we group the variables by <code class="language-r highlighter-rouge"><span class="n">size</span></code> and <code class="language-r highlighter-rouge"><span class="n">ownership</span></code> (as we did in <a href="#r-walk-through-61-importing-data-into-r-and-creating-tables-and-charts" class="show-page-number">R walk-through 6.1</a>).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_stats2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">man_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"United States"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">ownership</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">management</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">mean_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">management</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">sd_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">(</span><span class="n">management</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+
+</span><span class="n">table_stats2</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 53 x 6</span><span class="w">
+</span><span class="c1">## # Groups:   country, ownership [?]</span><span class="w">
+</span><span class="c1">##    country ownership                  size    obs mean_m    sd_m</span><span class="w">
+</span><span class="c1">##    &lt;fct&gt;   &lt;fct&gt;                      &lt;fct&gt; &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">##  1 Brazil  Dispersed Shareholders     small    28   3.06   0.667</span><span class="w">
+</span><span class="c1">##  2 Brazil  Dispersed Shareholders     large    45   3.48   0.731</span><span class="w">
+</span><span class="c1">##  3 Brazil  Family owned, external CEO small     8   2.82   0.725</span><span class="w">
+</span><span class="c1">##  4 Brazil  Family owned, external CEO large    10   2.99   0.688</span><span class="w">
+</span><span class="c1">##  5 Brazil  Family owned, family CEO   small    80   2.50   0.668</span><span class="w">
+</span><span class="c1">##  6 Brazil  Family owned, family CEO   large    41   2.70   0.645</span><span class="w">
+</span><span class="c1">##  7 Brazil  Founder                    small   124   2.35   0.524</span><span class="w">
+</span><span class="c1">##  8 Brazil  Founder                    large    72   2.66   0.591</span><span class="w">
+</span><span class="c1">##  9 Brazil  Government                 small     1   4    NaN    </span><span class="w">
+</span><span class="c1">## 10 Brazil  Government                 large     2   2.44   1.18 </span><span class="w">
+</span><span class="c1">## # ... with 43 more rows</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="loosen-15">Now we use the variable <code class="language-r highlighter-rouge"><span class="n">size</span></code> as a column variable, so that we can see the summary statistics in two blocks of columns (separately for larger and smaller firms). This is not a standard or straightforward procedure, but an Internet search (for ‘tidyverse spread multiple columns’) gives the following solution.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_stats2_mc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">table_stats2</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">gather</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">country</span><span class="o">:</span><span class="n">size</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">unite</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">spread</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w">
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">table_stats2_mc</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 28 x 8</span><span class="w">
+</span><span class="c1">## # Groups:   country, ownership [28]</span><span class="w">
+</span><span class="c1">##    country ownership        large_mean_m large_obs large_sd_m small_mean_m</span><span class="w">
+</span><span class="c1">##    &lt;fct&gt;   &lt;fct&gt;                   &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">##  1 Brazil  Dispersed Share~         3.48        45      0.731         3.06</span><span class="w">
+</span><span class="c1">##  2 Brazil  Family owned, e~         2.99        10      0.688         2.82</span><span class="w">
+</span><span class="c1">##  3 Brazil  Family owned, f~         2.70        41      0.645         2.50</span><span class="w">
+</span><span class="c1">##  4 Brazil  Founder                  2.66        72      0.591         2.35</span><span class="w">
+</span><span class="c1">##  5 Brazil  Government               2.44         2      1.18          4   </span><span class="w">
+</span><span class="c1">##  6 Brazil  Managers                 2.51         7      0.631         2.64</span><span class="w">
+</span><span class="c1">##  7 Brazil  Other                    3.01        29      0.541         2.57</span><span class="w">
+</span><span class="c1">##  8 Brazil  Private Equity          NA           NA     NA             3.23</span><span class="w">
+</span><span class="c1">##  9 Brazil  Private Individ~         2.94        42      0.523         2.69</span><span class="w">
+</span><span class="c1">## 10 Canada  Dispersed Share~         3.52        53      0.582         3.43</span><span class="w">
+</span><span class="c1">## # ... with 18 more rows, and 2 more variables: small_obs &lt;dbl&gt;,</span><span class="w">
+</span><span class="c1">## #   small_sd_m &lt;dbl&gt;</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>To understand the logic of this command, go through it step by step: first apply <code class="language-r highlighter-rouge"><span class="n">gather</span></code> (which compiles the values of multiple columns (<code class="language-r highlighter-rouge"><span class="n">country</span></code> and <code class="language-r highlighter-rouge"><span class="n">size</span></code> in this case) into a single column), then <code class="language-r highlighter-rouge"><span class="n">unite</span></code> (which pastes multiple columns into one), and then <code class="language-r highlighter-rouge"><span class="n">spread</span></code> (takes two columns and spreads them into multiple columns).</p>
+</blockquote>
+<p>So far we have looked at associations between firm characteristics and management practices, but have not made any causal statements. We will now discuss the difficulties with making causal statements using this data and examine how we might determine the direction of causation.</p>
+<ol class="text-question">
+  <li>For each of the following variables, explain how it could affect management practices, and then explain how management practices could affect it:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>education level of managers (percentage with a college degree)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>number of competitors</li>
+</ul>
+<ul class="text-sub-question">
+  <li>firm size (number of employees).</li>
+</ul>
+<ol class="text-question page-break-before">
+  <li>One way to establish the direction of causation is through a randomized field experiment. Read the discussion on pages 22–23 of the <a href="https://tinyco.re/6438551" class="show-url">Bloom et al. paper</a> (the section ‘Experimental Evidence on Management Quality and Firm Performance’) about one such experiment that was conducted in Indian textile factories.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Briefly describe the idea behind a randomized field experiment, and explain, with reference to the results of the experiment in India, whether we can use it to determine the direction of causation between management practice and firm performance. The paper <a href="https://tinyco.re/8992788" class="show-url">‘Does Management Matter? Evidence from India’</a> provides more details about the experiment (pages 9–10 are particularly useful).</li>
+</ul>
+<ul class="text-sub-question tighten-10">
+  <li>Figure 12 in the paper shows productivity in treatment and control firms over time, with 95% confidence intervals. Use the information in the chart to describe the effect of the treatment on firm productivity.</li>
+</ul>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>University of Manchester’s Econometric Computing Learning Resource (ECLR). 2018. ‘R AnalysisTidy’. Updated 9 January 2018. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in R
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="06-03.html"
+               class="active">
+                Getting started in R
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="active">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="active">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="active">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

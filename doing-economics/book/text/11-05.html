@@ -1,0 +1,2519 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 11: Working in Google Sheets
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 11: Working in Google Sheets" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/11-05.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-11-working-in-google-sheets"><strong>Empirical Project 11</strong> Working in Google Sheets</h1>
+<h2 class="save-2" id="part-111-summarizing-the-data">Part 11.1 Summarizing the data</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>construct indices to measure attitudes or opinions</li>
+    <li>use Cronbach’s alpha to assess indices for internal consistency</li>
+    <li>practise recoding and creating new variables.</li>
+  </ul>
+</blockquote>
+<p>We will be using data collected from an internet survey sponsored by the German government.</p>
+<p>First, download the survey data and documentation:</p>
+<ul>
+  <li>Download the <a href="https://tinyco.re/5330076" class="show-url">data</a>. Read the ‘Data dictionary’ tab and make sure you know what each variable represents. (Later we will discuss exactly how some of these variables were coded.)</li>
+  <li>Download a <a href="https://tinyco.re/5667320" class="show-url">short description</a> of the dataset, which explains the survey design and questions asked. You may find it helpful to read it before starting on the questions below.</li>
+</ul>
+<ol class="text-question">
+  <li>While contingent valuation methods can be useful, they also have shortcomings. Read Section 5 of the paper <a href="https://tinyco.re/3376290" class="show-url">‘Introduction to economic valuation methods’</a> (pages 16–19), and explain which limitations you think apply particularly to the survey we are looking at. You may also find it useful to look at Table 2 of that paper, which compares stated-preference with revealed-preference methods.</li>
+</ol>
+<p>Before comparing between question formats (dichotomous choice (DC) and two-way payment ladder (TWPL)), we will first compare the people assigned to each question format to see if they are similar in demographic characteristics and attitudes towards related topics (such as beliefs about climate change and the need for government intervention). If the groups are vastly dissimilar then any observed differences in answers between the groups might be due to differences in attitudes and/or demographics rather than the question format.</p>
+<dl class="definition">
+<dt class="definition-term">Likert scale</dt><dd class="definition-description">A numerical scale (usually ranging from 1–5 or 1–7) used to measure attitudes or opinions, with each number representing the individual’s level of agreement or disagreement with a particular statement.</dd>
+</dl>
+<p>Attitudes were assessed using a 1–5 <strong data-term="Likert scale">Likert scale</strong>, where 1 = strongly disagree, and 5 = strongly agree. The way the questions were asked was not consistent, so an answer of ‘strongly agree’ might mean high climate change skepticism for one question, but low skepticism for another question. In order to combine these questions into an index we need to recode (in this case, reverse-code) some of the variables.</p>
+<ol class="text-question">
+  <li>Recode or create the variables as specified:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Reverse-code the following variables (so that 1 is now 5, 2 is now 4, and so on): cog_2, cog_5, scepticism_6, scepticism_7. (<em>Hint:</em> One way to do this is to create a new variable and use Google Sheets’ IF function to fill in the values of the new variable based on the values of the original variable. For help on using the IF function, see <a href="06-05.html#google-sheets-walk-through-61-using-the-if-function" class="show-page-number">Google Sheets walk-through 6.1</a>.)</li>
+</ul>
+<ul class="text-sub-question tighten-10">
+  <li>For the variables ‘WTP_plmin’ and ‘WTP_plmax’, create new variables with the values replaced as shown in Figure 11.1 (these are the actual amounts, in euros, that individuals selected in the survey, and will be useful for calculating summary measures later). In order to produce the correct summary statistics, you will need to use Google Sheet’s IF function to preserve the blank cells and only fill in values for the new variable if the original variable is non-blank.</li>
+</ul>
+<div class="figure figure-no-source" id="figure-11-1">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <tr>
+    <th class="align-center">Original value</th>
+    <th class="align-center">New value</th>
+  </tr>
+  <tr>
+    <td class="align-right">1</td>
+    <td class="align-right">48</td>
+  </tr>
+  <tr>
+    <td class="align-right">2</td>
+    <td class="align-right">72</td>
+  </tr>
+  <tr>
+    <td class="align-right">3</td>
+    <td class="align-right">84</td>
+  </tr>
+  <tr>
+    <td class="align-right">4</td>
+    <td class="align-right">108</td>
+  </tr>
+  <tr>
+    <td class="align-right">5</td>
+    <td class="align-right">156</td>
+  </tr>
+  <tr>
+    <td class="align-right">6</td>
+    <td class="align-right">192</td>
+  </tr>
+  <tr>
+    <td class="align-right">7</td>
+    <td class="align-right">252</td>
+  </tr>
+  <tr>
+    <td class="align-right">8</td>
+    <td class="align-right">324</td>
+  </tr>
+  <tr>
+    <td class="align-right">9</td>
+    <td class="align-right">432</td>
+  </tr>
+  <tr>
+    <td class="align-right">10</td>
+    <td class="align-right">540</td>
+  </tr>
+  <tr>
+    <td class="align-right">11</td>
+    <td class="align-right">720</td>
+  </tr>
+  <tr>
+    <td class="align-right">12</td>
+    <td class="align-right">960</td>
+  </tr>
+  <tr>
+    <td class="align-right">13</td>
+    <td class="align-right">1,200</td>
+  </tr>
+  <tr>
+    <td class="align-right">14</td>
+    <td class="align-right">1,440</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+WTP survey categories (original value) and euro amounts (new value).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 11.1 </span>
+WTP survey categories (original value) and euro amounts (new value).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li>Create the following indices, giving them an appropriate name in your spreadsheet (make sure to use the reverse-coded variable where relevant):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Belief that climate change is a real phenomenon: Take the mean of scepticism_2, scepticism_6, and scepticism_7.</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li>Preferences for government intervention to solve problems in society: Take the mean of cog_1, cog_2, cog_3, cog_4, cog_5, and cog_6.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Feeling of personal responsibility to act pro-environmentally: Take the mean of PN_1, PN_2, PN_3, PN_4, PN_6, and PN_7.</li>
+</ul>
+<dl class="definition">
+<dt class="definition-term">Cronbach’s alpha</dt><dd class="definition-description">A measure used to assess the extent to which a set of items is a reliable or consistent measure of a concept. This measure ranges from 0–1, with 0 meaning that all of the items are independent of one another, and 1 meaning that all of the items are perfectly correlated with each other.</dd>
+</dl>
+<p class="tighten-5">When creating indices, we may be interested to see if each item used in the index measures the same underlying variable of interest (known as reliability or consistency). There are two common ways to assess reliability: either look at the correlation between items in the index, or use a summary measure called <strong data-term="Cronbach's alpha">Cronbach’s alpha</strong> (this measure is used in the social sciences). We will be calculating and interpreting both of these measures.</p>
+<p>Cronbach’s alpha is a way to summarize the correlations between many variables, and ranges from 0 to 1, with 0 meaning that all of the items are independent of one another, and 1 meaning that all of the items are perfectly correlated with each other. While higher values of this measure indicate that the items are closely related and therefore measure the same concept, with values that are very close to 1 (or 1) we could be concerned that our index contains redundant items (for example, two items that tell us the same information, so we would only want to use one or the other, but not both). You can read more about this in the paper <a href="https://tinyco.re/1644975" class="show-url">‘Using and interpreting Cronbach’s Alpha’</a>.</p>
+<ol class="text-question">
+  <li>Calculate correlation coefficients and interpret Cronbach’s alpha:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>For one of the indices you created in Question 3, create a correlation table to show the correlation between each of the items in the index. Remember to give the variables meaningful names in your table (refer to the ‘Data dictionary’ tab for descriptions of each variable). For help on calculating correlation coefficients, see <a href="01-05.html#google-sheets-walk-through-17-calculating-correlation-and-drawing-a-scatterplot" class="show-page-number">Google Sheets walk-through 1.7</a>. Figure 11.2 shows an example for Question 3<em>(a)</em>. (Remember that the correlation between A and B is the same as the correlation between B and A, so you only need to calculate the correlation for each pair of items once.) Are the items in that index strongly correlated?</li>
+</ul>
+<div class="figure figure-no-source" id="figure-11-2">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th> </th>
+      <th>exaggeration</th>
+      <th>not.human.activity</th>
+      <th>no.evidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>exaggeration</td>
+      <td>1</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>not.human.activity</td>
+      <td> </td>
+      <td>1</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>no.evidence</td>
+      <td> </td>
+      <td> </td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Correlation table for survey items on climate change scepticism: Climate change is exaggerated (exaggeration), Human activity is not the main cause of climate change (not.human.activity), No evidence of global warming (no.evidence).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 11.2  </span>
+Correlation table for survey items on climate change scepticism: Climate change is exaggerated (exaggeration), Human activity is not the main cause of climate change (not.human.activity), No evidence of global warming (no.evidence).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The Cronbach’s alpha for these indices are 0.66, 0.71, and 0.85 respectively. Interpret these values in terms of index reliability.</li>
+</ul>
+<p class="keep-together">Now we will compare characteristics of people in the dichotomous choice (DC) group and two-way payment ladder (TWPL) group (the variable ‘abst_format’ indicates which group an individual belongs to). Since the groups are of different sizes, we will use percentages instead of frequencies.</p>
+<ol class="text-question">
+  <li>
+    <p>For each group (DC and TWPL), create tables to summarize the distribution of the following variables (a separate table for each variable):</p>
+    <ul>
+      <li>gender (‘sex’)</li>
+      <li>age (‘age’)</li>
+      <li>number of children (‘kids_nr’)</li>
+      <li>household net income per month in euros (‘hhnetinc’)</li>
+      <li>membership in environmental organization (‘member’)</li>
+      <li>highest educational attainment (‘education’).</li>
+    </ul>
+    <p>For help on creating tables, see <a href="03-05.html#google-sheets-walk-through-31-making-a-frequency-table-using-the-pivottable-option" class="show-page-number">Google Sheets walk-through 3.1</a>. Using the tables you have created, and without doing formal calculations, discuss any similarities/differences in demographic characteristics between the two groups.</p>
+  </li>
+</ol>
+<ol class="text-question">
+  <li>Create a separate summary table as shown in Figure 11.3 for each of the three indices you created in Question 3. Without doing formal calculations, do the two groups of individuals look similar in the attitudes specified?</li>
+</ol>
+<div class="figure fixed figure-no-source" id="figure-11-3">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Mean</th>
+      <th>Standard deviation</th>
+      <th>Min</th>
+      <th>Max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DC format</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>TWPL format</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Summary table for indices.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 11.3 </span>
+Summary table for indices.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<h2 title="Part 11.2 Comparing willingness to pay across methods and characteristics" id="part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics">Part 11.2 Comparing willingness to pay across methods and individual characteristics</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>compare survey measures of willingness to pay.</li>
+  </ul>
+</blockquote>
+<p>Before comparing WTP across question formats, we will summarize the distribution of WTP within each question format.</p>
+<ol class="text-question">
+  <li>For individuals who answered the TWPL question:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Use the variables ‘WTP_plmin’ and ‘WTP_plmax’ to create column charts (one for each variable) with frequency on the vertical axis and category (the numbers 1–14) on the horizontal axis. Describe characteristics of the distributions shown on the charts.</li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li>Using the variables you created in Question 2<em>(b)</em> in Part 11.1 (showing the actual WTP amounts), make a new variable that contains the average of the two variables (i.e. for each individual, calculate the average of the minimum and maximum willingness to pay).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Calculate the mean and median of the variable you created in Question 1<em>(b)</em>.</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li>Using the variable from Question 1<em>(b)</em>, calculate the correlation between individuals’ average WTP and the demographic and attitudinal variables  (see Questions 3 and 5 from Part 11.1 for a list of these variables). Interpret the relationships implied by the coefficients.</li>
+</ul>
+<ol class="text-question">
+  <li>For individuals who answered the DC question:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Each individual was given one amount and had to decide ‘yes’, ‘no’, or ‘no vote/abstain from deciding’. Make a pivot table showing the frequency of ‘DC_ref_outcome’, with ‘costs’ as the row variable and ‘DC_ref_outcome’ as the column variable.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use this table to calculate the percentage of individuals who voted ‘no’ and ‘yes’ for each amount (in other words as a percentage of the row total, not the overall total). Count individuals who chose ‘abstain’ as voting ‘no’.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Make a scatterplot showing the ‘demand curve’, with percentage of individuals who voted ‘yes’ as the vertical axis variable and amount (in euros) as the horizontal axis variable. (To connect the points, use the chart option ‘Scatter with Straight Lines and Markers’.) Describe features of this ‘demand curve’ that you find interesting.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Repeat Question 2<em>(b)</em>, this time excluding individuals who chose ‘abstain’ from the calculations. Plot this new ‘demand curve’ on the chart created for Question 2<em>(c)</em>. Do your results change qualitatively, depending on how you count individuals who did not vote?</li>
+</ul>
+<ol class="text-question">
+  <li>Compare the mean and median WTP under both question formats:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Complete Figure 11.4 and use it to calculate the difference in means (DC minus TWPL), the standard deviation of these differences, and the number of observations. (The mean of DC is the mean of ‘DC_ref_outcome’ for individuals who voted ‘yes’.)</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-11-4">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Mean</th>
+      <th>Standard deviation</th>
+      <th>Number of observations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DC</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>TWPL</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Summary table for WTP.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 11.4  </span>
+Summary table for WTP.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question tighten-15 keep-together">
+  <li>Use Google Sheets’ CONFIDENCE.T function and the calculated values for Question 3<em>(a)</em> to make a 95% confidence interval for the difference in means. Discuss your findings. (For help on calculating confidence intervals for the difference in means, see <a href="06-05.html#google-sheets-walk-through-64-creating-confidence-intervals-and-adding-them-to-a-chart" class="show-page-number">Google Sheets walk-through 6.4</a> and the discussion in <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean" class="show-page-number">Part 8.3</a>.).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Does the median WTP look different across question formats? (You do not need to do any formal calculations.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using your answers to Questions 3<em>(a)</em>–<em>(c)</em>, would you recommend that governments use the mean or median WTP in policy-making decisions? (That is, which measure appears to be more robust to changes in the question format?)</li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li>
+    <p><a href="https://tinyco.re/8311899" class="show-url">Leading think tanks</a> estimate that the world needs 20 trillion USD of investment in low-carbon energy supplies and energy efficient technologies by 2030 to meet the Paris Agreement targets. This amount roughly corresponds to 3,273 euros total per adult (aged 15 and above), or 298 euros per adult per year (2020 to 2030 inclusive).</p>
+    <p>Compare this approximate number with the WTP estimates you have found. Assuming people around the world have the same attitudes towards climate change as the Germans surveyed, would a tax equal to the median WTP be enough to finance climate change mitigation? Discuss how governments could increase public support for and involvement in climate change mitigation activities.</p>
+  </li>
+</ul>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in Google Sheets
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="11-05.html"
+               class="active">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="active">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

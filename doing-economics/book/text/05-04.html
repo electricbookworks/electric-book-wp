@@ -1,0 +1,2914 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 5 Solutions
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 5 Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/05-04.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter solutions"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-5-solutions"><strong>Empirical Project 5</strong> Solutions</h1>
+<p class="tighten-10">These are not model answers. They are provided to help students, including those doing the project outside a formal class, to check their progress while working through the questions using the Excel, R, or Google Sheets walk-throughs. There are also brief notes for the more interpretive questions. Students taking courses using <em>Doing Economics</em> should follow the guidance of their instructors.</p>
+<h2 id="part-51-measuring-income-inequality">Part 5.1 Measuring income inequality</h2>
+<ol class="text-question">
+  <li>China and the US are used as examples.</li>
+</ol>
+<div class="figure fixed figure-no-source" id="solution-figure-5-1">
+<div class="figure-body">
+<div class="figure-html">
+<table class="align-right">
+  <tr>
+    <th colspan="2"><br />China, 1980<br /></th>
+  </tr>
+  <tr>
+    <td>Cumulative share of the population (%)</td>
+    <td>Cumulative share of income (%)</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>0.00</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>3.14</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>7.63</td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td>13.43</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>20.47</td>
+  </tr>
+  <tr>
+    <td>50</td>
+    <td>28.82</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>38.55</td>
+  </tr>
+  <tr>
+    <td>70</td>
+    <td>49.92</td>
+  </tr>
+  <tr>
+    <td>80</td>
+    <td>63.28</td>
+  </tr>
+  <tr>
+    <td>90</td>
+    <td>79.33</td>
+  </tr>
+  <tr>
+    <td>100</td>
+    <td>100.00</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Table showing cumulative income shares for China (1980).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.1 </span>
+Table showing cumulative income shares for China (1980).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="solution-figure-5-2">
+<div class="figure-body">
+<div class="figure-html">
+<table class="align-right">
+  <tr>
+    <th colspan="2">China, 2014</th>
+  </tr>
+  <tr>
+    <td>Cumulative share of the population (%)</td>
+    <td>Cumulative share of income (%)</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>0.00</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>0.92</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>2.84</td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td>5.81</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>9.95</td>
+  </tr>
+  <tr>
+    <td>50</td>
+    <td>15.44</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>22.55</td>
+  </tr>
+  <tr>
+    <td>70</td>
+    <td>31.75</td>
+  </tr>
+  <tr>
+    <td>80</td>
+    <td>43.95</td>
+  </tr>
+  <tr>
+    <td>90</td>
+    <td>61.43</td>
+  </tr>
+  <tr>
+    <td>100</td>
+    <td>100.00</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Table showing cumulative income shares for China (2014).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.2 </span>
+Table showing cumulative income shares for China (2014).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="solution-figure-5-3">
+<div class="figure-body">
+<div class="figure-html">
+<table class="align-right">
+  <tr>
+    <th colspan="2">United States, 1980</th>
+  </tr>
+  <tr>
+    <td>Cumulative share of the population (%)</td>
+    <td>Cumulative share of income (%)</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>0.00</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>2.29</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>6.22</td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td>11.52</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>18.08</td>
+  </tr>
+  <tr>
+    <td>50</td>
+    <td>25.89</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>35.04</td>
+  </tr>
+  <tr>
+    <td>70</td>
+    <td>45.73</td>
+  </tr>
+  <tr>
+    <td>80</td>
+    <td>58.44</td>
+  </tr>
+  <tr>
+    <td>90</td>
+    <td>74.39</td>
+  </tr>
+  <tr>
+    <td>100</td>
+    <td>100.00</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Table showing cumulative income shares for the US (1980).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.3 </span>
+Table showing cumulative income shares for the US (1980).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="solution-figure-5-4">
+<div class="figure-body">
+<div class="figure-html">
+<table class="align-right">
+  <tr>
+    <th colspan="2">United States, 2014</th>
+  </tr>
+  <tr>
+    <td>Cumulative share of the population (%)</td>
+    <td>Cumulative share of income (%)</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>0.00</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>1.88</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>5.14</td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td>9.66</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>15.41</td>
+  </tr>
+  <tr>
+    <td>50</td>
+    <td>22.45</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>30.92</td>
+  </tr>
+  <tr>
+    <td>70</td>
+    <td>41.09</td>
+  </tr>
+  <tr>
+    <td>80</td>
+    <td>53.58</td>
+  </tr>
+  <tr>
+    <td>90</td>
+    <td>69.90</td>
+  </tr>
+  <tr>
+    <td>100</td>
+    <td>100.00</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Table showing cumulative income shares for the US (2014).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.4 </span>
+Table showing cumulative income shares for the US (2014).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figures 5.5 and 5.6 show the Lorenz curves for China and the US. The perfect equality line applies to the next question’s solution.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Solution figures 5.5 and 5.6 show the Lorenz curves for China and the US, with the perfect equality line.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="solution-figure-5-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for China.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for China.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Lorenz curves for China.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.5 </span>
+Lorenz curves for China.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="solution-figure-5-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for the US.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for the US.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Lorenz curves for the US.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.6 </span>
+Lorenz curves for the US.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>The area between the perfect equality line and the Lorenz curve reflects inequality. Inequality in both countries widened between 1980 and 2014. The change in China is far larger than that in the US.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Although income distribution is more equal in China than in the US in 1980, it is less equal in China than in the US in 2014.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>China had a mostly planned economy in 1980, which prioritized equality. Since 1978, China has undertaken waves of reforms to marketize the economy and improve efficiency. The rapid growth has come at the cost of equality. By introducing market reforms, opportunities emerged for private gain through entrepreneurial activities. Although rapid growth and high inequality are negatively correlated both in high income countries and in a group of ‘catching up’ countries, as discussed in <a href="https://tinyco.re/1686411" class="show-url">Section 19.11</a> of <em>The Economy</em>, rapid growth in China has come at the cost of rising inequality.</p>
+    <p>Inequality in the US is higher than in most developed countries. Many people attribute the higher inequality to policies favouring the rich. Worsening inequality in the US can be explained by a range of factors, including tax policies that favour the rich, education policies that dampen the opportunities for intergenerational mobility (see <a href="https://tinyco.re/3301931" class="show-url">Section 19.2</a> of <em>The Economy</em>), the skill-biased technological change that raises the incomes of workers with skills complementary to ICT and reduces that of workers with skills substitutable by ICT, and the <a href="https://tinyco.re/434258" class="show-url">decline of labour unions</a>.</p>
+  </li>
+</ul>
+<ol class="text-question">
+  <li>Solution figures 5.7 and 5.8 show the Lorenz curves for China and the US with Gini coefficients labelled.</li>
+</ol>
+<div class="figure fixed figure-no-source" id="solution-figure-5-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for China, with labelled Gini coefficients.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for China, with labelled Gini coefficients.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Lorenz curves for China, with labelled Gini coefficients.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.7 </span>
+Lorenz curves for China, with labelled Gini coefficients.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="solution-figure-5-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for the US, with labelled Gini coefficients.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curves for the US, with labelled Gini coefficients.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Lorenz curves for the US, with labelled Gini coefficients.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.8 </span>
+Lorenz curves for the US, with labelled Gini coefficients.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>These ratios all help give policymakers an idea of the distribution of income in the economy and where income is concentrated. Policymakers may use the information to decide on policies favouring certain income deciles of the population.</p>
+    <ul>
+      <li>The 90/10 ratio compares the two extremes of the income distribution and tells policymakers about the difference between the richest and the poorest. Policymakers can use the information to decide how much income to redistribute to the poorest.</li>
+      <li>The 90/50 ratio tells policymakers about how the middle class is doing relative to the richest. The ratio can also be used to determine the distribution of tax burden among the relatively rich population.</li>
+      <li>The 50/10 ratio reveals the distribution of income among the relatively poor population. Policymakers can use the information to determine the amount of income to be redistributed to each group, and to determine who is in relative poverty (many governments define the poverty line relative to the median income).</li>
+    </ul>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>See <a href="https://tinyco.re/2299150" class="show-url">Section 19.8</a> of <em>The Economy</em> to see how governments can affect income inequality.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Students will plot the data for the ratio measures by changing the variable selected for the Gini coefficient.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>The interdecile ratios are calculated as the ratios between incomes of various deciles of income distribution. The 90/10 ratio, for example, is the ratio of the income of the 9th decile to the income of the 1st decile.</p>
+    <p>Larger values mean the income from one decile of the distribution is higher relative to the income from another decile.</p>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>Countries that rank highly on the Gini coefficient also generally rank highly on ratio measures. There are, however, some exceptions. Slovenia, for example, while being the most equal country in terms of the Gini coefficient in 2015, was only the 5th most equal country in terms of the 90/10 ratio. The potential differences in rankings of different measures mean it is important to look at more than one measure. The Gini coefficient is an overall measure of a distribution that may mask extreme inequalities between certain groups of the population.</li>
+</ul>
+<ol class="text-question">
+  <li>
+    <p>Measures chosen here are the share of income going to the top 1%, and the share of the population living in relative poverty.</p>
+    <ul>
+      <li>
+        <p><em>Share of income going to the top 1%:</em> This measure looks at the high end of the income distribution (the right tail). Larger values indicate that the very rich have a larger share of the income, and that there is therefore more inequality between the very rich and the rest of society. However, this is a narrower measure of inequality than the Gini coefficient because it only tells us about how the very rich are doing.</p>
+      </li>
+      <li>
+        <p><em>Share of the population living in relative poverty:</em> This measure is defined as the share of individuals who live in a household with 60% of the disposable income of the median household. A larger value indicates that a larger proportion of individuals are living in relative poverty.</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+<h2 class="page-break-before" id="part-52-measuring-other-kinds-of-inequality">Part 5.2 Measuring other kinds of inequality</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 5.9 shows the mortality inequality Gini coefficients for the ten countries.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-5-9">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Mortality inequality Gini coefficients (1952–2002).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Mortality inequality Gini coefficients (1952–2002).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Mortality inequality Gini coefficients (1952–2002).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.9 </span>
+Mortality inequality Gini coefficients (1952–2002).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question tighten-15 hyphenate">
+  <li>Mortality inequality has been falling over time in all countries except Russia. Developing countries tend to have greater mortality inequality than developed countries. Industrialized, richer countries seem to have materialized most of the available improvement (somewhere at a mor­tality Gini of 0.1) since the 1960s. Exceptions to this are India and Brazil, which are both still on a significant downward trend and still not close to a mortality Gini value of 0.1. The only country in this set of countries where some of the gains are being reversed is Russia, although the latest upward movement is fairly modest, and one may interpret this as Russia having settled on a higher mortality Gini of about 0.15.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 5.10 shows Gini coefficients by country for 1952.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-5-10">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Countries ranked according to mortality inequality Gini coefficients in 1952.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Countries ranked according to mortality inequality Gini coefficients in 1952.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Countries ranked according to mortality inequality Gini coefficients in 1952.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.10 </span>
+Countries ranked according to mortality inequality Gini coefficients in 1952.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figure 5.11 shows Gini coefficients by country for 2002.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-5-11">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Countries ranked according to mortality inequality Gini coefficients in 2002.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Countries ranked according to mortality inequality Gini coefficients in 2002.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Countries ranked according to mortality inequality Gini coefficients in 2002.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.11 </span>
+Countries ranked according to mortality inequality Gini coefficients in 2002.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The rankings are different in 1952 and 2002. Japan, for example, moved up five places in the ranking to become the second most equal country in 2002. The rapid economic development in Japan has led to rising life expectancy. Living to old age is now the norm in Japan rather than a privilege enjoyed only by the rich. The rising proportion of elderly voters has contributed to policies aimed at improving elderly care, which have reduced the variation in life expectancy. The United States, on the other hand, dropped four places to become a relatively less equal nation in the group. The high costs of healthcare may prevent poor people from accessing treatment, especially if uninsured. It is more likely for disadvantaged groups in society such as minorities or part-time workers to lack insurance coverage.</li>
+</ul>
+<ol class="text-question">
+  <li>This example looks at access to essential medicines.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>The median availability of selected generic medicines (in percentage terms) is a measure of the access to treatment. Data on availability, defined as the percentage of medicine outlets where a medicine was found on a given day, are collected through surveys in multiple regions for each country.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Solution figures 5.12 and 5.13 provide two charts summarizing the data.</li>
+</ul>
+<div class="figure float-bottom figure-no-source" id="solution-figure-5-12">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Median availability of selected generic medicines in the private sector (2007–2013).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-12.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Median availability of selected generic medicines in the private sector (2007–2013).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Median availability of selected generic medicines in the private sector (2007–2013).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.12 </span>
+Median availability of selected generic medicines in the private sector (2007–2013).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-bottom figure-no-source" id="solution-figure-5-13">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Median availability of selected generic medicines in the public sector (2007–2013).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-13.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Median availability of selected generic medicines in the public sector (2007–2013).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Median availability of selected generic medicines in the public sector (2007–2013).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.13 </span>
+Median availability of selected generic medicines in the public sector (2007–2013).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>There are large disparities in health inequality across countries. For example, availability in the Russian Federation is 100%, whereas in China it is about 15%. The availability of medicines within a country can differ depending on whether an outlet belongs to the public or the private sector. In some countries, such as Brazil, private sector availability of medicines is far higher than that in the public sector. The reverse is true for other countries such as Sao Tome and Principe. Note that a higher availability of medicines in the private sector does not necessarily mean greater access for the entire population, since the private sector is only open to individuals with the ability to pay. This disparity means that richer individuals can access a wider range of medical treatments.</p>
+    <p>The data has some limitations. The basket of medicines differs across countries. The data reflects availability on the day of data collection, which may not be a representative day. Outlets could stockpile medicines in expectation of the arrival of the data collection team. Availability does not account for the dosage and strengths of the products.</p>
+  </li>
+</ul>
+<ol class="text-question">
+  <li>Solution figure 5.14 looks at the gender gap in primary education.</li>
+</ol>
+<ul class="text-sub-question">
+  <li><em>Note:</em> It is difficult to find ten countries without any missing data point between 1980 and 2010. Countries with full data may not be as interesting as others. The lines below connect all available data points.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-5-14">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Female pupils as a percentage of total enrolment in primary education (1980–2010).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-14.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Female pupils as a percentage of total enrolment in primary education (1980–2010).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Female pupils as a percentage of total enrolment in primary education (1980–2010).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.14 </span>
+Female pupils as a percentage of total enrolment in primary education (1980–2010).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>For most countries in the selected group, the share of female pupils in primary education fluctuated around levels just below 50% throughout the period. China and India were the most unequal countries in 1980. India had the greatest improvement in equality over the period, and by 2010 the female share reached nearly 48%. Note the inverse U-shape for China, which could be due to the increasing gender imbalance in the school-age population (<a href="https://tinyco.re/7113498" class="show-url">around 112 males per 100 females in 2010</a>).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Solution figure 5.15 shows the percentage change in the measure between 1980 and 2010.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-5-15">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Change (%) in female pupils’ share of total enrolment in primary education (1980–2010).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-05-15.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Change (%) in female pupils’ share of total enrolment in primary education (1980–2010).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Change (%) in female pupils’ share of total enrolment in primary education (1980–2010).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 5.15 </span>
+Change (%) in female pupils’ share of total enrolment in primary education (1980–2010).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>India had the largest change, whereas France had the smallest change.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>India had the lowest share of enrolled female primary education students in the group in 1980. Rapid development and changing beliefs have contributed to the efforts to reduce gender education inequalities. Universal primary education and promotion of gender equality are among the eight goals in the Millennium Development Goals (MDGs) to which India committed to achieve by 2015 since 2000.</p>
+    <p>France, as a developed country, had relatively high equality from the beginning of the period and hence had experienced relatively little change over the period (due to less scope for improvement).</p>
+    <p>From Question 4<em>(c)</em>, it is apparent that countries which already had a very high percentage of female enrolment (PFE) saw no change. Those countries with initially low female participation have significantly improved.</p>
+    <p>The data demonstrates that the past few decades have seen a significant improvement in access to education for girls. If you repeated the above analysis for all countries, you would see similar results.</p>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>The measure depends on the gender composition of the population. If there are more male than female children of primary schooling age in a country, then the share of females enrolled must be less than 50%. The ratio of female to male in enrolment rate, which provides a population-adjusted measure of gender parity, can be used instead.</p>
+    <p>Remember that all we can see here is enrolment in primary education. It is possible that males could receive more education overall (secondary and higher levels). In fact, if you go back to the <a href="https://tinyco.re/8784776" class="show-url">‘Educational Mobility and Inequality’ section</a> of the Our World in Data website, you will see that in many regions females still receive a significantly smaller amount of education overall.</p>
+  </li>
+</ul>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Solutions
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="05-04.html"
+               class="active">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="active">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

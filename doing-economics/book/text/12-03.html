@@ -1,0 +1,2968 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 12: Working in R
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 12: Working in R" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/12-03.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-12-working-in-r"><strong>Empirical Project 12</strong> Working in R</h1>
+<blockquote class="info web-full-width">
+  <h3 id="download-the-code">Download the code</h3>
+  <p>To <a href="https://tinyco.re/5963785">download the code chunks used in this project</a>, right-click on the download link and select ‘Save Link As…’. You’ll need to save the code download to your working directory, and open it in RStudio.</p>
+  <p>Don’t forget to also download the data into your working directory by following the steps in this project.</p>
+</blockquote>
+<h2 id="getting-started-in-r">Getting started in R</h2>
+<p>For this project you will need the following packages:</p>
+<ul>
+  <li><code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code>, to help with data manipulation</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">readxl</span></code>, to import an Excel spreadsheet</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">knitr</span></code>, to format tables</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">ineq</span></code>, to calculate inequality measures</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">rvest</span></code>, to import tables directly from websites</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">zoo</span></code>, to format times and dates.</li>
+</ul>
+<p>If you need to install any of these packages, run the following code:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"tidyverse"</span><span class="p">,</span><span class="w"> </span><span class="s2">"readxl"</span><span class="p">,</span><span class="w"> </span><span class="s2">"knitr"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"ineq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rvest"</span><span class="p">,</span><span class="w"> </span><span class="s2">"zoo"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p>You can import the libraries now, or when they are used in the R walk-throughs below.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">knitr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ineq</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">zoo</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 class="page-break-before" id="part-121-inequality">Part 12.1 Inequality</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>draw Lorenz curves and calculate Gini coefficients</li>
+    <li>assess the effect of a policy on income inequality</li>
+    <li>convert nominal values to real values (extension).</li>
+  </ul>
+</blockquote>
+<p>One reason cited for Scheme $6,000 was to share the gains from economic growth among everyone in the society. We will be using household income data collected by the Hong Kong government to assess the potential effects of this scheme.</p>
+<p>Download the <a href="https://tinyco.re/9836396" class="show-url">data</a>. The spreadsheet contains information about household incomes for certain percentiles of the population. These incomes are ‘pre-intervention’, meaning that they do not include the effects of handouts or policy interventions from the government. (If you are curious about the difference between the two tables in this spreadsheet, see the extension section <a href="12-03.html#extension-nominal-and-real-values" class="show-page-number">‘Nominal and real values’</a> at the end of Part 12.1.)</p>
+<ol class="text-question">
+  <li>Using the table ‘Monthly real household income (pre-tax, $HKD)’, plot a separate line chart for each percentile, with year on the horizontal axis and income on the vertical axis. Describe any patterns you see over time.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-121-importing-a-specified-range-of-data-from-a-spreadsheet"><strong>R walk-through 12.1</strong> Importing a specified range of data from a spreadsheet</h3>
+  <p>We start by importing the data. The data provided in the Excel spreadsheet is not in the usual format of one variable per column (known as ‘long’ format). Instead the first tab contains two separate tables, and we need the second table. We can therefore use the <code class="language-r highlighter-rouge"><span class="n">range</span><span class="w"> </span><span class="o">=</span></code> option of the <code class="language-r highlighter-rouge"><span class="n">read_excel</span></code> function to specify the cells in the spreadsheet to import (note that variable headers for the years are included).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">knitr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Set your working directory to the correct folder.</span><span class="w">
+</span><span class="c1"># Insert your file path for 'YOURFILEPATH'.</span><span class="w">
+</span><span class="n">setwd</span><span class="p">(</span><span class="s2">"YOURFILEPATH"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Import the data, stating the cell range</span><span class="w">
+</span><span class="n">income</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"Project-12-datafile.xlsx"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A13:I18"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Rename the first column</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">income</span><span class="p">)[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"percentile"</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We can use the <code class="language-r highlighter-rouge"><span class="n">ggplot</span></code> function to make a line chart showing the change in real income on the vertical axis (<code class="language-r highlighter-rouge"><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real_inc</span></code>) and year on the horizontal axis (<code class="language-r highlighter-rouge"><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span></code>) for each of the percentile groups (<code class="language-r highlighter-rouge"><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentile</span></code>) on a single chart as follows.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">income</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">gather</span><span class="p">(</span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">real_inc</span><span class="p">,</span><span class="w"> </span><span class="n">`2009`</span><span class="o">:</span><span class="n">`2016`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real_inc</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Monthly real household income (HKD)"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-12-1">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-12-01.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-01.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-01-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-01-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-01-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-01.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Monthly real household income over time.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-01.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-01-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-01-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-01-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-01.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Monthly real household income over time.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Monthly real household income over time.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.1 </span>
+Monthly real household income over time.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>However, plotting all percentile groups using the same scale hides a lot of variation within each percentile group. So, we should create a separate chart for each percentile group. As an example, we will plot the chart for the 15th percentile.</p>
+  <p>First, we use the <code class="language-r highlighter-rouge"><span class="n">gather</span></code> function to reshape the data into the format that R uses to plot charts. Then we use the <code class="language-r highlighter-rouge"><span class="n">filter</span></code> function to select data for the 15th percentile only and use <code class="language-r highlighter-rouge"><span class="n">mutate</span></code> to convert <code class="language-r highlighter-rouge"><span class="n">Year</span></code> to a numeric variable (otherwise, R will not know the years are numbers and cannot plot the chart). Finally, we use <code class="language-r highlighter-rouge"><span class="n">gglot</span></code> to make the line chart as before.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">income</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Reshape the data</span><span class="w">
+  </span><span class="n">gather</span><span class="p">(</span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">real_inc</span><span class="p">,</span><span class="w"> </span><span class="n">`2009`</span><span class="o">:</span><span class="n">`2016`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Select only data for 15th percentile</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">percentile</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"15th"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Set 'Year' as a numeric variable so we can plot a line</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">Year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">Year</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real_inc</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">ylab</span><span class="p">(</span><span class="w">
+      </span><span class="s2">"Monthly real household income for 15th percentile"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-12-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-12-02.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-02.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-02-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-02-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-02-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Monthly real household income for 15th percentile.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-02.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-02-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-02-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-02-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Monthly real household income for 15th percentile.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Monthly real household income for 15th percentile.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.2 </span>
+Monthly real household income for 15th percentile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<p>Now we will use this data to draw Lorenz curves and compare changes in the income distribution for 2011–2012. One way to do this is to make the following simplifying assumptions:</p>
+<ul>
+  <li>There are 100 households in the economy (so we can think of each percentile as corresponding to one household).</li>
+  <li>Households between the 15th and 25th percentile have the same income as the household in the 15th percentile, households between the 25th and 50th percentile have the same income as the household in the 25th percentile, and so on. (Households below the 15th percentile earn nothing.)</li>
+</ul>
+<ol class="text-question keep-with-next">
+  <li>Draw Lorenz curves for 2011 and 2012 by carrying out the following:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a new column for 2012 only, showing incomes following the $6,000 handout. Assume that nothing else has changed except for the cash handout. (Remember that this amount was given to all households, including those with no income.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Calculate the economy-wide earnings in 2011 and 2012 (with the cash handout included). (<em>Hint:</em> Multiply the income of a given percentile by the number of households assumed to earn that amount.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use your answers to Question 2<em>(b)</em> to complete the table in Figure 12.3 below. (The second row also shows zeros in 2011 because the bottom 15% of households earned nothing.) For help on how to calculate cumulative shares, see <a href="05-03.html#r-walk-through-51-importing-an-excel-file-either-xlsx-or-xls-format-into-r" class="show-page-number">R walk-through 5.1</a>.</li>
+</ul>
+<div class="figure float-top-next figure-no-source" id="figure-12-3">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th class="align-center">Cumulative share of the population (%)</th>
+    <th class="align-center">Perfect equality line</th>
+    <th class="align-center">Cumulative share of income in 2011 (%)</th>
+    <th class="align-center">Cumulative share of income in 2012 (%)</th>
+  </tr>
+  <tr>
+    <td class="align-right">0</td>
+    <td class="align-right">0</td>
+    <td class="align-right">0</td>
+    <td class="align-right">0</td>
+  </tr>
+  <tr>
+    <td class="align-right">15</td>
+    <td class="align-right">15</td>
+    <td class="align-right">0</td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">25</td>
+    <td class="align-right">25</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">50</td>
+    <td class="align-right">50</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">75</td>
+    <td class="align-right">75</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">85</td>
+    <td class="align-right">85</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">100</td>
+    <td class="align-right">100</td>
+    <td class="align-right">100</td>
+    <td class="align-right">100</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Cumulative share of income, for some percentiles of the population.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.3 </span>
+Cumulative share of income, for some percentiles of the population.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Draw the Lorenz curves for 2011 and 2012 in the same chart, with cumulative share of population on the horizontal axis and cumulative share of income on the vertical axis. Add the perfect equality line to your chart, and add a chart legend.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-122-calculating-cumulative-income-shares-and-plotting-a-lorenz-curve"><strong>R walk-through 12.2</strong> Calculating cumulative income shares and plotting a Lorenz curve</h3>
+  <p class="loosen-10">Questions 2<em>(a)</em>–<em>(c)</em> can be completed in one stage using the piping technique, although there are a number of steps. The piping operator (<code class="language-r highlighter-rouge"><span class="o">%&gt;%</span></code>) from the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package allows us to perform multiple functions, one after another. (For more information on piping operators, see <a href="https://tinyco.re/5531433">The University of Manchester’s Econometric Computing Learning Resource</a>.)</p>
+  <p class="loosen-10">First, we use the <code class="language-r highlighter-rouge"><span class="n">select</span></code> function to get the relevant variables. Then, we remove the ‘th’ suffix in the <code class="language-r highlighter-rouge"><span class="n">percentile</span></code> values using the <code class="language-r highlighter-rouge"><span class="n">separate</span></code> function, and convert them to numeric values using the <code class="language-r highlighter-rouge"><span class="n">mutate</span></code> function (as in <a href="12-03.html#r-walk-through-121-importing-a-specified-range-of-data-from-a-spreadsheet" class="show-page-number">R walk-through 12.1</a>). We then use <code class="language-r highlighter-rouge"><span class="n">rbind</span></code> (which stands for ‘row bind’) to add an extra row for the 0th percentile, and <code class="language-r highlighter-rouge"><span class="n">cbind</span></code> (‘column bind’) to add a column representing the number of households in each percentile group (assuming 100 households in the economy).</p>
+  <p class="loosen-10">Now, we use the <code class="language-r highlighter-rouge"><span class="n">mutate</span></code> function to create new variables containing the information we need to draw the Lorenz curve. We create a new variable called <code class="language-r highlighter-rouge"><span class="m">2012</span><span class="err">_</span><span class="n">handout</span></code> that adds $6,000 to each value for the year 2012. We calculate the economy-wide income for each percentile group by multiplying the income values with the number of households, storing these in the variables <code class="language-r highlighter-rouge"><span class="m">2011</span><span class="err">_</span><span class="n">income</span></code> and <code class="language-r highlighter-rouge"><span class="m">2012</span><span class="err">_</span><span class="n">income</span></code>. To complete Figure 12.3, we need to calculate the cumulative income for each percentile group. To sort the data from the lowest to highest percentile groups we use the <code class="language-r highlighter-rouge"><span class="n">arrange</span></code> function. Next we use the <code class="language-r highlighter-rouge"><span class="n">cumsum</span></code> function to calculate the cumulative sum of economy-wide incomes for each year, storing these in the variables <code class="language-r highlighter-rouge"><span class="m">2011</span><span class="err">_</span><span class="n">sum</span></code> and <code class="language-r highlighter-rouge"><span class="m">2012</span><span class="err">_</span><span class="n">sum</span></code>.</p>
+  <p>Finally we tidy up the data to reflect Figure 12.3 by making sure that the 0th percentile has no share of the income and the 100th percentile has 100% of the cumulative income.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df.new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Select the required variables</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">percentile</span><span class="p">,</span><span class="w"> </span><span class="n">`2011`</span><span class="p">,</span><span class="w"> </span><span class="n">`2012`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Separate words from numbers</span><span class="w">
+  </span><span class="n">separate</span><span class="p">(</span><span class="n">percentile</span><span class="p">,</span><span class="w"> </span><span class="s2">"percentile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"th"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Change character variable to numeric variable</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">percentile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">percentile</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Add observation for 0th percentile</span><span class="w">
+  </span><span class="n">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Order percentile values from low to high</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">percentile</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Add column for the number of households in each group</span><span class="w">
+  </span><span class="n">cbind</span><span class="p">(</span><span class="n">households</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">`2012_handout`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`2012`</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">6000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Economy-wide income</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">`2011_income`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`2011`</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">households</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">`2012_income`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`2012_handout`</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">households</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Relative share in 2011</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">`2011_cum`</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+    </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">`2011_income`</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">`2011_income`</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Relative share in 2012</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">`2012_cum`</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+    </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">`2012_income`</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">`2012_income`</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Drop interim variables</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">percentile</span><span class="p">,</span><span class="w"> </span><span class="n">households</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">`2011_cum`</span><span class="p">,</span><span class="w"> </span><span class="n">`2012_cum`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Tidy up the table to normalize 0 and 100 percentiles</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">percentile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">households</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">households</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> 
+
+</span><span class="n">kable</span><span class="p">(</span><span class="n">df.new</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">|</span><span class="w"> </span><span class="n">percentile</span><span class="o">|</span><span class="w"> </span><span class="m">2011</span><span class="err">_</span><span class="n">sum</span><span class="o">|</span><span class="w"> </span><span class="m">2012</span><span class="err">_</span><span class="n">sum</span><span class="o">|</span><span class="w">
+</span><span class="o">|----------:|--------:|--------:|</span><span class="w">
+</span><span class="o">|</span><span class="w">          </span><span class="m">0</span><span class="o">|</span><span class="w">     </span><span class="m">0.00</span><span class="o">|</span><span class="w">     </span><span class="m">0.00</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">15</span><span class="o">|</span><span class="w">     </span><span class="m">0.00</span><span class="o">|</span><span class="w">     </span><span class="m">3.91</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">25</span><span class="o">|</span><span class="w">     </span><span class="m">2.74</span><span class="o">|</span><span class="w">     </span><span class="m">8.44</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">50</span><span class="o">|</span><span class="w">    </span><span class="m">15.09</span><span class="o">|</span><span class="w">    </span><span class="m">24.53</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">75</span><span class="o">|</span><span class="w">    </span><span class="m">41.42</span><span class="o">|</span><span class="w">    </span><span class="m">50.37</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">85</span><span class="o">|</span><span class="w">    </span><span class="m">60.50</span><span class="o">|</span><span class="w">    </span><span class="m">67.09</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">        </span><span class="m">100</span><span class="o">|</span><span class="w">   </span><span class="m">100.00</span><span class="o">|</span><span class="w">   </span><span class="m">100.00</span><span class="o">|</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Using the data from Questions 2<em>(a)</em>–<em>(c)</em> we can plot the Lorenz curve using the <code class="language-r highlighter-rouge"><span class="n">ggplot</span></code> function. Note that we use the <code class="language-r highlighter-rouge"><span class="n">percentile</span></code> variable to draw the line of perfect equality.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df.new</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Create variable for perfect equality</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">equality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Reshape into long format for plotting</span><span class="w">
+  </span><span class="n">gather</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">cum_income</span><span class="p">,</span><span class="w"> </span><span class="n">`2011_cum`</span><span class="o">:</span><span class="n">equality</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cum_income</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Cumulative share of income (%)"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">xlab</span><span class="p">(</span><span class="s2">"Cumulative share of population (%)"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-12-4">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-12-04.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-04.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-04-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-04-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-04-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curve (2011).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-04.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-04-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-04-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-04-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Lorenz curve (2011).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Lorenz curve (2011).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.4  </span>
+Lorenz curve (2011).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<p>Now we will compare the Gini coefficients in 2011, 2012, and 2013 (a year after the policy came into effect).</p>
+<ol class="text-question keep-with-next">
+  <li>Calculate the Gini coefficient by carrying out the following:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table as in Figure 12.5, and fill in the remaining values (some values for 2011 have been filled in for you). The first column should contain the numbers 1 to 100, in intervals of 1, and the remaining columns should contain the incomes earned by a household at that percentile (using the same assumption as in Question 2). Remember that the 2012 data should include the cash handout. To obtain more accurate answers, use two decimal places instead of rounding incomes to the nearest dollar.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-12-5">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th class="align-center">Percentile</th>
+    <th class="align-center">2011</th>
+    <th class="align-center">2012</th>
+    <th class="align-center">2013</th>
+  </tr>
+  <tr>
+    <td class="align-right">1</td>
+    <td class="align-right">0.00</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">2</td>
+    <td class="align-right">0.00</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">3</td>
+    <td class="align-right">0.00</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">…</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">98</td>
+    <td class="align-right">44,516.67</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">99</td>
+    <td class="align-right">44,516.67</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">100</td>
+    <td class="align-right">44,516.67</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Incomes earned by each percentile of the population.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.5 </span>
+Incomes earned by each percentile of the population.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Using the <code class="language-r highlighter-rouge"><span class="n">ineq</span></code> function, calculate the Gini coefficient for each year.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Based on the Gini coefficients from Question 3<em>(b)</em>, what effect did the $6,000 handout appear to have on income inequality in the short run, and in the long run? Suggest some explanations for what you observe.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-123-generating-gini-coefficients"><strong>R walk-through 12.3</strong> Generating Gini coefficients</h3>
+  <h4 class="add-1" id="create-table-containing-percentiles">Create table containing percentiles</h4>
+  <p>To create the percentiles for every percentile in our 100 household economy we need to take the income for each percentile group and expand that for every household in the respective percentile group. For example, there are 15 households in the bottom percentile group having zero income for 2011 and 2013, and $6,000 in 2012. For the 15th percentile group there are 15 households that will share the same income value, and so on for the other percentile groups.</p>
+  <p>To achieve this expansion, we first create a new variable (<code class="language-r highlighter-rouge"><span class="n">households</span></code>) that contains the number of households in each percentile group. Then for each group we can use the <code class="language-r highlighter-rouge"><span class="n">slice</span></code> and <code class="language-r highlighter-rouge"><span class="n">rep</span></code> functions together to copy the values for <code class="language-r highlighter-rouge"><span class="m">2011</span></code>, <code class="language-r highlighter-rouge"><span class="m">2012</span></code>, and <code class="language-r highlighter-rouge"><span class="m">2013</span></code> within each percentile group. The <code class="language-r highlighter-rouge"><span class="n">rep</span></code> function takes a sequence of 1 to 6 (in other words the number of groups) and copies each number in the sequence by the corresponding value in the <code class="language-r highlighter-rouge"><span class="n">households</span></code> variable. The result is a variable containing 15 1s, 10 2s, 25 3s, and so on. The <code class="language-r highlighter-rouge"><span class="n">splice</span></code> function then uses this index to reference each observation in the data, for example where the index value is 1 the bottom percentile group is selected, where the index value is 2 the 15th percentile group is selected, and so on.</p>
+  <p>Once the expansion is complete we order the data by row and generate a new sequence from 1 to 100 to represent the percentile. The final result is the dataframe called <code class="language-r highlighter-rouge"><span class="n">df.new</span></code>.</p>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df.new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">`2011`</span><span class="p">,</span><span class="w"> </span><span class="n">`2012`</span><span class="p">,</span><span class="w"> </span><span class="n">`2013`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Apply the $6,000 handout to 2012</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">`2012`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`2012`</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">6000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Arrange by ascending incomes in 2011</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">`2011`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Specify number of households in each group</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">households</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">households</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Repeat values within each percentile group</span><span class="w">
+  </span><span class="n">slice</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">(),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">households</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rowwise</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">`2011`</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Create a sequence from 1 to 100 for percentiles</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">percentile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">()))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">percentile</span><span class="p">,</span><span class="w"> </span><span class="n">`2011`</span><span class="p">,</span><span class="w"> </span><span class="n">`2012`</span><span class="p">,</span><span class="w"> </span><span class="n">`2013`</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Check the first and last five percentiles to compare </span><span class="w">
+</span><span class="c1"># with Figure 12.5.</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">df.new</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 5 x 4</span><span class="w">
+</span><span class="c1">##   percentile `2011` `2012` `2013`</span><span class="w">
+</span><span class="c1">##        &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1          1      0   6000      0</span><span class="w">
+</span><span class="c1">## 2          2      0   6000      0</span><span class="w">
+</span><span class="c1">## 3          3      0   6000      0</span><span class="w">
+</span><span class="c1">## 4          4      0   6000      0</span><span class="w">
+</span><span class="c1">## 5          5      0   6000      0</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tail</span><span class="p">(</span><span class="n">df.new</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 5 x 4</span><span class="w">
+</span><span class="c1">##   percentile `2011` `2012` `2013`</span><span class="w">
+</span><span class="c1">##        &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1         96 44516. 50544. 45270.</span><span class="w">
+</span><span class="c1">## 2         97 44516. 50544. 45270.</span><span class="w">
+</span><span class="c1">## 3         98 44516. 50544. 45270.</span><span class="w">
+</span><span class="c1">## 4         99 44516. 50544. 45270.</span><span class="w">
+</span><span class="c1">## 5        100 44516. 50544. 45270.</span><span class="w">
+</span></code></pre></div>  </div>
+  <h4 class="page-break-before" id="calculate-gini-coefficients">Calculate Gini coefficients</h4>
+  <p>Using the <code class="language-r highlighter-rouge"><span class="n">ineq</span></code> function from the <code class="language-r highlighter-rouge"><span class="n">ineq</span></code> package, it is straightforward to obtain the Gini coefficient for each year.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ineq</span><span class="p">)</span><span class="w">
+</span><span class="n">ineq</span><span class="p">(</span><span class="n">df.new</span><span class="o">$</span><span class="n">`2011`</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 0.4687603</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ineq</span><span class="p">(</span><span class="n">df.new</span><span class="o">$</span><span class="n">`2012`</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 0.3440174</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ineq</span><span class="p">(</span><span class="n">df.new</span><span class="o">$</span><span class="n">`2013`</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 0.4698187</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<ol class="text-question">
+  <li>In our analysis we assumed that the $6,000 handout was the only policy that affected households in 2012. In reality a household’s disposable income will also depend on taxes and transfers. Without doing additional calculations, explain what would happen to the shape of the Lorenz curve and inequality in 2012 if:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>households in and below the 15th percentile received cash transfers from the government</li>
+</ul>
+<ul class="text-sub-question">
+  <li>households in and above the 75th percentile had to pay income tax.</li>
+</ul>
+<blockquote class="economists">
+  <h3 id="extension-nominal-and-real-values"><strong>Extension</strong> Nominal and real values</h3>
+  <p>In this extension section, we will discuss how the table ‘Monthly nominal household income (pre-tax, $HKD)’ taken from the <a href="https://tinyco.re/7377644" class="show-url">Hong Kong Poverty Situation Report 2016</a> was used to create the table ‘Monthly real household income (pre-tax, $HKD)’, and why we needed to make this conversion.</p>
+  <dl class="definition">
+<dt class="definition-term">inflation</dt><dd class="definition-description">An increase in the general price level in the economy. Usually measured over a year. <em class="definition-cross-reference">See also: <a href="50-01-glossary.html#glossary-deflation">deflation</a>, <a href="50-01-glossary.html#glossary-disinflation">disinflation</a>.</em></dd>
+</dl>
+  <p>The difference between real and nominal income is that real income takes inflation into account. You may be familiar with the concept of <strong data-term="inflation">inflation</strong>, which is an increase in the general price level in the economy. Usually inflation is measured by taking a fixed bundle of goods and services and looking at how much it would cost to buy that bundle, compared to a reference year. (For more details about real vs nominal variables, see the Einstein <a href="https://tinyco.re/7284725" class="show-url">‘Comparing income at different times, and across different countries’</a> in Section 1.2 of <em>The Economy</em>.) If the bundle has become more expensive, then we conclude that the price level in the economy has increased.</p>
+  <p>In this case, the values from 2010 onwards have been adjusted to account for the fact that prices have increased since 2009, so the same income would be able to purchase fewer goods and services. Without making this adjustment, we would conclude that households in the 15th percentile had the same purchasing power in 2009 and 2010, when in fact they do not as they can buy fewer goods in 2010 because of the overall price increase.</p>
+  <ol class="text-question">
+    <li>Convert nominal values to real values, using 2009 as the reference year:</li>
+  </ol>
+  <ul class="text-sub-question">
+    <li>To understand what happens to a given nominal value over time due to inflation, create a table as in Figure 12.6 below, and fill it in according to the percentage increases shown. (These percentages were taken from the <a href="https://tinyco.re/4078333" class="show-url">Monthly Digest of Statistics</a>.) (For example, $1 in 2009 would be $1 × (1 + (2.40/100)) = $1.024 in 2010.) For greater accuracy, round your answers to three decimal places. With a starting value of $1 in 2009, what would the value be in 2016?</li>
+  </ul>
+  <div class="figure figure-no-source" id="figure-12-6">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Percentage increase (from previous year)</th>
+      <th>Inflation index</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2009</td>
+      <td> </td>
+      <td>1.000</td>
+    </tr>
+    <tr>
+      <td>2010</td>
+      <td>2.40</td>
+      <td>1.024</td>
+    </tr>
+    <tr>
+      <td>2011</td>
+      <td>5.30</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2012</td>
+      <td>4.10</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2013</td>
+      <td>4.30</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2014</td>
+      <td>4.40</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2015</td>
+      <td>3.00</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2016</td>
+      <td>2.40</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Creating an index-based series from percentage increases.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.6 </span>
+Creating an index-based series from percentage increases.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <ul class="text-sub-question">
+    <li>Use this table to convert nominal incomes to real incomes by dividing the nominal income by the corresponding value in the third column (for example, divide nominal incomes in 2010 by 1.024 to get the value in 2009 terms). You should get the same values as in the ‘real household income’ table.</li>
+  </ul>
+</blockquote>
+<blockquote class="expandable-box">
+  <h3 id="extension-r-walk-through-124-converting-nominal-incomes-to-real-incomes"><strong>Extension R walk-through 12.4</strong> Converting nominal incomes to real incomes</h3>
+  <p>To obtain the real income values, we need to divide the income for each percentile group by the inflation index created in Question 5<em>(a)</em>. Recall that we have only imported the real income data from the Excel spreadsheet and not the nominal income data, so we will first import the nominal income data (<code class="language-r highlighter-rouge"><span class="n">nom_income</span></code>). Note that in the code below, the inflation index is entered as a vector (list of numbers) called <code class="language-r highlighter-rouge"><span class="n">inflation</span></code> (with the same number of elements as the number of years in the data) and this is multiplied (element-wise) by each row of the income data using the <code class="language-r highlighter-rouge"><span class="n">sweep</span></code> function.</p>
+  <p>The result is the dataframe called <code class="language-r highlighter-rouge"><span class="n">real_income</span></code>. We use the <code class="language-r highlighter-rouge"><span class="n">kable</span></code> function to make a neat table showing the values of this dataframe.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import the nominal income data</span><span class="w">
+</span><span class="n">nom_income</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"Project 12 datafile.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A3:I8"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">inflation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1.024</span><span class="p">,</span><span class="w"> </span><span class="m">1.078</span><span class="p">,</span><span class="w"> </span><span class="m">1.122</span><span class="p">,</span><span class="w"> 
+  </span><span class="m">1.171</span><span class="p">,</span><span class="w"> </span><span class="m">1.222</span><span class="p">,</span><span class="w"> </span><span class="m">1.259</span><span class="p">,</span><span class="w"> </span><span class="m">1.289</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Only multiply columns with income data by the inflation </span><span class="w">
+</span><span class="c1"># index</span><span class="w">
+</span><span class="n">real_income</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sweep</span><span class="p">(</span><span class="n">nom_income</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">],</span><span class="w"> </span><span class="n">MARGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">inflation</span><span class="p">,</span><span class="w"> </span><span class="s2">"/"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Reattach the percentile column</span><span class="w">
+  </span><span class="n">cbind</span><span class="p">(</span><span class="n">percentile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">85</span><span class="p">,</span><span class="w"> </span><span class="m">75</span><span class="p">,</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">),</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w">
+
+</span><span class="n">kable</span><span class="p">(</span><span class="n">real_income</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r print-wrap-words highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">|</span><span class="w"> </span><span class="n">percentile</span><span class="o">|</span><span class="w">  </span><span class="m">2009</span><span class="o">|</span><span class="w">  </span><span class="m">2010</span><span class="o">|</span><span class="w">     </span><span class="m">2011</span><span class="o">|</span><span class="w">     </span><span class="m">2012</span><span class="o">|</span><span class="w">     </span><span class="m">2013</span><span class="o">|</span><span class="w">     </span><span class="m">2014</span><span class="o">|</span><span class="w">     </span><span class="m">2015</span><span class="o">|</span><span class="w">     </span><span class="m">2016</span><span class="o">|</span><span class="w">
+</span><span class="o">|----------:|-----:|-------:|--------:|--------:|--------:|--------:|--------:|--------:|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">85</span><span class="o">|</span><span class="w"> </span><span class="m">43300</span><span class="o">|</span><span class="w"> </span><span class="m">43945.31</span><span class="o">|</span><span class="w"> </span><span class="m">44515.67</span><span class="o">|</span><span class="w"> </span><span class="m">44563.28</span><span class="o">|</span><span class="w"> </span><span class="m">45260.46</span><span class="o">|</span><span class="w"> </span><span class="m">45171.85</span><span class="o">|</span><span class="w"> </span><span class="m">47656.87</span><span class="o">|</span><span class="w"> </span><span class="m">47090.77</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">75</span><span class="o">|</span><span class="w"> </span><span class="m">31000</span><span class="o">|</span><span class="w"> </span><span class="m">31250.00</span><span class="o">|</span><span class="w"> </span><span class="m">32273.86</span><span class="o">|</span><span class="w"> </span><span class="m">32531.19</span><span class="o">|</span><span class="w"> </span><span class="m">34158.84</span><span class="o">|</span><span class="w"> </span><span class="m">33306.06</span><span class="o">|</span><span class="w"> </span><span class="m">34789.52</span><span class="o">|</span><span class="w"> </span><span class="m">34910.78</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">50</span><span class="o">|</span><span class="w"> </span><span class="m">17400</span><span class="o">|</span><span class="w"> </span><span class="m">17578.12</span><span class="o">|</span><span class="w"> </span><span class="m">17806.27</span><span class="o">|</span><span class="w"> </span><span class="m">17825.31</span><span class="o">|</span><span class="w"> </span><span class="m">18616.57</span><span class="o">|</span><span class="w"> </span><span class="m">18494.27</span><span class="o">|</span><span class="w"> </span><span class="m">19062.75</span><span class="o">|</span><span class="w"> </span><span class="m">19394.88</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">25</span><span class="o">|</span><span class="w">  </span><span class="m">8000</span><span class="o">|</span><span class="w">  </span><span class="m">8203.12</span><span class="o">|</span><span class="w">  </span><span class="m">8346.69</span><span class="o">|</span><span class="w">  </span><span class="m">8823.53</span><span class="o">|</span><span class="w"> </span><span class="m">8539.71</span><span class="o">|</span><span class="w"> </span><span class="m">8592.47</span><span class="o">|</span><span class="w"> </span><span class="m">8737.09</span><span class="o">|</span><span class="w"> </span><span class="m">8533.75</span><span class="o">|</span><span class="w">
+</span><span class="o">|</span><span class="w">         </span><span class="m">15</span><span class="o">|</span><span class="w">  </span><span class="m">4500</span><span class="o">|</span><span class="w">  </span><span class="m">4394.53</span><span class="o">|</span><span class="w">  </span><span class="m">4637.05</span><span class="o">|</span><span class="w">  </span><span class="m">4456.33</span><span class="o">|</span><span class="w">  </span><span class="m">4355.25</span><span class="o">|</span><span class="w">  </span><span class="m">4091.65</span><span class="o">|</span><span class="w">  </span><span class="m">3971.41</span><span class="o">|</span><span class="w">  </span><span class="m">3878.98</span><span class="o">|</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<h2 class="page-break-before" id="part-122-government-popularity">Part 12.2 Government popularity</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>assess the effect of a policy on government popularity.</li>
+  </ul>
+</blockquote>
+<p>One possible reason why the government implemented Scheme $6,000 was to gain public approval, since there was some pressure on the government to spend the surplus on alleviating current social issues rather than reinvesting it (for example, in pension schemes). We will use a public opinion poll conducted by the University of Hong Kong to assess whether this scheme could have improved public satisfaction with the government.</p>
+<ol class="text-question">
+  <li>Think about the groups who would be affected by this scheme (for example, the government or members of the public). Who would be likely to support or oppose this scheme, and why?</li>
+</ol>
+<p>Download the data:</p>
+<ul>
+  <li>Go to <a href="https://tinyco.re/5876400" class="show-url">the overall performance results page on the HKU POP website</a>, which contains half-yearly survey data on the overall performance of the government.</li>
+  <li>Under the subheading ‘Collapsed data’, import the data contained in this table using R. (The data is not available in Excel format, so you will have to import the data manually.)</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-125-importing-data-directly-from-a-website"><strong>R walk-through 12.5</strong> Importing data directly from a website</h3>
+  <p class="tighten-10">It is quite common to use data from publicly-available websites that is presented in a table, but is not available in a spreadsheet to download. Although we could copy and paste this data into a spreadsheet and then import that into R, we could instead use the <code class="language-r highlighter-rouge"><span class="n">rvest</span></code> package to read the data in such a table directly into a dataframe. The R-bloggers site provides details on how to do this in a <a href="https://tinyco.re/8050236" class="show-url">guide to using <code class="language-r highlighter-rouge"><span class="n">rvest</span></code></a>. We will store this table in a dataframe called <code class="language-r highlighter-rouge"><span class="n">overall</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># When copying this code to R you need to ensure that the </span><span class="w">
+</span><span class="c1"># url is presented in one line.</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+  </span><span class="s2">"https://www.hkupop.hku.hk/english/popexpress/sargperf/sarg/halfyr/datatables.html"</span><span class="w">
+
+</span><span class="n">overall</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html_nodes</span><span class="p">(</span><span class="n">xpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'//*[@id="popexpress"]/table[2]'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html_table</span><span class="p">(</span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">overall</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">overall</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Note that if the technicalities of the procedure described above are too complicated, you can still proceed by manually copying and pasting the data into a spreadsheet and then importing it into R.</p>
+</blockquote>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>R will recognize the data you have imported as text, but to make charts, the data needs to be in number format (the % signs need to be removed). Follow the steps in R walk-through 12.6 below to reformat all columns.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Read <a href="https://tinyco.re/2003477" class="show-url">the HKU POP survey methods page</a> for a description of how the survey data was collected. Explain whether you think the sample is representative of the target population, and discuss some limitations of the survey method.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-126-cleaning-imported-data"><strong>R walk-through 12.6</strong> Cleaning imported data</h3>
+  <p>The names of each column from the imported data are long and contain a mixture of alphabet sets; we can rename the variables using the <code class="language-r highlighter-rouge"><span class="n">names</span></code> property of a dataframe.</p>
+  <p>Then we use the <code class="language-r highlighter-rouge"><span class="n">gsub</span></code> function to find and replace all instances of the ‘%’ sign in the data with an empty string (<code class="language-r highlighter-rouge"><span class="s2">""</span></code>), and use <code class="language-r highlighter-rouge"><span class="n">as.numeric</span></code> to convert all variables (except the date variable) to be numeric variables (currently R thinks these are text instead of numbers because they had a ‘%’ sign when imported).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">names</span><span class="p">(</span><span class="n">overall</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Total Sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sub-sample"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"Positive"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Half-half"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Negative"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"DKHS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Total"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Net Value"</span><span class="p">)</span><span class="w">
+</span><span class="n">overall</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">overall</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate_all</span><span class="p">(</span><span class="n">funs</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"%"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="o">-</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">funs</span><span class="p">(</span><span class="n">as.numeric</span><span class="p">))</span><span class="w">
+
+</span><span class="n">str</span><span class="p">(</span><span class="n">overall</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## 'data.frame':    43 obs. of  9 variables:</span><span class="w">
+</span><span class="c1">##  $ Date        : chr  "7-12/2018" "1-6/2018" "7-12/2017" "1-6/2017" ...</span><span class="w">
+</span><span class="c1">##  $ Total Sample: num  3025 12092 12201 12181 12074 ...</span><span class="w">
+</span><span class="c1">##  $ Sub-sample  : num  1761 7225 8750 7380 7167 ...</span><span class="w">
+</span><span class="c1">##  $ Positive    : num  36 35.7 39.6 28.5 24.3 25.1 24.2 27.1 27 27.6 ...</span><span class="w">
+</span><span class="c1">##  $ Half-half   : num  22.1 21.1 22.2 21.3 24.7 22.5 27.3 25.7 24.6 27.2 ...</span><span class="w">
+</span><span class="c1">##  $ Negative    : num  40.7 42.2 35.7 49.1 49.3 51.2 47.4 45.9 47.1 43.7 ...</span><span class="w">
+</span><span class="c1">##  $ DKHS        : num  1.1 1 2.5 1.1 1.7 1.2 1 1.2 1.3 1.5 ...</span><span class="w">
+</span><span class="c1">##  $ Total       : num  100 100 100 100 100 100 100 100 100 100 ...</span><span class="w">
+</span><span class="c1">##  $ Net Value   : num  -4.7 -6.6 3.9 -20.7 -25 -26.1 -23.2 -18.8 -20 -16.1 ...</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<ol class="text-question">
+  <li>Assess public satisfaction with the government by carrying out the following:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Make a line chart with overall public satisfaction (net value, which is the difference between percentage of positive and negative responses) on the vertical axis, and time (Jan–June 2006 to the latest period available) on the horizontal axis. Comment on any trends in overall public satisfaction over this time period.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Go to <a href="https://tinyco.re/9518557" class="show-url">the POP polls main data page</a> and choose one or two other indicators that are directly related to the policy (for example, improving people’s <code class="language-r highlighter-rouge"><span class="n">Degree</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">prosperity</span></code> or <code class="language-r highlighter-rouge"><span class="n">Degree</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">equality</span></code>). Find a table of the data by clicking ‘Content’, then ‘Table’ (if half-yearly data is not available, choose the most similar time interval). Import the data into R, and reformat the variable of interest as in Question 2.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>For each of your chosen indicators, make a separate line chart as in Question 3<em>(a)</em> and comment on any similarities to or differences from the chart in Question 3<em>(a)</em>. (Since some indicators may be measured on a different scale, focus on changes over time.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Do you think the scheme had the intended effect on government popularity? Besides the scheme, what other factors or events could explain the observed patterns?</li>
+</ul>
+<blockquote class="expandable-box page-break-before">
+  <h3 id="r-walk-through-127-cleaning-data-and-setting-dates"><strong>R walk-through 12.7</strong> Cleaning data and setting dates</h3>
+  <p class="tighten-5">For Question 3<em>(a)</em>, before we can plot the imported data in R, we need to format the data variable so that R understands the chronological order of the data. The imported data has the <code class="language-r highlighter-rouge"><span class="n">Date</span></code> variable, which is a text string using ‘1-6’ to represent January to June and ‘7-12’ for July to December. This format is not useful for ordering the data because R cannot determine the sequential order of numbers that are stored as text.</p>
+  <p class="tighten-12">There are a number of ways that R can deal with times and dates. In this example we are going to use the <code class="language-r highlighter-rouge"><span class="n">yearmon</span></code> function from the <code class="language-r highlighter-rouge"><span class="n">zoo</span></code> library as this focuses on using monthly data. Although we don’t have monthly data, we can use the <code class="language-r highlighter-rouge"><span class="n">gsub</span></code> function to replace the ‘1-6’ text string with ‘jan-’ and ‘7-12’ with ‘july-’, in other words we are going to use January and July to represent the first and second half of each year respectively.</p>
+  <p>Once we have the months in a format that R can understand, we use the <code class="language-r highlighter-rouge"><span class="n">as.yearmon</span></code> function to set the <code class="language-r highlighter-rouge"><span class="n">Date</span></code> variable to the date format (using the <code class="language-r highlighter-rouge"><span class="o">%b-%</span><span class="n">Y</span></code> option; further details on date formats in R can be found in the <a href="https://tinyco.re/8606284" class="show-url">Dates and Times in R page</a>).</p>
+  <p class="tighten-15">We can use the <code class="language-r highlighter-rouge"><span class="n">scale_x_yearmon</span></code> function when plotting the line chart to ensure that the dates on the horizontal axis are labelled correctly.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">zoo</span><span class="p">)</span><span class="w">
+
+</span><span class="n">overall</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">funs</span><span class="p">(</span><span class="w">
+    </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"1-6/"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jan-"</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">funs</span><span class="p">(</span><span class="w">
+    </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"7-12/"</span><span class="p">,</span><span class="w"> </span><span class="s2">"july-"</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.yearmon</span><span class="p">(</span><span class="n">Date</span><span class="p">,</span><span class="w"> </span><span class="s2">"%b-%Y"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">subset</span><span class="p">(</span><span class="n">Date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s2">"Jan 2006"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`Net Value`</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">scale_x_yearmon</span><span class="p">(</span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"%b-%Y"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Net satisfaction"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-12-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-12-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Net public satisfaction with the government’s performance over time.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Net public satisfaction with the government’s performance over time.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Net public satisfaction with the government’s performance over time.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.7 </span>
+<span class="tighten-15">Net public satisfaction with the government’s performance over time.</span>
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p class="tighten-10">For Question 3<em>(b)</em>, in this example we use the variable <code class="language-r highlighter-rouge"><span class="n">Improving</span><span class="w"> </span><span class="n">People</span><span class="err">'</span><span class="n">s</span><span class="w"> </span><span class="n">Livelihood</span></code>. Repeating the import and cleaning processes from <a href="#r-walk-through-125-importing-data-directly-from-a-website" class="show-page-number">R walk-through 12.5</a>, we can directly read in the relevant data.</p>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># When copying this code to R you need to ensure that the </span><span class="w">
+</span><span class="c1"># url is presented in one line.</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+  </span><span class="s2">"https://www.hkupop.hku.hk/english/popexpress/sargperf/live/halfyr/datatables.html"</span><span class="w">
+
+</span><span class="n">improvement</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html_nodes</span><span class="p">(</span><span class="n">xpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'//*[@id="popexpress"]/table[2]'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html_table</span><span class="p">(</span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">improvement</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">improvement</span><span class="w"> </span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
+
+</span><span class="nf">names</span><span class="p">(</span><span class="n">improvement</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Total Sample"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"Sub-sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Positive"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Half-half"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Negative"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"DKHS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Total"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Net Value"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">improvement</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">improvement</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate_all</span><span class="p">(</span><span class="n">funs</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"%"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)))</span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="o">-</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">funs</span><span class="p">(</span><span class="n">as.numeric</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>For Question 3<em>(c)</em>, repeat the steps taken for 3<em>(a)</em>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">improvement</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">funs</span><span class="p">(</span><span class="w">
+    </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"1-6/"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jan-"</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate_at</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">funs</span><span class="p">(</span><span class="w">
+    </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"7-12/"</span><span class="p">,</span><span class="w"> </span><span class="s2">"july-"</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.yearmon</span><span class="p">(</span><span class="n">Date</span><span class="p">,</span><span class="w"> </span><span class="s2">"%b-%Y"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">subset</span><span class="p">(</span><span class="n">Date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s2">"Jan 2006"</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`Net Value`</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">scale_x_yearmon</span><span class="p">(</span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"%b-%Y"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Net satisfaction"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-12-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-12-08.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-08.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-08-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-08-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-08-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-12-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Net public satisfaction with the government’s ability to improve people’s livelihood over time.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-12-08.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-12-08-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-08-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-08-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-12-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Net public satisfaction with the government’s ability to improve people’s livelihood over time.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Net public satisfaction with the government’s ability to improve people’s livelihood over time.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 12.8 </span>
+Net public satisfaction with the government’s ability to improve people’s livelihood over time.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>In 2018, the government decided to do another cash handout. Read the article <a href="https://tinyco.re/6826202" class="show-url">‘Hong Kong cash handout scheme will cost government HK$330 million to administer’</a> and discuss how this scheme differs from the 2011 scheme. Explain whether you think this policy is an improvement over the 2011 scheme.</li>
+</ol>
+<ol class="text-question keep-together">
+  <li>Suppose you are a policymaker in a developed country with a large budget surplus, and one of the government’s aims is to reduce income inequality. Would you recommend that the government implement a scheme similar to either the 2011 or 2018 scheme? If you recommend a cash handout, suggest some modifications that could make the scheme more effective. If not, suggest other policies that may be more effective in reducing inequality. You may find it helpful to research policies aimed at reducing income inequality, for example <a href="https://tinyco.re/1088897" class="show-url">Universal Basic Income</a>, which some countries have tried.)</li>
+</ol>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in R
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="12-03.html"
+               class="active">
+                Getting started in R
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="active">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="active">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

@@ -1,0 +1,4505 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 8 Solutions
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 8 Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/08-04.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter solutions"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-8-solutions"><strong>Empirical Project 8</strong> Solutions</h1>
+<p class="tighten-10">These are not model answers. They are provided to help students, including those doing the project outside a formal class, to check their progress while working through the questions using the Excel, R, or Google Sheets walk-throughs. There are also brief notes for the more interpretive questions. Students taking courses using <em>Doing Economics</em> should follow the guidance of their instructors.</p>
+<h2 id="part-81-cleaning-and-summarizing-the-data">Part 8.1 Cleaning and summarizing the data</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>One way to rename the variables is given in Solution figure 8.1.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-8-1">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>New name</th>
+      <th>Variable description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S002EV</td>
+      <td>EVS-wave</td>
+      <td>EVS-wave</td>
+    </tr>
+    <tr>
+      <td>S003</td>
+      <td>Country/region</td>
+      <td>Country/region</td>
+    </tr>
+    <tr>
+      <td>S006</td>
+      <td>Respondent number</td>
+      <td>Original respondent number</td>
+    </tr>
+    <tr>
+      <td>S009</td>
+      <td>Country abbreviation</td>
+      <td>Country abbreviation</td>
+    </tr>
+    <tr>
+      <td>A009</td>
+      <td>Health</td>
+      <td>State of health (subjective)</td>
+    </tr>
+    <tr>
+      <td>A170</td>
+      <td>Life satisfaction</td>
+      <td>Satisfaction with your life</td>
+    </tr>
+    <tr>
+      <td>C036</td>
+      <td>Work Q1</td>
+      <td>To develop talents you need to have a job</td>
+    </tr>
+    <tr>
+      <td>C037</td>
+      <td>Work Q2</td>
+      <td>Humiliating to receive money without having to work for it</td>
+    </tr>
+    <tr>
+      <td>C038</td>
+      <td>Work Q3</td>
+      <td>People who don’t work become lazy</td>
+    </tr>
+    <tr>
+      <td>C039</td>
+      <td>Work Q4</td>
+      <td>Work is a duty towards society</td>
+    </tr>
+    <tr>
+      <td>C041</td>
+      <td>Work Q5</td>
+      <td>Work should come first even if it means less spare time</td>
+    </tr>
+    <tr>
+      <td>X001</td>
+      <td>Sex</td>
+      <td>Sex</td>
+    </tr>
+    <tr>
+      <td>X003</td>
+      <td>Age</td>
+      <td>Age</td>
+    </tr>
+    <tr>
+      <td>X007</td>
+      <td>Marital status</td>
+      <td>Marital status</td>
+    </tr>
+    <tr>
+      <td>X011_01</td>
+      <td>Number of children</td>
+      <td>How many children you have—deceased children not included</td>
+    </tr>
+    <tr>
+      <td>X025A</td>
+      <td>Education</td>
+      <td>Educational level respondent: ISCED-code one digit</td>
+    </tr>
+    <tr>
+      <td>X028</td>
+      <td>Employment</td>
+      <td>Employment status</td>
+    </tr>
+    <tr>
+      <td>X047D</td>
+      <td>Monthly household income</td>
+      <td>Monthly household income (× 1,000), corrected for ppp in euros</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Completed data dictionary.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.1 </span>
+Completed data dictionary.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li>Examples of answers on how some of the variables were measured are provided:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>To use reported life satisfaction in interpersonal and cross-country comparisons, we need to assume that all individuals share similar presuppositions and answer the questions in similar environments and contexts.</p>
+    <p>These assumptions are not entirely plausible. Perceived social norms, beliefs, culture, and many other characteristics vary across individuals and across countries, affecting individuals’ responses. As a result, differences in answers may reflect differences in these factors rather than the true level of satisfaction.</p>
+    <p>There are a large number of environmental factors that can influence the answers. The day of the week, the weather, and major news stories are all examples of such factors. It is impossible to control for all these factors.</p>
+    <p>Although the measure has limitations, it may be the best we can obtain.</p>
+  </li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li><em>Employment status:</em> Social norms, beliefs, culture, and other factors which vary across individuals and countries can affect people’s willingness to report truthfully on their employment status. Many people probably do not know accurately the technical definitions of the terms associated with employment status, resulting in misreports. Misreporting of employment status is therefore likely to be an issue.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>An example answer is given below.</p>
+    <ul>
+      <li><em>No-opinion responding:</em> A tendency to select the response category that is most neutral in its meaning (for example ‘neither agree nor disagree’). Some people may consider the information being asked for as private and therefore will not want to give opinions. We can check for respondents who choose neutral answers for most questions.</li>
+      <li class="tighten-15"><em>Primacy effects:</em> A tendency to select one of the first response categories presented on a list. When people want to spend minimal time on a questionnaire, they may just choose the first category given for each question. We can check for respondents who choose the first category for most questions. We can include in the questionnaire similar questions with the categories ordered differently so that if individuals select the first categories even for similar questions, we would know that they are probably not paying attention.</li>
+      <li class="tighten-15"><em>Socially desirable responding:</em> Conscious or subconscious tendency to select response options more likely to conform with social norms or present the respondent in a good light. The answers reveal the values, attitudes, and beliefs of the respondents. Respondents may engage in socially desirable responding because they are afraid of the risk that their employers or potential employers may learn about their answers and penalize them. We can identify a set of answers complying with social norms in any given region and identify respondents who chose almost the same set of answers.</li>
+    </ul>
+  </li>
+</ul>
+<ol class="text-question">
+  <li><em>(a)</em>–<em>(e)</em> No solution is provided. For Excel users: Refer to <a href="08-02.html#excel-walk-through-81-cleaning-data-and-splitting-variables" class="show-page-number">Excel walk-through 8.1</a> for guidance on answering Question 3<em>(a)</em> and <em>(e)</em>. For R users: Refer to <a href="08-03.html#r-walk-through-82-cleaning-data-and-splitting-variables" class="show-page-number">R walk-through 8.2</a>. For Google Sheets users: Refer to <a href="08-05.html#google-sheets-walk-through-81-cleaning-data-and-splitting-variables" class="show-page-number">Google Sheets walk-through 8.1</a>.</li>
+</ol>
+<ol class="text-question">
+  <li>No solution is provided.</li>
+</ol>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>The long right tail means the mean is skewed to the right. Using deviations from the average income in this case would underestimate the living standards of many people.</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li>No solution is provided. For Excel users: Refer to <a href="08-02.html#excel-walk-through-83-calculating-percentiles-from-actual-values" class="show-page-number">Excel walk-through 8.3</a> for guidance, and for an example of naming a new variable. For R users: Refer to <a href="08-03.html#r-walk-through-84-calculating-averages-and-percentiles" class="show-page-number">R walk-through 8.4</a>. For Google Sheets users: Refer to <a href="08-05.html#google-sheets-walk-through-83-calculating-percentiles-from-actual-values" class="show-page-number">Google sheets walk-through 8.3</a>.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>The table in Solution figure 8.2 shows the breakdown of each country’s population according to employment status. There are many possible features to comment on, for example:</p>
+    <ul>
+      <li>the differences in percentages of students surveyed</li>
+      <li>the percentages in full-time employment, part-time employment, and self-employment, making a comparison between developing and developed countries</li>
+      <li>variations in unemployment across countries.</li>
+    </ul>
+  </li>
+</ul>
+<div class="figure shrink-90pc wide float-top figure-no-source" id="solution-figure-8-2">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Full-time</th>
+      <th>Housewife</th>
+      <th>Other</th>
+      <th>Part-time</th>
+      <th>Retired</th>
+      <th>Self-employed</th>
+      <th>Students</th>
+      <th>Unemployed</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>Albania</td>
+    <td>29.42</td>
+    <td>7.42</td>
+    <td>1.50</td>
+    <td>5.50</td>
+    <td>9.08</td>
+    <td>22.08</td>
+    <td>7.33</td>
+    <td>17.67</td>
+  </tr>
+  <tr>
+    <td>Armenia</td>
+    <td>23.86</td>
+    <td>20.92</td>
+    <td>1.14</td>
+    <td>8.09</td>
+    <td>18.38</td>
+    <td>5.96</td>
+    <td>6.70</td>
+    <td>14.95</td>
+  </tr>
+  <tr>
+    <td>Austria</td>
+    <td>39.80</td>
+    <td>7.24</td>
+    <td>1.89</td>
+    <td>9.95</td>
+    <td>25.49</td>
+    <td>5.02</td>
+    <td>8.39</td>
+    <td>2.22</td>
+  </tr>
+  <tr>
+    <td>Belarus</td>
+    <td>57.88</td>
+    <td>2.43</td>
+    <td>1.21</td>
+    <td>6.95</td>
+    <td>18.59</td>
+    <td>3.40</td>
+    <td>6.87</td>
+    <td>2.67</td>
+  </tr>
+  <tr>
+    <td>Belgium</td>
+    <td>42.89</td>
+    <td>5.96</td>
+    <td>3.72</td>
+    <td>8.94</td>
+    <td>23.01</td>
+    <td>3.57</td>
+    <td>5.21</td>
+    <td>6.70</td>
+  </tr>
+  <tr>
+    <td>Bosnia Herzegovina</td>
+    <td>34.06</td>
+    <td>9.33</td>
+    <td>0.82</td>
+    <td>2.90</td>
+    <td>14.67</td>
+    <td>3.08</td>
+    <td>8.15</td>
+    <td>26.99</td>
+  </tr>
+  <tr>
+    <td>Bulgaria</td>
+    <td>46.32</td>
+    <td>2.62</td>
+    <td>0.76</td>
+    <td>2.79</td>
+    <td>31.28</td>
+    <td>5.58</td>
+    <td>2.37</td>
+    <td>8.28</td>
+  </tr>
+  <tr>
+    <td>Croatia</td>
+    <td>41.58</td>
+    <td>3.37</td>
+    <td>0.93</td>
+    <td>2.78</td>
+    <td>26.01</td>
+    <td>2.86</td>
+    <td>8.75</td>
+    <td>13.72</td>
+  </tr>
+  <tr>
+    <td>Cyprus</td>
+    <td>46.32</td>
+    <td>13.68</td>
+    <td>1.29</td>
+    <td>2.84</td>
+    <td>24.39</td>
+    <td>6.58</td>
+    <td>1.68</td>
+    <td>3.23</td>
+  </tr>
+  <tr>
+    <td>Czech Republic</td>
+    <td>46.56</td>
+    <td>3.06</td>
+    <td>4.66</td>
+    <td>1.68</td>
+    <td>31.27</td>
+    <td>3.82</td>
+    <td>5.43</td>
+    <td>3.52</td>
+  </tr>
+  <tr>
+    <td>Denmark</td>
+    <td>55.89</td>
+    <td>0.28</td>
+    <td>1.32</td>
+    <td>6.69</td>
+    <td>24.32</td>
+    <td>5.94</td>
+    <td>4.15</td>
+    <td>1.41</td>
+  </tr>
+  <tr>
+    <td>Estonia</td>
+    <td>50.35</td>
+    <td>4.08</td>
+    <td>2.20</td>
+    <td>5.11</td>
+    <td>28.52</td>
+    <td>3.61</td>
+    <td>3.38</td>
+    <td>2.75</td>
+  </tr>
+  <tr>
+    <td>Finland</td>
+    <td>52.34</td>
+    <td>1.38</td>
+    <td>3.94</td>
+    <td>5.11</td>
+    <td>22.77</td>
+    <td>6.17</td>
+    <td>3.72</td>
+    <td>4.57</td>
+  </tr>
+  <tr>
+    <td>France</td>
+    <td>46.83</td>
+    <td>5.59</td>
+    <td>1.94</td>
+    <td>6.04</td>
+    <td>28.78</td>
+    <td>2.76</td>
+    <td>3.13</td>
+    <td>4.92</td>
+  </tr>
+  <tr>
+    <td>Georgia</td>
+    <td>19.46</td>
+    <td>11.60</td>
+    <td>0.81</td>
+    <td>6.57</td>
+    <td>19.38</td>
+    <td>7.06</td>
+    <td>2.60</td>
+    <td>32.52</td>
+  </tr>
+  <tr>
+    <td>Germany</td>
+    <td>38.44</td>
+    <td>4.58</td>
+    <td>3.03</td>
+    <td>8.44</td>
+    <td>28.64</td>
+    <td>2.97</td>
+    <td>2.67</td>
+    <td>11.23</td>
+  </tr>
+  <tr>
+    <td>Great Britain</td>
+    <td>33.50</td>
+    <td>7.32</td>
+    <td>4.01</td>
+    <td>11.23</td>
+    <td>28.99</td>
+    <td>5.72</td>
+    <td>1.40</td>
+    <td>7.82</td>
+  </tr>
+  <tr>
+    <td>Greece</td>
+    <td>28.49</td>
+    <td>17.42</td>
+    <td>0.40</td>
+    <td>2.97</td>
+    <td>26.73</td>
+    <td>13.72</td>
+    <td>6.18</td>
+    <td>4.09</td>
+  </tr>
+  <tr>
+    <td>Hungary</td>
+    <td>46.39</td>
+    <td>1.20</td>
+    <td>7.21</td>
+    <td>2.00</td>
+    <td>24.04</td>
+    <td>3.53</td>
+    <td>6.57</td>
+    <td>9.05</td>
+  </tr>
+  <tr>
+    <td>Iceland</td>
+    <td>54.50</td>
+    <td>2.25</td>
+    <td>6.01</td>
+    <td>9.91</td>
+    <td>7.06</td>
+    <td>11.41</td>
+    <td>4.95</td>
+    <td>3.90</td>
+  </tr>
+  <tr>
+    <td>Ireland</td>
+    <td>41.87</td>
+    <td>19.84</td>
+    <td>1.59</td>
+    <td>9.72</td>
+    <td>13.89</td>
+    <td>4.96</td>
+    <td>1.59</td>
+    <td>6.55</td>
+  </tr>
+  <tr>
+    <td>Italy</td>
+    <td>32.88</td>
+    <td>8.33</td>
+    <td>0.46</td>
+    <td>9.13</td>
+    <td>23.06</td>
+    <td>13.70</td>
+    <td>7.08</td>
+    <td>5.37</td>
+  </tr>
+  <tr>
+    <td>Kosovo</td>
+    <td>19.57</td>
+    <td>11.65</td>
+    <td>0.52</td>
+    <td>5.23</td>
+    <td>5.83</td>
+    <td>9.41</td>
+    <td>18.00</td>
+    <td>29.80</td>
+  </tr>
+  <tr>
+    <td>Latvia</td>
+    <td>52.05</td>
+    <td>6.18</td>
+    <td>2.34</td>
+    <td>3.76</td>
+    <td>23.22</td>
+    <td>3.26</td>
+    <td>4.26</td>
+    <td>4.93</td>
+  </tr>
+  <tr>
+    <td>Lithuania</td>
+    <td>50.13</td>
+    <td>4.11</td>
+    <td>2.89</td>
+    <td>5.16</td>
+    <td>23.97</td>
+    <td>3.41</td>
+    <td>6.04</td>
+    <td>4.29</td>
+  </tr>
+  <tr>
+    <td>Luxembourg</td>
+    <td>51.33</td>
+    <td>9.36</td>
+    <td>1.12</td>
+    <td>7.38</td>
+    <td>15.36</td>
+    <td>3.00</td>
+    <td>9.87</td>
+    <td>2.58</td>
+  </tr>
+  <tr>
+    <td>Macedonia</td>
+    <td>35.74</td>
+    <td>4.34</td>
+    <td>1.24</td>
+    <td>1.71</td>
+    <td>16.74</td>
+    <td>3.72</td>
+    <td>8.53</td>
+    <td>27.98</td>
+  </tr>
+  <tr>
+    <td>Malta</td>
+    <td>33.84</td>
+    <td>32.33</td>
+    <td>0.68</td>
+    <td>3.84</td>
+    <td>23.42</td>
+    <td>2.33</td>
+    <td>0.55</td>
+    <td>3.01</td>
+  </tr>
+  <tr>
+    <td>Moldova</td>
+    <td>30.49</td>
+    <td>7.24</td>
+    <td>1.87</td>
+    <td>7.58</td>
+    <td>25.64</td>
+    <td>4.86</td>
+    <td>4.43</td>
+    <td>17.89</td>
+  </tr>
+  <tr>
+    <td>Montenegro</td>
+    <td>39.02</td>
+    <td>4.63</td>
+    <td>0.60</td>
+    <td>2.14</td>
+    <td>16.64</td>
+    <td>4.97</td>
+    <td>4.80</td>
+    <td>27.19</td>
+  </tr>
+  <tr>
+    <td>Netherlands</td>
+    <td>32.40</td>
+    <td>9.52</td>
+    <td>3.68</td>
+    <td>18.24</td>
+    <td>27.76</td>
+    <td>6.48</td>
+    <td>0.80</td>
+    <td>1.12</td>
+  </tr>
+  <tr>
+    <td>Northern Cyprus</td>
+    <td>31.19</td>
+    <td>19.55</td>
+    <td>2.23</td>
+    <td>5.20</td>
+    <td>8.91</td>
+    <td>8.91</td>
+    <td>13.61</td>
+    <td>10.40</td>
+  </tr>
+  <tr>
+    <td>Northern Ireland</td>
+    <td>30.10</td>
+    <td>10.36</td>
+    <td>4.53</td>
+    <td>8.74</td>
+    <td>29.45</td>
+    <td>3.56</td>
+    <td>1.29</td>
+    <td>11.97</td>
+  </tr>
+  <tr>
+    <td>Norway</td>
+    <td>53.23</td>
+    <td>2.22</td>
+    <td>6.55</td>
+    <td>9.48</td>
+    <td>12.60</td>
+    <td>8.17</td>
+    <td>7.06</td>
+    <td>0.71</td>
+  </tr>
+  <tr>
+    <td>Poland</td>
+    <td>41.81</td>
+    <td>6.00</td>
+    <td>0.10</td>
+    <td>3.14</td>
+    <td>28.00</td>
+    <td>5.81</td>
+    <td>7.62</td>
+    <td>7.52</td>
+  </tr>
+  <tr>
+    <td>Portugal</td>
+    <td>46.20</td>
+    <td>5.24</td>
+    <td>1.57</td>
+    <td>3.27</td>
+    <td>33.51</td>
+    <td>1.70</td>
+    <td>1.05</td>
+    <td>7.46</td>
+  </tr>
+  <tr>
+    <td>Romania</td>
+    <td>41.07</td>
+    <td>10.54</td>
+    <td>1.95</td>
+    <td>3.22</td>
+    <td>33.95</td>
+    <td>3.02</td>
+    <td>3.61</td>
+    <td>2.63</td>
+  </tr>
+  <tr>
+    <td>Russian Federation</td>
+    <td>54.36</td>
+    <td>5.81</td>
+    <td>2.72</td>
+    <td>5.08</td>
+    <td>23.77</td>
+    <td>1.27</td>
+    <td>2.72</td>
+    <td>4.26</td>
+  </tr>
+  <tr>
+    <td>Serbia</td>
+    <td>34.21</td>
+    <td>5.02</td>
+    <td>1.07</td>
+    <td>2.38</td>
+    <td>25.16</td>
+    <td>6.91</td>
+    <td>4.11</td>
+    <td>21.13</td>
+  </tr>
+  <tr>
+    <td>Slovakia</td>
+    <td>40.98</td>
+    <td>1.73</td>
+    <td>4.89</td>
+    <td>2.21</td>
+    <td>39.73</td>
+    <td>3.55</td>
+    <td>1.25</td>
+    <td>5.66</td>
+  </tr>
+  <tr>
+    <td>Slovenia</td>
+    <td>47.44</td>
+    <td>2.50</td>
+    <td>2.75</td>
+    <td>1.25</td>
+    <td>31.59</td>
+    <td>4.37</td>
+    <td>6.99</td>
+    <td>3.12</td>
+  </tr>
+  <tr>
+    <td>Spain</td>
+    <td>41.52</td>
+    <td>16.30</td>
+    <td>0.11</td>
+    <td>4.63</td>
+    <td>19.93</td>
+    <td>6.28</td>
+    <td>3.19</td>
+    <td>8.04</td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>54.82</td>
+    <td>0.38</td>
+    <td>6.60</td>
+    <td>7.36</td>
+    <td>15.36</td>
+    <td>7.23</td>
+    <td>4.06</td>
+    <td>4.19</td>
+  </tr>
+  <tr>
+    <td>Switzerland</td>
+    <td>48.50</td>
+    <td>6.42</td>
+    <td>3.21</td>
+    <td>14.03</td>
+    <td>21.31</td>
+    <td>2.89</td>
+    <td>1.39</td>
+    <td>2.25</td>
+  </tr>
+  <tr>
+    <td>Turkey</td>
+    <td>16.42</td>
+    <td>42.39</td>
+    <td>0.60</td>
+    <td>2.14</td>
+    <td>10.00</td>
+    <td>7.66</td>
+    <td>5.92</td>
+    <td>14.88</td>
+  </tr>
+  <tr>
+    <td>Ukraine</td>
+    <td>40.92</td>
+    <td>6.79</td>
+    <td>1.02</td>
+    <td>4.84</td>
+    <td>32.09</td>
+    <td>4.41</td>
+    <td>3.23</td>
+    <td>6.71</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+<span class="tighten-15">Self-reported employment status in each country (per cent of sample).</span>
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.2 </span>
+<span class="tighten-15">Self-reported employment status in each country (per cent of sample).</span>
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li><a href="#solution-figure-8-3" class="show-page-number">Solution figure 8.3</a> shows the summary table.</li>
+</ul>
+<div class="figure shrink-90pc wide figure-no-source" id="solution-figure-8-3">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="2">Male</th>
+    <th colspan="2">Female</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Mean</td>
+    <td>Standard deviation</td>
+    <td>Mean</td>
+    <td>Standard deviation</td>
+  </tr>
+  <tr>
+    <td>Life satisfaction</td>
+    <td>6.98</td>
+    <td>2.30</td>
+    <td>6.98</td>
+    <td>2.30</td>
+  </tr>
+  <tr>
+    <td>Self-reported health</td>
+    <td>3.68</td>
+    <td>0.95</td>
+    <td>3.68</td>
+    <td>0.95</td>
+  </tr>
+  <tr>
+    <td>Work ethic</td>
+    <td>3.68</td>
+    <td>0.76</td>
+    <td>3.68</td>
+    <td>0.76</td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td>47.10</td>
+    <td>17.42</td>
+    <td>47.09</td>
+    <td>17.42</td>
+  </tr>
+  <tr>
+    <td>Education</td>
+    <td>3.09</td>
+    <td>1.36</td>
+    <td>3.09</td>
+    <td>1.36</td>
+  </tr>
+  <tr>
+    <td>Number of children</td>
+    <td>1.63</td>
+    <td>1.41</td>
+    <td>1.63</td>
+    <td>1.41</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+A summary table for the EVS data.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.3 </span>
+A summary table for the EVS data.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<h2 id="part-82-visualizing-the-data">Part 8.2 Visualizing the data</h2>
+<ol class="text-question">
+  <li>Germany is used as an example.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figures <a href="#solution-figure-8-4">8.4</a> and <a href="#solution-figure-8-5" class="show-page-number">8.5</a> provide frequency tables for work ethic in Germany for Wave 3 and Wave 4.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-8-4">
+<div class="figure-body">
+<div class="figure-md">
+<table class="align-right">
+  <thead>
+    <tr>
+      <th>Range of work ethic score</th>
+      <th>Frequency</th>
+      <th>Percentage of individuals (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>1.20</td>
+      <td>3</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <td>1.40</td>
+      <td>6</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <td>1.60</td>
+      <td>9</td>
+      <td>0.63</td>
+    </tr>
+    <tr>
+      <td>1.80</td>
+      <td>15</td>
+      <td>1.05</td>
+    </tr>
+    <tr>
+      <td>2.00</td>
+      <td>18</td>
+      <td>1.26</td>
+    </tr>
+    <tr>
+      <td>2.20</td>
+      <td>21</td>
+      <td>1.47</td>
+    </tr>
+    <tr>
+      <td>2.40</td>
+      <td>47</td>
+      <td>3.28</td>
+    </tr>
+    <tr>
+      <td>2.60</td>
+      <td>68</td>
+      <td>4.75</td>
+    </tr>
+    <tr>
+      <td>2.80</td>
+      <td>79</td>
+      <td>5.52</td>
+    </tr>
+    <tr>
+      <td>3.00</td>
+      <td>114</td>
+      <td>7.96</td>
+    </tr>
+    <tr>
+      <td>3.20</td>
+      <td>130</td>
+      <td>9.08</td>
+    </tr>
+    <tr>
+      <td>3.40</td>
+      <td>166</td>
+      <td>11.59</td>
+    </tr>
+    <tr>
+      <td>3.60</td>
+      <td>171</td>
+      <td>11.94</td>
+    </tr>
+    <tr>
+      <td>3.80</td>
+      <td>185</td>
+      <td>12.92</td>
+    </tr>
+    <tr>
+      <td>4.00</td>
+      <td>164</td>
+      <td>11.45</td>
+    </tr>
+    <tr>
+      <td>4.20</td>
+      <td>106</td>
+      <td>7.40</td>
+    </tr>
+    <tr>
+      <td>4.40</td>
+      <td>55</td>
+      <td>3.84</td>
+    </tr>
+    <tr>
+      <td>4.60</td>
+      <td>34</td>
+      <td>2.37</td>
+    </tr>
+    <tr>
+      <td>4.80</td>
+      <td>20</td>
+      <td>1.40</td>
+    </tr>
+    <tr>
+      <td>5.00</td>
+      <td>21</td>
+      <td>1.47</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Frequency table for work ethic (Germany, Wave 3).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.4 </span>
+Frequency table for work ethic (Germany, Wave 3).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-8-5">
+<div class="figure-body">
+<div class="figure-md">
+<table class="align-right">
+  <thead>
+    <tr>
+      <th>Range of work ethic score</th>
+      <th>Frequency</th>
+      <th>Percentage of individuals (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.0</td>
+      <td>1</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>1.2</td>
+      <td>1</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>1.4</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>1.6</td>
+      <td>6</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <td>1.8</td>
+      <td>9</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <td>2.0</td>
+      <td>18</td>
+      <td>1.07</td>
+    </tr>
+    <tr>
+      <td>2.2</td>
+      <td>22</td>
+      <td>1.31</td>
+    </tr>
+    <tr>
+      <td>2.4</td>
+      <td>35</td>
+      <td>2.08</td>
+    </tr>
+    <tr>
+      <td>2.6</td>
+      <td>44</td>
+      <td>2.61</td>
+    </tr>
+    <tr>
+      <td>2.8</td>
+      <td>75</td>
+      <td>4.46</td>
+    </tr>
+    <tr>
+      <td>3.0</td>
+      <td>90</td>
+      <td>5.35</td>
+    </tr>
+    <tr>
+      <td>3.2</td>
+      <td>125</td>
+      <td>7.43</td>
+    </tr>
+    <tr>
+      <td>3.4</td>
+      <td>152</td>
+      <td>9.03</td>
+    </tr>
+    <tr>
+      <td>3.6</td>
+      <td>171</td>
+      <td>10.16</td>
+    </tr>
+    <tr>
+      <td>3.8</td>
+      <td>180</td>
+      <td>10.70</td>
+    </tr>
+    <tr>
+      <td>4.0</td>
+      <td>207</td>
+      <td>12.30</td>
+    </tr>
+    <tr>
+      <td>4.2</td>
+      <td>191</td>
+      <td>11.35</td>
+    </tr>
+    <tr>
+      <td>4.4</td>
+      <td>166</td>
+      <td>9.86</td>
+    </tr>
+    <tr>
+      <td>4.6</td>
+      <td>79</td>
+      <td>4.69</td>
+    </tr>
+    <tr>
+      <td>4.8</td>
+      <td>37</td>
+      <td>2.20</td>
+    </tr>
+    <tr>
+      <td>5.0</td>
+      <td>74</td>
+      <td>4.40</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Frequency table for work ethic (Germany, Wave 4).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.5 </span>
+Frequency table for work ethic (Germany, Wave 4).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li><a href="#solution-figure-8-6" class="show-page-number">Solution figure 8.6</a> shows the column chart for Germany for Waves 3 and 4.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-8-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Distribution of work ethic score in Germany: Waves 3 and 4.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Distribution of work ethic score in Germany: Waves 3 and 4.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Distribution of work ethic score in Germany: Waves 3 and 4.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.6 </span>
+Distribution of work ethic score in Germany: Waves 3 and 4.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The work ethic scores have increased over time, as shown by the rightward shift in the distribution in Wave 4.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li><a href="#solution-figure-8-7" class="show-page-number">Solution figure 8.7</a> shows the average life satisfaction in Waves 1 to 4.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-8-7">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Wave 1</th>
+      <th>Wave 2</th>
+      <th>Wave 3</th>
+      <th>Wave 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Belgium</td>
+      <td>7.37</td>
+      <td>7.60</td>
+      <td>7.42</td>
+      <td>7.63</td>
+    </tr>
+    <tr>
+      <td>Denmark</td>
+      <td>8.21</td>
+      <td>8.17</td>
+      <td>8.31</td>
+      <td>8.41</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>6.71</td>
+      <td>6.77</td>
+      <td>6.98</td>
+      <td>7.05</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>7.22</td>
+      <td>7.03</td>
+      <td>7.43</td>
+      <td>6.77</td>
+    </tr>
+    <tr>
+      <td>Iceland</td>
+      <td>8.05</td>
+      <td>8.01</td>
+      <td>8.08</td>
+      <td>8.07</td>
+    </tr>
+    <tr>
+      <td>Italy</td>
+      <td>6.65</td>
+      <td>7.30</td>
+      <td>7.18</td>
+      <td>7.40</td>
+    </tr>
+    <tr>
+      <td>Netherlands</td>
+      <td>7.75</td>
+      <td>7.77</td>
+      <td>7.83</td>
+      <td>7.99</td>
+    </tr>
+    <tr>
+      <td>Northern Ireland</td>
+      <td>7.66</td>
+      <td>7.88</td>
+      <td>8.07</td>
+      <td>7.82</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>6.60</td>
+      <td>7.15</td>
+      <td>6.97</td>
+      <td>7.29</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>8.03</td>
+      <td>7.99</td>
+      <td>7.62</td>
+      <td>7.68</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Average life satisfaction across countries and survey waves.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.7 </span>
+Average life satisfaction across countries and survey waves.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question tighten-15">
+  <li><a href="#solution-figure-8-8" class="show-page-number">Solution figure 8.8</a> provides the line chart of average life satisfaction across countries and survey waves. <em>Note:</em> When producing a chart with many lines, the key produced by Excel/R/Google Sheets is often inadequate in allowing the reader to distinguish between the series. You may need to add labels to the series.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-8-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Line chart of average life satisfaction (wellbeing) across countries and survey waves.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Line chart of average life satisfaction (wellbeing) across countries and survey waves.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Line chart of average life satisfaction (wellbeing) across countries and survey waves.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.8 </span>
+Line chart of average life satisfaction (wellbeing) across countries and survey waves.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question keep-together">
+  <li>Average life satisfaction increased slightly over the survey periods for most countries. Also, instead of looking at averages, we could look at deciles, which would allow us to assess whether the changes in average life satisfaction are due to a shift in the entire distribution or an increase in reporting of extreme values.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>The answer depends on your chosen country/countries.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li><a href="#solution-figure-8-9" class="show-page-number">Solution figure 8.9</a> shows the correlation coefficients.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-8-9">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>life satisfaction</th>
+      <th>Work ethic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Age</td>
+      <td>–0.08</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <td>Education</td>
+      <td>0.09</td>
+      <td>–0.15</td>
+    </tr>
+    <tr>
+      <td>Full-time employment</td>
+      <td>0.18</td>
+      <td>–0.03</td>
+    </tr>
+    <tr>
+      <td>Gender (= 0 if male, = 1 if female)</td>
+      <td>–0.02</td>
+      <td>–0.05</td>
+    </tr>
+    <tr>
+      <td>Self-reported health</td>
+      <td>0.38</td>
+      <td>–0.07</td>
+    </tr>
+    <tr>
+      <td>Income</td>
+      <td>0.24</td>
+      <td>–0.15</td>
+    </tr>
+    <tr>
+      <td>Number of children</td>
+      <td>–0.02</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>Relative income</td>
+      <td>0.19</td>
+      <td>–0.05</td>
+    </tr>
+    <tr>
+      <td>Life satisfaction</td>
+      <td>1.00</td>
+      <td>–0.03</td>
+    </tr>
+    <tr>
+      <td>Work ethic</td>
+      <td>–0.03</td>
+      <td>1.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Correlation between life satisfaction, work ethic and other variables.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.9 </span>
+Correlation between life satisfaction, work ethic and other variables.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question tighten-15 hyphenate keep-together">
+  <li>The correlation coefficient, ranged between –1 and 1, measures the strength and direction of a linear relationship between two variables. A negative coefficient means the two variables are negatively linearly correlated, and a positive coefficient means the two variables are positively linearly correlated. The coefficient of 0.18 between employ­ment status and life satisfaction, for example, means that people who are full-time employed tend to be more satisfied with their lives relative to those who are unemployed. The coefficients between life satisfaction and other variables have the expected sign. The results that work ethic is negatively linearly related to education, employment status, and relative income, however, are somewhat surprising.</li>
+</ul>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question keep-together loosen-15">
+  <li>
+    <p><a href="#solution-figure-8-10" class="show-page-number">Solution figure 8.10</a> shows average life satisfaction according to employment status.</p>
+    <p>Employed respondents are more satisfied with their lives compared with the unemployed. The retired, like the unemployed, do not work, but they do not suffer nearly as large a drop in life satisfaction. This suggests that social norms that discriminate against the unemployed is a plausible explanation for the relatively low life satisfaction of the unemployed.</p>
+  </li>
+</ul>
+<div class="figure shrink-70pc float-top figure-no-source" id="solution-figure-8-10">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Average life satisfaction</th>
+      <th colspan="3">Employment status</th>
+    </tr>
+    <tr>
+      <th>Country/Region</th>
+      <th>Full-time</th>
+      <th>Retired</th>
+      <th>Unemployed</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>Albania</td>
+    <td>6.63</td>
+    <td>5.81</td>
+    <td>6.07</td>
+  </tr>
+  <tr>
+    <td>Armenia</td>
+    <td>6.04</td>
+    <td>4.85</td>
+    <td>5.46</td>
+  </tr>
+  <tr>
+    <td>Austria</td>
+    <td>7.44</td>
+    <td>7.74</td>
+    <td>6.07</td>
+  </tr>
+  <tr>
+    <td>Belarus</td>
+    <td>6.10</td>
+    <td>5.62</td>
+    <td>5.61</td>
+  </tr>
+  <tr>
+    <td>Belgium</td>
+    <td>7.72</td>
+    <td>7.83</td>
+    <td>6.37</td>
+  </tr>
+  <tr>
+    <td>Bosnia Herzegovina</td>
+    <td>7.33</td>
+    <td>7.01</td>
+    <td>6.77</td>
+  </tr>
+  <tr>
+    <td>Bulgaria</td>
+    <td>6.18</td>
+    <td>4.97</td>
+    <td>4.69</td>
+  </tr>
+  <tr>
+    <td>Croatia</td>
+    <td>7.31</td>
+    <td>6.48</td>
+    <td>7.17</td>
+  </tr>
+  <tr>
+    <td>Cyprus</td>
+    <td>7.38</td>
+    <td>7.03</td>
+    <td>6.56</td>
+  </tr>
+  <tr>
+    <td>Czech Republic</td>
+    <td>7.30</td>
+    <td>6.89</td>
+    <td>6.07</td>
+  </tr>
+  <tr>
+    <td>Denmark</td>
+    <td>8.54</td>
+    <td>8.21</td>
+    <td>7.20</td>
+  </tr>
+  <tr>
+    <td>Estonia</td>
+    <td>6.93</td>
+    <td>6.25</td>
+    <td>4.97</td>
+  </tr>
+  <tr>
+    <td>Finland</td>
+    <td>7.82</td>
+    <td>8.02</td>
+    <td>5.77</td>
+  </tr>
+  <tr>
+    <td>France</td>
+    <td>7.20</td>
+    <td>6.97</td>
+    <td>6.24</td>
+  </tr>
+  <tr>
+    <td>Georgia</td>
+    <td>6.12</td>
+    <td>4.69</td>
+    <td>5.42</td>
+  </tr>
+  <tr>
+    <td>Germany</td>
+    <td>7.26</td>
+    <td>6.85</td>
+    <td>4.61</td>
+  </tr>
+  <tr>
+    <td>Great Britain</td>
+    <td>7.53</td>
+    <td>7.93</td>
+    <td>6.03</td>
+  </tr>
+  <tr>
+    <td>Greece</td>
+    <td>7.15</td>
+    <td>6.62</td>
+    <td>5.98</td>
+  </tr>
+  <tr>
+    <td>Hungary</td>
+    <td>6.65</td>
+    <td>5.89</td>
+    <td>4.86</td>
+  </tr>
+  <tr>
+    <td>Iceland</td>
+    <td>8.20</td>
+    <td>8.45</td>
+    <td>7.23</td>
+  </tr>
+  <tr>
+    <td>Ireland</td>
+    <td>7.90</td>
+    <td>7.83</td>
+    <td>7.18</td>
+  </tr>
+  <tr>
+    <td>Italy</td>
+    <td>7.43</td>
+    <td>7.44</td>
+    <td>6.60</td>
+  </tr>
+  <tr>
+    <td>Kosovo</td>
+    <td>6.30</td>
+    <td>6.04</td>
+    <td>6.78</td>
+  </tr>
+  <tr>
+    <td>Latvia</td>
+    <td>6.52</td>
+    <td>5.93</td>
+    <td>5.31</td>
+  </tr>
+  <tr>
+    <td>Lithuania</td>
+    <td>6.59</td>
+    <td>5.63</td>
+    <td>4.53</td>
+  </tr>
+  <tr>
+    <td>Luxembourg</td>
+    <td>7.87</td>
+    <td>8.24</td>
+    <td>5.50</td>
+  </tr>
+  <tr>
+    <td>Macedonia</td>
+    <td>7.19</td>
+    <td>6.67</td>
+    <td>6.61</td>
+  </tr>
+  <tr>
+    <td>Malta</td>
+    <td>7.70</td>
+    <td>7.76</td>
+    <td>5.95</td>
+  </tr>
+  <tr>
+    <td>Moldova</td>
+    <td>7.12</td>
+    <td>5.98</td>
+    <td>6.07</td>
+  </tr>
+  <tr>
+    <td>Montenegro</td>
+    <td>7.63</td>
+    <td>7.22</td>
+    <td>7.47</td>
+  </tr>
+  <tr>
+    <td>Netherlands</td>
+    <td>8.04</td>
+    <td>7.95</td>
+    <td>7.00</td>
+  </tr>
+  <tr>
+    <td>Northern Cyprus</td>
+    <td>6.74</td>
+    <td>6.44</td>
+    <td>5.64</td>
+  </tr>
+  <tr>
+    <td>Northern Ireland</td>
+    <td>7.68</td>
+    <td>7.77</td>
+    <td>7.54</td>
+  </tr>
+  <tr>
+    <td>Norway</td>
+    <td>8.19</td>
+    <td>8.26</td>
+    <td>8.00</td>
+  </tr>
+  <tr>
+    <td>Poland</td>
+    <td>7.46</td>
+    <td>6.57</td>
+    <td>7.06</td>
+  </tr>
+  <tr>
+    <td>Portugal</td>
+    <td>6.84</td>
+    <td>5.88</td>
+    <td>5.44</td>
+  </tr>
+  <tr>
+    <td>Romania</td>
+    <td>7.14</td>
+    <td>6.57</td>
+    <td>7.41</td>
+  </tr>
+  <tr>
+    <td>Russian Federation</td>
+    <td>6.86</td>
+    <td>5.70</td>
+    <td>6.40</td>
+  </tr>
+  <tr>
+    <td>Serbia</td>
+    <td>7.17</td>
+    <td>6.67</td>
+    <td>6.73</td>
+  </tr>
+  <tr>
+    <td>Slovakia</td>
+    <td>7.47</td>
+    <td>6.71</td>
+    <td>6.12</td>
+  </tr>
+  <tr>
+    <td>Slovenia</td>
+    <td>7.83</td>
+    <td>7.13</td>
+    <td>6.76</td>
+  </tr>
+  <tr>
+    <td>Spain</td>
+    <td>7.34</td>
+    <td>7.21</td>
+    <td>7.19</td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>7.88</td>
+    <td>8.17</td>
+    <td>6.52</td>
+  </tr>
+  <tr>
+    <td>Switzerland</td>
+    <td>8.04</td>
+    <td>8.12</td>
+    <td>5.76</td>
+  </tr>
+  <tr>
+    <td>Turkey</td>
+    <td>6.50</td>
+    <td>6.61</td>
+    <td>5.76</td>
+  </tr>
+  <tr>
+    <td>Ukraine</td>
+    <td>6.34</td>
+    <td>5.44</td>
+    <td>4.95</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Average life satisfaction according to employment status and country.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.10 </span>
+Average life satisfaction according to employment status and country.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The calculation of the difference in average life satisfaction is provided in <a href="#solution-figure-8-11" class="show-page-number">Solution figure 8.11</a>.</li>
+</ul>
+<div class="figure shrink-70pc float-top figure-no-source" id="solution-figure-8-11">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country/Region</th>
+      <th>Difference between full-time employed and unemployed</th>
+      <th>Difference between full-time employed and retired</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Albania</td>
+      <td>0.57</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <td>Armenia</td>
+      <td>0.58</td>
+      <td>1.18</td>
+    </tr>
+    <tr>
+      <td>Austria</td>
+      <td>1.36</td>
+      <td>–0.31</td>
+    </tr>
+    <tr>
+      <td>Belarus</td>
+      <td>0.49</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <td>Belgium</td>
+      <td>1.35</td>
+      <td>–0.12</td>
+    </tr>
+    <tr>
+      <td>Bosnia Herzegovina</td>
+      <td>0.56</td>
+      <td>0.33</td>
+    </tr>
+    <tr>
+      <td>Bulgaria</td>
+      <td>1.48</td>
+      <td>1.20</td>
+    </tr>
+    <tr>
+      <td>Croatia</td>
+      <td>0.14</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <td>Cyprus</td>
+      <td>0.82</td>
+      <td>0.35</td>
+    </tr>
+    <tr>
+      <td>Czech Republic</td>
+      <td>1.24</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <td>Denmark</td>
+      <td>1.34</td>
+      <td>0.34</td>
+    </tr>
+    <tr>
+      <td>Estonia</td>
+      <td>1.95</td>
+      <td>0.67</td>
+    </tr>
+    <tr>
+      <td>Finland</td>
+      <td>2.05</td>
+      <td>–0.20</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>0.96</td>
+      <td>0.23</td>
+    </tr>
+    <tr>
+      <td>Georgia</td>
+      <td>0.70</td>
+      <td>1.43</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>2.65</td>
+      <td>0.41</td>
+    </tr>
+    <tr>
+      <td>Great Britain</td>
+      <td>1.51</td>
+      <td>–0.40</td>
+    </tr>
+    <tr>
+      <td>Greece</td>
+      <td>1.17</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <td>Hungary</td>
+      <td>1.79</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>Iceland</td>
+      <td>0.97</td>
+      <td>–0.24</td>
+    </tr>
+    <tr>
+      <td>Ireland</td>
+      <td>0.71</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <td>Italy</td>
+      <td>0.83</td>
+      <td>–0.01</td>
+    </tr>
+    <tr>
+      <td>Kosovo</td>
+      <td>–0.49</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>Latvia</td>
+      <td>1.21</td>
+      <td>0.59</td>
+    </tr>
+    <tr>
+      <td>Lithuania</td>
+      <td>2.06</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <td>Luxembourg</td>
+      <td>2.37</td>
+      <td>–0.37</td>
+    </tr>
+    <tr>
+      <td>Macedonia</td>
+      <td>0.58</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <td>Malta</td>
+      <td>1.75</td>
+      <td>–0.06</td>
+    </tr>
+    <tr>
+      <td>Moldova</td>
+      <td>1.05</td>
+      <td>1.14</td>
+    </tr>
+    <tr>
+      <td>Montenegro</td>
+      <td>0.16</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <td>Netherlands</td>
+      <td>1.04</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>Northern Cyprus</td>
+      <td>1.10</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <td>Northern Ireland</td>
+      <td>0.14</td>
+      <td>–0.09</td>
+    </tr>
+    <tr>
+      <td>Norway</td>
+      <td>0.19</td>
+      <td>–0.07</td>
+    </tr>
+    <tr>
+      <td>Poland</td>
+      <td>0.40</td>
+      <td>0.89</td>
+    </tr>
+    <tr>
+      <td>Portugal</td>
+      <td>1.40</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <td>Romania</td>
+      <td>–0.27</td>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <td>Russian Federation</td>
+      <td>0.46</td>
+      <td>1.16</td>
+    </tr>
+    <tr>
+      <td>Serbia</td>
+      <td>0.44</td>
+      <td>0.50</td>
+    </tr>
+    <tr>
+      <td>Slovakia</td>
+      <td>1.35</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>Slovenia</td>
+      <td>1.07</td>
+      <td>0.70</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>0.15</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>1.36</td>
+      <td>–0.30</td>
+    </tr>
+    <tr>
+      <td>Switzerland</td>
+      <td>2.28</td>
+      <td>–0.08</td>
+    </tr>
+    <tr>
+      <td>Turkey</td>
+      <td>0.74</td>
+      <td>–0.11</td>
+    </tr>
+    <tr>
+      <td>Ukraine</td>
+      <td>1.40</td>
+      <td>0.90</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Difference in average life satisfaction: full-time employed minus unemployed, and full-time employed minus retired.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.11 </span>
+Difference in average life satisfaction: full-time employed minus unemployed, and full-time employed minus retired.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figures <a href="#solution-figure-8-12">8.12</a> and <a href="#solution-figure-8-13" class="show-page-number">8.13</a> provide column charts showing both differences in life satisfaction.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-8-12">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction between the full-time employed and the unemployed vs average work ethic.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-12.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction between the full-time employed and the unemployed vs average work ethic.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Difference in life satisfaction between the full-time employed and the unemployed vs average work ethic.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.12 </span>
+Difference in life satisfaction between the full-time employed and the unemployed vs average work ethic.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-8-13">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction between the full-time employed and the retired vs average work ethic.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-13.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction between the full-time employed and the retired vs average work ethic.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Difference in life satisfaction between the full-time employed and the retired vs average work ethic.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.13 </span>
+Difference in life satisfaction between the full-time employed and the retired vs average work ethic.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question keep-together">
+  <li>The correlation coefficient for full-time employed vs unemployed is -0.158, which indicates a weak negative correlation. Looking at the scatterplot (Solution figure 8.12), it is difficult to see a clear relationship between the two variables. The correlation coefficient for full-time employed vs retired is 0.4843, which indicates a moderate positive correlation (the gap in life satisfaction between employed and retired is positive and wider in countries with higher average work ethic).</li>
+</ul>
+<h2 class="keep with-next" id="part-83-confidence-intervals-for-difference-in-the-mean">Part 8.3 Confidence intervals for difference in the mean</h2>
+<ol class="text-question">
+  <li>
+    <p>Choice of countries for this example:</p>
+    <ul>
+      <li>top third: Turkey</li>
+      <li>middle third: Spain</li>
+      <li>lower third: Great Britain.</li>
+    </ul>
+  </li>
+</ol>
+<ul class="text-sub-question keep-with-previous">
+  <li>The table for our chosen countries is as shown in <a href="#solution-figure-8-14" class="show-page-number">Solution figure 8.14</a>.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-8-14">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="3">Full-time</th>
+    <th colspan="3">Retired</th>
+    <th colspan="3">Unemployed</th>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td>Average</td>
+    <td>SD</td>
+    <td>Count</td>
+    <td>Average</td>
+    <td>SD</td>
+    <td>Count</td>
+    <td>Average</td>
+    <td>SD</td>
+    <td>Count</td>
+  </tr>
+  <tr>
+    <td>Great Britain</td>
+    <td>7.53</td>
+    <td>1.85</td>
+    <td>334</td>
+    <td>7.93</td>
+    <td>1.98</td>
+    <td>289</td>
+    <td>6.03</td>
+    <td>2.19</td>
+    <td>78</td>
+  </tr>
+  <tr>
+    <td>Spain</td>
+    <td>7.34</td>
+    <td>1.70</td>
+    <td>377</td>
+    <td>7.21</td>
+    <td>1.93</td>
+    <td>181</td>
+    <td>7.19</td>
+    <td>2.14</td>
+    <td>73</td>
+  </tr>
+  <tr>
+    <td>Turkey</td>
+    <td>6.50</td>
+    <td>2.55</td>
+    <td>330</td>
+    <td>6.61</td>
+    <td>2.60</td>
+    <td>201</td>
+    <td>5.76</td>
+    <td>3.13</td>
+    <td>299</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Summary table of life satisfaction, by employment status.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.14 </span>
+Summary table of life satisfaction, by employment status.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The calculations are provided in Solution figures <a href="#solution-figure-8-15">8.15</a> and <a href="#solution-figure-8-16" class="show-page-number">8.16</a>.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-8-15">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Difference in means</th>
+      <th>SD of difference in means</th>
+      <th>Number of observations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Great Britain</td>
+      <td>–0.40</td>
+      <td>2.71</td>
+      <td>623</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>0.13</td>
+      <td>2.58</td>
+      <td>558</td>
+    </tr>
+    <tr>
+      <td>Turkey</td>
+      <td>–0.11</td>
+      <td>3.64</td>
+      <td>531</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Calculated values for differences in life satisfaction (full-time vs retired).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.15 </span>
+Calculated values for differences in life satisfaction (full-time vs retired).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-8-16">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Difference in means</th>
+      <th>SD of difference in means</th>
+      <th>Number of observations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Great Britain</td>
+      <td>1.51</td>
+      <td>2.86</td>
+      <td>412</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>0.15</td>
+      <td>2.73</td>
+      <td>450</td>
+    </tr>
+    <tr>
+      <td>Turkey</td>
+      <td>0.74</td>
+      <td>4.04</td>
+      <td>629</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Calculated values for differences in life satisfaction (full-time vs unemployed).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.16 </span>
+Calculated values for differences in life satisfaction (full-time vs unemployed).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The calculations are provided in Solution figures <a href="#solution-figure-8-17">8.17</a> and <a href="#solution-figure-8-18" class="show-page-number">8.18</a>.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-8-17">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Difference in means</th>
+      <th>SD of difference in means</th>
+      <th>Number of observations</th>
+      <th>CI distance to sample mean</th>
+      <th>Total width of CI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Great Britain</td>
+      <td>–0.40</td>
+      <td>2.71</td>
+      <td>623.00</td>
+      <td>0.21</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>0.13</td>
+      <td>2.58</td>
+      <td>558.00</td>
+      <td>0.21</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <td>Turkey</td>
+      <td>–0.11</td>
+      <td>3.64</td>
+      <td>531.00</td>
+      <td>0.31</td>
+      <td>0.62</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Calculated width of 95% confidence interval for differences in life satisfaction (full-time vs retired).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.17 </span>
+Calculated width of 95% confidence interval for differences in life satisfaction (full-time vs retired).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-8-18">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Difference in means</th>
+      <th>SD of difference in means</th>
+      <th>Number of observations</th>
+      <th>CI distance to mean</th>
+      <th>Total width of CI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Great Britain</td>
+      <td>1.51</td>
+      <td>2.86</td>
+      <td>412.00</td>
+      <td>0.28</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>0.15</td>
+      <td>2.73</td>
+      <td>450.00</td>
+      <td>0.25</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <td>Turkey</td>
+      <td>0.74</td>
+      <td>4.04</td>
+      <td>629.00</td>
+      <td>0.32</td>
+      <td>0.63</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Calculated width of 95% confidence interval for differences in life satisfaction (full-time vs unemployed).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.18  </span>
+Calculated width of 95% confidence interval for differences in life satisfaction (full-time vs unemployed).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figures <a href="#solution-figure-8-19">8.19</a> and <a href="#solution-figure-8-20" class="show-page-number">8.20</a> provide column charts for the example countries showing the difference in life satisfaction and confidence intervals.</li>
+</ul>
+<div class="figure float-top figure-no-source" id="solution-figure-8-19">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction (wellbeing): full-time and retired.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-19.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction (wellbeing): full-time and retired.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Difference in life satisfaction (wellbeing): full-time and retired.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.19 </span>
+Difference in life satisfaction (wellbeing): full-time and retired.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-8-20">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction (wellbeing): full-time and unemployed.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-08-20.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in life satisfaction (wellbeing): full-time and unemployed.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Difference in life satisfaction (wellbeing): full-time and unemployed.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 8.20 </span>
+Difference in life satisfaction (wellbeing): full-time and unemployed.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question loosen-15">
+  <li>
+    <p>For full-time and retired: In Great Britain, the retired have higher life satisfaction than full-time workers on average (0.4 points higher on a 1–5 scale), and this difference has been estimated with reasonable precision, so we can be fairly confident that this difference is unlikely to have occurred if really there was no difference in wellbeing between the two groups. In Turkey, the retired have slightly higher life satisfaction but this difference is both small (0.1 points) and not precisely estimated (the confidence interval is quite wide), so it is well possible that the difference we observed is consistent with there actually being no difference between the two groups. The same conclusions can be drawn for Spain, except that full-time workers have a slightly higher life satisfaction than the unemployed on average.</p>
+    <p>For full-time and unemployed: In all three countries, full-time workers have higher life satisfaction than the unemployed on average. The difference is largest for Great Britain (1.5 points on a 1–5 scale, which is considerable), and is precisely estimated, so we can be fairly confident that this difference is unlikely to have occurred if really there was no difference in wellbeing between the two groups. While we find a smaller difference for Turkey, it is estimated with precision and we come to the same conclusion as for Great Britain. For Spain, the difference is small and not very precisely estimated, so it is well possible that the difference we observed is consistent with there actually being no difference between the two groups.</p>
+    <p>Recall that 95% confidence intervals may not always contain the respective population means, so the above conclusions are never definite.</p>
+  </li>
+</ul>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question keep-with-next keep-together">
+  <li>A natural experiment can control for variables that affect both the dependent and independent variables. The method allows us to isolate the effect of employment status on life satisfaction. The <em>ceteris paribus</em> effect of employment status on life satisfaction, if obtained, has a causal interpretation.</li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li>If we have data on the same individual over time, then we can calculate the difference in life satisfaction for the same person under different employment statuses, instead of comparing different individuals (as we did in this project).</li>
+</ul>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Solutions
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="08-04.html"
+               class="active">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="active">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="active">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

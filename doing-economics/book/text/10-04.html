@@ -1,0 +1,4525 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 10 Solutions
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 10 Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/10-04.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter solutions"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-10-solutions"><strong>Empirical Project 10</strong> Solutions</h1>
+<p class="tighten-10 save-1">These are not model answers. They are provided to help students, including those doing the project outside a formal class, to check their progress while working through the questions using the Excel, R, or Google Sheets walk-throughs. There are also brief notes for the more interpretive questions. Students taking courses using <em>Doing Economics</em> should follow the guidance of their instructors.</p>
+<blockquote class="box fixed">
+  <h3 id="note">Note</h3>
+  <p>These solutions are based on the June 2017 version. Your solutions will differ slightly if using other versions.</p>
+</blockquote>
+<h2 id="part-101-summarizing-the-data">Part 10.1 Summarizing the data</h2>
+<ol class="text-question">
+  <li>Explanations of why each indicator may be a good measure or may give misleading information of that category follow:</li>
+</ol>
+<p><strong>Depth</strong></p>
+<ul>
+  <li><em>Private credit by deposit money banks to GDP (%).</em> The amount of outstanding credit extended by banks to the non-financial private sector by deposit money banks measured relative to a country’s GDP is a measure of the size of the financial sector. (Deposit money banks are resident banks, called commercial banks in <a href="https://tinyco.re/2646265" class="show-url">Unit 10</a> of <em>Economy, Society, and Public Policy</em>, which have liabilities in the form of deposits payable on demand, transferable by electronic transfer, cheque, or otherwise usable for making payments.) However, countries vary in terms of the government’s role in financial service provision and in the extent of ownership of enterprises by the government rather than the private sector. This measure may therefore underestimate financial depth in countries where the government is more dominant.</li>
+  <li><em>Deposit money banks’ assets to GDP (%).</em> This is a broader measure and whilst it includes lending to government-owned enterprises, for example, it also includes other assets (such as government bonds) that are not directly related to bank lending in the economy.</li>
+</ul>
+<p><strong>Access</strong></p>
+<ul>
+  <li><em>Bank accounts per 1,000 adults.</em> Countries with more bank accounts per 1,000 adults would have better access, <em>ceteris paribus</em>. However, countries differ in terms of the preference for accessing formal sources of finance, the credibility of the institutions, and the nature of the services. The cross-country differences in this measure may reflect differences in these factors rather than in access. Also, this measure does not account for the possibility that one person can have multiple bank accounts.</li>
+  <li><em>Bank branches per 100,000 adults.</em> Bank branches provide an easy, efficient and trustworthy platform for people to access financial services. The number of branches reflects financial institutions’ dedication to and presence in a country. If the additional branches are located in different areas, more people would be able to physically reach them and access the services. However, if the additional branches are all concentrated in the same area, then the effect on access would be small. Given the variation across countries of the distribution of branches, this measure should be used with caution. Also, many banking services can be done online rather than at a physical branch, requiring fewer physical branches in a country. This feature of modern banking is not captured by this measure.</li>
+  <li><em>Firms with a bank loan or line of credit.</em> Firms, compared with other economic actors, have a greater preference for and hence demand for financial services. The advantage of using this measure is that the variations arising from varying preferences for loans across countries would be lower. Once again, however, the measure is determined by many other factors which may vary across countries.</li>
+  <li class="tighten-15"><em>Small firms with a bank loan or line of credit (%).</em> Smaller firms, including those that are starting up, are more likely to face credit rationing or exclusion for the reasons discussed in Unit 10 of <em>Economy, Society, and Public Policy</em>, making this measure of particular interest to policymakers.</li>
+</ul>
+<p><strong>Stability</strong></p>
+<ul>
+  <li><em>Bank Z-score.</em> This is a measure of the probability of a default in a country’s banking system and is calculated as a weighted average (using the total assets of individual banks as the weights) of the Z-scores of the individual banks. The Z-score links a bank’s capitalization with the rate of return it is making and the volatility of those returns. A higher Z-score indicates greater banking stability. This measure does not, however, take account of the interconnectedness of banks.</li>
+  <li><em>Bank regulatory capital to risk-weighted assets (%).</em> The more regulatory capital banks have, relative to their assets, the more capable they are of withstanding negative shocks. However, due to cross-country differences in accounting and policies, the data is not directly comparable across countries.</li>
+</ul>
+<ol class="text-question page-break-before">
+  <li>The box and whisker plots are shown in Solution figures 10.1–10.8. For most indicators, the data are quite tightly clustered together (as shown by the narrow width of the box). Extreme values appear to be an issue for most indicators (except ‘Firms with a bank loan or line of credit’, and ‘Small firms with a bank loan or line of credit’). One possible reason for a large number of outliers is that the way banking is done can vary greatly across countries, for example, countries that rely heavily on online banking would have far fewer bank branches per 100,000 adults than countries in which transactions are mostly done in-person.</li>
+</ol>
+<div class="figure figure-no-source" id="solution-figure-10-1">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Private credit by deposit money banks to GDP (%).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Private credit by deposit money banks to GDP (%).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Private credit by deposit money banks to GDP (%).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.1 </span>
+Box and whisker plot: Private credit by deposit money banks to GDP (%).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Deposit money banks’ assets to GDP (%).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Deposit money banks’ assets to GDP (%).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Deposit money banks’ assets to GDP (%).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.2 </span>
+Box and whisker plot: Deposit money banks’ assets to GDP (%).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank accounts per 1,000 adults.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank accounts per 1,000 adults.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Bank accounts per 1,000 adults.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.3 </span>
+Box and whisker plot: Bank accounts per 1,000 adults.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-4">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank branches per 100,000 adults.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank branches per 100,000 adults.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Bank branches per 100,000 adults.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.4 </span>
+Box and whisker plot: Bank branches per 100,000 adults.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Firms with a bank loan or line of credit (%).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Firms with a bank loan or line of credit (%).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Firms with a bank loan or line of credit (%).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.5 </span>
+Box and whisker plot: Firms with a bank loan or line of credit (%).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Small firms with a bank loan or line of credit (%).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Small firms with a bank loan or line of credit (%).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Small firms with a bank loan or line of credit (%).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.6 </span>
+Box and whisker plot: Small firms with a bank loan or line of credit (%).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank Z-score.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank Z-score.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Bank Z-score.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.7 </span>
+Box and whisker plot: Bank Z-score.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank regulatory capital to risk-weighted assets (%).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Box and whisker plot: Bank regulatory capital to risk-weighted assets (%).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Box and whisker plot: Bank regulatory capital to risk-weighted assets (%).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.8 </span>
+Box and whisker plot: Bank regulatory capital to risk-weighted assets (%).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question page-break-before">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>‘Deposit money banks’ assets to GDP (%)’ and ‘Bank accounts per 1,000 adults’ are used as examples here. Averages are rounded to two decimal places and the number of observations is listed underneath the average value.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-10-9">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th></th>
+    <th>High income: non-OECD</th>
+    <th>High income: OECD</th>
+    <th>Low income</th>
+    <th>Lower middle income</th>
+    <th>Upper middle income</th>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td class="align-right">63.89</td>
+    <td class="align-right">89.67</td>
+    <td class="align-right">15.26</td>
+    <td class="align-right">28.10</td>
+    <td class="align-right">45.60</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">25</td>
+    <td class="align-right">32</td>
+    <td class="align-right">26</td>
+    <td class="align-right">45</td>
+    <td class="align-right">44</td>
+  </tr>
+  <tr>
+    <td>2001</td>
+    <td class="align-right">67.17</td>
+    <td class="align-right">90.06</td>
+    <td class="align-right">14.96</td>
+    <td class="align-right">27.85</td>
+    <td class="align-right">46.79</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">25</td>
+    <td class="align-right">32</td>
+    <td class="align-right">26</td>
+    <td class="align-right">47</td>
+    <td class="align-right">45</td>
+  </tr>
+  <tr>
+    <td>2002</td>
+    <td class="align-right">68.69</td>
+    <td class="align-right">91.16</td>
+    <td class="align-right">14.98</td>
+    <td class="align-right">27.61</td>
+    <td class="align-right">45.17</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">26</td>
+    <td class="align-right">32</td>
+    <td class="align-right">27</td>
+    <td class="align-right">48</td>
+    <td class="align-right">46</td>
+  </tr>
+  <tr>
+    <td>2003</td>
+    <td class="align-right">67.29</td>
+    <td class="align-right">92.75</td>
+    <td class="align-right">15.71</td>
+    <td class="align-right">27.76</td>
+    <td class="align-right">44.80</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">26</td>
+    <td class="align-right">32</td>
+    <td class="align-right">27</td>
+    <td class="align-right">48</td>
+    <td class="align-right">46</td>
+  </tr>
+  <tr>
+    <td>2004</td>
+    <td class="align-right">63.35</td>
+    <td class="align-right">94.17</td>
+    <td class="align-right">15.20</td>
+    <td class="align-right">28.61</td>
+    <td class="align-right">44.92</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">27</td>
+    <td class="align-right">32</td>
+    <td class="align-right">27</td>
+    <td class="align-right">48</td>
+    <td class="align-right">46</td>
+  </tr>
+  <tr>
+    <td>2005</td>
+    <td class="align-right">62.19</td>
+    <td class="align-right">98.79</td>
+    <td class="align-right">15.25</td>
+    <td class="align-right">30.36</td>
+    <td class="align-right">46.68</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">27</td>
+    <td class="align-right">32</td>
+    <td class="align-right">27</td>
+    <td class="align-right">48</td>
+    <td class="align-right">45</td>
+  </tr>
+  <tr>
+    <td>2006</td>
+    <td class="align-right">62.77</td>
+    <td class="align-right">105.78</td>
+    <td class="align-right">15.86</td>
+    <td class="align-right">30.35</td>
+    <td class="align-right">48.37</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">27</td>
+    <td class="align-right">32</td>
+    <td class="align-right">26</td>
+    <td class="align-right">48</td>
+    <td class="align-right">46</td>
+  </tr>
+  <tr>
+    <td>2007</td>
+    <td class="align-right">65.25</td>
+    <td class="align-right">110.92</td>
+    <td class="align-right">16.57</td>
+    <td class="align-right">32.02</td>
+    <td class="align-right">50.24</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">27</td>
+    <td class="align-right">31</td>
+    <td class="align-right">26</td>
+    <td class="align-right">48</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2008</td>
+    <td class="align-right">68.73</td>
+    <td class="align-right">117.73</td>
+    <td class="align-right">18.28</td>
+    <td class="align-right">34.73</td>
+    <td class="align-right">54.25</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">27</td>
+    <td class="align-right">31</td>
+    <td class="align-right">26</td>
+    <td class="align-right">48</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2009</td>
+    <td class="align-right">79.37</td>
+    <td class="align-right">123.16</td>
+    <td class="align-right">19.11</td>
+    <td class="align-right">37.65</td>
+    <td class="align-right">58.59</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">25</td>
+    <td class="align-right">30</td>
+    <td class="align-right">25</td>
+    <td class="align-right">47</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2010</td>
+    <td class="align-right">78.77</td>
+    <td class="align-right">120.75</td>
+    <td class="align-right">20.30</td>
+    <td class="align-right">37.23</td>
+    <td class="align-right">58.52</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">26</td>
+    <td class="align-right">30</td>
+    <td class="align-right">25</td>
+    <td class="align-right">48</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2011</td>
+    <td class="align-right">78.00</td>
+    <td class="align-right">118.81</td>
+    <td class="align-right">21.58</td>
+    <td class="align-right">37.88</td>
+    <td class="align-right">58.91</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">26</td>
+    <td class="align-right">29</td>
+    <td class="align-right">25</td>
+    <td class="align-right">46</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2012</td>
+    <td class="align-right">78.85</td>
+    <td class="align-right">117.64</td>
+    <td class="align-right">21.19</td>
+    <td class="align-right">38.63</td>
+    <td class="align-right">59.95</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">26</td>
+    <td class="align-right">29</td>
+    <td class="align-right">23</td>
+    <td class="align-right">47</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2013</td>
+    <td class="align-right">80.12</td>
+    <td class="align-right">115.07</td>
+    <td class="align-right">22.87</td>
+    <td class="align-right">40.28</td>
+    <td class="align-right">61.48</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">26</td>
+    <td class="align-right">29</td>
+    <td class="align-right">23</td>
+    <td class="align-right">46</td>
+    <td class="align-right">47</td>
+  </tr>
+  <tr>
+    <td>2014</td>
+    <td class="align-right">83.81</td>
+    <td class="align-right">112.49</td>
+    <td class="align-right">23.56</td>
+    <td class="align-right">42.46</td>
+    <td class="align-right">64.68</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="align-right">25</td>
+    <td class="align-right">29</td>
+    <td class="align-right">22</td>
+    <td class="align-right">44</td>
+    <td class="align-right">45</td>
+  </tr>
+</table>
+</div>
+<p class="title">
+</p>
+<p class="description">
+Deposit money banks’ assets to GDP (%), 2000–2014, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.9 </span>
+Deposit money banks’ assets to GDP (%), 2000–2014, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-10">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th>East Asia and Pacific</th>
+    <th>Europe and Central Asia</th>
+    <th>Latin America and Caribbean</th>
+    <th>Middle East and North Africa</th>
+    <th>North America</th>
+    <th>South Asia</th>
+    <th>Sub-Saharan Africa</th>
+  </tr>
+  <tr>
+    <td class="align-right">2000</td>
+    <td class="align-right">67.56</td>
+    <td class="align-right">58.61</td>
+    <td class="align-right">46.93</td>
+    <td class="align-right">60.92</td>
+    <td class="align-right">68.46</td>
+    <td class="align-right">28.12</td>
+    <td class="align-right">20.64</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">45</td>
+    <td class="align-right">33</td>
+    <td class="align-right">17</td>
+    <td class="align-right">2</td>
+    <td class="align-right">7</td>
+    <td class="align-right">43</td>
+  </tr>
+  <tr>
+    <td class="align-right">2001</td>
+    <td class="align-right">67.25</td>
+    <td class="align-right">58.10</td>
+    <td class="align-right">48.89</td>
+    <td class="align-right">62.51</td>
+    <td class="align-right">83.10</td>
+    <td class="align-right">29.39</td>
+    <td class="align-right">20.53</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">46</td>
+    <td class="align-right">33</td>
+    <td class="align-right">18</td>
+    <td class="align-right">2</td>
+    <td class="align-right">7</td>
+    <td class="align-right">44</td>
+  </tr>
+  <tr>
+    <td class="align-right">2002</td>
+    <td class="align-right">62.32</td>
+    <td class="align-right">58.67</td>
+    <td class="align-right">49.10</td>
+    <td class="align-right">61.92</td>
+    <td class="align-right">94.57</td>
+    <td class="align-right">32.06</td>
+    <td class="align-right">20.50</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">26</td>
+    <td class="align-right">47</td>
+    <td class="align-right">33</td>
+    <td class="align-right">19</td>
+    <td class="align-right">2</td>
+    <td class="align-right">7</td>
+    <td class="align-right">45</td>
+  </tr>
+  <tr>
+    <td class="align-right">2003</td>
+    <td class="align-right">61.24</td>
+    <td class="align-right">60.47</td>
+    <td class="align-right">48.25</td>
+    <td class="align-right">59.39</td>
+    <td class="align-right">92.08</td>
+    <td class="align-right">33.15</td>
+    <td class="align-right">21.43</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">26</td>
+    <td class="align-right">47</td>
+    <td class="align-right">33</td>
+    <td class="align-right">19</td>
+    <td class="align-right">2</td>
+    <td class="align-right">7</td>
+    <td class="align-right">45</td>
+  </tr>
+  <tr>
+    <td class="align-right">2004</td>
+    <td class="align-right">60.62</td>
+    <td class="align-right">62.51</td>
+    <td class="align-right">46.69</td>
+    <td class="align-right">57.02</td>
+    <td class="align-right">91.04</td>
+    <td class="align-right">36.02</td>
+    <td class="align-right">20.99</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">26</td>
+    <td class="align-right">47</td>
+    <td class="align-right">33</td>
+    <td class="align-right">20</td>
+    <td class="align-right">2</td>
+    <td class="align-right">7</td>
+    <td class="align-right">45</td>
+  </tr>
+  <tr>
+    <td class="align-right">2005</td>
+    <td class="align-right">62.69</td>
+    <td class="align-right">67.64</td>
+    <td class="align-right">47.28</td>
+    <td class="align-right">56.14</td>
+    <td class="align-right">94.11</td>
+    <td class="align-right">38.77</td>
+    <td class="align-right">21.48</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">46</td>
+    <td class="align-right">33</td>
+    <td class="align-right">20</td>
+    <td class="align-right">2</td>
+    <td class="align-right">7</td>
+    <td class="align-right">46</td>
+  </tr>
+  <tr>
+    <td class="align-right">2006</td>
+    <td class="align-right">63.32</td>
+    <td class="align-right">73.50</td>
+    <td class="align-right">47.17</td>
+    <td class="align-right">56.31</td>
+    <td class="align-right">100.84</td>
+    <td class="align-right">34.78</td>
+    <td class="align-right">22.12</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">47</td>
+    <td class="align-right">33</td>
+    <td class="align-right">20</td>
+    <td class="align-right">2</td>
+    <td class="align-right">8</td>
+    <td class="align-right">44</td>
+  </tr>
+  <tr>
+    <td class="align-right">2007</td>
+    <td class="align-right">64.10</td>
+    <td class="align-right">79.04</td>
+    <td class="align-right">48.88</td>
+    <td class="align-right">55.71</td>
+    <td class="align-right">101.98</td>
+    <td class="align-right">37.70</td>
+    <td class="align-right">22.78</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">46</td>
+    <td class="align-right">33</td>
+    <td class="align-right">21</td>
+    <td class="align-right">2</td>
+    <td class="align-right">8</td>
+    <td class="align-right">44</td>
+  </tr>
+  <tr>
+    <td class="align-right">2008</td>
+    <td class="align-right">68.48</td>
+    <td class="align-right">85.71</td>
+    <td class="align-right">51.88</td>
+    <td class="align-right">57.94</td>
+    <td class="align-right">104.46</td>
+    <td class="align-right">41.53</td>
+    <td class="align-right">24.38</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">46</td>
+    <td class="align-right">33</td>
+    <td class="align-right">21</td>
+    <td class="align-right">2</td>
+    <td class="align-right">8</td>
+    <td class="align-right">44</td>
+  </tr>
+  <tr>
+    <td class="align-right">2009</td>
+    <td class="align-right">74.95</td>
+    <td class="align-right">92.90</td>
+    <td class="align-right">55.29</td>
+    <td class="align-right">65.27</td>
+    <td class="align-right">66.73</td>
+    <td class="align-right">43.88</td>
+    <td class="align-right">26.32</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">44</td>
+    <td class="align-right">33</td>
+    <td class="align-right">21</td>
+    <td class="align-right">1</td>
+    <td class="align-right">8</td>
+    <td class="align-right">42</td>
+  </tr>
+  <tr>
+    <td class="align-right">2010</td>
+    <td class="align-right">75.56</td>
+    <td class="align-right">91.18</td>
+    <td class="align-right">54.30</td>
+    <td class="align-right">64.12</td>
+    <td class="align-right">60.50</td>
+    <td class="align-right">45.36</td>
+    <td class="align-right">26.15</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">25</td>
+    <td class="align-right">46</td>
+    <td class="align-right">32</td>
+    <td class="align-right">21</td>
+    <td class="align-right">1</td>
+    <td class="align-right">8</td>
+    <td class="align-right">43</td>
+  </tr>
+  <tr>
+    <td class="align-right">2011</td>
+    <td class="align-right">75.97</td>
+    <td class="align-right">90.08</td>
+    <td class="align-right">54.39</td>
+    <td class="align-right">65.47</td>
+    <td class="align-right">59.34</td>
+    <td class="align-right">45.63</td>
+    <td class="align-right">26.94</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">23</td>
+    <td class="align-right">46</td>
+    <td class="align-right">32</td>
+    <td class="align-right">20</td>
+    <td class="align-right">1</td>
+    <td class="align-right">8</td>
+    <td class="align-right">43</td>
+  </tr>
+  <tr>
+    <td class="align-right">2012</td>
+    <td class="align-right">75.11</td>
+    <td class="align-right">89.98</td>
+    <td class="align-right">55.87</td>
+    <td class="align-right">65.36</td>
+    <td class="align-right">58.29</td>
+    <td class="align-right">45.79</td>
+    <td class="align-right">27.45</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">24</td>
+    <td class="align-right">46</td>
+    <td class="align-right">32</td>
+    <td class="align-right">20</td>
+    <td class="align-right">1</td>
+    <td class="align-right">8</td>
+    <td class="align-right">41</td>
+  </tr>
+  <tr>
+    <td class="align-right">2013</td>
+    <td class="align-right">79.25</td>
+    <td class="align-right">88.83</td>
+    <td class="align-right">56.44</td>
+    <td class="align-right">66.47</td>
+    <td class="align-right">58.08</td>
+    <td class="align-right">46.44</td>
+    <td class="align-right">28.39</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">24</td>
+    <td class="align-right">46</td>
+    <td class="align-right">32</td>
+    <td class="align-right">20</td>
+    <td class="align-right">1</td>
+    <td class="align-right">8</td>
+    <td class="align-right">40</td>
+  </tr>
+  <tr>
+    <td class="align-right">2014</td>
+    <td class="align-right">86.66</td>
+    <td class="align-right">87.06</td>
+    <td class="align-right">57.33</td>
+    <td class="align-right">75.13</td>
+    <td class="align-right">60.28</td>
+    <td class="align-right">45.50</td>
+    <td class="align-right">29.01</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">23</td>
+    <td class="align-right">46</td>
+    <td class="align-right">31</td>
+    <td class="align-right">18</td>
+    <td class="align-right">1</td>
+    <td class="align-right">8</td>
+    <td class="align-right">38</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Deposit money banks’ assets to GDP (%), 2000–2014, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.10 </span>
+Deposit money banks’ assets to GDP (%), 2000–2014, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-11">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th>High income: non-OECD</th>
+    <th>High income: OECD</th>
+    <th>Low income</th>
+    <th>Lower middle income</th>
+    <th>Upper middle income</th>
+  </tr>
+    <tr>
+    <td class="align-right">2000</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">2001</td>
+    <td class="align-right">21.80</td>
+    <td class="align-right"></td>
+    <td class="align-right">0.36</td>
+    <td class="align-right">265.15</td>
+    <td class="align-right">9.96</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">1</td>
+    <td class="align-right"></td>
+    <td class="align-right">2</td>
+    <td class="align-right">1</td>
+    <td class="align-right">1</td>
+  </tr>
+  <tr>
+    <td class="align-right">2002</td>
+    <td class="align-right">28.47</td>
+    <td class="align-right"></td>
+    <td class="align-right">38.91</td>
+    <td class="align-right">285.32</td>
+    <td class="align-right">10.46</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">1</td>
+    <td class="align-right"></td>
+    <td class="align-right">2</td>
+    <td class="align-right">1</td>
+    <td class="align-right">1</td>
+  </tr>
+  <tr>
+    <td class="align-right">2003</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">39.22</td>
+    <td class="align-right">366.82</td>
+    <td class="align-right">10.52</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">2</td>
+    <td class="align-right">1</td>
+    <td class="align-right">1</td>
+  </tr>
+  <tr>
+    <td class="align-right">2004</td>
+    <td class="align-right">592.08</td>
+    <td class="align-right">1,095.45</td>
+    <td class="align-right">78.59</td>
+    <td class="align-right">243.98</td>
+    <td class="align-right">406.29</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">9</td>
+    <td class="align-right">2</td>
+    <td class="align-right">15</td>
+    <td class="align-right">22</td>
+    <td class="align-right">12</td>
+  </tr>
+  <tr>
+    <td class="align-right">2005</td>
+    <td class="align-right">607.45</td>
+    <td class="align-right">1,055.63</td>
+    <td class="align-right">79.36</td>
+    <td class="align-right">366.78</td>
+    <td class="align-right">466.04</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">3</td>
+    <td class="align-right">16</td>
+    <td class="align-right">26</td>
+    <td class="align-right">17</td>
+  </tr>
+  <tr>
+    <td class="align-right">2006</td>
+    <td class="align-right">657.89</td>
+    <td class="align-right">1,172.50</td>
+    <td class="align-right">80.45</td>
+    <td class="align-right">394.09</td>
+    <td class="align-right">485.32</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">3</td>
+    <td class="align-right">18</td>
+    <td class="align-right">27</td>
+    <td class="align-right">20</td>
+  </tr>
+  <tr>
+    <td class="align-right">2007</td>
+    <td class="align-right">697.26</td>
+    <td class="align-right">1,258.88</td>
+    <td class="align-right">70.21</td>
+    <td class="align-right">405.92</td>
+    <td class="align-right">546.63</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">3</td>
+    <td class="align-right">19</td>
+    <td class="align-right">29</td>
+    <td class="align-right">21</td>
+  </tr>
+  <tr>
+    <td class="align-right">2008</td>
+    <td class="align-right">778.63</td>
+    <td class="align-right">1,511.63</td>
+    <td class="align-right">89.02</td>
+    <td class="align-right">412.18</td>
+    <td class="align-right">594.75</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">11</td>
+    <td class="align-right">4</td>
+    <td class="align-right">20</td>
+    <td class="align-right">31</td>
+    <td class="align-right">21</td>
+  </tr>
+  <tr>
+    <td class="align-right">2009</td>
+    <td class="align-right">830.02</td>
+    <td class="align-right">1,579.37</td>
+    <td class="align-right">96.29</td>
+    <td class="align-right">427.92</td>
+    <td class="align-right">623.42</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">12</td>
+    <td class="align-right">4</td>
+    <td class="align-right">21</td>
+    <td class="align-right">32</td>
+    <td class="align-right">22</td>
+  </tr>
+  <tr>
+    <td class="align-right">2010</td>
+    <td class="align-right">956.33</td>
+    <td class="align-right">1,590.49</td>
+    <td class="align-right">121.95</td>
+    <td class="align-right">475.07</td>
+    <td class="align-right">634.92</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">14</td>
+    <td class="align-right">4</td>
+    <td class="align-right">22</td>
+    <td class="align-right">31</td>
+    <td class="align-right">22</td>
+  </tr>
+  <tr>
+    <td class="align-right">2011</td>
+    <td class="align-right">973.43</td>
+    <td class="align-right">1,429.95</td>
+    <td class="align-right">105.51</td>
+    <td class="align-right">519.34</td>
+    <td class="align-right">745.30</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">14</td>
+    <td class="align-right">3</td>
+    <td class="align-right">21</td>
+    <td class="align-right">32</td>
+    <td class="align-right">23</td>
+  </tr>
+  <tr>
+    <td class="align-right">2012</td>
+    <td class="align-right">982.11</td>
+    <td class="align-right">1,184.27</td>
+    <td class="align-right">122.68</td>
+    <td class="align-right">546.57</td>
+    <td class="align-right">692.47</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">13</td>
+    <td class="align-right">5</td>
+    <td class="align-right">20</td>
+    <td class="align-right">30</td>
+    <td class="align-right">22</td>
+  </tr>
+  <tr>
+    <td class="align-right">2013</td>
+    <td class="align-right">1,058.99</td>
+    <td class="align-right">1,211.82</td>
+    <td class="align-right">122.68</td>
+    <td class="align-right">509.85</td>
+    <td class="align-right">714.89</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">13</td>
+    <td class="align-right">5</td>
+    <td class="align-right">18</td>
+    <td class="align-right">31</td>
+    <td class="align-right">21</td>
+  </tr>
+  <tr>
+    <td class="align-right">2014</td>
+    <td class="align-right">1,101.30</td>
+    <td class="align-right">1,230.74</td>
+    <td class="align-right">101.69</td>
+    <td class="align-right">632.79</td>
+    <td class="align-right">805.33</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">13</td>
+    <td class="align-right">5</td>
+    <td class="align-right">11</td>
+    <td class="align-right">23</td>
+    <td class="align-right">18</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Bank accounts per 1,000 adults, 2000–2014, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.11 </span>
+Bank accounts per 1,000 adults, 2000–2014, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top figure-no-source" id="solution-figure-10-12">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th>East Asia and Pacific</th>
+    <th>Europe and Central Asia</th>
+    <th>Latin America and Caribbean</th>
+    <th>Middle East and North Africa</th>
+    <th>North America</th>
+    <th>South Asia</th>
+    <th>Sub-Saharan Africa</th>
+  </tr>
+  <tr>
+    <td class="align-right">2000</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+  </tr>
+  <tr>
+    <td class="align-right">2001</td>
+    <td class="align-right">265.15</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">8.12</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">1</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+  </tr>
+  <tr>
+    <td class="align-right">2002</td>
+    <td class="align-right">285.32</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">29.19</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">1</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+  </tr>
+  <tr>
+    <td class="align-right">2003</td>
+    <td class="align-right">366.82</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">29.65</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">1</td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right"></td>
+    <td class="align-right">3</td>
+  </tr>
+  <tr>
+    <td class="align-right">2004</td>
+    <td class="align-right">580.53</td>
+    <td class="align-right">537.83</td>
+    <td class="align-right">521.01</td>
+    <td class="align-right">368.07</td>
+    <td class="align-right"></td>
+    <td class="align-right">425.56</td>
+    <td class="align-right">126.12</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">5</td>
+    <td class="align-right">8</td>
+    <td class="align-right">8</td>
+    <td class="align-right">6</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">29</td>
+  </tr>
+  <tr>
+    <td class="align-right">2005</td>
+    <td class="align-right">575.46</td>
+    <td class="align-right">843.54</td>
+    <td class="align-right">473.32</td>
+    <td class="align-right">380.89</td>
+    <td class="align-right"></td>
+    <td class="align-right">452.45</td>
+    <td class="align-right">139.72</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">6</td>
+    <td class="align-right">12</td>
+    <td class="align-right">11</td>
+    <td class="align-right">8</td>
+    <td class="align-right"></td>    
+    <td class="align-right">4</td>
+    <td class="align-right">31</td>
+  </tr>
+  <tr>
+    <td class="align-right">2006</td>
+    <td class="align-right">516.70</td>
+    <td class="align-right">919.94</td>
+    <td class="align-right">528.12</td>
+    <td class="align-right">388.46</td>
+    <td class="align-right"></td>
+    <td class="align-right">487.81</td>
+    <td class="align-right">145.62</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">9</td>
+    <td class="align-right">12</td>
+    <td class="align-right">12</td>
+    <td class="align-right">8</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">33</td>
+  </tr>
+  <tr>
+    <td class="align-right">2007</td>
+    <td class="align-right">557.99</td>
+    <td class="align-right">982.22</td>
+    <td class="align-right">600.95</td>
+    <td class="align-right">420.53</td>
+    <td class="align-right"></td>
+    <td class="align-right">525.75</td>
+    <td class="align-right">150.74</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">9</td>
+    <td class="align-right">12</td>
+    <td class="align-right">12</td>
+    <td class="align-right">9</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">36</td>
+  </tr>
+  <tr>
+    <td class="align-right">2008</td>
+    <td class="align-right">713.03</td>
+    <td class="align-right">1,092.63</td>
+    <td class="align-right">651.44</td>
+    <td class="align-right">463.48</td>
+    <td class="align-right"></td>
+    <td class="align-right">458.24</td>
+    <td class="align-right">167.85</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">12</td>
+    <td class="align-right">12</td>
+    <td class="align-right">11</td>
+    <td class="align-right"></td>
+    <td class="align-right">5</td>
+    <td class="align-right">37</td>
+  </tr>
+  <tr>
+    <td class="align-right">2009</td>
+    <td class="align-right">738.29</td>
+    <td class="align-right">1,053.40</td>
+    <td class="align-right">695.64</td>
+    <td class="align-right">523.62</td>
+    <td class="align-right"></td>
+    <td class="align-right">428.60</td>
+    <td class="align-right">185.96</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">13</td>
+    <td class="align-right">13</td>
+    <td class="align-right">13</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">38</td>
+  </tr>
+  <tr>
+    <td class="align-right">2010</td>
+    <td class="align-right">764.47</td>
+    <td class="align-right">1,116.05</td>
+    <td class="align-right">750.63</td>
+    <td class="align-right">523.34</td>
+    <td class="align-right"></td>
+    <td class="align-right">431.42</td>
+    <td class="align-right">216.89</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">15</td>
+    <td class="align-right">13</td>
+    <td class="align-right">13</td>
+    <td class="align-right"></td>
+    <td class="align-right">5</td>
+    <td class="align-right">37</td>
+  </tr>
+  <tr>
+    <td class="align-right">2011</td>
+    <td class="align-right">973.88</td>
+    <td class="align-right">1,159.48</td>
+    <td class="align-right">647.61</td>
+    <td class="align-right">531.78</td>
+    <td class="align-right"></td>
+    <td class="align-right">545.29</td>
+    <td class="align-right">235.62</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">10</td>
+    <td class="align-right">15</td>
+    <td class="align-right">13</td>
+    <td class="align-right">14</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">37</td>
+  </tr>
+  <tr>
+    <td class="align-right">2012</td>
+    <td class="align-right">796.89</td>
+    <td class="align-right">1,156.74</td>
+    <td class="align-right">695.38</td>
+    <td class="align-right">536.23</td>
+    <td class="align-right"></td>
+    <td class="align-right">560.50</td>
+    <td class="align-right">277.71</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">11</td>
+    <td class="align-right">14</td>
+    <td class="align-right">12</td>
+    <td class="align-right">14</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">35</td>
+  </tr>
+  <tr>
+    <td class="align-right">2013</td>
+    <td class="align-right">744.74</td>
+    <td class="align-right">1,097.12</td>
+    <td class="align-right">730.90</td>
+    <td class="align-right">529.63</td>
+    <td class="align-right"></td>
+    <td class="align-right">580.13</td>
+    <td class="align-right">320.58</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">12</td>
+    <td class="align-right">14</td>
+    <td class="align-right">12</td>
+    <td class="align-right">13</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">33</td>
+  </tr>
+  <tr>
+    <td class="align-right">2014</td>
+    <td class="align-right">863.20</td>
+    <td class="align-right">1,161.06</td>
+    <td class="align-right">797.02</td>
+    <td class="align-right">542.29</td>
+    <td class="align-right"></td>
+    <td class="align-right">672.26</td>
+    <td class="align-right">413.40</td>
+  </tr>
+  <tr>
+    <td class="align-right"></td>
+    <td class="align-right">11</td>
+    <td class="align-right">14</td>
+    <td class="align-right">11</td>
+    <td class="align-right">8</td>
+    <td class="align-right"></td>
+    <td class="align-right">4</td>
+    <td class="align-right">22</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Bank accounts per 1,000 adults, 2000–2014, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.12 </span>
+Bank accounts per 1,000 adults, 2000–2014, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question keep-together tighten-15">
+  <li>
+    <p>Solution figures <a href="#solution-figure-10-13" class="show-page-number">10.13 to 10.16</a> show the line charts, and comments on these are provided.</p>
+    <p>Richer countries tend to have larger financial institutions and markets. Depth measure by deposit money banks’ assets to GDP has been increasing in all countries except in non-OECD high-income countries.</p>
+    <p>Richer countries have better access as measured by bank accounts per 1,000 adults. Access displays an upward trend in all groups except in high-income OECD countries.</p>
+    <p>The values of both indicators increase over time for all groups except the high-income OECD group in which access and depth fell for several years after the global financial crisis.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-10-13">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Deposit money banks’ assets to GDP (%), 2000–2014, by income group.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-16.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Deposit money banks’ assets to GDP (%), 2000–2014, by income group.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Deposit money banks’ assets to GDP (%), 2000–2014, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.13 </span>
+Deposit money banks’ assets to GDP (%), 2000–2014, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-14">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Deposit money banks’ assets to GDP (%), 2000–2014, by region.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-17.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Deposit money banks’ assets to GDP (%), 2000–2014, by region.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Deposit money banks’ assets to GDP (%), 2000–2014, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.14 </span>
+Deposit money banks’ assets to GDP (%), 2000–2014, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-15">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bank accounts per 1,000 adults, 2000–2014, by income group.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-18.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bank accounts per 1,000 adults, 2000–2014, by income group.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bank accounts per 1,000 adults, 2000–2014, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.15 </span>
+Bank accounts per 1,000 adults, 2000–2014, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure" id="solution-figure-10-16">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bank accounts per 1,000 adults, 2000–2014, by region.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-19.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bank accounts per 1,000 adults, 2000–2014, by region.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bank accounts per 1,000 adults, 2000–2014, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.16 </span>
+Bank accounts per 1,000 adults, 2000–2014, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+<div class="figure-source">
+<p class="source">
+<em>Note:</em> No data is available for North America over this period.
+</p>
+</div><!--.figure-source-->
+</div>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question keep-with-next">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Values are rounded to two decimal places, and shown in <a href="#solution-figure-10-17" class="show-page-number">Solution figure 10.17</a>. North America is omitted due to missing data in all years.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-10-17">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th>East Asia and Pacific</th>
+    <th>Europe and Central Asia</th>
+    <th>Latin America and Caribbean</th>
+    <th>Middle East and North Africa</th>
+    <th>South Asia</th>
+    <th>Sub-Saharan Africa</th>
+  </tr>
+  <tr>
+    <td>2004</td>
+    <td>253.86</td>
+    <td>637.40</td>
+    <td>504.48</td>
+    <td>301.03</td>
+    <td>529.82</td>
+    <td>64.48</td>
+  </tr>
+  <tr>
+    <td>2005</td>
+    <td>336.63</td>
+    <td>1,262.14</td>
+    <td>471.72</td>
+    <td>324.82</td>
+    <td>531.27</td>
+    <td>76.57</td>
+  </tr>
+  <tr>
+    <td>2006</td>
+    <td>81.43</td>
+    <td>1,324.44</td>
+    <td>484.82</td>
+    <td>351.77</td>
+    <td>549.06</td>
+    <td>79.62</td>
+  </tr>
+  <tr>
+    <td>2007</td>
+    <td>85.34</td>
+    <td>1,380.43</td>
+    <td>520.49</td>
+    <td>393.35</td>
+    <td>573.51</td>
+    <td>132.21</td>
+  </tr>
+  <tr>
+    <td>2008</td>
+    <td>87.54</td>
+    <td>1,525.15</td>
+    <td>561.82</td>
+    <td>418.40</td>
+    <td>614.92</td>
+    <td>149.09</td>
+  </tr>
+  <tr>
+    <td>2009</td>
+    <td>90.62</td>
+    <td>1,501.88</td>
+    <td>633.35</td>
+    <td>436.77</td>
+    <td>227.03</td>
+    <td>195.23</td>
+  </tr>
+  <tr>
+    <td>2010</td>
+    <td>94.60</td>
+    <td>1,371.62</td>
+    <td>686.92</td>
+    <td>431.48</td>
+    <td>267.47</td>
+    <td>220.34</td>
+  </tr>
+  <tr>
+    <td>2011</td>
+    <td>105.83</td>
+    <td>1,419.89</td>
+    <td>688.62</td>
+    <td>420.16</td>
+    <td>334.88</td>
+    <td>236.72</td>
+  </tr>
+  <tr>
+    <td>2012</td>
+    <td>96.85</td>
+    <td>1,269.52</td>
+    <td>736.57</td>
+    <td>426.43</td>
+    <td>373.07</td>
+    <td>277.92</td>
+  </tr>
+  <tr>
+    <td>2013</td>
+    <td>101.48</td>
+    <td>1,043.82</td>
+    <td>755.75</td>
+    <td>427.68</td>
+    <td>399.85</td>
+    <td>309.17</td>
+  </tr>
+  <tr>
+    <td>2014</td>
+    <td>106.33</td>
+    <td>1,059.82</td>
+    <td>780.49</td>
+    <td>524.85</td>
+    <td>411.35</td>
+    <td>350.80</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Population-weighted averages of the indicator ‘Bank accounts per 1,000 adults’, 2004–2014.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.17 </span>
+Population-weighted averages of the indicator ‘Bank accounts per 1,000 adults’, 2004–2014.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question keep-together">
+  <li>Where the weighted average is smaller than the simple average, countries with larger populations will generally have poorer access than countries with smaller populations, as is the case with East Asia and Pacific. The reverse holds when the weighted average is larger than the simple average, as is generally the case for Latin America and the Caribbean.</li>
+</ul>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>The number of bank accounts per 1,000 adults is used as an example: In 2010, the 5th percentile is 27.59, and the 95th percentile is 1,604.69.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li>
+    <p><a href="#solution-figure-10-18" class="show-page-number">Solution figure 10.18</a> is provided for income groups. Values are rounded to two decimal places.</p>
+    <p>The simple averages of Winsorized values are lower. The differences are large, suggesting that the average values before the Winsorization were driven by extreme values.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-10-18">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Income group</th>
+      <th>2010 average (Winsorized)</th>
+      <th>2010 average (non-Winsorized)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>High income: non-OECD</td>
+      <td>916.90</td>
+      <td>956.33</td>
+    </tr>
+    <tr>
+      <td>High income: OECD</td>
+      <td>1,356.47</td>
+      <td>1,590.49</td>
+    </tr>
+    <tr>
+      <td>Low income</td>
+      <td>123.06</td>
+      <td>121.96</td>
+    </tr>
+    <tr>
+      <td>Lower middle income</td>
+      <td>422.65</td>
+      <td>475.07</td>
+    </tr>
+    <tr>
+      <td>Upper middle income</td>
+      <td>635.71</td>
+      <td>643.92</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Bank accounts per 1,000 adults: Winsorized averages for 2010.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.18 </span>
+Bank accounts per 1,000 adults: Winsorized averages for 2010.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<h2 class="page-break-before" title="Part 10.2 Comparing financial stability before and after the global financial crisis" id="part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis">Part 10.2 Comparing financial stability before and after the 2008 global financial crisis</h2>
+<ol class="text-question">
+  <li>There has been a rapid increase in the number of regulations since the global financial crisis. Banks are now required to hold more capital and liquid assets against the risks they take. Investment banks are forced to focus on facilitating client trades rather than on trading using their own capital. In many countries, regulators require banks to be prepared to survive future financial crises. These changes have raised the capital–asset ratio and lowered the probability of default.</li>
+</ol>
+<ol class="text-question">
+  <li><a href="#solution-figure-10-19" class="show-page-number">Solution figures 10.19 to 10.22</a> provide the separate tables for the relevant indicators by region and income group. Values are rounded to two decimal places.</li>
+</ol>
+<div class="figure figure-no-source" id="solution-figure-10-19">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right table-vertical-rules">
+  <tr>
+    <th></th>
+    <th colspan="3">2007</th>
+    <th colspan="3">2014</th>
+    <th colspan="3"></th>
+  </tr>
+  <tr>
+    <td>Income group</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Diff in means</td>
+    <td>SD (diff in means)</td>
+    <td>CI width</td>
+  </tr>
+  <tr>
+    <td>High income: non-OECD</td>
+    <td class="align-right">12.14</td>
+    <td class="align-right">32</td>
+    <td class="align-right">6.67</td>
+    <td class="align-right">11.57</td>
+    <td class="align-right">25</td>
+    <td class="align-right">6.60</td>
+    <td class="align-right">–0.57</td>
+    <td class="align-right">9.38</td>
+    <td class="align-right">3.87</td>
+  </tr>
+  <tr>
+    <td>High income: OECD</td>
+    <td class="align-right">11.66</td>
+    <td class="align-right">32</td>
+    <td class="align-right">8.27</td>
+    <td class="align-right">11.83</td>
+    <td class="align-right">31</td>
+    <td class="align-right">6.81</td>
+    <td class="align-right">0.17</td>
+    <td class="align-right">10.71</td>
+    <td class="align-right">3.62</td>
+  </tr>
+  <tr>
+    <td>Low income</td>
+    <td class="align-right">7.75</td>
+    <td class="align-right">25</td>
+    <td class="align-right">4.74</td>
+    <td class="align-right">9.49</td>
+    <td class="align-right">9</td>
+    <td class="align-right">4.50</td>
+    <td class="align-right">1.73</td>
+    <td class="align-right">6.54</td>
+    <td class="align-right">3.98</td>
+  </tr>
+  <tr>
+    <td>Lower middle income</td>
+    <td class="align-right">12.88</td>
+    <td class="align-right">46</td>
+    <td class="align-right">8.12</td>
+    <td class="align-right">12.82</td>
+    <td class="align-right">31</td>
+    <td class="align-right">8.92</td>
+    <td class="align-right">–0.05</td>
+    <td class="align-right">12.07</td>
+    <td class="align-right">4.06</td>
+  </tr>
+  <tr>
+    <td>Upper middle income</td>
+    <td class="align-right">11.90</td>
+    <td class="align-right">47</td>
+    <td class="align-right">8.33</td>
+    <td class="align-right">11.42</td>
+    <td class="align-right">32</td>
+    <td class="align-right">9.35</td>
+    <td class="align-right">–0.49</td>
+    <td class="align-right">12.52</td>
+    <td class="align-right">4.16</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Bank Z-score, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.19 </span>
+Bank Z-score, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-20">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right table-vertical-rules">
+  <tr>
+    <th></th>
+    <th colspan="3">2007</th>
+    <th colspan="3">2014</th>
+    <th colspan="3"></th>
+  </tr>
+  <tr>
+    <td>Income group</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Diff in means</td>
+    <td>SD (diff in means)</td>
+    <td>CI width</td>
+  </tr>
+  <tr>
+    <td>High income: non-OECD</td>
+    <td class="align-right">15.07</td>
+    <td class="align-right">15</td>
+    <td class="align-right">2.74</td>
+    <td class="align-right">17.30</td>
+    <td class="align-right">19</td>
+    <td class="align-right">2.71</td>
+    <td class="align-right">2.23</td>
+    <td class="align-right">3.86</td>
+    <td class="align-right">2.00</td>
+  </tr>
+  <tr>
+    <td>High income: OECD</td>
+    <td class="align-right">12.01</td>
+    <td class="align-right">32</td>
+    <td class="align-right">1.43</td>
+    <td class="align-right">16.79</td>
+    <td class="align-right">31</td>
+    <td class="align-right">4.27</td>
+    <td class="align-right">4.79</td>
+    <td class="align-right">4.50</td>
+    <td class="align-right">1.70</td>
+  </tr>
+  <tr>
+    <td>Low income</td>
+    <td class="align-right">21.58</td>
+    <td class="align-right">4</td>
+    <td class="align-right">7.97</td>
+    <td class="align-right">21.0</td>
+    <td class="align-right">6</td>
+    <td class="align-right">5.18</td>
+    <td class="align-right">–0.57</td>
+    <td class="align-right">9.50</td>
+    <td class="align-right">13.70</td>
+  </tr>
+  <tr>
+    <td>Lower middle income</td>
+    <td class="align-right">18.36</td>
+    <td class="align-right">24</td>
+    <td class="align-right">6.23</td>
+    <td class="align-right">17.03</td>
+    <td class="align-right">30</td>
+    <td class="align-right">4.67</td>
+    <td class="align-right">–1.34</td>
+    <td class="align-right">7.78</td>
+    <td class="align-right">3.20</td>
+  </tr>
+  <tr>
+    <td>Upper middle income</td>
+    <td class="align-right">15.83</td>
+    <td class="align-right">27</td>
+    <td class="align-right">3.58</td>
+    <td class="align-right">16.25</td>
+    <td class="align-right">32</td>
+    <td class="align-right">2.29</td>
+    <td class="align-right">0.42</td>
+    <td class="align-right">4.25</td>
+    <td class="align-right">1.60</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Capital to asset ratio, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.20 </span>
+Capital to asset ratio, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-21">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right table-vertical-rules">
+  <tr>
+    <th></th>
+    <th colspan="3">2007</th>
+    <th colspan="3">2014</th>
+    <th colspan="3"></th>
+  </tr>
+  <tr>
+    <td>Region</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Diff in means</td>
+    <td>SD (diff in means)</td>
+    <td>CI width</td>
+  </tr>
+  <tr>
+    <td>East Asia and Pacific</td>
+    <td class="align-right">12.81</td>
+    <td class="align-right">24</td>
+    <td class="align-right">7.66</td>
+    <td class="align-right">12.48</td>
+    <td class="align-right">18</td>
+    <td class="align-right">7.16</td>
+    <td class="align-right">–0.34</td>
+    <td class="align-right">10.48</td>
+    <td class="align-right">4.77</td>
+  </tr>
+  <tr>
+    <td>Europe and Central Asia</td>
+    <td class="align-right">8.92</td>
+    <td class="align-right">51</td>
+    <td class="align-right">7.12</td>
+    <td class="align-right">7.98</td>
+    <td class="align-right">43</td>
+    <td class="align-right">6.29</td>
+    <td class="align-right">–0.94</td>
+    <td class="align-right">9.50</td>
+    <td class="align-right">2.78</td>
+  </tr>
+  <tr>
+    <td>Latin America and Caribbean</td>
+    <td class="align-right">13.09</td>
+    <td class="align-right">35</td>
+    <td class="align-right">6.64</td>
+    <td class="align-right">12.60</td>
+    <td class="align-right">28</td>
+    <td class="align-right">6.80</td>
+    <td class="align-right">–0.49</td>
+    <td class="align-right">9.50</td>
+    <td class="align-right">3.47</td>
+  </tr>
+  <tr>
+    <td>Middle East and North Africa</td>
+    <td class="align-right">20.17</td>
+    <td class="align-right">20</td>
+    <td class="align-right">7.41</td>
+    <td class="align-right">21.76</td>
+    <td class="align-right">9.13</td>
+    <td class="align-right">15</td>
+    <td class="align-right">1.59</td>
+    <td class="align-right">11.76</td>
+    <td class="align-right">6.11</td>
+  </tr>
+  <tr>
+    <td>North America</td>
+    <td class="align-right">19.37</td>
+    <td class="align-right">3</td>
+    <td class="align-right">3.15</td>
+    <td class="align-right">17.78</td>
+    <td class="align-right">3</td>
+    <td class="align-right">6.26</td>
+    <td class="align-right">–1.59</td>
+    <td class="align-right">7.01</td>
+    <td class="align-right">15.93</td>
+  </tr>
+  <tr>
+    <td>South Asia</td>
+    <td class="align-right">10.85</td>
+    <td class="align-right">8</td>
+    <td class="align-right">8.49</td>
+    <td class="align-right">10.38</td>
+    <td class="align-right">6</td>
+    <td class="align-right">2.53</td>
+    <td class="align-right">–0.47</td>
+    <td class="align-right">8.86</td>
+    <td class="align-right">7.74</td>
+  </tr>
+  <tr>
+    <td>Sub-Saharan Africa</td>
+    <td class="align-right">8.25</td>
+    <td class="align-right">41</td>
+    <td class="align-right">5.16</td>
+    <td class="align-right">9.46</td>
+    <td class="align-right">15</td>
+    <td class="align-right">5.10</td>
+    <td class="align-right">1.21</td>
+    <td class="align-right">7.25</td>
+    <td class="align-right">3.27</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Bank Z-score, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.21 </span>
+Bank Z-score, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-22">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right table-vertical-rules">
+  <tr>
+    <th></th>
+    <th colspan="3">2007</th>
+    <th colspan="3">2014</th>
+    <th colspan="3"></th>
+  </tr>
+  <tr>
+    <td>Region</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Mean</td>
+    <td>N</td>
+    <td>SD</td>
+    <td>Diff in means</td>
+    <td>SD (diff in means)</td>
+    <td>CI width</td>
+  </tr>
+  <tr>
+    <td>East Asia and Pacific</td>
+    <td class="align-right">14.58</td>
+    <td class="align-right">12</td>
+    <td class="align-right">4.98</td>
+    <td class="align-right">16.45</td>
+    <td class="align-right">15</td>
+    <td class="align-right">4.17</td>
+    <td class="align-right">1.86</td>
+    <td class="align-right">6.49</td>
+    <td class="align-right">3.88</td>
+  </tr>
+  <tr>
+    <td>Europe and Central Asia</td>
+    <td class="align-right">15.12</td>
+    <td class="align-right">44</td>
+    <td class="align-right">5.48</td>
+    <td class="align-right">17.85</td>
+    <td class="align-right">45</td>
+    <td class="align-right">3.79</td>
+    <td class="align-right">2.73</td>
+    <td class="align-right">6.66</td>
+    <td class="align-right">2.02</td>
+  </tr>
+  <tr>
+    <td>Latin America and Caribbean</td>
+    <td class="align-right">14.93</td>
+    <td class="align-right">17</td>
+    <td class="align-right">2.34</td>
+    <td class="align-right">15.28</td>
+    <td class="align-right">17</td>
+    <td class="align-right">1.77</td>
+    <td class="align-right">0.35</td>
+    <td class="align-right">2.93</td>
+    <td class="align-right">1.50</td>
+  </tr>
+  <tr>
+    <td>Middle East and North Africa</td>
+    <td class="align-right">15.21</td>
+    <td class="align-right">10</td>
+    <td class="align-right">3.65</td>
+    <td class="align-right">15.27</td>
+    <td class="align-right">15</td>
+    <td class="align-right">2.68</td>
+    <td class="align-right">0.06</td>
+    <td class="align-right">4.53</td>
+    <td class="align-right">3.01</td>
+  </tr>
+  <tr>
+    <td>North America</td>
+    <td class="align-right">13.80</td>
+    <td class="align-right">2</td>
+    <td class="align-right">1.00</td>
+    <td class="align-right">14.30</td>
+    <td class="align-right">2</td>
+    <td class="align-right">0.10</td>
+    <td class="align-right">0.50</td>
+    <td class="align-right">1.00</td>
+    <td class="align-right">12.19</td>
+  </tr>
+  <tr>
+    <td>South Asia</td>
+    <td class="align-right">12.30</td>
+    <td class="align-right">2</td>
+    <td class="align-right">0.00</td>
+    <td class="align-right">15.36</td>
+    <td class="align-right">5</td>
+    <td class="align-right">3.19</td>
+    <td class="align-right">3.06</td>
+    <td class="align-right">3.19</td>
+    <td class="align-right">4.43</td>
+  </tr>
+  <tr>
+    <td>Sub-Saharan Africa</td>
+    <td class="align-right">17.76</td>
+    <td class="align-right">15</td>
+    <td class="align-right">5.65</td>
+    <td class="align-right">19.05</td>
+    <td class="align-right">19</td>
+    <td class="align-right">4.83</td>
+    <td class="align-right">1.29</td>
+    <td class="align-right">7.43</td>
+    <td class="align-right">3.88</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Capital to asset ratio, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.22 </span>
+Capital to asset ratio, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li><a href="#solution-figure-10-23" class="show-page-number">Solution figures 10.23 to 10.26</a> show the column charts.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-10-23">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Bank Z-score, by income group.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-26.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Bank Z-score, by income group.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Confidence intervals for Bank Z-score, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.23 </span>
+Confidence intervals for Bank Z-score, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-24">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Capital to asset ratio, by income group.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-27.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Capital to asset ratio, by income group.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Confidence intervals for Capital to asset ratio, by income group.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.24 </span>
+Confidence intervals for Capital to asset ratio, by income group.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-25">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Bank Z-score, by region.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-28.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Bank Z-score, by region.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Confidence intervals for Bank Z-score, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.25 </span>
+Confidence intervals for Bank Z-score, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-10-26">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Capital to asset ratio, by region.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-10-29.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Confidence intervals for Capital to asset ratio, by region.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Confidence intervals for Capital to asset ratio, by region.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 10.26 </span>
+Confidence intervals for Capital to asset ratio, by region.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>The means for bank Z-scores were estimated quite imprecisely (wide confidence intervals) so it is likely that the observed differences between 2007 and 2014 are due to chance. The size of the difference is also small for all countries and regions (recall that the vertical axis is measured in percentage points).</p>
+    <p>In high-income countries, the bank regulatory capital to risk-weighted assets ratio increased between 2007 and 2014, especially for OECD countries, and Europe and Central Asia. For these countries/regions, the mean is quite precisely estimated. The sample data, therefore, is not very compatible with pre- and post-crisis population distributions which have identical means. For all other countries, the observed differences are small and imprecisely estimated (either because there are few countries in that group, or because there is huge variation within the group).</p>
+    <p>The global financial crisis affected some countries more than others (for example, in North America, the US economy was affected more severely than the Canadian economy). As an extension, you could instead group countries according to how affected they were by the crisis (e.g. not much, moderately, severely) and recalculate the difference in means before and after the crisis. We might expect that countries that were affected more severely would also place stricter banking system regulations than less-affected countries.</p>
+  </li>
+</ul>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Solutions
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="10-04.html"
+               class="active">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="active">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

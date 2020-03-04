@@ -1,0 +1,3137 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 8: Working in Excel
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 8: Working in Excel" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/08-02.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-8-working-in-excel"><strong>Empirical Project 8</strong> Working in Excel</h1>
+<h2 class="add-4" id="part-81-cleaning-and-summarizing-the-data">Part 8.1 Cleaning and summarizing the data</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>detect and correct entries in a dataset</li>
+    <li>recode variables to make them easier to analyse</li>
+    <li>calculate percentiles for subsets of the data.</li>
+  </ul>
+</blockquote>
+<p>So far we have been working with data that was formatted correctly. However, sometimes the datasets will be messier and we will need to ‘clean’ the data before starting any analysis. Data cleaning involves checking that all variables are formatted correctly, all observations are entered correctly (e.g. no typos), and missing values are coded in a way that the software you are using can understand. Otherwise, the software will either not be able to analyse your data, or only analyse the observations it recognizes, which could lead to incorrect results and conclusions.</p>
+<p class="loosen-15">In the data we will use, the European Values Study (EVS) data has been converted to Excel from another program, so there are some entries that were not converted correctly and some variables that need to be recoded (for example, replacing words with numbers, or replacing one number with another).</p>
+<p>Download the EVS data and documentation:</p>
+<ul>
+  <li>Download the <a href="https://tinyco.re/9465901" class="show-url">EVS data</a>.</li>
+  <li>For the documentation, go to <a href="https://tinyco.re/6701388" class="show-url">the data download site</a>.</li>
+  <li>Click on the ‘Data and Documents’ button in the middle of the page, then click the ‘Other Documents’ button and download the PDF file called ‘ZA4804_EVS_VariableCorrespondence.pdf’. This file contains information about each variable in the dataset (e.g. variable name and what it measures).</li>
+</ul>
+<ol class="text-question keep-together">
+  <li>The data spreadsheet contains an incomplete Data dictionary and four tabs with the data collected from each wave of the survey. The variable names currently do not tell us what the variable is, so we need to relabel them to avoid confusion.</li>
+</ol>
+<ul class="text-sub-question tighten-15">
+  <li>Use the PDF you have downloaded to fill in Column C (Variable de­scription) of the Data dictionary tab. The second column of the PDF lists all variables in the dataset (alphabetically) and tells you what it measures.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Fill in Column B with an appropriate new name for each variable and rename the variables in the other four tabs accordingly.</li>
+</ul>
+<p>Throughout this project we will refer to the variables using their original names, so the Data dictionary tab will come in handy. In general, data dictionaries and variable correspondences are useful because they contain important information about what each variable represents and how it is measured, which usually cannot be summarized in a short variable name.</p>
+<ol class="text-question">
+  <li>Now we will take a closer look at how some of the variables were measured.</li>
+</ol>
+<ul class="text-sub-question tighten-15">
+  <li>Variable A170 is reported life satisfaction on a scale of 1 (dissatisfied) to 10 (satisfied). Respondents answered the question ‘All things considered, how satisfied are you with your life as a whole these days?’ Discuss the assumptions needed to use this measure in interpersonal and cross-country comparisons, and whether you think they are plausible. (You may find it helpful to refer to Box 2.1 of the <a href="https://tinyco.re/1768499" class="show-url">‘OECD guidelines on measuring subjective well-being’</a>.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>An individual’s employment status (variable X028) was self-reported. Explain whether misreporting of employment status is likely to be an issue, and give some factors that may affect the likelihood of misreporting in this context.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Variables C036 to C041 ask about an individual’s attitudes towards work. With self-reports, we may also be concerned that individuals are using a heuristic (rule of thumb) to answer the questions. Table 2.1 of the <a href="https://tinyco.re/1768499" class="show-url">‘OECD Guidelines on measuring subjective well-being’</a> lists some response biases and heuristics that individuals could use. Pick three that you think particularly apply to questions about life satisfaction or work ethic and describe how we might check whether this issue may be present in our data.</li>
+</ul>
+<p class="tighten-10 keep-with-next">Before doing any data analysis, it is important to check that all variables are coded in a way that the software can recognize. This process involves checking how missing values are coded (usually these need to be coded in a particular way for each software), and that numerical variables (numbers) only contain numbers and not text (in order to calculate summary statistics).</p>
+<ol class="text-question">
+  <li>We will now check and clean the dataset so it is ready to use. Make the following changes to all relevant data tabs:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Currently, missing values are recorded as ‘.a’, but we would like them to be blank cells. Use Excel’s Find and Replace tool to change the ‘.a’ to blank cells for variables A009 to X047D. (See <a href="#excel-walk-through-81-cleaning-data-and-splitting-variables">Excel walk-through 8.1</a> for help on how to do this).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Variable A170 (life satisfaction) is currently a mixture of numbers (2 to 9) and words (‘Satisfied’ and ‘Dissatisfied’), but we would like it to be all numbers. Replace the word ‘Dissatisfied’ with the number 1, and the word ‘Satisfied’ with the number 10.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Similarly, variable X011_01 (number of children) has recorded no children as a word rather than a number. Replace ‘No children’ with the number 0.</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li>The variables C036 to C041 should be replaced with numbers ranging from 1 (‘Strongly disagree’) to 5 (‘Strongly agree’) so we can take averages of them later. Similarly, variable <code class="language-r highlighter-rouge"><span class="n">A</span><span class="m">009</span></code> should be recoded as 1 = ‘Very Poor’, 2 = ‘Poor’, 3 = ‘Fair’, 4 = ‘Good’, 5 = ‘Very Good’. (<em>Hint:</em> You may find it helpful to do the find and replace in ascending/descending order i.e. recode ’Strongly Disagree’/‘Very Poor’ as 1, then ‘Disagree’/‘Poor’ as 2, and so on.)</li>
+</ul>
+<ul class="text-sub-question loosen-15">
+  <li>We would like to split X025A into two variables, one for the number before the colon, and the other containing the words after the colon. Use Excel’s LEFT and/or RIGHT functions to create two new variables accordingly. (See Excel walk-through 8.1 for help on how to do this).</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="excel-walk-through-81-cleaning-data-and-splitting-variables"><strong>Excel walk-through 8.1</strong> Cleaning data and splitting variables</h3>
+  <p class="tighten-15">Follow the walk-through in the <a href="https://tinyco.re/1843031" class="show-url">CORE video</a>, or in Figure 8.1, to find out how to clean data and split variables in Excel.</p>
+  <div class="video youtube bump-up" id="Tb8KPhWrwww" data-video-id="Tb8KPhWrwww" data-video-language="en">
+    <div class="video-wrapper">
+        <a class="video-link" href="https://tinyco.re/1843031"><img src="https://core-econ.org/doing-economics/book/images/web/youtube-Tb8KPhWrwww.jpg" /></a>
+    </div>
+    <p class="video-description">
+        <a href="https://tinyco.re/1843031">How to clean data and split variables</a>
+    </p>
+</div>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-8-1">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to clean data using find and replace, and split variables using Excel’s LEFT and RIGHT functions.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to clean data using find and replace, and split variables using Excel’s LEFT and RIGHT functions.
+" class="" />
+        </a>
+</div>
+<p class="description">
+How to clean data using find and replace, and split variables using Excel’s LEFT and RIGHT functions.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.1 </span>
+How to clean data using find and replace, and split variables using Excel’s LEFT and RIGHT functions.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-1a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. Currently some cells have entries ‘.a’ where the data is missing. We will find and replace the variables A009 to X047D (not pictured here).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. Currently some cells have entries ‘.a’ where the data is missing. We will find and replace the variables A009 to X047D (not pictured here).
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+This is what the data looks like. Currently some cells have entries ‘.a’ where the data is missing. We will find and replace the variables A009 to X047D (not pictured here).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.1a </span>
+This is what the data looks like. Currently some cells have entries ‘.a’ where the data is missing. We will find and replace the variables A009 to X047D (not pictured here).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-1b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-01-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Find and replace specific cell entries
+: ‘Find and Replace’ in Excel is similar to this feature in Microsoft Word, except that it searches for text in individual cells rather than in lines of text. You can adapt steps 1–3 to change specific values of cells in a column, for example replacing a particular word with a particular number.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Find and replace specific cell entries
+: ‘Find and Replace’ in Excel is similar to this feature in Microsoft Word, except that it searches for text in individual cells rather than in lines of text. You can adapt steps 1–3 to change specific values of cells in a column, for example replacing a particular word with a particular number.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Find and replace specific cell entries
+</p>
+<p class="description">
+‘Find and Replace’ in Excel is similar to this feature in Microsoft Word, except that it searches for text in individual cells rather than in lines of text. You can adapt steps 1–3 to change specific values of cells in a column, for example replacing a particular word with a particular number.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.1b </span>
+‘Find and Replace’ in Excel is similar to this feature in Microsoft Word, except that it searches for text in individual cells rather than in lines of text. You can adapt steps 1–3 to change specific values of cells in a column, for example replacing a particular word with a particular number.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-1c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-01-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Extract a specific part of a string of text
+: Excel’s LEFT and RIGHT functions can help you extract parts of a long string of text, which is useful if you want to shorten variables or only keep particular information in a cell. Here, we are going to save variable X025A as two variables: ‘Education_1’ will contain the numbers before the colon, and ‘Education_2’ will contain the words after the colon.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Extract a specific part of a string of text
+: Excel’s LEFT and RIGHT functions can help you extract parts of a long string of text, which is useful if you want to shorten variables or only keep particular information in a cell. Here, we are going to save variable X025A as two variables: ‘Education_1’ will contain the numbers before the colon, and ‘Education_2’ will contain the words after the colon.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Extract a specific part of a string of text
+</p>
+<p class="description">
+Excel’s LEFT and RIGHT functions can help you extract parts of a long string of text, which is useful if you want to shorten variables or only keep particular information in a cell. Here, we are going to save variable X025A as two variables: ‘Education_1’ will contain the numbers before the colon, and ‘Education_2’ will contain the words after the colon.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.1c </span>
+Excel’s LEFT and RIGHT functions can help you extract parts of a long string of text, which is useful if you want to shorten variables or only keep particular information in a cell. Here, we are going to save variable X025A as two variables: ‘Education_1’ will contain the numbers before the colon, and ‘Education_2’ will contain the words after the colon.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-1d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-01-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-01-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Extract a specific part of a string of text
+: The RIGHT function counts the specified number of characters starting from the right end of the string of text. Since words have different lengths, we use LEN() to calculate the length of the string, then subtract the colon’s position in the string (using the FIND function). For example, if the string is 10 characters long, and the colon is the third character, we want Excel to extract characters 4 to 10 (the first 6 characters from the right).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-01-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-01-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-01-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Extract a specific part of a string of text
+: The RIGHT function counts the specified number of characters starting from the right end of the string of text. Since words have different lengths, we use LEN() to calculate the length of the string, then subtract the colon’s position in the string (using the FIND function). For example, if the string is 10 characters long, and the colon is the third character, we want Excel to extract characters 4 to 10 (the first 6 characters from the right).
+" class="" />
+        </a>
+</div>
+<p class="title">
+Extract a specific part of a string of text
+</p>
+<p class="description">
+The RIGHT function counts the specified number of characters starting from the right end of the string of text. Since words have different lengths, we use LEN() to calculate the length of the string, then subtract the colon’s position in the string (using the FIND function). For example, if the string is 10 characters long, and the colon is the third character, we want Excel to extract characters 4 to 10 (the first 6 characters from the right).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.1d </span>
+The RIGHT function counts the specified number of characters starting from the right end of the string of text. Since words have different lengths, we use LEN() to calculate the length of the string, then subtract the colon’s position in the string (using the FIND function). For example, if the string is 10 characters long, and the colon is the third character, we want Excel to extract characters 4 to 10 (the first 6 characters from the right).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<p>Although the paper we are following only considered individuals aged 25–80 who were not students, we will retain the other observations in our analysis. However, we need to remove any observations that have missing values for A170, X028, or any of the other variables except X047D. Removing missing data ensures that any summary statistics or analysis we do is done on the same set of data (without having to always account for the fact that some values are missing), and is fine as long as the data are missing at random (i.e. there is no particular reason why certain observations are missing and not others).</p>
+<ol class="text-question">
+  <li>
+    <p>In your spreadsheet, remove all rows in all waves that have missing data for A170. Do the same for:</p>
+    <ul>
+      <li>X003, X028, X007 and X001 in all waves</li>
+      <li>A009 in Waves 1, 2, and 4 only</li>
+      <li>C036, C037, C038, C039, C041 and X047D in Waves 3 and 4 only</li>
+      <li>X011_01 and X025A, in Wave 4.</li>
+    </ul>
+    <p>Excel walk-through 8.2 gives guidance on how to do this.  <br />
+(<em>Note:</em> Excel may take some time to process the commands.)</p>
+  </li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="excel-walk-through-82-dropping-observations-that-satisfy-particular-conditions"><strong>Excel walk-through 8.2</strong> Dropping observations that satisfy particular conditions</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-8-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to drop observations that satisfy particular conditions using ‘filter’, ‘select’ and ‘delete’.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to drop observations that satisfy particular conditions using ‘filter’, ‘select’ and ‘delete’.
+" class="" />
+        </a>
+</div>
+<p class="description">
+How to drop observations that satisfy particular conditions using ‘filter’, ‘select’ and ‘delete’.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.2 </span>
+How to drop observations that satisfy particular conditions using ‘filter’, ‘select’ and ‘delete’.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-2a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data.
+: This is what the data looks like. In this example, we will remove any rows with the variable A170 recorded as missing (blank). First, we will filter the data so that only rows with blank cells in this column are showing.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data.
+: This is what the data looks like. In this example, we will remove any rows with the variable A170 recorded as missing (blank). First, we will filter the data so that only rows with blank cells in this column are showing.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data.
+</p>
+<p class="description">
+This is what the data looks like. In this example, we will remove any rows with the variable A170 recorded as missing (blank). First, we will filter the data so that only rows with blank cells in this column are showing.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.2a </span>
+This is what the data looks like. In this example, we will remove any rows with the variable A170 recorded as missing (blank). First, we will filter the data so that only rows with blank cells in this column are showing.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-2b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-02-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the rows of interest
+: After step 3, you will see all the data that needs to be deleted.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Filter the rows of interest
+: After step 3, you will see all the data that needs to be deleted.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Filter the rows of interest
+</p>
+<p class="description">
+After step 3, you will see all the data that needs to be deleted.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.2b </span>
+After step 3, you will see all the data that needs to be deleted.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-2c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-02-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Delete these rows from the dataset
+: Excel will remove all the selected rows from the dataset. If there are many rows to delete, this command may take some time to process.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Delete these rows from the dataset
+: Excel will remove all the selected rows from the dataset. If there are many rows to delete, this command may take some time to process.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Delete these rows from the dataset
+</p>
+<p class="description">
+Excel will remove all the selected rows from the dataset. If there are many rows to delete, this command may take some time to process.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.2c </span>
+Excel will remove all the selected rows from the dataset. If there are many rows to delete, this command may take some time to process.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-2d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-02-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Clear the filter to see the rest of the data
+: After removing the specified rows, clear the filter to see the rest of your data. You will see that the number of rows has decreased.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Clear the filter to see the rest of the data
+: After removing the specified rows, clear the filter to see the rest of your data. You will see that the number of rows has decreased.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Clear the filter to see the rest of the data
+</p>
+<p class="description">
+After removing the specified rows, clear the filter to see the rest of your data. You will see that the number of rows has decreased.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.2d </span>
+After removing the specified rows, clear the filter to see the rest of your data. You will see that the number of rows has decreased.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-2e">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-02-e.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-e.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-e-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-e-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-e-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-02-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The modified data
+: This is what the data looks like after removing rows with missing entries in A170. You can adapt steps 1–7 to remove rows that satisfy other conditions, such as containing a particular value or range of values.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-02-e.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-02-e-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-e-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-e-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-02-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The modified data
+: This is what the data looks like after removing rows with missing entries in A170. You can adapt steps 1–7 to remove rows that satisfy other conditions, such as containing a particular value or range of values.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The modified data
+</p>
+<p class="description">
+This is what the data looks like after removing rows with missing entries in A170. You can adapt steps 1–7 to remove rows that satisfy other conditions, such as containing a particular value or range of values.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.2e </span>
+This is what the data looks like after removing rows with missing entries in A170. You can adapt steps 1–7 to remove rows that satisfy other conditions, such as containing a particular value or range of values.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>We will now create two variables, work ethic and relative income, which we will use in our comparison of life satisfaction.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Work ethic is measured as the average of C036 to C041. Using Excel’s AVERAGE function, create a new variable showing this work ethic measure.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Since unemployed individuals and students may not have income, the study calculated relative income as the relative household income of that individual, measured as a deviation from the average income in that individual’s country. Explain the issues with using this method if the income distribution is skewed (for example, a long right tail).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Instead of using average income, we will define relative income as the percentile of that individual’s household in the income distribution. Create a new variable showing this information. (See Excel walk-through 8.3 for one way to do this).</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="excel-walk-through-83-calculating-percentiles-from-actual-values"><strong>Excel walk-through 8.3</strong> Calculating percentiles from actual values</h3>
+  <div class="slides slides-show-figures">
+<div class="figure summary figure-no-source" id="figure-8-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to calculate percentiles from actual values.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to calculate percentiles from actual values.
+" class="" />
+        </a>
+</div>
+<p class="description">
+How to calculate percentiles from actual values.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.3 </span>
+How to calculate percentiles from actual values.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-3a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. In this example, we will calculate the percentile of X047D (log income), according to the country (S003). You will need to use two new columns (R and S in this case).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. In this example, we will calculate the percentile of X047D (log income), according to the country (S003). You will need to use two new columns (R and S in this case).
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+This is what the data looks like. In this example, we will calculate the percentile of X047D (log income), according to the country (S003). You will need to use two new columns (R and S in this case).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.3a </span>
+This is what the data looks like. In this example, we will calculate the percentile of X047D (log income), according to the country (S003). You will need to use two new columns (R and S in this case).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-3b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-03-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the rank of each observation
+: The intuition behind our rank calculation is that an observation’s rank is the number of observations larger than it, plus 1. (For example, if there were only two numbers, the smaller number should be ranked 2 and the larger number ranked 1). By default, Excel will rank observations from largest to smallest (higher numbers will have lower ranks). We need this setting to calculate percentiles. 
+In this example, we need to rank observations only within the country it belongs to, not the entire dataset, so we use this as a condition in COUNTIFS.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the rank of each observation
+: The intuition behind our rank calculation is that an observation’s rank is the number of observations larger than it, plus 1. (For example, if there were only two numbers, the smaller number should be ranked 2 and the larger number ranked 1). By default, Excel will rank observations from largest to smallest (higher numbers will have lower ranks). We need this setting to calculate percentiles. 
+In this example, we need to rank observations only within the country it belongs to, not the entire dataset, so we use this as a condition in COUNTIFS.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Calculate the rank of each observation
+</p>
+<p class="description">
+<span class="tighten-15">The intuition behind our rank calculation is that an observation’s rank is the number of observations larger than it, plus 1. (For example, if there were only two numbers, the smaller number should be ranked 2 and the larger number ranked 1). By default, Excel will rank observations from largest to smallest (higher numbers will have lower ranks). We need this setting to calculate percentiles. In this example, we need to rank observations only within the country it belongs to, not the entire dataset, so we use this as a condition in COUNTIFS.</span>
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.3b </span>
+The intuition behind our rank calculation is that an observation’s rank is the number of observations larger than it, plus 1. (For example, if there were only two numbers, the smaller number should be ranked 2 and the larger number ranked 1). By default, Excel will rank observations from largest to smallest (higher numbers will have lower ranks). We need this setting to calculate percentiles. In this example, we need to rank observations only within the country it belongs to, not the entire dataset, so we use this as a condition in COUNTIFS.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-8-3c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-03-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-03-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Use the calculated rank to calculate the percentile.
+: The intuition behind the percentile calculation is that an observation’s percentile is the percentage of observations smaller than it (the +1 in the formula is needed to exclude the observation itself). The 1– at the start of the formula is because we ranked observations from largest to smallest (so we need to ‘reverse’ all the numbers). Here we have multiplied by 100 so the numbers correspond to actual percentiles (e.g. 92 percentile). You can see that higher incomes have lower ranks and higher percentiles, indicating that we have done this correctly. Note: This example was based on observations with non-missing income only (not the fully-cleaned dataset), so the numbers you get will be slightly different.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-03-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-03-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-03-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Use the calculated rank to calculate the percentile.
+: The intuition behind the percentile calculation is that an observation’s percentile is the percentage of observations smaller than it (the +1 in the formula is needed to exclude the observation itself). The 1– at the start of the formula is because we ranked observations from largest to smallest (so we need to ‘reverse’ all the numbers). Here we have multiplied by 100 so the numbers correspond to actual percentiles (e.g. 92 percentile). You can see that higher incomes have lower ranks and higher percentiles, indicating that we have done this correctly. Note: This example was based on observations with non-missing income only (not the fully-cleaned dataset), so the numbers you get will be slightly different.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Use the calculated rank to calculate the percentile.
+</p>
+<p class="description">
+The intuition behind the percentile calculation is that an observation’s percentile is the percentage of observations smaller than it (the +1 in the formula is needed to exclude the observation itself). The 1– at the start of the formula is because we ranked observations from largest to smallest (so we need to ‘reverse’ all the numbers). Here we have multiplied by 100 so the numbers correspond to actual percentiles (e.g. 92 percentile). You can see that higher incomes have lower ranks and higher percentiles, indicating that we have done this correctly. <em>Note:</em> This example was based on observations with non-missing income only (not the fully-cleaned dataset), so the numbers you get will be slightly different.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.3c </span>
+The intuition behind the percentile calculation is that an observation’s percentile is the percentage of observations smaller than it (the +1 in the formula is needed to exclude the observation itself). The 1– at the start of the formula is because we ranked observations from largest to smallest (so we need to ‘reverse’ all the numbers). Here we have multiplied by 100 so the numbers correspond to actual percentiles (e.g. 92 percentile). You can see that higher incomes have lower ranks and higher percentiles, indicating that we have done this correctly. <em>Note:</em> This example was based on observations with non-missing income only (not the fully-cleaned dataset), so the numbers you get will be slightly different.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>Now we have all the variables we need in the format we need. We will make some tables to summarize the data. Using the data for Wave 4:</li>
+</ol>
+<p class="sidenote"><em>Hint:</em> For help on creating this table, see <a href="03-02.html#excel-walk-through-31-making-a-frequency-table-using-excels-pivottable-option" class="show-page-number">Excel walk-through 3.1</a>. For help on changing the values in the table to percentages of the row total, follow steps 18–19 in <a href="03-02.html#excel-walk-through-32-making-a-pivot-table-with-more-than-two-variables" class="show-page-number">Excel walk-through 3.2</a>, but instead of selecting ‘Average’ (as in step 19), select ‘Show Values As’ (or ‘Show data as’) then ‘% of Row Total’.</p>
+<ul class="text-sub-question">
+  <li>Create a table showing the breakdown of each country’s population according to employment status, with country (S003) as the row variable, and employment status (X028) as the column variable. Express the values as percentages of the row total rather than frequencies. Discuss any differences or similarities between countries that you find interesting.</li>
+</ul>
+<ul class="text-sub-question loosen-15">
+  <li>Create a new table as shown in Figure 8.4 (similar to Table 1 in the study <a href="https://tinyco.re/1482788" class="show-url">‘Employment status and subjective well-being’</a>) and fill in the missing values. Reported life satisfaction is measured by A170. Summary tables such as these give a useful overview of what each variable looks like.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-8-4">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th></th>
+    <th colspan="2">Male</th>
+    <th colspan="2">Female</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Mean</td>
+    <td>Standard deviation</td>
+    <td>Mean</td>
+    <td>Standard deviation</td>
+  </tr>
+  <tr>
+    <td>Life satisfaction</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Self-reported health</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Work ethic</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Education</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Number of children</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Summary statistics by gender, European Values Study.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.4 </span>
+Summary statistics by gender, European Values Study.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<h2 id="part-82-visualizing-the-data">Part 8.2 Visualizing the data</h2>
+<blockquote class="info">
+  <h3 id="note">Note</h3>
+  <p>You will need to have done Questions 1–5 in Part 8.1 before doing this part.</p>
+</blockquote>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>use column charts, line charts, and scatterplots to visualize data</li>
+    <li>calculate and interpret correlation coefficients.</li>
+  </ul>
+</blockquote>
+<p>We will now create some summary charts of the self-reported measures (work ethic and life satisfaction), starting with column charts to show the distributions of values. Along with employment status, these are the main variables of interest, so it is important to look at them carefully before doing further data analysis.</p>
+<p class="loosen-10">The distribution of work ethic and life satisfaction may vary across countries but may also change over time within a country, especially since the surveys are conducted around once a decade. To compare distributions for a particular country over time, we have to use the same horizontal axis, so we will first need to make a separate frequency table for each distribution of interest (survey wave). Also, since the number of people surveyed in each wave may differ, we will use percentages instead of frequencies as the vertical axis variable.</p>
+<ol class="text-question">
+  <li>Using the data from Wave 3 and Wave 4 only, for three countries of your choice:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Using the work ethic measure, create a separate frequency table for Wave 3 and for Wave 4, similar to Figure 8.5. The column ‘Percentage of individuals (%)’ refers to the number of individuals in that wave. The values in the first column should range from 1 to 5, in intervals of 0.2. (<em>Hint:</em> To count observations only for a particular country, you will need to use the IF function and FREQUENCY function together. See <a href="06-02.html#excel-walk-through-61-using-excels-if-function" class="show-page-number">Excel walk-through 6.1</a> for help on how to do this).</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-8-5">
+<div class="figure-body">
+<div class="figure-md">
+<table class="align-right">
+  <thead>
+    <tr>
+      <th>Range of work ethic score</th>
+      <th>Frequency</th>
+      <th>Percentage of individuals (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.00</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>1.20</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4.80</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>5.00</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Frequency table for self-reported work ethic.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.5 </span>
+Frequency table for self-reported work ethic.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Plot a separate column chart for each country to show the distribution of work ethic scores in Wave 3, with the percentage of individuals on the vertical axis and the range of work ethic score on the horizontal axis. On each chart, plot the distribution of scores in Wave 4 on top of the Wave 3 distribution. (See <a href="06-02.html#excel-walk-through-62-overlaying-one-column-chart-over-another" class="show-page-number">Excel walk-through 6.2</a> in Empirical Project 6 for guidance on what your charts should look like).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Based on your charts from 1<em>(b)</em>, does it appear that attitudes towards work in each country of your choice have changed over time? (<em>Hint:</em> For example, look at where the distribution is centred, the percentages of observations on the left tail or the right tail of the distribution, and how spread out the data is.)</li>
+</ul>
+<ol class="text-question">
+  <li>We will use line charts to make a similar comparison for life satisfaction (A170) over time. Using data for countries that are present in Waves 1 to 4:</li>
+</ol>
+<ul class="text-sub-question tighten-10">
+  <li>Create a table showing the average life satisfaction, by wave (column variable) and by country (row variable). (<em>Hint:</em> You may find it easier to make four separate pivot tables and copy-paste the results into a new table).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a line chart with wave number (1 to 4) on the horizontal axis and average life satisfaction on the vertical axis. Make sure to include a legend.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>From your results in 2<em>(a)</em> and <em>(b)</em>, how has the distribution of life satisfaction changed over time? What other information about the distribution of life satisfaction could we use to supplement these results?</li>
+</ul>
+<ul class="text-sub-question tighten-10">
+  <li>Choose one or two countries and research events that could explain the observed changes in average life satisfaction over time shown in 2<em>(a)</em> and <em>(b)</em>.</li>
+</ul>
+<dl class="definition">
+<dt class="definition-term">correlation coefficient</dt><dd class="definition-description">A numerical measure, ranging between 1 and −1, of how closely associated two variables are—whether they tend to rise and fall together, or move in opposite directions. A positive coefficient indicates that when one variable takes a high (low) value, the other tends to be high (low) too, and a negative coefficient indicates that when one variable is high the other is likely to be low. A value of 1 or −1 indicates that knowing the value of one of the variables would allow you to perfectly predict the value of the other. A value of 0 indicates that knowing one of the variables provides no information about the value of the other.</dd>
+</dl>
+<p class="loosen-10">After describing patterns in our main variables over time, we will use <strong data-term="correlation coefficient">correlation coefficients</strong> and scatterplots to look at the relationship between these variables and the other variables in our dataset.</p>
+<ol class="text-question">
+  <li>Using the Wave 4 data:</li>
+</ol>
+<ul class="text-sub-question loosen-10">
+  <li>Create a table as shown in Figure 8.6 and calculate the required correlation coefficients. For employment status and gender, you will need to create new variables: full-time employment should be equal to 1 if full-time employed and 0 if unemployed, and treated as missing data (left as a blank cell) otherwise. Gender should be 0 if male and 1 if female.</li>
+</ul>
+<div class="figure figure-no-source" id="figure-8-6">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th>Variable</th>
+    <th>Life satisfaction</th>
+    <th>Work ethic</th>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Education</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Full-time employment</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Self-reported health</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Income</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Number of children</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Relative income</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Life satisfaction</td>
+    <td>1</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Work ethic</td>
+    <td></td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Correlation between life satisfaction, work ethic and other variables, Wave 4.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.6 </span>
+Correlation between life satisfaction, work ethic and other variables, Wave 4.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question loosen-10">
+  <li>Interpret the coefficients, paying close attention to how the variables are coded. (For example, you could comment on the absolute magnitude and sign of the coefficients). Explain whether the relationships implied by the coefficients are what you expected (for example, would you expect life satisfaction to increase or decrease with health, income, etc.)</li>
+</ul>
+<p>Next, we will look at the relationship between employment status and life satisfaction and investigate the paper’s hypothesis that this relationship varies with the average work ethic in a country.</p>
+<ol class="text-question">
+  <li>Using the data from Wave 4, carry out the following:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table showing the average life satisfaction according to employment status (showing the full-time employed, retired, and unemployed categories only), with country (S003) as the row variable, and employment status (X028) as the column variable. Comment on any differences in average life satisfaction between these three groups, and whether social norms is a plausible explanation for these differences.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use the table from 4<em>(a)</em> to calculate the difference in average life satisfaction (full-time employed minus unemployed, and full-time employed minus retired).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Make a separate scatterplot for each of these differences in life satisfaction, with average work ethic on the horizontal axis and difference in life satisfaction on the vertical axis.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>For each difference (employed vs unemployed, employed vs retired), calculate and interpret the correlation coefficient between average work ethic and difference in life satisfaction.</li>
+</ul>
+<p>So far we have described the data using tables and charts, but have not made any statements about whether what we observe is consistent with an assumption that work ethic has no bearing on differences in life satisfaction between different subgroups. In the next part, we will assess the relationship between employment status and life satisfaction and assess whether the observed data lead us to reject the above assumption.</p>
+<h2 id="part-83-confidence-intervals-for-difference-in-the-mean">Part 8.3 Confidence intervals for difference in the mean</h2>
+<blockquote class="info">
+  <h3 id="note-1">Note</h3>
+  <p>You will need to have done Questions 1–5 in Part 8.1 before doing this part. Part 8.2 is not necessary but is helpful to get an idea of what the data looks like.</p>
+</blockquote>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-2">Learning objectives for this part</h3>
+  <ul>
+    <li>calculate and interpret confidence intervals for the difference in means between two groups.</li>
+  </ul>
+</blockquote>
+<p class="loosen-15">The aim of this project was to look at the empirical relationship between employment and life satisfaction.</p>
+<p>When we calculate differences between groups, we collect evidence which may or may not support a hypothesis that life satisfaction is identical between different subgroups. Economists often call this testing for statistical significance. In <a href="06-02.html#part-62-do-management-practices-differ-between-countries" class="show-page-number">Part 6.2</a> of Empirical Project 6, we constructed 95% confidence intervals for means, and used a rule of thumb to assess our hypothesis that the two groups considered were identical (at the population level) in the variable of interest. Now we will learn how to construct confidence intervals for the difference in two means, which allows us to make such a judgment on the basis of a single confidence interval.</p>
+<p>Remember that the width of a confidence interval depends on the standard deviation and number of observations. (Read <a href="06-02.html#part-62-do-management-practices-differ-between-countries" class="show-page-number">Part 6.2</a> of Empirical Project 6 to understand why.) When making a confidence interval for a sample mean (such as the mean life satisfaction of the unemployed), we use the standard deviation and number of observations in that sample (unemployed people) to obtain the standard error of the sample mean.</p>
+<script type="math/tex; mode=display">\text{Standard error of sample mean (SE)} = \frac{\text{SD of sample data}}{\sqrt{\text{number of observations (n)}}}</script>
+<p>When we look at the difference in means (such as life satisfaction of employed minus unemployed), we are using data from two groups (the unemployed and the employed) to make one confidence interval, so the number of observations is the sum of observations across both groups. To calculate the standard deviation for the difference in means, we use the standard deviations (SD) of each group:</p>
+<script type="math/tex; mode=display">\text{SD (difference in means)} = \sqrt{(\text{SD of group 1})^2 + (\text{SD of group 2})^2}</script>
+<p class="loosen-15">This formula requires the two groups of data to be independent, meaning that the data from one group is not related, paired, or matched with data from the other group. This assumption is reasonable for the life satisfaction data we are using. However, if the two groups of data are not independent, for example if the same people generated both groups of data (as in the public goods experiments of <a href="02-01.html" class="show-page-number">Empirical Project 2</a>), then we cannot use this formula.</p>
+<p>Once we have the new standard deviation and number of observations, we can calculate the width of the confidence interval (distance from the mean to one end of the interval) as before. The width of the confidence interval tells us how precisely the difference in means was estimated, and this precision tells us how compatible the sample data is with the hypothesis that there is no difference between the population means. If the value 0 falls outside the 95% confidence interval, this implies that the data is unlikely to have been sampled from a population with equal population means. For example, if the estimated difference is positive, and the 95% confidence interval is not wide enough to include 0, we can be reasonably confident that the true difference is positive too. In other words, it tells us that the p-value for the difference we have found is less than 0.05, so we would be very unlikely to find such a big difference if the population means were in fact identical.</p>
+<p>In Figure 8.7, for Great Britain, we can be reasonably confident that the true difference in average life satisfaction between the full-time employed and the unemployed is positive. However, for Spain, we do not have strong evidence of a real difference in mean life satisfaction.</p>
+<div class="figure figure-no-source" id="figure-8-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-08-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-08-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-08-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="95% confidence intervals for the average difference in life satisfaction (full-time employed minus unemployed) in Great Britain and Spain.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-08-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-08-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-08-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="95% confidence intervals for the average difference in life satisfaction (full-time employed minus unemployed) in Great Britain and Spain.
+" class="" />
+        </a>
+</div>
+<p class="description">
+95% confidence intervals for the average difference in life satisfaction (full-time employed minus unemployed) in Great Britain and Spain.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 8.7 </span>
+95% confidence intervals for the average difference in life satisfaction (full-time employed minus unemployed) in Great Britain and Spain.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question keep-together">
+  <li>We will apply this method to make confidence intervals for differences in life satisfaction. Choose three countries: one with an average work ethic in the top third of scores, one in the middle third, and one in the lower third. (See <a href="06-02.html#excel-walk-through-64-creating-confidence-intervals-and-adding-them-to-a-chart" class="show-page-number">Excel walk-through 6.4</a> for help on calculating confidence intervals and adding them to a chart.)</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a pivot table for these countries, showing the average life satisfaction score, standard deviation of life satisfaction, and number of observations, with country (S003) as the row variable, and employment status (full-time employed, retired, and unemployed only) as the column variable.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use your pivot table from 1<em>(a)</em> to calculate the difference in means (full-time employed minus unemployed, and full-time employed minus retired), the standard deviation of these differences, and the number of observations.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Use Excel’s CONFIDENCE.T function and the calculated values in 1<em>(b)</em> to determine the 95% confidence interval width (distance between the mean and one end of the interval) of the difference in means.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a column chart for your chosen countries showing the difference in life satisfaction (employed vs unemployed and employed vs retired) on the vertical axis, and country on the horizontal axis (sorted according to low, medium, and high work ethic). Add the confidence intervals from 1<em>(c)</em> to your chart.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Interpret your findings from Question 1<em>(d)</em>, commenting on the size of the observed differences in means, and the precision of your estimates.</li>
+</ul>
+<ol class="text-question">
+  <li>The method we used to compare life satisfaction relied on making comparisons between people with different employment statuses, but a person’s employment status is not entirely random. We cannot therefore make causal statements such as ‘being unemployed causes life satisfaction to decrease’. Describe how we could use the following methods to assess better the effect of being unemployed on life satisfaction, and make some statements about causality:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>a natural experiment</li>
+</ul>
+<ul class="text-sub-question loosen-15">
+  <li>panel data (data on the same individuals, taken at different points in time).</li>
+</ul>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="active
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in Excel
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="08-02.html"
+               class="active">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="active">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="active">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

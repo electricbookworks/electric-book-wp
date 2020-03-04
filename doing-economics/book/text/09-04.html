@@ -1,0 +1,4002 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 9 Solutions
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 9 Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/09-04.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter solutions"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-9-solutions"><strong>Empirical Project 9</strong> Solutions</h1>
+<p class="tighten-10 save-2">These are not model answers. They are provided to help students, including those doing the project outside a formal class, to check their progress while working through the questions using the Excel, R, or Google Sheets walk-throughs. There are also brief notes for the more interpretive questions. Students taking courses using <em>Doing Economics</em> should follow the guidance of their instructors.</p>
+<h2 id="part-91-households-that-did-not-get-a-loan">Part 9.1 Households that did not get a loan</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 9.1 indicates the proportion of households that lived in each region and area type.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-1">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Region</th>
+      <th>Proportion in the region living in small towns</th>
+      <th>Proportion of regional households living in large towns</th>
+      <th>Proportion of regional households living in rural areas</th>
+      <th>Proportion of all households living in the region</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Addis Ababa</td>
+      <td>0</td>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>Afar</td>
+      <td>0.15</td>
+      <td>0.10</td>
+      <td>0.76</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>Amhara</td>
+      <td>0.11</td>
+      <td>0.22</td>
+      <td>0.67</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <td>Benshagul Gumuz</td>
+      <td>0.10</td>
+      <td>0.00</td>
+      <td>0.90</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>Diredwa</td>
+      <td>0.00</td>
+      <td>0.47</td>
+      <td>0.53</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>Gambelia</td>
+      <td>0.08</td>
+      <td>0.12</td>
+      <td>0.80</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>Harari</td>
+      <td>0.00</td>
+      <td>0.27</td>
+      <td>0.73</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>Oromia</td>
+      <td>0.11</td>
+      <td>0.28</td>
+      <td>0.61</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <td>SNNP</td>
+      <td>0.09</td>
+      <td>0.18</td>
+      <td>0.73</td>
+      <td>0.23</td>
+    </tr>
+    <tr>
+      <td>Somalie</td>
+      <td>0.09</td>
+      <td>0.16</td>
+      <td>0.76</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>Tigray</td>
+      <td>0.07</td>
+      <td>0.37</td>
+      <td>0.56</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td><strong>Grand total</strong></td>
+      <td><strong>0.09</strong></td>
+      <td><strong>0.28</strong></td>
+      <td><strong>0.63</strong></td>
+      <td><strong>1.00</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Proportion of sample living in towns vs rural areas, by ‘region’. (Note that numbers may not add up to 1 due to rounding.)
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.1 </span>
+Proportion of sample living in towns vs rural areas, by ‘region’. (Note that numbers may not add up to 1 due to rounding.)
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>30.40% of households have a female household head.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Solution figure 9.2 provides the summary table for the variables (‘SD’ refers to standard deviation).</li>
+</ul>
+<div class="figure float-bottom-next figure-no-source" id="solution-figure-9-2">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Mean</th>
+      <th>SD</th>
+      <th>Min</th>
+      <th>Max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Household size</td>
+      <td>4.58</td>
+      <td>2.40</td>
+      <td>1.00</td>
+      <td>16.00</td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>0.30</td>
+      <td>0.46</td>
+      <td>0.00</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>44.18</td>
+      <td>15.61</td>
+      <td>3.00</td>
+      <td>99.00</td>
+    </tr>
+    <tr>
+      <td>Young children</td>
+      <td>1.89</td>
+      <td>1.71</td>
+      <td>0.00</td>
+      <td>10.00</td>
+    </tr>
+    <tr>
+      <td>Working-age adults</td>
+      <td>2.58</td>
+      <td>1.52</td>
+      <td>0.00</td>
+      <td>10.00</td>
+    </tr>
+    <tr>
+      <td>Max education</td>
+      <td>7.53</td>
+      <td>7.28</td>
+      <td>0.00</td>
+      <td>30.00</td>
+    </tr>
+    <tr>
+      <td>Number of assets</td>
+      <td>14.90</td>
+      <td>17.23</td>
+      <td>0.00</td>
+      <td>203.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Summary table for household demographics (all households).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.2 </span>
+Summary table for household demographics (all households).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The average household size is 4.58 (or 5 people, rounding to the nearest person), with around 1–2 children and 2–3 working-age adults. On average, the most educated person in the household has had 7-8 years of schooling. Households have around 15 assets on average.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Note that only households with information for all three variables are included.</li>
+</ul>
+<div class="figure float-bottom-next figure-no-source" id="solution-figure-9-3">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th>Not rejected</th>
+    <th>Rejected</th>
+    <th>Blank or NA</th>
+    <th>Sum</th>
+  </tr>
+  <tr>
+    <td>Applied for loan</td>
+    <td><em class="extra-emphasis">1,363</em></td>
+    <td><em class="extra-emphasis">201</em></td>
+    <td>1</td>
+    <td>1,565</td>
+  </tr>
+  <tr>
+    <td>Did not apply for loan</td>
+    <td><em class="extra-emphasis">3,632</em></td>
+    <td>24</td>
+    <td>2</td>
+    <td>3,658</td>
+  </tr>
+  <tr>
+    <td>Blank or NA</td>
+    <td>37</td>
+    <td>2</td>
+    <td>0</td>
+    <td>39</td>
+  </tr>
+  <tr>
+    <td><strong>Grand total</strong></td>
+    <td><strong>5,032</strong></td>
+    <td><strong>227</strong></td>
+    <td><strong>3</strong></td>
+    <td><strong>5,262</strong></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Loan applications and approvals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.3 </span>
+Loan applications and approvals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question tighten-15 keep-together">
+  <li>
+    <p>There are some responses that do not make sense. For example, 1,363 households applied for a loan and received the loan. Two households did not answer whether they applied for a loan but at the same time indicated that they were rejected a loan. In fact, 24 households indicated that they did not apply for a loan, yet they indicated that they were refused a loan. As the questions about loan application and loan rejection refer to the same 12-month period, these observations clearly make no sense, so we decided to exclude them from the data set analysed. This decision is contestable, since we exclude more than 10% of households that indicate that they were refused a loan. Thus, it is important to be transparent about this decision.</p>
+    <p>We shall also remove all observations that have missing data for any of these two questions. This leaves us with 1,363 + 3,632 + 201 = 5,196 observations (those highlighted in green in Solution figure 9.3).</p>
+    <p>Of these observations, 30.10% of households applied for a loan. 96.13% of these were successful.</p>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>The 26.23% of households that applied for a loan and received one are clearly not credit excluded. However, they may still be credit constrained, as the mere fact that they received a loan says nothing about whether the terms were favourable or not (‘favourable’ being a criterion which may be somewhat difficult to pin down). The 69.90% of households that did not apply for a loan could be credit excluded, credit constrained, or neither as they may not have a need for a loan. It is here where additional information on the reasons for not applying will become important. The 3.87% of households that did apply but were refused a loan can be described as credit excluded.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create the ‘HH_status’ variable in your software.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>After creating this variable in your software, you should find that 588 (11.32%) households were discouraged borrowers (4,608 were not discouraged).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>3,012 (57.97%) households were credit constrained (2,184 were not).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figures 9.4 and 9.5 provide frequency tables (with values expressed in proportions) showing the most important and the second most important reasons for not applying for a loan.</p>
+    <p>Across the two tables it is clear that there is a substantial portion of households that do not want to be in debt. Others indicate that they do not believe they can afford a loan (‘Fear not to be able to pay’ or ‘Believe would be refused’). These households would certainly be considered credit constrained, or even credit excluded.</p>
+    <p>Almost 20% of households also state that they do not have any need for a loan (‘Have adequate farm’).</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-4">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Reason</th>
+      <th>Proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Do Not Like To Be In Debt</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <td>Have Adequate Farm</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <td>Fear Not Be Able To Pay</td>
+      <td>0.17</td>
+    </tr>
+    <tr>
+      <td>Believe Would Be Refused</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td>No Farm or Business</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <td>Do Not Know Any Lender</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <td>Too Expensive</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>Inadequate Collateral</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>Other (Specify)</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>Too Much Trouble</td>
+      <td>0.03</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Most important reason for not applying for a loan.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.4 </span>
+Most important reason for not applying for a loan.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure float-top-next figure-no-source" id="solution-figure-9-5">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Reason</th>
+      <th>Proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fear Not Be Able To Pay</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <td>Do Not Like To Be In Debt</td>
+      <td>0.24</td>
+    </tr>
+    <tr>
+      <td>Inadequate Collateral</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>Believe Would Be Refused</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>Too Expensive</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <td>Do Not Know Any Lender</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>Too Much Trouble</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>Have Adequate Farm</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>No Farm or Business</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>Other (Specify)</td>
+      <td>0.02</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Second most important reason for not applying for a loan.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.5 </span>
+Second most important reason for not applying for a loan.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question keep-together">
+  <li>
+    <p>Solution figure 9.6 compares the loan purposes of ‘successful’ and ‘denied’ borrowers. Compared with all households, a greater proportion of households that got loans indicated the purpose for the loan as consumption, and a smaller proportion of households that got loans indicated the purpose as for investment.</p>
+    <p><em>Note:</em> The entry ‘10’ is likely due to incorrect recording of responses, since ‘10’ is not a valid category in the original survey.</p>
+  </li>
+</ol>
+<div class="figure float-bottom-next figure-no-source" id="solution-figure-9-6">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Purpose</th>
+      <th>Successful</th>
+      <th>Denied</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10</td>
+      <td>0.00</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <td>Business start-up capital</td>
+      <td>0.15</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>Expanding business</td>
+      <td>0.08</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <td>Other (specify)</td>
+      <td>0.03</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>Purchase agricultural inputs for food crop</td>
+      <td>0.30</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <td>Purchase house/lease land</td>
+      <td>0.02</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>Purchase inputs for other crops</td>
+      <td>0.01</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>Purchase non-farm inputs</td>
+      <td>0.12</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>For consumption and personal expenses</td>
+      <td>0.20</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Loan purpose for successful and denied (credit-excluded) borrowers.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.6 </span>
+Loan purpose for successful and denied (credit-excluded) borrowers.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<blockquote class="box fixed tighten-15 keep-together">
+  <h3 id="note">Note</h3>
+  <p>Although most categories are the same, the two tables are not exactly comparable because ‘Consumption and personal expenses’ was a separate category from ‘Other’ for successful borrowers, but was considered as one of the responses in ‘Other (specify)’ for credit-excluded households. Looking at the variable loan_purpose_other in the ‘All households’ tab, we can see that reasons related to consumption and personal expenses (such as medical, school, transport expenses) apply to around 20 or so households.</p>
+</blockquote>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 9.7 compares the averages of the specified household characteristics.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-7">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Household characteristic</th>
+      <th>Successful</th>
+      <th>Denied</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of observations</td>
+      <td>1,363</td>
+      <td>201</td>
+    </tr>
+    <tr>
+      <td>Age of household head</td>
+      <td>43.40</td>
+      <td>41.20</td>
+    </tr>
+    <tr>
+      <td>Highest education in household</td>
+      <td>7.26</td>
+      <td>8.00</td>
+    </tr>
+    <tr>
+      <td>Number of assets</td>
+      <td>15.90</td>
+      <td>14.50</td>
+    </tr>
+    <tr>
+      <td>Household size</td>
+      <td>4.87</td>
+      <td>4.82</td>
+    </tr>
+    <tr>
+      <td>Number of young children</td>
+      <td>2.09</td>
+      <td>2.22</td>
+    </tr>
+    <tr>
+      <td>Number of working-age adults</td>
+      <td>2.75</td>
+      <td>2.76</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Comparison of household characteristics (successful and denied borrowers).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.7 </span>
+Comparison of household characteristics (successful and denied borrowers).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Explanations of how characteristics may affect a household’s ability to get a loan:</p>
+    <ul>
+      <li>Younger households are more likely to be credit excluded compared to older people because they are more likely to have less assets and unstable employment.</li>
+      <li>Less educated households are less likely to get higher paid jobs and hence less likely to repay the loans. We can thus expect more loans given to more educated people or people with a higher-educated household head.</li>
+      <li>Assets can serve as collateral. We can expect households with less collateral to receive fewer loans because the risks involved for the lenders are higher.</li>
+      <li>Households with more members to share the repayment burden are more likely to be able to repay loans.</li>
+      <li>Having a greater number of children improves the prospects of repayments as the children will eventually grow up and become productive members of the family. Governments may provide benefits to families with more children.</li>
+      <li>Having a greater number of working-age adults means greater repayment capability.</li>
+    </ul>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>The data reveals patterns consistent with our expectations, except in the pattern for the relation between education and loans. The data shows that credit-excluded people tend to have better education. One possible explanation is that people with more educated family members may be more likely to apply for loans because they are more likely to be aware of how to apply for loans and be more confident of their abilities to get a loan and repay. However, it is also possible that education is also correlated with other variable(s) that are significantly correlated with the likelihood of receiving a loan.</li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li>
+    <p>There are many possibilities for conditioning on the variables ‘rural’ or ‘region’. The example in Solution figure 9.8 shows means conditioned on household status (‘successful’ or ‘denied’) and the ‘rural’ variable.</p>
+    <p>Some patterns remain the same, though we can now see that in rural areas, successful borrowers have on average more education. In terms of numbers of children and working-age adults, the conditioning on the ‘rural’ variable changed the values. Now we can see that successful borrowers tend to have on average more children and more working-age adults.</p>
+    <p>However, we ought to interpret these differences carefully as some of the groups have very small numbers of observations.</p>
+  </li>
+</ul>
+<div class="figure wide figure-no-source" id="solution-figure-9-8">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Rural</th>
+      <th> </th>
+      <th>Small town (urban)</th>
+      <th> </th>
+      <th>Large town (urban)</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>Successful</td>
+      <td>Denied</td>
+      <td>Successful</td>
+      <td>Denied</td>
+      <td>Successful</td>
+      <td>Denied</td>
+    </tr>
+    <tr>
+      <td>Number of observations</td>
+      <td>903</td>
+      <td>128</td>
+      <td>128</td>
+      <td>17</td>
+      <td>332</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>Age of household head</td>
+      <td>45.10</td>
+      <td>43.40</td>
+      <td>42.10</td>
+      <td>37.50</td>
+      <td>39.20</td>
+      <td>37.30</td>
+    </tr>
+    <tr>
+      <td>Highest education in household</td>
+      <td>5.00</td>
+      <td>4.55</td>
+      <td>9.59</td>
+      <td>13.12</td>
+      <td>12.51</td>
+      <td>14.3</td>
+    </tr>
+    <tr>
+      <td>Number of assets</td>
+      <td>13.60</td>
+      <td>12.10</td>
+      <td>15.70</td>
+      <td>16.70</td>
+      <td>22.10</td>
+      <td>19.20</td>
+    </tr>
+    <tr>
+      <td>Household size</td>
+      <td>5.35</td>
+      <td>5.47</td>
+      <td>4.12</td>
+      <td>4.06</td>
+      <td>3.84</td>
+      <td>3.57</td>
+    </tr>
+    <tr>
+      <td>Number of young children</td>
+      <td>2.49</td>
+      <td>2.84</td>
+      <td>1.56</td>
+      <td>1.41</td>
+      <td>1.20</td>
+      <td>1.05</td>
+    </tr>
+    <tr>
+      <td>Number of working-age adults</td>
+      <td>2.91</td>
+      <td>2.88</td>
+      <td>2.54</td>
+      <td>2.33</td>
+      <td>2.42</td>
+      <td>2.36</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Comparison of household characteristics, conditioning on the ‘rural’ variable.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.8 </span>
+Comparison of household characteristics, conditioning on the ‘rural’ variable.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>The difference in means is shown in the table in Solution figure 9.9.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>The standard deviation (SD) for the difference in means, and the number of observations in both groups, are shown in the table below.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-9">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="3">Successful borrowers</th>
+    <th colspan="3">Denied borrowers</th>
+    <th colspan="3">Difference in means</th>
+  </tr>
+  <tr>
+    <td>Household characteristic</td>
+    <td class="align-center">Mean</td>
+    <td class="align-center">SD</td>
+    <td class="align-center">N</td>
+    <td class="align-center">Mean</td>
+    <td class="align-center">SD</td>
+    <td class="align-center">N</td>
+    <td class="align-center">Difference in means</td>
+    <td class="align-center">CI lower</td>
+    <td class="align-center">CI upper</td>
+  </tr>
+  <tr>
+    <td>Age of household head</td>
+    <td>43.40</td>
+    <td>14.30</td>
+    <td>1,361</td>
+    <td>41.20</td>
+    <td>12.90</td>
+    <td>201</td>
+    <td>2.15</td>
+    <td>0.21</td>
+    <td>4.09</td>
+  </tr>
+  <tr>
+    <td>Highest education in household</td>
+    <td>7.26</td>
+    <td>6.74</td>
+    <td>1,361</td>
+    <td>8.00</td>
+    <td>7.90</td>
+    <td>201</td>
+    <td>−0.73</td>
+    <td>−1.89</td>
+    <td>0.42</td>
+  </tr>
+  <tr>
+    <td>Number of assets</td>
+    <td>15.90</td>
+    <td>19.00</td>
+    <td>1,361</td>
+    <td>14.50</td>
+    <td>16.80</td>
+    <td>201</td>
+    <td>1.42</td>
+    <td>−1.13</td>
+    <td>3.97</td>
+  </tr>
+  <tr>
+    <td>Household size</td>
+    <td>4.87</td>
+    <td>2.35</td>
+    <td>1,361</td>
+    <td>4.82</td>
+    <td>2.35</td>
+    <td>201</td>
+    <td>0.05</td>
+    <td>−0.30</td>
+    <td>0.40</td>
+  </tr>
+  <tr>
+    <td>Number of young children</td>
+    <td>2.09</td>
+    <td>1.68</td>
+    <td>1,361</td>
+    <td>2.22</td>
+    <td>1.80</td>
+    <td>201</td>
+    <td>−0.14</td>
+    <td>−0.40</td>
+    <td>0.13</td>
+  </tr>
+  <tr>
+    <td>Number of working-age adults</td>
+    <td>2.75</td>
+    <td>1.49</td>
+    <td>1,361</td>
+    <td>2.76</td>
+    <td>1.42</td>
+    <td>201</td>
+    <td>−0.003</td>
+    <td>−0.22</td>
+    <td>0.21</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Calculating 95% confidence interval for difference in means between ‘successful’ and ‘denied’ borrowers.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.9 </span>
+Calculating 95% confidence interval for difference in means between ‘successful’ and ‘denied’ borrowers.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figure 9.10 shows the differences in household characteristics.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-10">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in means between ‘successful’ and ‘denied’ borrowers by household characteristics, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-09-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Difference in means between ‘successful’ and ‘denied’ borrowers by household characteristics, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Difference in means between ‘successful’ and ‘denied’ borrowers by household characteristics, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.10 </span>
+Difference in means between ‘successful’ and ‘denied’ borrowers by household characteristics, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>On average, successful borrowers have an older household head (2 years older) and 1–2 more assets than denied borrowers, though these differences are quite imprecisely estimated (as with the differences for all other characteristics. Therefore the sample differences we see could well come from a population where there is no difference between households which were denied a loan and those who were successful borrowers. Recall that 95% confidence intervals may not always contain the respective population means, so the above conclusions are never definite.</li>
+</ul>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>See Solution figure 9.11.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-11">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Household characteristic</th>
+      <th>Successful borrowers</th>
+      <th>Denied borrowers</th>
+      <th>Discouraged borrowers</th>
+      <th>Constrained borrowers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of observations</td>
+      <td>1,363</td>
+      <td>201</td>
+      <td>588</td>
+      <td>3,012</td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>43.37</td>
+      <td>41.21</td>
+      <td>43.28</td>
+      <td>44.84</td>
+    </tr>
+    <tr>
+      <td>Highest education in household</td>
+      <td>7.26</td>
+      <td>8.00</td>
+      <td>6.50</td>
+      <td>7.14</td>
+    </tr>
+    <tr>
+      <td>Number of assets</td>
+      <td>15.88</td>
+      <td>14.46</td>
+      <td>10.16</td>
+      <td>13.54</td>
+    </tr>
+    <tr>
+      <td>Household size</td>
+      <td>4.87</td>
+      <td>4.82</td>
+      <td>4.65</td>
+      <td>4.44</td>
+    </tr>
+    <tr>
+      <td>Number of young children</td>
+      <td>2.09</td>
+      <td>2.22</td>
+      <td>2.03</td>
+      <td>1.81</td>
+    </tr>
+    <tr>
+      <td>Number of working-age adults</td>
+      <td>2.75</td>
+      <td>2.76</td>
+      <td>2.49</td>
+      <td>2.49</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Comparison of household characteristics by borrower type.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.11 </span>
+Comparison of household characteristics by borrower type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>We can see that, in addition to what we analysed before, discouraged borrowers have less education and fewer assets. Constrained borrowers have smaller household sizes.</li>
+</ul>
+<ol class="text-question keep-together">
+  <li>One example of selection bias is the study of the determinants of prosperity. To do this, we can compare developing with developed countries. However, only developing countries with adequate resources and willingness collect and submit their data. The set of developing countries for which we have data is thus not representative of the population of developing countries.</li>
+</ol>
+<h2 id="part-92-households-that-got-a-loan">Part 9.2 Households that got a loan</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>There are a total of 1,480 observations for these variables. There are six blanks for the start date (0.41%) and 535 (36.15%) for the end date. Hence for more than a third of observations we have no end date.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Percentage of the loans that were long term: 22.80% if using the measure of loan duration with negatives replaced by absolute values; and ignoring blanks (NAs).</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Numbers are rounded to the nearest whole number, and shown in Solution figure 9.12.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-12">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Mean</th>
+      <th>SD</th>
+      <th>Min</th>
+      <th>Max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Loan amount (principal)</td>
+      <td>26,896</td>
+      <td>783,587</td>
+      <td>1</td>
+      <td>30,000,000</td>
+    </tr>
+    <tr>
+      <td>Total amount</td>
+      <td>29,223</td>
+      <td>827,144</td>
+      <td>20</td>
+      <td>31,260,000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Summary measures of loan amount (principal) and total amount.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.12 </span>
+Summary measures of loan amount (principal) and total amount.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>No solution is provided.</li>
+</ul>
+<ul class="text-sub-question keep-together">
+  <li>50.52% of the loans are zero interest. There is one loan for which the interest rate is 200%. It may not be evident on a column chart (histogram), but you can also identify the extreme value(s) with a scatterplot, as shown in Solution figure 9.13.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-13">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Loan amounts and interest rates.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-09-13.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Loan amounts and interest rates.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Loan amounts and interest rates.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.13 </span>
+Loan amounts and interest rates.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figure 9.14 shows summary tables of measures of the loan amount and the interest rate. (<em>Note:</em> It is good practice to show the number of observations in a particular group.)</p>
+    <p>Short-term loans are, on average, for smaller amounts. A greater proportion of short-term loans offer very low interest rates. Smaller proportions of short-term loans offer high interest rates. The spread of interest rates and loan amounts is much larger for long-term loans than for short-term loans.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-14">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th>Loan amount</th>
+    <th>N</th>
+    <th>Mean</th>
+    <th>SD</th>
+    <th>Min</th>
+    <th>Max</th>
+    <th>1st quartile</th>
+    <th>2nd quartile</th>
+    <th>3rd quartile</th>
+  </tr>
+  <tr>
+    <td>Long term</td>
+    <td>211</td>
+    <td>172,718</td>
+    <td>2,072,736</td>
+    <td>20</td>
+    <td>30,000,000</td>
+    <td>1,000</td>
+    <td>3,700</td>
+    <td>8,000</td>
+  </tr>
+  <tr>
+    <td>Short term</td>
+    <td>717</td>
+    <td>3,017</td>
+    <td>8,398</td>
+    <td>40</td>
+    <td>150,000</td>
+    <td>480</td>
+    <td>1,500</td>
+    <td>3,500</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><strong>Interest rate</strong></td>
+    <td class="align-center"><strong>N</strong></td>
+    <td class="align-center"><strong>Mean</strong></td>
+    <td class="align-center"><strong>SD</strong></td>
+    <td class="align-center"><strong>Min</strong></td>
+    <td class="align-center"><strong>Max</strong></td>
+    <td class="align-center"><strong>1st quartile</strong></td>
+    <td class="align-center"><strong>2nd quartile</strong></td>
+    <td class="align-center"><strong>3rd quartile</strong></td>
+  </tr>
+  <tr>
+    <td>Long term</td>
+    <td>211</td>
+    <td>0.19</td>
+    <td>0.27</td>
+    <td>0.00</td>
+    <td>2.24</td>
+    <td>0.00</td>
+    <td>0.14</td>
+    <td>0.25</td>
+  </tr>
+  <tr>
+    <td>Short term</td>
+    <td>717</td>
+    <td>0.11</td>
+    <td>0.17</td>
+    <td>0.00</td>
+    <td>1.12</td>
+    <td>0.00</td>
+    <td>0.05</td>
+    <td>0.17</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Comparison of distribution of long-term and short-term loans.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.14 </span>
+Comparison of distribution of long-term and short-term loans.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question keep-together">
+  <li>
+    <p>Solution figure 9.15 shows the correlation between the interest rate and household characteristics. Here, we recoded gender as a dummy variable (1 = Female, 0 = Male).</p>
+    <p>The correlations are all fairly weak. We would expect that lenders would charge lower interest rates to households with more working-age adults and more members because these households are better able to repay, and the risks associated with lending to them are therefore lower. This is not what we observe in the data. The rest of the correlations have the expected sign (positive/negative).</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-15">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Household characteristics</th>
+      <th>Interest rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Household size</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>–0.02</td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>Young children</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <td>Working-age adults</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>Max education</td>
+      <td>−0.08</td>
+    </tr>
+    <tr>
+      <td>Number of assets</td>
+      <td>–0.05</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Correlations between interest rate and household characteristics.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.15 </span>
+Correlations between interest rate and household characteristics.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figures 9.16 and 9.17 show the proportion of loans with sources of finance ‘borrowed_from’ and ‘borrowed_from_other’. (Numbers are quoted to 3 decimal places due to small values).</p>
+    <p>Compared to rural households, urban households are more likely to borrow from banks and employers. Rural households are more likely to borrow from microfinance institutions and governments.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-16">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th colspan="5">Proportion of 'borrowed_from'</th>
+  </tr>
+  <tr>
+    <td class="align-center"><strong>Source of finance</strong></td>
+    <td class="align-center"><strong>Large town (urban)</strong></td>
+    <td class="align-center"><strong>Rural</strong></td>
+    <td class="align-center"><strong>Small town (urban)</strong></td>
+    <td class="align-center"><strong>Total</strong></td>
+  </tr>
+  <tr>
+    <td>Bank (commercial)</td>
+    <td>0.02</td>
+    <td>0.00</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Employer</td>
+    <td>0.04</td>
+    <td>0.00</td>
+    <td>0.01</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Grocery/Local Merchant</td>
+    <td>0.08</td>
+    <td>0.05</td>
+    <td>0.10</td>
+    <td>0.06</td>
+  </tr>
+  <tr>
+    <td>Microfinance Institution</td>
+    <td>0.19</td>
+    <td>0.28</td>
+    <td>0.27</td>
+    <td>0.26</td>
+  </tr>
+  <tr>
+    <td>Money Lender (Katapila)</td>
+    <td>0.00</td>
+    <td>0.05</td>
+    <td>0.02</td>
+    <td>0.04</td>
+  </tr>
+  <tr>
+    <td>Neighbour</td>
+    <td>0.11</td>
+    <td>0.12</td>
+    <td>0.07</td>
+    <td>0.11</td>
+  </tr>
+  <tr>
+    <td>NGO</td>
+    <td>0.01</td>
+    <td>0.05</td>
+    <td>0.05</td>
+    <td>0.04</td>
+  </tr>
+  <tr>
+    <td>Other (specify)</td>
+    <td>0.06</td>
+    <td>0.12</td>
+    <td>0.04</td>
+    <td>0.10</td>
+  </tr>
+  <tr>
+    <td>Relative</td>
+    <td>0.49</td>
+    <td>0.32</td>
+    <td>0.43</td>
+    <td>0.37</td>
+  </tr>
+  <tr>
+    <td>Religious Institution</td>
+    <td>0.00</td>
+    <td>0.02</td>
+    <td>0.00</td>
+    <td>0.02</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Source of loan, by variable ‘rural’.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.16  </span>
+Source of loan, by variable ‘rural’.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-9-17">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th colspan="5">Proportion of borrowed_from_other</th>
+  </tr>
+  <tr>
+    <td class="align-center"><strong>Source of finance</strong></td>
+    <td class="align-center"><strong>Large town (urban)</strong></td>
+    <td class="align-center"><strong>Rural</strong></td>
+    <td class="align-center"><strong>Small town (urban)</strong></td>
+    <td class="align-center"><strong>Total</strong></td>
+  </tr>
+  <tr>
+    <td>Bank</td>
+    <td>0.00</td>
+    <td>0.01</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Cooperatives</td>
+    <td>0.42</td>
+    <td>0.43</td>
+    <td>0.40</td>
+    <td>0.43</td>
+  </tr>
+  <tr>
+    <td>Equib</td>
+    <td>0.05</td>
+    <td>0.01</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>From government</td>
+    <td>0.05</td>
+    <td>0.30</td>
+    <td>0.00</td>
+    <td>0.26</td>
+  </tr>
+  <tr>
+    <td>From individuals</td>
+    <td>0.05</td>
+    <td>0.01</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>From private business</td>
+    <td>0.00</td>
+    <td>0.02</td>
+    <td>0.00</td>
+    <td>0.02</td>
+  </tr>
+  <tr>
+    <td>From relatives</td>
+    <td>0.05</td>
+    <td>0.00</td>
+    <td>0.20</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>From women association</td>
+    <td>0.00</td>
+    <td>0.01</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>From Youth Association</td>
+    <td>0.00</td>
+    <td>0.01</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>HAB project</td>
+    <td>0.00</td>
+    <td>0.02</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Iddir</td>
+    <td>0.16</td>
+    <td>0.15</td>
+    <td>0.00</td>
+    <td>0.14</td>
+  </tr>
+  <tr>
+    <td>Micro and small enterprise</td>
+    <td>0.11</td>
+    <td>0.00</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Micro finance</td>
+    <td>0.00</td>
+    <td>0.04</td>
+    <td>0.40</td>
+    <td>0.05</td>
+  </tr>
+  <tr>
+    <td>Mobile</td>
+    <td>0.05</td>
+    <td>0.00</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>NGO</td>
+    <td>0.05</td>
+    <td>0.00</td>
+    <td>0.00</td>
+    <td>0.01</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Source of loan, by variable ‘rural’ (‘Other’ category only).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.17 </span>
+Source of loan, by variable ‘rural’ (‘Other’ category only).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question keep-together">
+  <li>
+    <p>Solution figures 9.18, 9.19, and 9.20 provide tables for each of the variables.</p>
+    <p>There are many possible comparisons to make, for example:</p>
+    <ul>
+      <li><em>Duration of loan:</em> In large towns and rural areas, the average loan duration of banks is the longest. Across all types of areas, informal sources (such as relatives or neighbours) tend to lend for shorter durations on average.</li>
+      <li><em>Loan amount:</em> Banks lend larger amounts on average.</li>
+      <li><em>Interest rate:</em> The interest rate from informal sources is not necessarily higher (on average) than interest rates from formal sources such as banks. Lending from people that know the household (employer, relatives, neighbours) incurs lower average interest rates, possibly because the principal–agent problem is less severe.</li>
+    </ul>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-18">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Source of finance</th>
+      <th>Large town (urban)</th>
+      <th>Rural</th>
+      <th>Small town (urban)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bank (commercial)</td>
+      <td>1,814</td>
+      <td>619</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Employer</td>
+      <td>602</td>
+      <td>290</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Grocery/Local Merchant</td>
+      <td>166</td>
+      <td>259</td>
+      <td>176</td>
+    </tr>
+    <tr>
+      <td>Microfinance Institution</td>
+      <td>712</td>
+      <td>411</td>
+      <td>510</td>
+    </tr>
+    <tr>
+      <td>Money Lender (Katapila)</td>
+      <td>365</td>
+      <td>332</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <td>Neighbour</td>
+      <td>125</td>
+      <td>187</td>
+      <td>296</td>
+    </tr>
+    <tr>
+      <td>NGO</td>
+      <td>373</td>
+      <td>395</td>
+      <td>236</td>
+    </tr>
+    <tr>
+      <td>Other (specify)</td>
+      <td>274</td>
+      <td>372</td>
+      <td>806</td>
+    </tr>
+    <tr>
+      <td>Relative</td>
+      <td>237</td>
+      <td>217</td>
+      <td>393</td>
+    </tr>
+    <tr>
+      <td>Religious Institution</td>
+      <td>1,461</td>
+      <td>343</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>(blank)</td>
+      <td>1,096</td>
+      <td>289</td>
+      <td>151</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Duration of loan (rounded to nearest day).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.18 </span>
+Duration of loan (rounded to nearest day).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-9-19">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Source of finance</th>
+      <th>Large town (urban)</th>
+      <th>Rural</th>
+      <th>Small town (urban)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bank (commercial)</td>
+      <td>5,755,833</td>
+      <td>3,575</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Employer</td>
+      <td>5,915</td>
+      <td>1,350</td>
+      <td>1,000</td>
+    </tr>
+    <tr>
+      <td>Grocery/Local Merchant</td>
+      <td>1,370</td>
+      <td>1,429</td>
+      <td>1,599</td>
+    </tr>
+    <tr>
+      <td>Microfinance Institution</td>
+      <td>14,525</td>
+      <td>3,852</td>
+      <td>7,543</td>
+    </tr>
+    <tr>
+      <td>Money Lender (Katapila)</td>
+      <td>350</td>
+      <td>1,360</td>
+      <td>5,150</td>
+    </tr>
+    <tr>
+      <td>Neighbour</td>
+      <td>602</td>
+      <td>837</td>
+      <td>686</td>
+    </tr>
+    <tr>
+      <td>NGO</td>
+      <td>5,532</td>
+      <td>1,4475</td>
+      <td>2,300</td>
+    </tr>
+    <tr>
+      <td>Other (specify)</td>
+      <td>3,912</td>
+      <td>1,842</td>
+      <td>3,829</td>
+    </tr>
+    <tr>
+      <td>Relative</td>
+      <td>7,872</td>
+      <td>1,576</td>
+      <td>6,802</td>
+    </tr>
+    <tr>
+      <td>Religious Institution</td>
+      <td>50,000</td>
+      <td>910</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Loan amount (rounded to nearest whole number).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.19 </span>
+Loan amount (rounded to nearest whole number).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-9-20">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Source of finance</th>
+      <th>Large town (urban)</th>
+      <th>Rural</th>
+      <th>Small town (urban)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bank (commercial)</td>
+      <td>0.14</td>
+      <td>0.26</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Employer</td>
+      <td>0.04</td>
+      <td>0.06</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Grocery/Local Merchant</td>
+      <td>0.00</td>
+      <td>0.09</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Microfinance Institution</td>
+      <td>0.16</td>
+      <td>0.18</td>
+      <td>0.15</td>
+    </tr>
+    <tr>
+      <td>Money Lender (Katapila)</td>
+      <td>1.00</td>
+      <td>0.43</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <td>Neighbour</td>
+      <td>0.00</td>
+      <td>0.12</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>NGO</td>
+      <td>0.06</td>
+      <td>0.12</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>Other (specify)</td>
+      <td>0.13</td>
+      <td>0.16</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <td>Relative</td>
+      <td>0.01</td>
+      <td>0.08</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Religious Institution</td>
+      <td>0.00</td>
+      <td>0.20</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Interest rate (rounded to two decimal places).
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.20 </span>
+Interest rate (rounded to two decimal places).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>The following example uses a dummy variable called ‘Gender numerical’ which is equal to 1 for ‘Female’ and 0 for ‘Male’. The averages of this variable across categories are equivalent to the proportions.</p>
+    <p>Households with female heads are relatively more likely to borrow from grocery/local merchants, neighbours, NGOs, and relatives.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-9-21">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Source of finance</th>
+      <th>Large town (urban)</th>
+      <th>Rural</th>
+      <th>Small town (urban)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bank (commercial)</td>
+      <td>0.00</td>
+      <td>0.50</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Employer</td>
+      <td>0.31</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Grocery/Local Merchant</td>
+      <td>0.39</td>
+      <td>0.19</td>
+      <td>0.50</td>
+    </tr>
+    <tr>
+      <td>Microfinance Institution</td>
+      <td>0.41</td>
+      <td>0.13</td>
+      <td>0.31</td>
+    </tr>
+    <tr>
+      <td>Money Lender (Katapila)</td>
+      <td>0.00</td>
+      <td>0.27</td>
+      <td>0.50</td>
+    </tr>
+    <tr>
+      <td>Neighbour</td>
+      <td>0.35</td>
+      <td>0.25</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <td>NGO</td>
+      <td>0.25</td>
+      <td>0.31</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <td>Other (specify)</td>
+      <td>0.39</td>
+      <td>0.19</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <td>Relative</td>
+      <td>0.40</td>
+      <td>0.21</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <td>Religious Institution</td>
+      <td>1.00</td>
+      <td>0.24</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>(blank)</td>
+      <td>1.00</td>
+      <td>0.43</td>
+      <td>1.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Proportion of households with a female head, according to source of finance.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 9.21 </span>
+Proportion of households with a female head, according to source of finance.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Government policies such as tax reliefs and benefit, distance and/or access to various sources of financing, and stability of employment are all examples of variables that can be important.</li>
+</ul>
+<ol class="text-question keep-together">
+  <li>One hypothesis is that lack of knowledge of loan availability affects access by households to lending. The government could fund education programmes aimed at improving the poor’s understanding of financial services. The government could identify two poor regions with similar characteristics that are distant from each other. One region would serve as the control group while the other as the treatment group. The government could then randomly select and educate individuals from the treatment region. The causal effects of the policy could be assessed by comparing outcomes in the two regions after the treatment. During the study period, the government should avoid implementing other policies in the regions, especially those that can affect the regions differently. The two regions should be chosen such that they would evolve in similar ways without the policy, and that treatments on one region cannot indirectly affect outcomes in the other region.</li>
+</ol>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Solutions
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="09-04.html"
+               class="active">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="active">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

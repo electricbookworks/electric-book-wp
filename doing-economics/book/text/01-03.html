@@ -1,0 +1,3070 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 1: Working in R
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 1: Working in R" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/01-03.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-1-working-in-r"><strong>Empirical Project 1</strong> Working in R</h1>
+<blockquote class="info web-full-width">
+  <h3 id="download-the-code">Download the code</h3>
+  <p>To <a href="https://tinyco.re/0932489">download the code chunks used in this project</a>, right-click on the download link and select ‘Save Link As…’. You’ll need to save the code download to your working directory, and open it in RStudio.</p>
+  <p>Don’t forget to also download the data into your working directory by following the steps in this project.</p>
+</blockquote>
+<h2 class="save-2" id="getting-started-in-r">Getting started in R</h2>
+<p>If you have worked with R and have the software installed on your machine, you can begin this project. If you have not, watch the videos ‘Installing R and RStudio’ and ‘RStudio orientation’ for guidance on installing and using RStudio.</p>
+<div class="video youtube" id="EHjakj38Nnw" data-video-id="EHjakj38Nnw" data-video-language="en">
+    <div class="video-wrapper">
+        <a class="video-link" href="https://tinyco.re/5366799"><img src="https://core-econ.org/doing-economics/book/images/web/youtube-EHjakj38Nnw.jpg" /></a>
+    </div>
+    <p class="video-description">
+        <a href="https://tinyco.re/5366799">Installing R and RStudio</a>
+    </p>
+</div>
+<div class="video youtube" id="z9rH0RPuPMc" data-video-id="z9rH0RPuPMc" data-video-language="en">
+    <div class="video-wrapper">
+        <a class="video-link" href="https://tinyco.re/4571811"><img src="https://core-econ.org/doing-economics/book/images/web/youtube-z9rH0RPuPMc.jpg" /></a>
+    </div>
+    <p class="video-description">
+        <a href="https://tinyco.re/4571811">RStudio orientation</a>
+    </p>
+</div>
+<h2 id="part-11-the-behaviour-of-average-surface-temperature-over-time">Part 1.1 The behaviour of average surface temperature over time</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>use line charts to describe the behaviour of real-world variables over time.</li>
+  </ul>
+</blockquote>
+<p class="tighten-15">In the questions below, we look at data from NASA about land–ocean temperature anomalies in the northern hemisphere. Figure 1.1 is constructed using this data, and shows temperatures in the northern hemisphere over the period 1880–2016, expressed as differences from the average temperature from 1951 to 1980. We start by creating charts similar to Figure 1.1, in order to visualize the data and spot patterns more easily.</p>
+<div class="figure fixed figure-no-source" id="figure-1-1">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-01-01.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-01-01.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-01-01-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-01-01-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-01-01-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-01-01.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere temperatures (1880–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-01-01.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-01-01-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-01-01-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-01-01-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-01-01.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere temperatures (1880–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Northern hemisphere temperatures (1880–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.1 </span>
+Northern hemisphere temperatures (1880–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p>Before plotting any charts, download the data and make sure you understand how temperature is measured:</p>
+<ul class="allow-break">
+  <li>Go to NASA’s <a href="https://tinyco.re/2515719" class="show-url">Goddard Institute for Space Studies website</a>.</li>
+  <li>Under the subheading ‘Combined Land-Surface Air and Sea-Surface Water Temperature Anomalies’, select the CSV version of ‘Northern Hemisphere-mean monthly, seasonal, and annual means’ (right-click and select ‘Save Link As…’).</li>
+  <li>The default name of this file is NH.Ts+dSST.csv. Give it a suitable name and save it in an easily accessible location, such as a folder on your Desktop or in your personal folder.</li>
+</ul>
+<ol class="text-question">
+  <li>In this dataset, temperature is measured as ‘anomalies’ rather than as absolute temperature. Using <a href="https://tinyco.re/8370199" class="show-url">NASA’s Frequently Asked Questions section</a> as a reference, explain in your own words what temperature ‘anomalies’ means. Why have researchers chosen this particular measure over other measures (such as absolute temperature)?</li>
+</ol>
+<p>First we have to import the data into R.</p>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-11-importing-the-datafile-into-r"><strong>R walk-through 1.1</strong> Importing the datafile into R</h3>
+  <p>We want to import the datafile called ‘NH.Ts+dSST.csv’ into R.</p>
+  <p>We start by setting our working directory using the <code class="language-r highlighter-rouge"><span class="n">setwd</span></code> command. This command tells R where your datafiles are stored. In the code below, replace ‘YOURFILEPATH’ with the full filepath that indicates the folder in which you have saved the datafile. If you don’t know how to find the path to your working folder, see the <a href="https://tinyco.re/3407438" class="show-url">‘Technical Reference’ section</a>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">setwd</span><span class="p">(</span><span class="s2">"YOURFILEPATH"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Since our data is in csv format, we use the <code class="language-r highlighter-rouge"><span class="n">read.csv</span></code> function to import the data into R. We will call our file ‘tempdata’ (short for ‘temperature data’).</p>
+  <p class="sidenote bump-up">Here you can see commands to R which are spread across two lines. You can spread a command across multiple lines, but you must adhere to the following two rules for this to work. First, the line break should come inside a set of parenthesis (i.e. between <code class="language-r highlighter-rouge"><span class="p">(</span></code> and <code class="language-r highlighter-rouge"><span class="p">)</span></code> or straight after the assignment operator (<code class="language-r highlighter-rouge"><span class="o">&lt;-</span></code>). Second, the line break must not be inside a string (whatever is inside quotes) or in the middle of a word or number.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tempdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"NH.Ts+dSST.csv"</span><span class="p">,</span><span class="w">
+  </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">na.strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"***"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <p>When using this function, we added two options. If you open the spreadsheet in Excel, you will see that the real data table only starts in Row 2, so we use the <code class="language-r highlighter-rouge"><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span></code> option to skip the first row when importing the data. When looking at the spreadsheet, you can see that missing temperature data is coded as <code class="language-r highlighter-rouge"><span class="s2">"***"</span></code>. In order for R to recognize the non-missing temperature data as numbers, we use  the <code class="language-r highlighter-rouge"><span class="n">na.strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"***"</span></code> option to indicate that missing observations in the spreadsheet are coded as <code class="language-r highlighter-rouge"><span class="s2">"***"</span></code>.</p>
+  <p>To check that the data has been imported correctly, you can use the <code class="language-r highlighter-rouge"><span class="n">head</span></code> function to view the first six rows of the dataset, and confirm that they correspond to the columns in the csv file.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">(</span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##   Year   Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov</span><span class="w">
+</span><span class="c1">## 1 1880 -0.57 -0.41 -0.28 -0.38 -0.12 -0.24 -0.25 -0.26 -0.29 -0.34 -0.39</span><span class="w">
+</span><span class="c1">## 2 1881 -0.21 -0.27 -0.01 -0.04 -0.07 -0.38 -0.07 -0.04 -0.25 -0.42 -0.44</span><span class="w">
+</span><span class="c1">## 3 1882  0.21  0.20 -0.01 -0.38 -0.33 -0.39 -0.38 -0.15 -0.18 -0.54 -0.34</span><span class="w">
+</span><span class="c1">## 4 1883 -0.61 -0.70 -0.17 -0.29 -0.34 -0.27 -0.10 -0.27 -0.35 -0.23 -0.42</span><span class="w">
+</span><span class="c1">## 5 1884 -0.24 -0.13 -0.67 -0.64 -0.43 -0.53 -0.49 -0.52 -0.46 -0.42 -0.49</span><span class="w">
+</span><span class="c1">## 6 1885 -1.01 -0.37 -0.21 -0.54 -0.57 -0.49 -0.38 -0.46 -0.33 -0.31 -0.29</span><span class="w">
+</span><span class="c1">##     Dec   J.D   D.N   DJF   MAM   JJA   SON</span><span class="w">
+</span><span class="c1">## 1 -0.51 -0.34    NA    NA -0.26 -0.25 -0.34</span><span class="w">
+</span><span class="c1">## 2 -0.30 -0.21 -0.23 -0.33 -0.04 -0.16 -0.37</span><span class="w">
+</span><span class="c1">## 3 -0.43 -0.23 -0.22  0.04 -0.24 -0.31 -0.35</span><span class="w">
+</span><span class="c1">## 4 -0.27 -0.34 -0.35 -0.58 -0.27 -0.21 -0.33</span><span class="w">
+</span><span class="c1">## 5 -0.40 -0.45 -0.44 -0.22 -0.58 -0.51 -0.45</span><span class="w">
+</span><span class="c1">## 6  0.00 -0.41 -0.45 -0.60 -0.44 -0.44 -0.31</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Before working with the important data, we use the <code class="language-r highlighter-rouge"><span class="n">str</span></code> function to check that the data is formatted correctly.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">(</span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## 'data.frame':  138 obs. of 19 variables:</span><span class="w">
+</span><span class="c1">##  $ Year: int  1880 1881 1882 1883 1884 1885 1886 1887 1888 1889 ...</span><span class="w">
+</span><span class="c1">##  $ Jan : num  -0.57 -0.21 0.21 -0.61 -0.24 -1.01 -0.69 -1.08 -0.54 -0.33 ...</span><span class="w">
+</span><span class="c1">##  $ Feb : num  -0.41 -0.27 0.2 -0.7 -0.13 -0.37 -0.69 -0.6 -0.61 0.32 ...</span><span class="w">
+</span><span class="c1">##  $ Mar : num  -0.28 -0.01 -0.01 -0.17 -0.67 -0.21 -0.58 -0.37 -0.59 0.05 ...</span><span class="w">
+</span><span class="c1">##  $ Apr : num  -0.38 -0.04 -0.38 -0.29 -0.64 -0.54 -0.35 -0.43 -0.26 0.12 ...</span><span class="w">
+</span><span class="c1">##  $ May : num  -0.12 -0.07 -0.33 -0.34 -0.43 -0.57 -0.36 -0.28 -0.18 -0.07 ...</span><span class="w">
+</span><span class="c1">##  $ Jun : num  -0.24 -0.38 -0.39 -0.27 -0.53 -0.49 -0.44 -0.21 -0.06 -0.15 ...</span><span class="w">
+</span><span class="c1">##  $ Jul : num  -0.25 -0.07 -0.38 -0.1 -0.49 -0.38 -0.21 -0.23 0.01 -0.12 ...</span><span class="w">
+</span><span class="c1">##  $ Aug : num  -0.26 -0.04 -0.15 -0.27 -0.52 -0.46 -0.48 -0.53 -0.21 -0.19 ...</span><span class="w">
+</span><span class="c1">##  $ Sep : num  -0.29 -0.25 -0.18 -0.35 -0.46 -0.33 -0.35 -0.18 -0.15 -0.28 ...</span><span class="w">
+</span><span class="c1">##  $ Oct : num  -0.34 -0.42 -0.54 -0.23 -0.42 -0.31 -0.33 -0.41 0.01 -0.37 ...</span><span class="w">
+</span><span class="c1">##  $ Nov : num  -0.39 -0.44 -0.34 -0.42 -0.49 -0.29 -0.46 -0.21 -0.04 -0.63 ...</span><span class="w">
+</span><span class="c1">##  $ Dec : num  -0.51 -0.3 -0.43 -0.27 -0.4 0 -0.18 -0.45 -0.28 -0.58 ...</span><span class="w">
+</span><span class="c1">##  $ J.D : num  -0.34 -0.21 -0.23 -0.34 -0.45 -0.41 -0.43 -0.42 -0.24 -0.19 ...</span><span class="w">
+</span><span class="c1">##  $ D.N : num  NA -0.23 -0.22 -0.35 -0.44 -0.45 -0.41 -0.39 -0.26 -0.16 ...</span><span class="w">
+</span><span class="c1">##  $ DJF : num  NA -0.33 0.04 -0.58 -0.22 -0.6 -0.46 -0.62 -0.53 -0.1 ...</span><span class="w">
+</span><span class="c1">##  $ MAM : num  -0.26 -0.04 -0.24 -0.27 -0.58 -0.44 -0.43 -0.36 -0.34 0.03 ...</span><span class="w">
+</span><span class="c1">##  $ JJA : num  -0.25 -0.16 -0.31 -0.21 -0.51 -0.44 -0.38 -0.32 -0.09 -0.15 ...</span><span class="w">
+</span><span class="c1">##  $ SON : num  -0.34 -0.37 -0.35 -0.33 -0.45 -0.31 -0.38 -0.27 -0.06 -0.43 ...</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>You can see that all variables are formatted as numerical data (<code class="language-r highlighter-rouge"><span class="n">num</span></code>), so R correctly recognizes that the data are numbers.</p>
+</blockquote>
+<p>Now create some line charts using monthly, seasonal, and annual data, which help us look for general patterns over time.</p>
+<ol class="text-question">
+  <li>Choose one month and plot a line chart with average temperature anomaly on the vertical axis and time (from 1880 to the latest year available) on the horizontal axis. Label each axis appropriately and give your chart a suitable title (Refer to <a href="#figure-1-1" class="show-page-number">Figure 1.1</a> as an example.)</li>
+</ol>
+<blockquote class="expandable-box page-break-before">
+  <h3 id="r-walk-through-12-drawing-a-line-chart-of-temperature-and-time"><strong>R walk-through 1.2</strong> Drawing a line chart of temperature and time</h3>
+  <p>The data is formatted as numerical (<code class="language-r highlighter-rouge"><span class="n">num</span></code>) data, so R recognizes each variable as a series of numbers (instead of text), but does not recognize that these numbers correspond to the same variable for different time periods (known as ‘time series data’ in economics). Letting R know that we have time series data will make coding easier later (especially with making graphs). You can use the <code class="language-r highlighter-rouge"><span class="n">ts</span></code> function to specify that a variable is a time series. Make sure to amend the code below so that the end year  (<code class="language-r highlighter-rouge"><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">()</span></code>) corresponds to the latest year in your dataset (our example uses 2017).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tempdata</span><span class="o">$</span><span class="n">Jan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Jan</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1880</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">DJF</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">DJF</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1880</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">MAM</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">MAM</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1880</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">JJA</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">JJA</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1880</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">SON</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">SON</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1880</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">J.D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">J.D</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1880</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <p>Note that we placed each of these quarterly series in the relevant middle month. You could do the same for the remaining series, but we will only use the series above in this R walk-through.</p>
+  <p>We can now use these variables to draw line charts using the <code class="language-r highlighter-rouge"><span class="n">plot</span></code> function. As an example, we will draw a line chart using data for January (<code class="language-r highlighter-rouge"><span class="n">tempdata</span><span class="o">$</span><span class="n">Jan</span></code>) for the years 1880–2016. The <code class="language-r highlighter-rouge"><span class="n">title</span></code> option on the next line adds a chart title, and the <code class="language-r highlighter-rouge"><span class="n">abline</span></code> option draws a horizontal line according to our specifications. Make sure to amend the code below so that your chart title corresponds to the latest year in your dataset (our example uses 2016).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set line width and colour</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Jan</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Annual temperature anomalies"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Year"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add a title</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Average temperature anomaly in January in the northern hemisphere (1880-2016)"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add a horizontal line (at y = 0)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkorange2"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add a label to the horizontal line</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span><span class="w"> </span><span class="m">-0.1</span><span class="p">,</span><span class="w"> </span><span class="s2">"1951-1980 average"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-1-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-02.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-02.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-02-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-02-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-02-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere January temperatures (1880–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-02.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-02-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-02-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-02-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere January temperatures (1880–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Northern hemisphere January temperatures (1880–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.2 </span>
+Northern hemisphere January temperatures (1880–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>Try different values for <code class="language-r highlighter-rouge"><span class="n">type</span></code> and <code class="language-r highlighter-rouge"><span class="n">col</span></code> in the <code class="language-r highlighter-rouge"><span class="n">plot</span></code> function to figure out what these options do (some online research could help). <code class="language-r highlighter-rouge"><span class="n">xlab</span></code> and <code class="language-r highlighter-rouge"><span class="n">ylab</span></code> define the respective axis titles.</p>
+  <p>It is important to remember that all axis and chart titles should be enclosed in quotation marks (<code class="language-r highlighter-rouge"><span class="s2">""</span></code>), as well as any words that are not options (for example, colour names or filenames).</p>
+</blockquote>
+<ol class="text-question">
+  <li><em>Extra practice:</em> The columns labelled <code class="language-r highlighter-rouge"><span class="n">DJF</span></code>, <code class="language-r highlighter-rouge"><span class="n">MAM</span></code>, <code class="language-r highlighter-rouge"><span class="n">JJA</span></code>, and <code class="language-r highlighter-rouge"><span class="n">SON</span></code> contain seasonal averages (means). For example, the <code class="language-r highlighter-rouge"><span class="n">MAM</span></code> column contains the average of the March, April, and May columns for each year. Plot a separate line chart for each season, using average temperature anomaly for that season on the vertical axis and time (from 1880 to the latest year available) on the horizontal axis.</li>
+</ol>
+<ol class="text-question">
+  <li>The column labelled <code class="language-r highlighter-rouge"><span class="n">J</span><span class="err">–</span><span class="n">D</span></code> contains the average temperature anomaly for each year.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Plot a line chart with annual average temperature anomaly on the vertical axis and time (from 1880 to the latest year available) on the horizontal axis. Your chart should look like <a href="#figure-1-1" class="show-page-number">Figure 1.1</a>.<br />
+<em>Extension:</em> Add a horizontal line that intersects the vertical axis at 0, and label it ‘1951–1980 average’.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>What do your charts from Questions 2 to 4<em>(a)</em> suggest about the relationship between temperature and time?</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-13-producing-a-line-chart-for-the-annual-temperature-anomalies"><strong>R walk-through 1.3</strong> Producing a line chart for the annual temperature anomalies</h3>
+  <p>This is where the power of programming languages becomes evident: to produce the same line chart for a different variable, we simply take the code used in R walk-through 1.2 and replace the variable name <code class="language-r highlighter-rouge"><span class="n">Jan</span></code> with the name for the annual variable (<code class="language-r highlighter-rouge"><span class="n">J.D</span></code>). Again, make sure to amend the code so that your chart title corresponds to the latest year in your data (our example uses 2016).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set line width and colour</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">J.D</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Annual temperature anomalies"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Year"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># \n creates a line break</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Average annual temperature anomaly \n in the northern hemisphere (1880-2016)"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add a horizontal line (at y = 0)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkorange2"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add a label to the horizontal line</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span><span class="w"> </span><span class="m">-0.1</span><span class="p">,</span><span class="w"> </span><span class="s2">"1951-1980 average"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-1-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-03.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-03.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-03-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-03-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-03-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere annual temperatures (1880–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-03.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-03-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-03-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-03-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere annual temperatures (1880–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Northern hemisphere annual temperatures (1880–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.3 </span>
+Northern hemisphere annual temperatures (1880–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>You now have charts for three different time intervals: month (Question 2), season (Question 3), and year (Question 4). For each time interval, discuss what we can learn about patterns in temperature over time that we might not be able to learn from the charts of other time intervals.</li>
+</ol>
+<ol class="text-question">
+  <li>Compare your chart from Question 4 to Figure 1.4, which also shows the behaviour of temperature over time using data taken from the National Academy of Sciences.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Discuss the similarities and differences between the charts. (For example, are the horizontal and vertical axes variables the same, or do the lines have the same shape?)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Looking at the behaviour of temperature over time from 1000 to 1900 in Figure 1.4, are the observed patterns in your chart unusual?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Based on your answers to Questions 4 and 5, do you think the government should be concerned about climate change?</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-1-4">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-04.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-04.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-04-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-04-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-04-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere temperatures over the long run (1000–2006).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-04.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-04-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-04-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-04-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-04.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere temperatures over the long run (1000–2006).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Northern hemisphere temperatures over the long run (1000–2006).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.4 </span>
+Northern hemisphere temperatures over the long run (1000–2006).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<h2 id="part-12-variation-in-temperature-over-time">Part 1.2 Variation in temperature over time</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>summarize data in a frequency table, and visualize distributions with column charts</li>
+    <li>describe a distribution using mean and variance.</li>
+  </ul>
+</blockquote>
+<p>Aside from changes in the mean temperature, the government is also worried that climate change will result in more frequent extreme weather events. The island has experienced a few major storms and severe heat waves in the past, both of which caused serious damage and disruption to economic activity.</p>
+<p class="tighten-10">Will weather become more extreme and vary more as a result of climate change? <a href="https://tinyco.re/8697554" class="show-url">A <em>New York Times</em> article</a> uses the same temperature dataset you have been using to investigate the distribution of temperatures and temperature variability over time. Read through the article, paying close attention to the descriptions of the temperature distributions.</p>
+<p>We can use the mean and median to describe distributions, and we can use deciles to describe parts of distributions. To visualize distributions, we can use column charts (sometimes referred to as frequency histograms). We are now going to create similar charts of temperature distributions to the ones in the <em>New York Times</em> article, and look at different ways of summarizing distributions.</p>
+<dl class="definition">
+<dt class="definition-term">frequency table</dt><dd class="definition-description">A record of how many observations in a dataset have a particular value, range of values, or belong to a particular category.</dd>
+</dl>
+<p>In order to create a column chart using the temperature data we have, we first need to summarize the data using a <strong data-term="frequency table">frequency table</strong>. Instead of using deciles to group the data, we use intervals of 0.05, so that temperature anomalies with a value from −0.3 to −0.25 will be in one group, a value greater than −0.25 and up to 0.2 in another group, and so on. The frequency table shows us how many values belong to a particular group.</p>
+<ol class="text-question tighten-15">
+  <li>Using the monthly data for June, July, and August, create two frequency tables similar to Figure 1.5 for the years 1951–1980 and 1981–2010 respectively. The values in the first column should range from −0.3 to 1.05, in intervals of 0.05. See R walk-through 1.3 for how to do this.</li>
+</ol>
+<div class="figure fixed figure-no-source" id="figure-1-5">
+<div class="figure-body">
+<div class="figure-html">
+<table class="align-center">
+  <tr>
+    <th>Range of temperature anomaly (T)</th>
+    <th>Frequency</th>
+  </tr>
+  <tr>
+    <td>−0.30</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>−0.25</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>…</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&#160;1.00</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&#160;1.05</td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 1.5 </span>
+A frequency table.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li>Using the frequency tables from Question 1:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Plot two separate column charts (frequency histograms) for 1951–1980 and 1981–2010 to show the distribution of temperatures, with frequency on the vertical axis and the range of temperature anomaly on the horizontal axis. Your charts should look similar to those in the <em>New York Times</em> article.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using your charts, describe the similarities and differences (if any) between the distributions of temperature anomalies in 1951–1980 and 1981–2010.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-14-creating-frequency-tables-and-histograms"><strong>R walk-through 1.4</strong> Creating frequency tables and histograms</h3>
+  <p>Since we will be looking at data from different subperiods (year intervals) separately, we will create a categorical variable (a variable that has two or more categories) that indicates the subperiod for each observation (row). In R this type of variable is called a ‘factor variable’. When we create a factor variable, we need to define the categories that this variable can take.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+  </span><span class="n">factor</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+    </span><span class="nf">c</span><span class="p">(</span><span class="s2">"1921-1950"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1951-1980"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1981-2010"</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">ordered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We created a new variable called <code class="language-r highlighter-rouge"><span class="n">Period</span></code> and defined the possible categories (which R refers to as ‘levels’). Since we will not be using data for some years (before 1921 and after 2010), we want <code class="language-r highlighter-rouge"><span class="n">Period</span></code> to take the value ‘NA’ (not available) for these observations (rows), and the appropriate category for all the other observations (between 1921–2010). One way to do this is by defining <code class="language-r highlighter-rouge"><span class="n">Period</span></code> as ‘NA’ for all observations, then change the values of <code class="language-r highlighter-rouge"><span class="n">Period</span></code> for the observations in 1921–2010.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">[(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1920</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">1951</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"1921-1950"</span><span class="w">
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">[(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1950</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">1981</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"1951-1980"</span><span class="w">
+</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">[(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1980</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2011</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"1981-2010"</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We need to use all monthly anomalies from June, July, and August, but they are currently in three separate columns. We will use the <code class="language-r highlighter-rouge"><span class="n">c</span></code> (combine) function to create one new variable (called <code class="language-r highlighter-rouge"><span class="n">temp_summer</span></code>) that contains all these values.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Combine the temperature data for June, July, and August</span><span class="w">
+</span><span class="n">temp_summer</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Jun</span><span class="p">,</span><span class="w"> </span><span class="n">tempdata</span><span class="o">$</span><span class="n">Jul</span><span class="p">,</span><span class="w"> </span><span class="n">tempdata</span><span class="o">$</span><span class="n">Aug</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>There are many ways to achieve the same result. One alternative is to use the <code class="language-r highlighter-rouge"><span class="n">unlist</span></code> function and apply it to Columns 7 to 9 (containing the data for June to August) of <code class="language-r highlighter-rouge"><span class="n">tempdata</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp_summer</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">tempdata</span><span class="p">[,</span><span class="m">7</span><span class="o">:</span><span class="m">9</span><span class="p">],</span><span class="n">use.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now we have one long variable (<code class="language-r highlighter-rouge"><span class="n">temp_summer</span></code>), with the monthly temperature anomalies for the three months (from 1880 to the latest year) attached to each other. But remember that we want to make separate calculations for each category in <code class="language-r highlighter-rouge"><span class="n">Period</span></code> (1921–1950, 1951–1980, 1981–2010). To make a variable showing the categories for the <code class="language-r highlighter-rouge"><span class="n">temp_summer</span></code> variable, we use the <code class="language-r highlighter-rouge"><span class="n">c</span></code> function again.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Mirror the Period information for temp_sum</span><span class="w">
+</span><span class="n">temp_Period</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+</span><span class="nf">c</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Repopulate the factor information </span><span class="w">
+</span><span class="n">temp_Period</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">temp_Period</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nlevels</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">),</span><span class="w"> 
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">levels</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">Period</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>After using the <code class="language-r highlighter-rouge"><span class="n">c</span></code> function, we had to use the <code class="language-r highlighter-rouge"><span class="n">factor</span></code> function again to tell R that our new variable <code class="language-r highlighter-rouge"><span class="n">temp_Period</span></code> is a factor variable.</p>
+  <p>We have now created the variables needed to make frequency tables and histograms (<code class="language-r highlighter-rouge"><span class="n">temp_summer</span></code> and <code class="language-r highlighter-rouge"><span class="n">temp_Period</span></code>). To obtain the frequency table for 1951–1980, we use the <code class="language-r highlighter-rouge"><span class="n">hist</span></code> function on the monthly temperature anomalies from the period ‘1951–1980’: <code class="language-r highlighter-rouge"><span class="n">temp_summer</span><span class="p">[(</span><span class="n">temp_Period</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"1951-1980"</span><span class="p">)]</span></code>. The option <code class="language-r highlighter-rouge"><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span></code> tells R not to make a plot of this information. (See what happens if you set it to <code class="language-r highlighter-rouge"><span class="kc">TRUE</span></code>.)</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist</span><span class="p">(</span><span class="n">temp_summer</span><span class="p">[(</span><span class="n">temp_Period</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"1951-1980"</span><span class="p">)],</span><span class="w"> 
+  </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## $breaks</span><span class="w">
+</span><span class="c1">##  [1] -0.30 -0.25 -0.20 -0.15 -0.10 -0.05  0.00  0.05  0.10  0.15  0.20</span><span class="w">
+</span><span class="c1">## [12]  0.25</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## $counts</span><span class="w">
+</span><span class="c1">##  [1]  2  7  6  7 14  6 14 12 10  9  3</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## $density</span><span class="w">
+</span><span class="c1">##  [1] 0.4444444 1.5555556 1.3333333 1.5555556 3.1111111 1.3333333 3.1111111</span><span class="w">
+</span><span class="c1">##  [8] 2.6666667 2.2222222 2.0000000 0.6666667</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## $mids</span><span class="w">
+</span><span class="c1">##  [1] -0.275 -0.225 -0.175 -0.125 -0.075 -0.025  0.025  0.075  0.125  0.175</span><span class="w">
+</span><span class="c1">## [11]  0.225</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## $xname</span><span class="w">
+</span><span class="c1">## [1] "temp_summer[(temp_Period == \"1951-1980\")]"</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## $equidist</span><span class="w">
+</span><span class="c1">## [1] TRUE</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## attr(,"class")</span><span class="w">
+</span><span class="c1">## [1] "histogram"</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>From the output you can see that we can get the temperature ranges (the values in <code class="language-r highlighter-rouge"><span class="o">$</span><span class="n">breaks</span></code> correspond to Column 1 of Figure 1.5) and the frequencies (<code class="language-r highlighter-rouge"><span class="o">$</span><span class="n">counts</span></code>), which is all we need to create a frequency table. However, in our case the frequency table is merely a temporary input required to produce a histogram.</p>
+  <p>We can make the three histograms we need all at once, using the <code class="language-r highlighter-rouge"><span class="n">histogram</span></code> function from the <code class="language-r highlighter-rouge"><span class="n">mosaic</span></code> package.</p>
+  <p class="keep-with-next">The function below includes multiple commands:</p>
+  <ul>
+    <li><code class="language-r highlighter-rouge"><span class="o">|</span><span class="w"> </span><span class="n">temp_Period</span></code> splits the data according to its category, given by <code class="language-r highlighter-rouge"><span class="n">temp_Period</span></code>.</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"count"</span></code> indicates that we want to display the counts (frequencies) in each category.</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-0.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span></code> gives a sequence of numbers −0.5, −0.4, …, 1.3, which are boundaries for the categories.</li>
+    <li><code class="language-r highlighter-rouge"><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram of temperature anomalies"</span></code> gives Figure 1.6 its title.</li>
+  </ul>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load the library we use for the following command.</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">mosaic</span><span class="p">)</span><span class="w">
+
+</span><span class="n">histogram</span><span class="p">(</span><span class="o">~</span><span class="w"> </span><span class="n">temp_summer</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">temp_Period</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"count"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-0.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.10</span><span class="p">),</span><span class="w"> 
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram of Temperature anomalies"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Summer temperature distribution"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-1-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Summer temperature distributions for different time periods.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Summer temperature distributions for different time periods.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Summer temperature distributions for different time periods.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.6 </span>
+Summer temperature distributions for different time periods.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>To explain what a histogram displays, we refer to the histogram for the period from 1921–1950. Notice the vertical bars that are centred at values such as –0.35, –0.25, –0.15, –0.05, and so forth. We will look first at the highest of the bars, which is centred at –0.15. This bar represents values of the temperature anomalies that fall in the interval from –0.2 to –0.1. The height of this bar is a representation of how many values fall into this interval, (23 observations, in this case). As it is the highest bar, this indicates that this is the interval in which the largest proportion of temperature anomalies fell for the period from 1921 to 1950. As you can see, there are virtually no temperature anomalies larger than 0.3. The height of these bars gives a useful overview of the distribution of the temperature anomalies.</p>
+  <p>Now consider how this distribution changes as we move through the three distinct time periods. The distribution is clearly moving to the right for the period 1981–2010, which is an indication that the temperature is increasing; in other words, an indication of global warming.</p>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">variance</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the mean of the squares of the deviations from the arithmetic mean of the distribution. The variance is used to indicate how ‘spread out’ the data is. A higher variance means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has zero variance (no variation), while the set of numbers 1, 1, 999 has a high variance of 221,334 (large spread).</span></dd>
+</dl>
+<p>Now we will use our data to look at different aspects of distributions. Firstly, we will learn how to use deciles to determine which observations are ‘normal’ and ‘abnormal’, and then learn how to use <strong data-term="variance">variance</strong> to describe the shape of a distribution.</p>
+<ol class="text-question">
+  <li>The <em>New York Times</em> article considers the bottom third (the lowest or coldest one-third) of temperature anomalies in 1951–1980 as ‘cold’ and the top third (the highest or hottest one-third) of anomalies as ‘hot’. In decile terms, temperatures in the 1st to 3rd decile are ‘cold’ and temperatures in the 7th to 10th decile or above are ‘hot’ (rounded to the nearest decile). Use R’s <code class="language-r highlighter-rouge"><span class="n">quantile</span></code> function to determine what values correspond to the 3rd and 7th decile across all months in 1951–1980.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-15-using-the-quantile-function"><strong>R walk-through 1.5</strong> Using the <code class="language-r highlighter-rouge"><span class="n">quantile</span></code> function</h3>
+  <p>First, we need to create a variable that contains all monthly anomalies in the years 1951–1980. Then, we use R’s <code class="language-r highlighter-rouge"><span class="n">quantile</span></code> function to find the required percentiles (0.3 and 0.7 refer to the 3rd and 7th deciles, respectively).</p>
+  <p><em>Note</em>: You may get slightly different values to those shown here if you are using the latest data.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Select years 1951 to 1980</span><span class="w">
+</span><span class="n">temp_all_months</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">tempdata</span><span class="p">,</span><span class="w"> 
+  </span><span class="p">(</span><span class="n">Year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1951</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1980</span><span class="p">))</span><span class="w">
+                   
+</span><span class="c1"># Columns 2 to 13 contain months Jan to Dec.</span><span class="w">
+</span><span class="n">temp_51to80</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">temp_all_months</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">13</span><span class="p">])</span><span class="w">
+      
+</span><span class="c1"># c(0.3, 0.7) indicates the chosen percentiles.</span><span class="w">
+</span><span class="n">perc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">temp_51to80</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">))</span><span class="w">   
+
+</span><span class="c1"># The cold threshold</span><span class="w">
+</span><span class="n">p</span><span class="m">30</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">perc</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+</span><span class="n">p</span><span class="m">30</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  30% </span><span class="w">
+</span><span class="c1">## -0.1</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The hot threshold</span><span class="w">
+</span><span class="n">p</span><span class="m">70</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">perc</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w">
+</span><span class="n">p</span><span class="m">70</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  70% </span><span class="w">
+</span><span class="c1">## 0.11</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<ol class="text-question tighten-15">
+  <li>Based on the values you found in Question 3, count the number of anomalies that are considered ‘hot’ in 1981–2010, and express this as a percentage of all the temperature observations in that period. Does your answer suggest that we are experiencing hotter weather more frequently in 1981–2010? (Remember that each decile represents 10% of observations, so 30% of temperatures were considered ‘hot’ in 1951–1980.)</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-16-using-the-mean-function"><strong>R walk-through 1.6</strong> Using the <code class="language-r highlighter-rouge"><span class="n">mean</span></code> function</h3>
+  <p><em>Note</em>: You may get slightly different values to those shown here if you are using the latest data.</p>
+  <p>We repeat the steps used in R walk-through 1.5, now looking at monthly anomalies in the years 1981–2010. We can simply change the year values in the code from R walk-through 1.5.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Select years 1951 to 1980</span><span class="w">
+</span><span class="n">temp_all_months</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">tempdata</span><span class="p">,</span><span class="w"> 
+  </span><span class="p">(</span><span class="n">Year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1981</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">2010</span><span class="p">))</span><span class="w">
+                   
+</span><span class="c1"># Columns 2 to 13 contain months Jan to Dec.</span><span class="w">
+</span><span class="n">temp_81to10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">temp_all_months</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">13</span><span class="p">])</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now that we have all the monthly data for 1981–2010, we want to count the proportion of observations that are smaller than –0.1. This is easily achieved with the following lines of code:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Proportion smaller than p30"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Proportion smaller than p30"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temp_81to10</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p</span><span class="m">30</span><span class="w">
+</span><span class="n">mean</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 0.01944444</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>What we did was first create a variable called <code class="language-r highlighter-rouge"><span class="n">temp</span></code>, which equals 1 (<code class="language-r highlighter-rouge"><span class="kc">TRUE</span></code>) for all the monthly temperature anomalies in <code class="language-r highlighter-rouge"><span class="n">temp_81to10</span></code> that are smaller than the 30th percentile value (<code class="language-r highlighter-rouge"><span class="n">temp_81to10</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p</span><span class="m">30</span></code>), and 0 (<code class="language-r highlighter-rouge"><span class="kc">FALSE</span></code>) otherwise. The mean of this variable is the proportion of 1s. Here we find that 0.019 (= 1.9%) of observations are smaller than <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">30</span></code>. That means that between 1951 and 1980, 30% of observations for the temperature anomaly were smaller than –0.10, but between 1981 and 2010 only about two per cent of months are considered cold. That is a large change.</p>
+  <p>Let’s check whether we get a similar result for the number of observations that are larger than 0.11.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Proportion larger than p70"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Proportion larger than p70"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mean</span><span class="p">(</span><span class="n">temp_81to10</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="m">70</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 0.8444444</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<ol class="text-question">
+  <li>The <em>New York Times</em> article discusses whether temperatures have become more variable over time. One way to measure temperature variability is by calculating the variance of the temperature distribution. For each season (<code class="language-r highlighter-rouge"><span class="n">DJF</span></code>, <code class="language-r highlighter-rouge"><span class="n">MAM</span></code>, <code class="language-r highlighter-rouge"><span class="n">JJA</span></code>, and <code class="language-r highlighter-rouge"><span class="n">SON</span></code>):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the mean (average) and variance separately for the following time periods: 1921–1950, 1951–1980, and 1981–2010.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>For each season, compare the variances in different periods, and explain whether or not temperature appears to be more variable in later periods.</li>
+</ul>
+<blockquote class="expandable-box keep-together">
+  <h3 id="r-walk-through-17-calculating-and-understanding-mean-and-variance"><strong>R walk-through 1.7</strong> Calculating and understanding mean and variance</h3>
+  <p>One way to calculate mean and variance is to use the <code class="language-r highlighter-rouge"><span class="n">mosaic</span></code> package introduced in R walk-through 1.4. (Remember to first install the <code class="language-r highlighter-rouge"><span class="n">mosaic</span></code> package and load it into R with <code class="language-r highlighter-rouge"><span class="n">library</span><span class="p">(</span><span class="n">mosaic</span><span class="p">)</span></code>.)</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Only run if you haven't loaded mosaic yet</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">mosaic</span><span class="p">)</span><span class="w">
+</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Mean of DJF temperature anomalies across periods"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Mean of DJF temperature anomalies across periods"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mean</span><span class="p">(</span><span class="o">~</span><span class="n">DJF</span><span class="o">|</span><span class="n">Period</span><span class="p">,</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##     1921-1950     1951-1980     1981-2010 </span><span class="w">
+</span><span class="c1">## -0.0573333333 -0.0006666667  0.5206666667</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Variance of DJF anomalies across periods"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Variance of DJF anomalies across periods"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span><span class="p">(</span><span class="o">~</span><span class="n">DJF</span><span class="o">|</span><span class="n">Period</span><span class="p">,</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  1921-1950  1951-1980  1981-2010 </span><span class="w">
+</span><span class="c1">## 0.05907540 0.05361333 0.07149609</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Using the data in tempdata (<code class="language-r highlighter-rouge"><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span></code>), we calculated the mean (<code class="language-r highlighter-rouge"><span class="n">mean</span></code>) and variance (<code class="language-r highlighter-rouge"><span class="n">var</span></code>) of variable <code class="language-r highlighter-rouge"><span class="o">~</span><span class="n">DJF</span></code> separately for (<code class="language-r highlighter-rouge"><span class="o">|</span></code>) each value of <code class="language-r highlighter-rouge"><span class="n">Period</span></code>. The <code class="language-r highlighter-rouge"><span class="n">mosaic</span></code> package allows us to calculate the means/variances for each period all at once.  If <code class="language-r highlighter-rouge"><span class="n">mosaic</span></code> is not loaded, you will get the error message: <code class="language-r highlighter-rouge"><span class="n">Error</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="o">~</span><span class="n">DJF</span><span class="w"> </span><span class="err">\</span><span class="o">|</span><span class="w"> </span><span class="n">Period</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">unused</span><span class="w"> </span><span class="n">argument</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span></code>.</p>
+  <p>Looking at the results, it appears that it is not only the mean (December, January, and February) temperature anomaly that increases through 1981–2010, but also the variance.</p>
+  <p>Let’s calculate the variances through the periods for the other seasons.</p>
+  <div class="language-r keep-with-next highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Variance of MAM anomalies across periods"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Variance of MAM anomalies across periods"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span><span class="p">(</span><span class="o">~</span><span class="n">MAM</span><span class="o">|</span><span class="n">Period</span><span class="p">,</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  1921-1950  1951-1980  1981-2010 </span><span class="w">
+</span><span class="c1">## 0.03029069 0.02661333 0.07535126</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Variance of JJA anomalies across periods"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Variance of JJA anomalies across periods"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span><span class="p">(</span><span class="o">~</span><span class="n">JJA</span><span class="o">|</span><span class="n">Period</span><span class="p">,</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  1921-1950  1951-1980  1981-2010 </span><span class="w">
+</span><span class="c1">## 0.01726713 0.01459264 0.06588690</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Variance of SON anomalies across periods"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Variance of SON anomalies across periods"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span><span class="p">(</span><span class="o">~</span><span class="n">SON</span><span class="o">|</span><span class="n">Period</span><span class="p">,</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdata</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##  1921-1950  1951-1980  1981-2010 </span><span class="w">
+</span><span class="c1">## 0.02421437 0.02587920 0.10431506</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We recognize that the variances seem to remain fairly constant across the first two periods, but they do increase markedly for the 1981–2010 period.</p>
+  <p>We can plot a line chart to see these changes graphically. (This type of chart is formally known as a ‘time-series plot’). Make sure to change the chart title according to the latest year in your data (here we used 2016).</p>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">DJF</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Annual temperature anomalies"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Year"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># \n creates a line break</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Average temperature anomaly in DJF and JJA \n in the northern hemisphere (1880-2016)"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add a horizontal line (at y = 0)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkorange2"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">tempdata</span><span class="o">$</span><span class="n">JJA</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkgreen"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> 
+
+</span><span class="c1"># Add a label to the horizontal line</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">1895</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="s2">"1951-1980 average"</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="m">1880</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"DJF"</span><span class="p">,</span><span class="w"> </span><span class="s2">"JJA"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"darkgreen"</span><span class="p">),</span><span class="w"> 
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-1-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere winter and summer quarter temperatures (1958–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere winter and summer quarter temperatures (1958–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Northern hemisphere winter and summer quarter temperatures (1958–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.7 </span>
+Northern hemisphere winter and summer quarter temperatures (1958–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>Using the findings of the <em>New York Times</em> article and your answers to Questions 1 to 5, discuss whether temperature appears to be more variable over time. Would you advise the government to spend more money on mitigating the effects of extreme weather events?</li>
+</ol>
+<h2 class="page-break-before" id="part-13-carbon-emissions-and-the-environment">Part 1.3 Carbon emissions and the environment</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-2">Learning objectives for this part</h3>
+  <ul>
+    <li>use scatterplots and the correlation coefficient to assess the degree of association between two variables</li>
+    <li>explain what correlation measures and the limitations of correlation.</li>
+  </ul>
+</blockquote>
+<dl class="definition wide">
+<dt class="definition-term">correlation</dt><dd class="definition-description">A measure of how closely related two variables are. Two variables are correlated if knowing the value of one variable provides information on the likely value of the other, for example high values of one variable being commonly observed along with high values of the other variable. Correlation can be positive or negative. It is negative when high values of one variable are observed with low values of the other. Correlation does not mean that there is a causal relationship between the variables. <span class="definition-example">Example: When the weather is hotter, purchases of ice cream are higher. Temperature and ice cream sales are positively correlated. On the other hand, if purchases of hot beverages decrease when the weather is hotter, we say that temperature and hot beverage sales are negatively correlated.</span></dd><dt class="definition-term">correlation coefficient</dt><dd class="definition-description">A numerical measure, ranging between 1 and −1, of how closely associated two variables are—whether they tend to rise and fall together, or move in opposite directions. A positive coefficient indicates that when one variable takes a high (low) value, the other tends to be high (low) too, and a negative coefficient indicates that when one variable is high the other is likely to be low. A value of 1 or −1 indicates that knowing the value of one of the variables would allow you to perfectly predict the value of the other. A value of 0 indicates that knowing one of the variables provides no information about the value of the other.</dd>
+</dl>
+<p>The government has heard that carbon emissions could be responsible for climate change, and has asked you to investigate whether this is the case. To do so, we are now going to look at carbon emissions over time, and use another type of chart, the scatterplot, to show their relationship to temperature anomalies. One way to measure the relationship between two variables is <strong data-term="correlation">correlation</strong>. R walk-through 1.8 explains what correlation is and how to calculate it in R.</p>
+<p>In the questions below, we will make charts using the CO<sub>2</sub> data from the US National Oceanic and Atmospheric Administration. Download the <a href="https://tinyco.re/3763425" class="show-url">Excel spreadsheet</a> containing this data. Save the data as a csv file and import it into R.</p>
+<ol class="text-question tighten-15">
+  <li>The CO<sub>2</sub> data was recorded from one observatory in Mauna Loa. Using <a href="https://tinyco.re/8193893" class="show-url">an Earth System Research Laboratory article</a> as a reference, explain whether or not you think this data is a reliable representation of the global atmosphere.</li>
+</ol>
+<ol class="text-question tighten-15">
+  <li>The variables <code class="language-r highlighter-rouge"><span class="n">trend</span></code> and <code class="language-r highlighter-rouge"><span class="n">interpolated</span></code> are similar, but not identical. In your own words, explain the difference between these two measures of CO<sub>2</sub> levels. Why might there be seasonal variation in CO<sub>2</sub> levels?</li>
+</ol>
+<p>Now we will use a line chart to look for general patterns over time.</p>
+<ol class="text-question tighten-15">
+  <li>Plot a line chart with interpolated and trend CO<sub>2</sub> levels on the vertical axis and time (starting from January 1960) on the horizontal axis. Label the axes and the chart legend, and give your chart an appropriate title. What does this chart suggest about the relationship between CO<sub>2</sub> and time?</li>
+</ol>
+<p>We will now combine the CO<sub>2</sub> data with the temperature data from Part 1.1, and then examine the relationship between these two variables visually using scatterplots, and statistically using the <strong data-term="correlation coefficient">correlation coefficient</strong>. If you have not yet downloaded the temperature data, follow the instructions in Part 1.1.</p>
+<ol class="text-question">
+  <li>Choose one month and add the CO<sub>2</sub> trend data to the temperature dataset from Part 1.1, making sure that the data corresponds to the correct year.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Make a scatterplot of CO<sub>2</sub> level on the vertical axis and temperature anomaly on the horizontal axis.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Calculate and interpret the (Pearson) correlation coefficient between these two variables.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Discuss the shortcomings of using this coefficient to summarize the relationship between variables.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-18-scatterplots-and-the-correlation-coefficient"><strong>R walk-through 1.8</strong> Scatterplots and the correlation coefficient</h3>
+  <p>First we will use the <code class="language-r highlighter-rouge"><span class="n">read.csv</span></code> function to import the CO<sub>2</sub> datafile into R, and call it <code class="language-r highlighter-rouge"><span class="n">CO2data</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CO2data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"1_CO2 data.csv"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>This file has monthly data, but in contrast to the data in <code class="language-r highlighter-rouge"><span class="n">tempdata</span></code>, the data is all in one column (this is more conventional than the column per month format). To make this task easier, we will pick the June data from the CO<sub>2</sub> emissions and add them as an additional variable to the <code class="language-r highlighter-rouge"><span class="n">tempdata</span></code> dataset.</p>
+  <p>R has a convenient function called <code class="language-r highlighter-rouge"><span class="n">merge</span></code> to do this. First we create a new dataset that contains only the June emissions data (‘CO2data_june’).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CO2data_june</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">CO2data</span><span class="p">[</span><span class="n">CO2data</span><span class="o">$</span><span class="n">Month</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">6</span><span class="p">,]</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Then we use this data in the <code class="language-r highlighter-rouge"><span class="n">merge</span></code> function. The <code class="language-r highlighter-rouge"><span class="n">merge</span></code> function takes the original ‘tempdata’ and the ‘CO2data’ and merges (combines) them together. As the two dataframes have a common variable, <code class="language-r highlighter-rouge"><span class="n">Year</span></code>, R automatically matches the data by year.</p>
+  <p>(<em>Extension:</em> Look up <code class="language-r highlighter-rouge"><span class="o">?</span><span class="n">merge</span></code> or Google ‘How to use the R merge function’ to figure out what <code class="language-r highlighter-rouge"><span class="n">all.x</span></code> does, and to see other options that this function allows.)</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">names</span><span class="p">(</span><span class="n">CO2data</span><span class="p">)[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Year"</span><span class="w">
+</span><span class="n">tempCO2data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">tempdata</span><span class="p">,</span><span class="w"> </span><span class="n">CO2data_june</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Let us have a look at the data and check that it was combined correctly:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">(</span><span class="n">tempCO2data</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Jun"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Trend"</span><span class="p">)])</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##   Year   Jun  Trend</span><span class="w">
+</span><span class="c1">## 1 1958  0.04 314.85</span><span class="w">
+</span><span class="c1">## 2 1959  0.14 315.92</span><span class="w">
+</span><span class="c1">## 3 1960  0.18 317.36</span><span class="w">
+</span><span class="c1">## 4 1961  0.19 317.48</span><span class="w">
+</span><span class="c1">## 5 1962 -0.10 318.27</span><span class="w">
+</span><span class="c1">## 6 1963 -0.02 319.16</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="loosen-15">To make a scatterplot, we use the <code class="language-r highlighter-rouge"><span class="n">plot</span></code> function. R’s default chart for <code class="language-r highlighter-rouge"><span class="n">plot</span></code> is a scatterplot, so we do not need to specify the chart type. One new option that applies to scatterplots is <code class="language-r highlighter-rouge"><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span></code>, which determines the appearance of the data points. The number 16 corresponds to filled-in circles, but you can experiment with other numbers (from 0 to 25) to see what the data points look like.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Jun</span><span class="p">,</span><span class="w"> </span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Trend</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Temperature anomaly (degrees Celsius)"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"CO2 levels (trend, mole fraction)"</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Scatterplot for CO2 emissions and temperature anomalies"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-1-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-08.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-08.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-08-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-08-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-08-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="CO2 emissions and northern hemisphere June temperatures (1958–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-08.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-08-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-08-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-08-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-08.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="CO2 emissions and northern hemisphere June temperatures (1958–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+CO<sub>2</sub> emissions and northern hemisphere June temperatures (1958–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.8 </span>
+CO<sub>2</sub> emissions and northern hemisphere June temperatures (1958–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p class="keep-with-next">The <code class="language-r highlighter-rouge"><span class="n">cor</span></code> function calculates the correlation coefficient. <em>Note</em>: You may get slightly different results if you are using the latest data.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cor</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Jun</span><span class="p">,</span><span class="w"> </span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Trend</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] 0.9157744</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="tighten-5">In this case, the correlation coefficient tells us that the data is quite close to resembling an upward-sloping straight line (as seen on the scatterplot). There is a strong positive association between the two variables (higher temperature anomalies are associated with higher CO<sub>2</sub> levels).</p>
+  <p>One limitation of this correlation measure is that it only tells us about the strength of the upward- or downward-sloping linear relationship between two variables, in other words how closely the scatterplot aligns along an upward- or downward-sloping straight line. The correlation coefficient cannot tell us if the two variables have a different kind of relationship (such as that represented by a wavy line).</p>
+  <p class="tighten-15"><em>Note:</em> The word ‘strong’ is used for coefficients that are close to 1 or −1, and ‘weak’ is used for coefficients that are close to 0, though there is no precise range of values that are considered ‘strong’ or ‘weak’.</p>
+  <p>If you need more insight into correlation coefficients, you may find it helpful to watch online tutorials such as <a href="https://tinyco.re/4363520" class="show-url">‘Correlation coefficient intuition’</a> from the Khan Academy.</p>
+  <p class="loosen-15 keep-together">As we are dealing with time-series data, it is often more instructive to look at a line plot, as a scatterplot cannot convey how the observations relate to each other in the time dimension. If you were to check the variable types (using <code class="language-r highlighter-rouge"><span class="n">str</span><span class="p">(</span><span class="n">tempCO2data</span><span class="p">)</span></code>), you would see that the data is not yet in time-series format. We could continue with the format as it is, but for plotting purposes it is useful to let R know that we are dealing with time-series data. We therefore apply the <code class="language-r highlighter-rouge"><span class="n">ts</span></code> function as we did in Part 1.1.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Jun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Jun</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1958</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Trend</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Trend</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1958</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2017</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div>  </div>
+  <p>Let’s start by plotting the June temperature anomalies.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Jun</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"June temperature anomalies"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Year"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"June temperature anomalies and CO2 emissions"</span><span class="p">)</span><span class="w">  
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-1-9">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-09.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-09.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-09-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-09-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-09-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere June temperatures (1958–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-09.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-09-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-09-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-09-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Northern hemisphere June temperatures (1958–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+Northern hemisphere June temperatures (1958–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.9 </span>
+Northern hemisphere June temperatures (1958–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p class="tighten-15">Typically, when using the <code class="language-r highlighter-rouge"><span class="n">plot</span></code> function we would now only need to add the line for the second variable using the <code class="language-r highlighter-rouge"><span class="n">lines</span></code> command. The issue, however, is that the CO<sub>2</sub> emissions variable (<code class="language-r highlighter-rouge"><span class="n">Trend</span></code>) is on a different scale, and the automatic vertical axis scale (from –0.2 to about 1.2) would not allow for the display of <code class="language-r highlighter-rouge"><span class="n">Trend</span></code>. To resolve this issue you can introduce a second vertical axis using the commands below. (<em>Tip:</em> You are unlikely to remember the exact commands required, however you can Google ‘R plot 2 vertical axes’ or a similar search term, and then adjust the code you find so it will work on your dataset.)</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create extra margins used for the second axis</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">))</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Jun</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"June temperature anomalies"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Year"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"June temperature anomalies and CO2 emissions"</span><span class="p">)</span><span class="w">  
+
+</span><span class="c1"># This puts the next plot into the same picture.</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># No axis, no labels</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">tempCO2data</span><span class="o">$</span><span class="n">Trend</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">axes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">)</span><span class="w"> 
+</span><span class="n">axis</span><span class="p">(</span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s1">'CO2 emissions'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"June temp anom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"CO2 emis"</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"black"</span><span class="p">),</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <dl class="definition">
+<dt class="definition-term">causation</dt><dd class="definition-description">A direction from cause to effect, establishing that a change in one variable produces a change in another. While a correlation gives an indication of whether two variables move together (either in the same or opposite directions), causation means that there is a mechanism that explains this association. <span class="definition-example">Example: We know that higher levels of CO<sub>2</sub> in the atmosphere lead to a greenhouse effect, which warms the Earth’s surface. Therefore we can say that higher CO<sub>2</sub> levels are the cause of higher surface temperatures.</span></dd><dt class="definition-term">spurious correlation</dt><dd class="definition-description">A strong linear association between two variables that does not result from any direct relationship, but instead may be due to coincidence or to another unseen factor.</dd>
+</dl>
+  <div class="figure figure-no-source" id="figure-1-10">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-01-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-01-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="CO2 emissions and northern hemisphere June temperatures (1958–2016).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-01-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-01-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-01-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="CO2 emissions and northern hemisphere June temperatures (1958–2016).
+" class="" />
+        </a>
+</div>
+<p class="description">
+CO<sub>2</sub> emissions and northern hemisphere June temperatures (1958–2016).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 1.10 </span>
+CO<sub>2</sub> emissions and northern hemisphere June temperatures (1958–2016).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p class="tighten-15">This line graph not only shows how the two variables move together in general, but also clearly demonstrates that both variables display a clear upward trend over the sample period. This is an important feature of many (not all) time series variables, and is important for the interpretation (see the ‘Find out more’ box on spurious correlations that follows).</p>
+</blockquote>
+<ol class="text-question">
+  <li><em>Extra practice:</em> Choose two months and add the CO<sub>2</sub> trend data to the temperature dataset from Part 1.1, making sure that the data corresponds to the correct year. Create a separate chart for each month. What do your charts and the correlation coefficients suggest about the relationship between CO<sub>2</sub> levels and temperature anomalies?</li>
+</ol>
+<p class="hyphens-manual">Even though two variables are strongly correlated with each other, this is not necessarily because one variable’s behaviour is the result of the other (a characteristic known as <strong data-term="causation">causation</strong>). The two variables could be spuriously correlated. The following example illustrates <strong data-term="spurious correlation">spurious correlation</strong>:</p>
+<blockquote>
+  <p>A child’s academic performance may be positively correlated with the size of the child’s house or the number of rooms in the house, but could we conclude that building an extra room would make a child smarter, or doing well at school would make someone’s house bigger? It is more plausible that income or wealth, which determines the size of home that a family can afford and the resources available for studying, is the ‘unseen factor’ in this relationship. We could also determine whether income is the reason for this spurious correlation by comparing exam scores for children whose parents have similar incomes but different house sizes. If there is no correlation between exam scores and house size, then we can deduce that house size was not ‘causing’ exam scores (or vice versa).</p>
+</blockquote>
+<p class="sidenote">See this <a href="https://tinyco.re/5951011" class="show-url">TEDx Talk</a> for more examples of the dangers of confusing correlation with causation.</p>
+<ol class="text-question">
+  <li>Consider the example of spurious correlation described above.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>In your own words, explain spurious correlation and the difference between correlation and causation.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Give an example of spurious correlation, similar to the one above, for either CO<sub>2</sub> levels or temperature anomalies.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Choose an example of spurious correlation from <a href="https://tinyco.re/8861803" class="show-url">Tyler Vigen’s website</a>. Explain whether you think it is a coincidence, or whether this correlation could be due to one or more other variables.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="find-out-more-what-makes-some-correlations-spurious"><strong>Find out more</strong> What makes some correlations spurious?</h3>
+  <p class="tighten-15">In the spurious correlations website given in Question 6<em>(c)</em>, most of the examples you will see involve data series (variables) that are trending (meaning that they tend to increase or decrease over time). If you calculate a correlation between two variables that are trending, you are bound to find a large positive or negative correlation coefficient, even if there is no plausible explanation for a relationship between the two variables. For example, ‘per capita cheese consumption’ (which increases over time due to increased disposable incomes or greater availability of cheese) has a correlation coefficient of 0.95 with the ‘number of people who die from becoming tangled in their bedsheets’ (which also increases over time due to a growing population and a growing availability of bedsheets).</p>
+  <p class="loosen-15">The case for our example (the relationship between temperature and CO<sub>2</sub> emissions) is slightly different. There is a well-known chemical link between the two. So we understand how CO<sub>2</sub> emissions could potentially cause changes in temperature. But in general, do not be tempted to conclude that there is a causal link just because a high correlation coefficient can be seen. Be very cautious when attaching too much meaning to high correlation coefficients when the data displays trending behaviour.</p>
+</blockquote>
+<p class="loosen-15">This part shows that summary statistics, such as the correlation coefficient, can help identify possible patterns or relationships between variables, but we cannot draw conclusions about causation from them alone. It is also important to think about other explanations for what we see in the data, and whether we would expect there to be a relationship between the two variables.</p>
+<dl class="definition wide">
+<dt class="definition-term">natural experiment</dt><dd class="definition-description">An empirical study exploiting naturally occurring statistical controls in which researchers do not have the ability to assign participants to treatment and control groups, as is the case in conventional experiments. Instead, differences in law, policy, weather, or other events can offer the opportunity to analyse populations as if they had been part of an experiment. The validity of such studies depends on the premise that the assignment of subjects to the naturally occurring treatment and control groups can be plausibly argued to be random.</dd>
+</dl>
+<p class="tighten-15">However, there are ways to determine whether there is a causal relationship between two variables, for example, by looking at the scientific processes that connect the variables (as with CO<sub>2</sub> and temperature anomalies), or by using a <strong data-term="natural experiment">natural experiment</strong>. To read more about how natural experiments help evaluate whether one variable causes another, see <a href="https://tinyco.re/9384675" class="show-url">Section 1.8</a> of <em>Economy, Society, and Public Policy</em>. In Empirical Project 3, we will take a closer look at natural experiments and how we can use them to identify causal links between variables.</p>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in R
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="01-03.html"
+               class="active">
+                Getting started in R
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="active">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="active">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="active">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

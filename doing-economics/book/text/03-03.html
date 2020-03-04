@@ -1,0 +1,3119 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 3: Working in R
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 3: Working in R" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/03-03.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-3-working-in-r"><strong>Empirical Project 3</strong> Working in R</h1>
+<blockquote class="info web-full-width">
+  <h3 id="download-the-code">Download the code</h3>
+  <p>To <a href="https://tinyco.re/7364275">download the code chunks used in this project</a>, right-click on the download link and select ‘Save Link As…’. You’ll need to save the code download to your working directory, and open it in RStudio.</p>
+  <p>Don’t forget to also download the data into your working directory by following the steps in this project.</p>
+</blockquote>
+<h2 id="r-specific-learning-objectives">R-specific learning objectives</h2>
+<p>In addition to the learning objectives for this project, in this section you will learn how to use the piping technique to run a sequence of functions.</p>
+<h2 id="getting-started-in-r">Getting started in R</h2>
+<p>For this project you will need the following packages:</p>
+<ul>
+  <li><code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code>, to help with data manipulation</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">readxl</span></code>, to import an Excel spreadsheet</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">mosaic</span></code>, to help create frequency tables</li>
+  <li><code class="language-r highlighter-rouge"><span class="n">readstata13</span></code>, to read in a Stata datafile.</li>
+</ul>
+<p>You will also use the <code class="language-r highlighter-rouge"><span class="n">ggplot2</span></code> package to produce accurate graphs, but that comes as part of the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package.</p>
+<p>If you need to install any of these packages, run the following code:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"readxl"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tidyverse"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mosaic"</span><span class="p">,</span><span class="w"> </span><span class="s2">"readstata13"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p>You can import these libraries now, or when they are used in the R walk-throughs below.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">mosaic</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">readstata13</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 class="keep-with-next" id="part-31-before-and-after-comparisons-of-retail-prices">Part 3.1 Before-and-after comparisons of retail prices</h2>
+<p class="keep-with-next">We will first look at price data from the treatment group (stores in Berkeley) to see what happened to the price of sugary and non-sugary beverages after the tax.</p>
+<ul>
+  <li>Download the data from the <a href="https://tinyco.re/5269171" class="show-url">Global Food Research Program’s website</a>, and select the ‘Berkeley Store Price Survey’ Excel dataset. Then upload the dataset into R.</li>
+  <li>The first tab of the Excel file contains the data dictionary. Make sure you read the data description column carefully, and check that each variable is in the Data tab.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-31-importing-the-datafile-into-r"><strong>R walk-through 3.1</strong> Importing the datafile into R</h3>
+  <p class="tighten-15">The data is in <code class="language-r highlighter-rouge"><span class="n">.xlsx</span></code> format, so we use the <code class="language-r highlighter-rouge"><span class="n">readxl</span></code> package to import it. We also load the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> library as this includes packages that we will use later for drawing charts and making code easier to read. If you open the data in Excel, you will see that there are two tabs: ‘Data Dictionary’, which contains some information about the variables, and ‘Data’, which contains the actual data. Let’s import both into R, so that do not need to refer back to Excel for the additional information about variables.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Set your working directory to the correct folder.</span><span class="w">
+</span><span class="c1"># Insert your file path for 'YOURFILEPATH'.</span><span class="w">
+</span><span class="n">setwd</span><span class="p">(</span><span class="s2">"YOURFILEPATH"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">var_info</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"sps_public.xlsx"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Data Dictionary"</span><span class="p">)</span><span class="w">
+</span><span class="n">dat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"sps_public.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Data"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Let’s use the <code class="language-r highlighter-rouge"><span class="n">str</span></code> function to check that the variables were classified correctly.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Classes 'tbl_df', 'tbl' and 'data.frame': 2175 obs. of 12 variables:</span><span class="w">
+</span><span class="c1">## $ store_id      : num 16 16 16 16 16 16 16 16 16 16 ...</span><span class="w">
+</span><span class="c1">## $ type          : chr "WATER" "TEA" "TEA" "WATER" ...</span><span class="w">
+</span><span class="c1">## $ store_type    : num 2 2 2 2 2 2 2 2 2 2 ...</span><span class="w">
+</span><span class="c1">## $ type2         : chr NA NA NA NA ...</span><span class="w">
+</span><span class="c1">## $ size          : num 33.8 23 23 33.8 128 64 128 64 63.9 144 ...</span><span class="w">
+</span><span class="c1">## $ price         : num 1.69 0.99 0.99 1.69 3.79 2.79 3.79 2.79 4.59 5.99 ...</span><span class="w">
+</span><span class="c1">## $ price_per_oz  : num 0.05 0.043 0.043 0.05 0.0296 ...</span><span class="w">
+</span><span class="c1">## $ price_per_oz_c: num 5 4.3 4.3 5 2.96 ...</span><span class="w">
+</span><span class="c1">## $ taxed         : num 0 1 1 0 0 0 0 0 0 1 ...</span><span class="w">
+</span><span class="c1">## $ supp          : num 0 0 0 0 0 0 0 0 0 1 ...</span><span class="w">
+</span><span class="c1">## $ time          : chr "DEC2014" "DEC2014" "DEC2014" "DEC2014" ...</span><span class="w">
+</span><span class="c1">## $ product_id    : num 29 32 33 38 40 41 42 43 44 50 ...</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>R classified all the variables containing numbers as numerical (<code class="language-r highlighter-rouge"><span class="n">num</span></code>). However, for some of these variables (specifically, <code class="language-r highlighter-rouge"><span class="n">type</span></code>, <code class="language-r highlighter-rouge"><span class="n">taxed</span></code>, <code class="language-r highlighter-rouge"><span class="n">supp</span></code>, <code class="language-r highlighter-rouge"><span class="n">store_id</span></code>, <code class="language-r highlighter-rouge"><span class="n">store_type</span></code>, <code class="language-r highlighter-rouge"><span class="n">type2</span></code> and <code class="language-r highlighter-rouge"><span class="n">product_id</span></code>), the numbers actually represent categories (known as ‘factors’ in R). So let’s use the <code class="language-r highlighter-rouge"><span class="n">factor</span></code> function to convert the variables to factor variables.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dat</span><span class="o">$</span><span class="n">type</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">type</span><span class="p">)</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">taxed</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"not taxed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"taxed"</span><span class="p">))</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">supp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">supp</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Standard"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Supplemental"</span><span class="p">))</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">store_id</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">store_id</span><span class="p">)</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">store_type</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Large Supermarket"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Small Supermarket"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Pharmacy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Gas Station"</span><span class="p">))</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">type2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">type2</span><span class="p">)</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">product_id</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">product_id</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>You can see that we used the <code class="language-r highlighter-rouge"><span class="n">labels</span></code> option to specify the names of different categories (where they are clearly defined).</p>
+  <p>There is another variable, <code class="language-r highlighter-rouge"><span class="n">time</span></code>, which is classified as a <code class="language-r highlighter-rouge"><span class="n">chr</span></code> variable (<code class="language-r highlighter-rouge"><span class="n">chr</span></code> stands for ‘characters’, meaning letters and numbers), but should be a factor variable. Before we do this, we use the <code class="language-r highlighter-rouge"><span class="n">unique</span></code> command to check the categories of this variable.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">unique</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">time</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "DEC2014" "JUN2015" "MAR2015"</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="tighten-15">If you look at the timeline in the <a href="https://tinyco.re/8147535" class="show-url">Silver et al. (2017) paper</a>, you will notice that the third price survey was in March 2016, not in March 2015, so the data has been labelled incorrectly. We shall therefore change all the values <code class="language-r highlighter-rouge"><span class="n">MAR2015</span></code> to <code class="language-r highlighter-rouge"><span class="n">MAR2016</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Selects all observations with “time” equal to "MAR2015".</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">time</span><span class="p">[</span><span class="n">dat</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"MAR2015"</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"MAR2016"</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We can now change <code class="language-r highlighter-rouge"><span class="n">time</span></code> into a factor variable.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dat</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">time</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<ol class="text-question">
+  <li>Read <a href="https://tinyco.re/9522240" class="show-url">‘S1 Text’</a>, from the journal paper’s supporting information, which explains how the Store Price Survey data was collected.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>In your own words, explain how the product information was recorded, and the measures that researchers took to ensure that the data was accurate and representative of the treatment group. What were some of the data collection issues that they encountered?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Instead of using the name of the store, each store was given a unique ID number (recorded as store_id on the spreadsheet). Verify that the number of stores in the dataset is the same as that stated in the ‘S1 Text’ (26). Similarly, each product was given a unique ID number (product_id). How many different products are in the dataset?</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-32-counting-the-number-of-unique-elements-in-a-variable"><strong>R walk-through 3.2</strong> Counting the number of unique elements in a variable</h3>
+  <p>We use two functions here: <code class="language-r highlighter-rouge"><span class="n">unique</span></code> to obtain a list of the unique elements of the variables of interest (<code class="language-r highlighter-rouge"><span class="n">dat</span><span class="o">$</span><span class="n">store_id</span></code> and <code class="language-r highlighter-rouge"><span class="n">dat</span><span class="o">$</span><span class="n">product_id</span></code>), then <code class="language-r highlighter-rouge"><span class="n">length</span></code> to count how long the list is. We will create two variables, <code class="language-r highlighter-rouge"><span class="n">no_stores</span></code> and <code class="language-r highlighter-rouge"><span class="n">no_products</span></code>, that contain the number of stores and products respectively.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">no_stores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">store_id</span><span class="p">))</span><span class="w">
+</span><span class="n">no_products</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">product_id</span><span class="p">))</span><span class="w">
+</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Stores:"</span><span class="p">,</span><span class="w"> </span><span class="n">no_stores</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Stores: 26"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">paste</span><span class="p">(</span><span class="s2">"Products:"</span><span class="p">,</span><span class="w"> </span><span class="n">no_products</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Products: 247"</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+<p class="keep-with-next">Following the approach described in ‘S1 Text’, we will compare the variable price per ounce in US$ cents (<code class="language-r highlighter-rouge"><span class="n">price_per_oz_c</span></code>). We will look at what happened to prices in the two treatment groups before the tax (<code class="language-r highlighter-rouge"><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEC2014</span></code>) and after the tax (<code class="language-r highlighter-rouge"><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JUN2015</span></code>):</p>
+<ul>
+  <li><em>treatment group one:</em> large supermarkets (<code class="language-r highlighter-rouge"><span class="n">store_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span></code>)</li>
+  <li><em>treatment group two:</em> pharmacies (<code class="language-r highlighter-rouge"><span class="n">store_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span></code>).</li>
+</ul>
+<p class="tighten-10">Before doing this analysis, we will use summary measures to see how many observations are in the treatment and control group, and how the two groups differ across some variables of interest. For example, if there are very few observations in a group, we might be concerned about the precision of our estimates and will need to interpret our results in light of this fact.</p>
+<p>We will now create frequency tables containing the summary measures that we are interested in.</p>
+<ol class="text-question">
+  <li>Create the following tables:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>A frequency table showing the number (count) of store observations (store type) in December 2014 and June 2015, with ‘store type’ as the row variable and ‘time period’ as the column variable. For each store type, is the number of observations similar in each time period?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>A frequency table showing the number of taxed and non-taxed beverages in December 2014 and June 2015, with ‘store type’ as the row variable and ‘taxed’ as the column variable. (‘Taxed’ equals 1 if the sugar tax applied to that product, and 0 if the tax did not apply). For each store type, is the number of taxed and non-taxed beverages similar?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>A frequency table showing the number of each product type (type), with ‘product type’ as the row variable and ‘time period’ as the column variable. Which product types have the highest number of observations and which have the lowest number of observations? Why might some products have more observations than others?</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-33-creating-frequency-tables"><strong>R walk-through 3.3</strong> Creating frequency tables</h3>
+  <h4 class="add-1" id="frequency-table-for-store-type-and-time-period">Frequency table for store type and time period</h4>
+  <p>We use the <code class="language-r highlighter-rouge"><span class="n">tally</span></code> function, which allows us to produce frequency tables using the <code class="language-r highlighter-rouge"><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"count"</span></code> option. We start with the frequency table that shows the number of stores of different types in each time period.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mosaic</span><span class="p">)</span><span class="w">
+</span><span class="n">tally</span><span class="p">(</span><span class="o">~</span><span class="n">store_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dat</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">margins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"count"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##                    time</span><span class="w">
+</span><span class="c1">## store_type          DEC2014 JUN2015 MAR2016 Total</span><span class="w">
+</span><span class="c1">##   Large Supermarket     177     209     158   544</span><span class="w">
+</span><span class="c1">##   Small Supermarket     407     391     327  1125</span><span class="w">
+</span><span class="c1">##   Pharmacy               87     102      73   262</span><span class="w">
+</span><span class="c1">##   Gas Station            73      96      75   244</span><span class="w">
+</span><span class="c1">##   Total                 744     798     633  2175</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>There are fewer observations taken from gas stations and pharmacies and more from small supermarkets.</p>
+  <h4 id="frequency-table-for-store-type-and-taxed">Frequency table for store type and taxed</h4>
+  <p>Now we repeat the steps above to make a frequency table with <code class="language-r highlighter-rouge"><span class="n">store_type</span></code> as the row variable and <code class="language-r highlighter-rouge"><span class="n">taxed</span></code> as the column variable. We add <code class="language-r highlighter-rouge"><span class="o">+</span><span class="n">time</span></code> to the code because we also want separate values for each time period.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tally</span><span class="p">(</span><span class="o">~</span><span class="n">store_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taxed</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dat</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">margins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"count"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## , , time = DEC2014</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">##                    taxed</span><span class="w">
+</span><span class="c1">## store_type          not taxed taxed Total</span><span class="w">
+</span><span class="c1">##   Large Supermarket        92    85   177</span><span class="w">
+</span><span class="c1">##   Small Supermarket       196   211   407</span><span class="w">
+</span><span class="c1">##   Pharmacy                 44    43    87</span><span class="w">
+</span><span class="c1">##   Gas Station              34    39    73</span><span class="w">
+</span><span class="c1">##   Total                   366   378   744</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## , , time = JUN2015</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">##                    taxed</span><span class="w">
+</span><span class="c1">## store_type          not taxed taxed Total</span><span class="w">
+</span><span class="c1">##   Large Supermarket       111    98   209</span><span class="w">
+</span><span class="c1">##   Small Supermarket       192   199   391</span><span class="w">
+</span><span class="c1">##   Pharmacy                 52    50   102</span><span class="w">
+</span><span class="c1">##   Gas Station              44    52    96</span><span class="w">
+</span><span class="c1">##   Total                   399   399   798</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## , , time = MAR2016</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">##                    taxed</span><span class="w">
+</span><span class="c1">## store_type          not taxed taxed Total</span><span class="w">
+</span><span class="c1">##   Large Supermarket        88    70   158</span><span class="w">
+</span><span class="c1">##   Small Supermarket       154   173   327</span><span class="w">
+</span><span class="c1">##   Pharmacy                 36    37    73</span><span class="w">
+</span><span class="c1">##   Gas Station              31    44    75</span><span class="w">
+</span><span class="c1">##   Total                   309   324   633</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">## , , time = Total</span><span class="w">
+</span><span class="c1">## </span><span class="w">
+</span><span class="c1">##                    taxed</span><span class="w">
+</span><span class="c1">## store_type          not taxed taxed Total</span><span class="w">
+</span><span class="c1">##   Large Supermarket       291   253   544</span><span class="w">
+</span><span class="c1">##   Small Supermarket       542   583  1125</span><span class="w">
+</span><span class="c1">##   Pharmacy                132   130   262</span><span class="w">
+</span><span class="c1">##   Gas Station             109   135   244</span><span class="w">
+</span><span class="c1">##   Total                  1074  1101  2175</span><span class="w">
+</span></code></pre></div>  </div>
+  <h4 id="frequency-table-for-product-type-and-time-period">Frequency table for product type and time period</h4>
+  <p>Now we make a frequency table with product type (<code class="language-r highlighter-rouge"><span class="n">type</span></code>) as the row variable and time period (<code class="language-r highlighter-rouge"><span class="n">time</span></code>) as the column variable.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tally</span><span class="p">(</span><span class="o">~</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dat</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">margins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"count"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##              time</span><span class="w">
+</span><span class="c1">## type          DEC2014 JUN2015 MAR2016 Total</span><span class="w">
+</span><span class="c1">##   ENERGY           56      58      49   163</span><span class="w">
+</span><span class="c1">##   ENERGY-DIET      49      54      35   138</span><span class="w">
+</span><span class="c1">##   JUICE            70      64      52   186</span><span class="w">
+</span><span class="c1">##   JUICE DRINK      19      17       6    42</span><span class="w">
+</span><span class="c1">##   MILK             63      61      53   177</span><span class="w">
+</span><span class="c1">##   SODA            239     262     215   716</span><span class="w">
+</span><span class="c1">##   SODA-DIET       128     174     127   429</span><span class="w">
+</span><span class="c1">##   SPORT            11      16      12    39</span><span class="w">
+</span><span class="c1">##   SPORT-DIET        2       2       0     4</span><span class="w">
+</span><span class="c1">##   TEA              52      45      41   138</span><span class="w">
+</span><span class="c1">##   TEA-DIET          6       6       8    20</span><span class="w">
+</span><span class="c1">##   WATER            48      38      34   120</span><span class="w">
+</span><span class="c1">##   WATER-SWEET       1       1       1     3</span><span class="w">
+</span><span class="c1">##   Total           744     798     633  2175</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="tighten-10">This table shows that there were no observations for the category <code class="language-r highlighter-rouge"><span class="n">Sport</span><span class="o">-</span><span class="n">diet</span></code> in March 2016. As this is a drink which even in the other months has very few observations, it may be a product that is offered only in one shop, and it is possible that this shop was not visited in March 2016. The product may also be a seasonal product that is not available in March. It is also likely that <code class="language-r highlighter-rouge"><span class="n">Water</span><span class="o">-</span><span class="n">sweet</span></code> is offered in only one shop.</p>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">conditional mean</dt><dd class="definition-description">An average of a variable, taken over a subgroup of observations that satisfy certain conditions, rather than all observations.</dd>
+</dl>
+<p class="tighten-15">Besides counting the number of observations in a particular group, we can also calculate the mean by only using observations that satisfy certain conditions (known as the <strong data-term="conditional mean">conditional mean</strong>). In this case, we are interested in comparing the mean price of taxed and untaxed beverages, before and after the tax.</p>
+<ol class="text-question keep-with-next">
+  <li>Calculate and compare conditional means:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table similar to <a href="#figure-3-1" class="show-page-number">Figure 3.1</a>, showing the average price per ounce (in cents) for taxed and untaxed beverages separately, with ‘store type’ as the row variable, and ‘taxed’ and ‘time’ as the column variables. To follow the methodology used in the journal paper, make sure to only include products that are present in all time periods, and non-supplementary products (<code class="language-r highlighter-rouge"><span class="n">supp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span></code>).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Without doing any calculations, summarize any differences or general patterns between December 2014 and June 2015 that you find in the table.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Would we be able to assess the effect of sugar taxes on product prices by comparing the average price of untaxed goods with that of taxed goods in any given period? Why or why not?</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-3-1">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th></th>
+    <th colspan="2">Non-taxed</th>
+    <th colspan="2">Taxed</th>
+  </tr>
+  <tr>
+    <td>Store type</td>
+    <td>Dec 2014</td>
+    <td>Jun 2015</td>
+    <td>Dec 2014</td>
+    <td>Jun 2015</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+The average price of taxed and non-taxed beverages, according to time period and store type.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.1 </span>
+The average price of taxed and non-taxed beverages, according to time period and store type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><span> </span></p>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-34-calculating-conditional-means"><strong>R walk-through 3.4</strong> Calculating conditional means</h3>
+  <p>Calculating conditional means is not a straightforward task (in R or in any other statistical program), but is, however, a common data cleaning operation you will encounter. Here is one way to do this.</p>
+  <p>In order to identify products (<code class="language-r highlighter-rouge"><span class="n">product_id</span></code>) that have observations for all three periods (<code class="language-r highlighter-rouge"><span class="n">DEC2014</span></code> , <code class="language-r highlighter-rouge"><span class="n">JUN2015</span></code> and <code class="language-r highlighter-rouge"><span class="n">MAR2016</span></code>), we will first create a new variable called <code class="language-r highlighter-rouge"><span class="n">period_test</span></code>, which takes the value 1 (or <code class="language-r highlighter-rouge"><span class="kc">TRUE</span></code>) if we have observations in all periods for a product in a particular store, and 0 (<code class="language-r highlighter-rouge"><span class="kc">FALSE</span></code>) otherwise. These true/false variables are called ‘boolean variables’.</p>
+  <p>The easiest way to create this variable is through a loop. For each store and product ID, we will check whether there are observations in all periods (i.e. the variable <code class="language-r highlighter-rouge"><span class="n">time</span></code> has the time periods <code class="language-r highlighter-rouge"><span class="n">DEC2014</span></code> , <code class="language-r highlighter-rouge"><span class="n">JUN2015</span></code> and <code class="language-r highlighter-rouge"><span class="n">MAR2016</span></code>), and temporarily store this information in the variable <code class="language-r highlighter-rouge"><span class="n">test</span></code>. We then transfer this information to the rows of the new <code class="language-r highlighter-rouge"><span class="n">period_test</span></code> variable that correspond to that store and product ID.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dat</span><span class="o">$</span><span class="n">period_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+
+</span><span class="c1"># List of all store IDs</span><span class="w">
+</span><span class="n">sid_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">store_id</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># List of all product IDs</span><span class="w">
+</span><span class="n">pid_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">dat</span><span class="o">$</span><span class="n">product_id</span><span class="p">)</span><span class="w">
+
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">sid_list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pid_list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span><span class="w"> </span><span class="n">product_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">store_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w">
+    </span><span class="n">temp_time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temp</span><span class="o">$</span><span class="n">time</span><span class="w">
+    </span><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="w">
+      </span><span class="nf">any</span><span class="p">(</span><span class="n">temp_time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"DEC2014"</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> 
+      </span><span class="nf">any</span><span class="p">(</span><span class="n">temp_time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"JUN2015"</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+      </span><span class="nf">any</span><span class="p">(</span><span class="n">temp_time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"MAR2016"</span><span class="p">))</span><span class="w">
+    </span><span class="n">dat</span><span class="o">$</span><span class="n">period_test</span><span class="p">[</span><span class="n">dat</span><span class="o">$</span><span class="n">product_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> 
+      </span><span class="n">dat</span><span class="o">$</span><span class="n">store_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">test</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now we can use the <code class="language-r highlighter-rouge"><span class="n">period_test</span></code> variable to remove all products that have not been observed in all three periods. We will store the remaining products in a new dataframe, <code class="language-r highlighter-rouge"><span class="n">dat_c</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dat_c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span><span class="w">
+  </span><span class="p">(</span><span class="n">period_test</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">supp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Standard"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Now we can calculate the means of <code class="language-r highlighter-rouge"><span class="n">price_per_oz</span></code> by grouping the data according to <code class="language-r highlighter-rouge"><span class="n">store_type</span></code> , <code class="language-r highlighter-rouge"><span class="n">taxed</span></code> , and <code class="language-r highlighter-rouge"><span class="n">time</span></code>. One way to achieve this is to use a technique called piping:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">taxed</span><span class="p">,</span><span class="w"> </span><span class="n">store_type</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">price_per_oz</span><span class="p">),</span><span class="w">
+    </span><span class="n">avg.price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">price_per_oz</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">spread</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">avg.price</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">  
+  </span><span class="n">print</span><span class="p">()</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 8 x 6</span><span class="w">
+</span><span class="c1">## # Groups:   taxed, store_type [8]</span><span class="w">
+</span><span class="c1">##   taxed     store_type            n DEC2014 JUN2015 MAR2016</span><span class="w">
+</span><span class="c1">##   &lt;fct&gt;     &lt;fct&gt;             &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1 not taxed Large Supermarket    36   0.112   0.115   0.117</span><span class="w">
+</span><span class="c1">## 2 not taxed Small Supermarket    70   0.137   0.138   0.134</span><span class="w">
+</span><span class="c1">## 3 not taxed Pharmacy             18   0.152   0.161   0.154</span><span class="w">
+</span><span class="c1">## 4 not taxed Gas Station          12   0.169   0.170   0.170</span><span class="w">
+</span><span class="c1">## 5 taxed     Large Supermarket    36   0.156   0.169   0.167</span><span class="w">
+</span><span class="c1">## 6 taxed     Small Supermarket   101   0.159   0.160   0.155</span><span class="w">
+</span><span class="c1">## 7 taxed     Pharmacy             18   0.182   0.191   0.186</span><span class="w">
+</span><span class="c1">## 8 taxed     Gas Station          22   0.194   0.203   0.192</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Piping is a very useful technique in R for data analysis. If we have to perform a sequence of commands on the same object, then we can simplify the code by writing the sequence as a single command. We use the punctuation <code class="language-r highlighter-rouge"><span class="o">%&gt;%</span></code> to link the commands together.</p>
+  <p>In this code above, we 1) took the data in <code class="language-r highlighter-rouge"><span class="n">dat_c</span></code> and grouped them according to the variables <code class="language-r highlighter-rouge"><span class="n">taxed</span></code>, <code class="language-r highlighter-rouge"><span class="n">store_type</span></code> , and <code class="language-r highlighter-rouge"><span class="n">time</span></code>, 2) summarized the data by calculating the mean of <code class="language-r highlighter-rouge"><span class="n">price_per_oz</span></code> and the number of observations in each group, 3) rearranged the results table so that <code class="language-r highlighter-rouge"><span class="n">time</span></code> is the column variable and the values inside the table are the means of <code class="language-r highlighter-rouge"><span class="n">price_per_oz</span></code>.</p>
+  <p>The University of Manchester’s Econometric Computing Learning Resource provides <a href="https://tinyco.re/5531433" class="show-url">a more detailed introduction to piping</a>.</p>
+  <p>Use the <a href="https://tinyco.re/9687764" class="show-url">S3 Table</a> in the journal paper to check how closely your summary data match those in the paper.<sup id="fnref:2"><a href="#fn:2" class="footnote">1</a></sup> You should find that your results for Large Supermarkets and Pharmacies match, but the other store types have discrepancies. In <a href="#r-walk-through-35-making-a-column-chart-to-compare-two-groups" class="show-page-number">R walk-through 3.5</a> we will discuss these differences in more detail.</p>
+</blockquote>
+<p>In order to make a before-and-after comparison, we will make a chart similar to <a href="https://tinyco.re/8127041" class="show-url">Figure 2</a> in the journal paper, to show the change in prices for each store type.</p>
+<ol class="text-question">
+  <li>Using your table from Question 3:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the change in the mean price after the tax (price in June 2015 minus price in December 2014) for taxed and untaxed beverages, by store type.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Using the values you calculated in Question 4(<em>a</em>), plot a column chart to show this information (as done in Figure 2 of the journal paper) with store type on the horizontal axis and price change on the vertical axis. Label each axis and data series appropriately. You should get the same values as shown in Figure 2.</li>
+</ul>
+<blockquote class="expandable-box page-break-before">
+  <h3 id="r-walk-through-35-making-a-column-chart-to-compare-two-groups"><strong>R walk-through 3.5</strong> Making a column chart to compare two groups</h3>
+  <h4 class="add-1" id="calculate-price-differences-by-store-type">Calculate price differences by store type</h4>
+  <p>Let’s calculate the two price differences (June 2015 minus December 2014 and March 2016 minus December 2014), and store them as <code class="language-r highlighter-rouge"><span class="n">D</span><span class="m">1</span></code> and <code class="language-r highlighter-rouge"><span class="n">D</span><span class="m">2</span></code> respectively:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_res</span><span class="o">$</span><span class="n">D</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">table_res</span><span class="o">$</span><span class="n">JUN2015</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">table_res</span><span class="o">$</span><span class="n">DEC2014</span><span class="w">
+</span><span class="n">table_res</span><span class="o">$</span><span class="n">D</span><span class="m">2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">table_res</span><span class="o">$</span><span class="n">MAR2016</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">table_res</span><span class="o">$</span><span class="n">DEC2014</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="s2">"Group Means"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## [1] "Group Means"</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_res</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 8 x 8</span><span class="w">
+</span><span class="c1">## # Groups:   taxed, store_type [8]</span><span class="w">
+</span><span class="c1">##   taxed     store_type          n DEC2014 JUN2015 MAR2016      D1       D2</span><span class="w">
+</span><span class="c1">##   &lt;fct&gt;     &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">## 1 not taxed Large Supermar~    36   0.112   0.115   0.117 2.88e-3  0.00510</span><span class="w">
+</span><span class="c1">## 2 not taxed Small Supermar~    70   0.137   0.138   0.134 1.46e-3 -0.00304</span><span class="w">
+</span><span class="c1">## 3 not taxed Pharmacy           18   0.152   0.161   0.154 8.80e-3  0.00240</span><span class="w">
+</span><span class="c1">## 4 not taxed Gas Station        12   0.169   0.170   0.170 2.90e-4  0.00106</span><span class="w">
+</span><span class="c1">## 5 taxed     Large Supermar~    36   0.156   0.169   0.167 1.31e-2  0.0107 </span><span class="w">
+</span><span class="c1">## 6 taxed     Small Supermar~   101   0.159   0.160   0.155 1.44e-3 -0.00359</span><span class="w">
+</span><span class="c1">## 7 taxed     Pharmacy           18   0.182   0.191   0.186 8.97e-3  0.00448</span><span class="w">
+</span><span class="c1">## 8 taxed     Gas Station        22   0.194   0.203   0.192 9.25e-3 -0.00174</span><span class="w">
+</span></code></pre></div>  </div>
+  <h4 id="plot-a-column-chart-for-average-price-changes">Plot a column chart for average price changes</h4>
+  <p>To display <code class="language-r highlighter-rouge"><span class="n">D</span><span class="m">1</span></code> and <code class="language-r highlighter-rouge"><span class="n">D</span><span class="m">2</span></code> in a column chart, we will use the <code class="language-r highlighter-rouge"><span class="n">ggplot2</span></code> package (which is part of the <code class="language-r highlighter-rouge"><span class="n">tidyverse</span></code> package we loaded for R walk-through 3.1). Let’s start with displaying the average price change from December 2014 to June 2015 (which is stored in <code class="language-r highlighter-rouge"><span class="n">D</span><span class="m">1</span></code>):</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">table_res</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">taxed</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">D</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">store_type</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dodge"</span><span class="p">,</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Add the axes labels</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Price change (US$/oz)"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Store type"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Add the title and legend labels</span><span class="w">
+  </span><span class="n">scale_fill_discrete</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Beverages"</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Non-taxed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Taxed"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Average price change from Dec 2014 to Jun 2015"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-3-2">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-03-02.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-03-02.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-03-02-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-02-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-02-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average price change from December 2014 to June 2015.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-03-02.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-03-02-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-02-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-02-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-02.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average price change from December 2014 to June 2015.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average price change from December 2014 to June 2015.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.2 </span>
+Average price change from December 2014 to June 2015.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+  <p>Now we do the same for the price change from Dec 2014 to Mar 2016:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">table_res</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">taxed</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">D</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">store_type</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dodge"</span><span class="p">,</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Add the axes labels</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Price change (US$/oz)"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Store type"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Add the title and legend labels</span><span class="w">
+  </span><span class="n">scale_fill_discrete</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Beverages"</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Non-taxed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Taxed"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Average price change from Dec 2014 to Mar 2016"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-3-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-03-03.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-03-03.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-03-03-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-03-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-03-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average price change from December 2014 to March 2016.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-03-03.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-03-03-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-03-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-03-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average price change from December 2014 to March 2016.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average price change from December 2014 to March 2016.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.3 </span>
+Average price change from December 2014 to March 2016.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">statistically significant</dt><dd class="definition-description">When a relationship between two or more variables is unlikely to be due to chance, given the assumptions made about the variables (for example, having the same mean). Statistical significance does not tell us whether there is a causal link between the variables.</dd>
+</dl>
+<p>To assess whether the difference in mean prices before and after the tax could have happened by chance due to the samples chosen (and there are no differences in the population means), we could calculate the p-value. (Here, ‘population means’ refer to the mean prices before/after the tax that we would calculate if we had all prices for all stores in Berkeley.) The authors of the journal article calculate p-values, and use the idea of statistical significance to interpret them. Whenever they get a p-value of less than 5%, they conclude that the assumption of no differences in the population is unlikely to be true: they say that the price difference is <strong data-term="statistically significant">statistically significant</strong>. If they get a p-value higher than 5%, they say that the difference is not statistically significant, meaning that they think it could be due to chance variation in prices.</p>
+<p class="tighten-10">Using a particular cutoff level for the p-value, and concluding that a result is only statistically significant if the p-value is below the cutoff, is common in statistical studies, and 5% is often used as the cutoff level. But <a href="https://tinyco.re/6156097">this approach has been criticized recently by statisticians and social scientists</a>. The main criticisms raised are that any cutoffs are arbitrary. Instead of using a cutoff, we prefer to calculate p-values and use them to assess the strength of the evidence against our assumption that there are no differences in the population means. Whether the statistical evidence is strong enough for us to draw a conclusion about a policy, such as a sugar tax, will always be a matter of judgement.</p>
+<p>According to the journal paper, the p-value is 0.02 for large supermarkets, and 0.99 for pharmacies.</p>
+<ol class="text-question keep-with-next">
+  <li>Based on these p-values and your chart from Question 4, what can you conclude about the difference in means?  (<em>Hint:</em> You may find the discussion in <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour" class="show-page-number">Part 2.3</a> helpful.)</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="extension-r-walk-through-36-calculating-the-p-value-for-price-changes"><strong>Extension R walk-through 3.6</strong> Calculating the p-value for price changes</h3>
+  <p>In this walk-through, we show the calculations required to obtain the p- values in Table S3 of the Silver et al. (2017) paper. Since the p-values are already provided, this walk-through is only for those who want to see how these p-values were calculated. For the categories of Large Supermarkets and Pharmacies, we conduct a hypothesis test, which tests the null hypothesis that the price difference between June 2015 and December 2014 (and March 2016 and December 2014) for the taxed and untaxed beverages in the two store types could be due to chance.</p>
+  <p>We are interested in whether the difference in average price between <code class="language-r highlighter-rouge"><span class="n">JUN2015</span></code> and <code class="language-r highlighter-rouge"><span class="n">DEC2014</span></code> (or <code class="language-r highlighter-rouge"><span class="n">MAR2016</span></code> and <code class="language-r highlighter-rouge"><span class="n">DEC2014</span></code>) for one group (say, Large Supermarket and taxed) is zero (i.e. there is no difference in the means of the two populations). Note that we are dealing with paired observations (the same product in both time periods).</p>
+  <p>Let’s use the price difference between June 2015 and December 2014 in Large Supermarkets for taxed beverages as an example. First, we extract the prices for both periods (the vectors <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span></code> and <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">2</span></code>) and then calculate the difference, element by element (stored as <code class="language-r highlighter-rouge"><span class="n">d_t</span></code>).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="o">$</span><span class="n">price_per_oz</span><span class="p">[</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Large Supermarket"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"taxed"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"DEC2014"</span><span class="p">]</span><span class="w">
+
+</span><span class="n">p</span><span class="m">2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="o">$</span><span class="n">price_per_oz</span><span class="p">[</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Large Supermarket"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"taxed"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"JUN2015"</span><span class="p">]</span><span class="w">
+
+</span><span class="c1"># Price difference for taxed products</span><span class="w">
+</span><span class="n">d_t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>All three new variables are vectors with 36 elements. For <code class="language-r highlighter-rouge"><span class="n">d_t</span></code> to correctly represent the price difference for a particular product in a particular store, we need to be certain that each element in both vectors corresponds to the same product in the same store. To check that the elements match, we will extract the store and product IDs along with the prices, and compare the ordering in <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">alt</span></code> and <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">2</span><span class="err">_</span><span class="n">alt</span></code>.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="m">1</span><span class="err">_</span><span class="n">alt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="p">[</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Large Supermarket"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"taxed"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"DEC2014"</span><span class="p">,</span><span class="w">
+  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"store_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"price_per_oz"</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">p</span><span class="m">2</span><span class="err">_</span><span class="n">alt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="p">[</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Large Supermarket"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"taxed"</span><span class="w"> </span><span class="o">&amp;</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"JUN2015"</span><span class="p">,</span><span class="w">
+  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"store_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"price_per_oz"</span><span class="p">)]</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>You can see that the ordering matches, since the original datafile was ordered in a way (first according to <code class="language-r highlighter-rouge"><span class="n">time</span></code>, then <code class="language-r highlighter-rouge"><span class="n">store_id</span></code> and then <code class="language-r highlighter-rouge"><span class="n">product_id</span></code> ) that in this instance guarantees identical ordering.</p>
+  <p>The average value of the price difference is 0.0131222, and our task is to evaluate whether this is likely to be due to sampling variation (given the assumption that there is no difference between the populations) or not. To do this, we can use the <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function, which provides the associated p-value.</p>
+  <dl class="definition">
+<dt class="definition-term">standard error</dt><dd class="definition-description">A measure of the degree to which the sample mean deviates from the population mean. It is calculated by dividing the standard deviation of the sample by the square root of the number of observations.</dd>
+</dl>
+  <p>Alternatively, we can calculate the respective test statistic manually, which also requires us to calculate the <strong data-term="standard error">standard error</strong> of this value:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">d_t</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">d_t</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">d_t</span><span class="p">)))</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Alternatively, we can use the available <code class="language-r highlighter-rouge"><span class="n">t.test</span></code> function in R, which gives exactly the same results but has the advantage of directly obtaining p-values and confidence intervals.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Recognize that the differences come from paired samples.</span><span class="w">
+</span><span class="n">t.test</span><span class="p">(</span><span class="n">p</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">paired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##</span><span class="w">
+
+</span><span class="c1">## Paired t-test</span><span class="w">
+</span><span class="c1">##</span><span class="w">
+</span><span class="c1">## data: p2 and p1</span><span class="w">
+</span><span class="c1">## t = 4.7681, df = 35, p-value = 3.226e-05</span><span class="w">
+</span><span class="c1">## alternative hypothesis: true difference in means is not equal to 0</span><span class="w">
+</span><span class="c1">## 95 percent confidence interval:</span><span class="w">
+</span><span class="c1">## 0.007535221 0.018709202</span><span class="w">
+</span><span class="c1">## sample estimates:</span><span class="w">
+</span><span class="c1">## mean of the differences</span><span class="w">
+</span><span class="c1">## 0.01312221</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Or get the same result using the function directly on d</span><span class="w">
+</span><span class="c1"># t.test(d)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>To compare this result to the journal paper, look at the extract from Table S3 (the section on Large Supermarkets) shown in Figure 3.4 below. The cell with ‘**’ shows the mean price difference of 1.31 cents ($0.0131).</p>
+  <div class="figure" id="figure-3-4">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right print-shrink-90pc">
+  <tr>
+    <th rowspan="2">Large supermarkets<br />(<em>n</em> = 6)</th>
+    <th colspan="1">Taxed beverage price<br />(36 sets)</th>
+    <th colspan="1">Untaxed beverage price<br />(36 sets)</th>
+    <th colspan="1">Taxed – untaxed difference</th>
+  </tr>
+  <tr>
+    <td>cents/oz</td>
+    <td>cents/oz</td>
+    <td>cents/oz</td>
+  </tr>
+  <tr>
+    <td>Round 1: December 2014</td>
+    <td>15.62</td>
+    <td>11.19</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Round 2: June 2015</td>
+    <td>16.93</td>
+    <td>11.48</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Round 3: March 2016</td>
+    <td>16.68</td>
+    <td>11.70</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Mean change <br />(March 2016–Dec 2014)</td>
+    <td>1.07, (<em>p</em>=0.01)</td>
+    <td>0.51, (<em>p</em>=0.01)</td>
+    <td>0.56, (<em>p</em>=0.22)</td>
+  </tr>
+  <tr>
+    <td>Mean change<br />(June 2015–Dec 2014)</td>
+    <td>1.31, (<em>p</em>&lt;0.001)<sup>**</sup></td>
+    <td>0.29, (<em>p</em>=0.08)</td>
+    <td>1.02, (<em>p</em>=0.002)</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Table S3 in Silver et al. (2017), showing means and confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.4 </span>
+Table S3 in Silver et al. (2017), showing means and confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+<div class="figure-source">
+<p class="source">
+<em>n</em> = number of stores of each type.
+</p>
+</div><!--.figure-source-->
+</div>
+  <p>In our test output we get a very small p-value (0.0000323) which in the table is indicated by the double asterisk.</p>
+  <p>Tests for other store types are calculated similarly, by changing the data extracted to <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">1</span></code> and <code class="language-r highlighter-rouge"><span class="n">p</span><span class="m">2</span></code>. Let’s do that for one more example: the price difference between June 2015 and December 2014 in Large Supermarkets for untaxed beverages.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="m">1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="o">$</span><span class="n">price_per_oz</span><span class="p">[</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Large Supermarket"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> 
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"not taxed"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">dat_c</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"DEC2014"</span><span class="p">]</span><span class="w">
+
+</span><span class="n">p</span><span class="m">2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat_c</span><span class="o">$</span><span class="n">price_per_oz</span><span class="p">[</span><span class="w">
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">store_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Large Supermarket"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> 
+  </span><span class="n">dat_c</span><span class="o">$</span><span class="n">taxed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"not taxed"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">dat_c</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"JUN2015"</span><span class="p">]</span><span class="w">
+
+</span><span class="n">d_nt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="w">
+
+</span><span class="n">t.test</span><span class="p">(</span><span class="n">p</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">paired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##</span><span class="w">
+</span><span class="c1">## Paired t-test</span><span class="w">
+</span><span class="c1">##</span><span class="w">
+</span><span class="c1">## data: p2 and p1</span><span class="w">
+</span><span class="c1">## t = 1.8179, df = 35, p-value = 0.07765</span><span class="w">
+</span><span class="c1">## alternative hypothesis: true difference in means is not equal to 0</span><span class="w">
+</span><span class="c1">## 95 percent confidence interval:</span><span class="w">
+</span><span class="c1">## -0.0003367942 0.0061057804</span><span class="w">
+</span><span class="c1">## sample estimates:</span><span class="w">
+</span><span class="c1">## mean of the differences</span><span class="w">
+</span><span class="c1">## 0.002884493</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>You should be able to recognize the mean difference, the p-value, and the confidence interval in the excerpt of Table S3 provided in <a href="#figure-3-4">Figure 3.4</a>.</p>
+  <p>Let’s also replicate the last section of Table S3, which shows the difference between the price changes in taxed and untaxed products, that is, we want to know whether <code class="language-r highlighter-rouge"><span class="n">d_t</span></code>AND <code class="language-r highlighter-rouge"><span class="n">d_nt</span></code> have different means. We will apply the two sample hypothesis tests, but this time for unpaired data, as the products differ across samples.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t.test</span><span class="p">(</span><span class="n">d_t</span><span class="p">,</span><span class="n">d_nt</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##</span><span class="w">
+</span><span class="c1">## Welch two sample t-test</span><span class="w">
+</span><span class="c1">##</span><span class="w">
+</span><span class="c1">## data: d_t and d_nt</span><span class="w">
+</span><span class="c1">## t = 3.2227, df = 55.955, p-value = 0.002119</span><span class="w">
+</span><span class="c1">## alternative hypothesis: true difference in means is not equal to 0</span><span class="w">
+</span><span class="c1">## 95 percent confidence interval:</span><span class="w">
+</span><span class="c1">## 0.003873834 0.016601603</span><span class="w">
+</span><span class="c1">## sample estimates:</span><span class="w">
+</span><span class="c1">## mean of x mean of y</span><span class="w">
+</span><span class="c1">## 0.013122212 0.002884493</span><span class="w">
+</span></code></pre></div>  </div>
+  <p class="tighten-10">Again you should be able to identify the corresponding entries in Table S3 shown in <a href="#figure-3-4" class="show-page-number">Figure 3.4</a>. The main entry in the table is 1.02, indicating that the means of the two groups differ by 1.02 cents. This is confirmed in our calculations, as $0.01312 − $0.00288 is about $0.0102 or 1.02 cents. The p-value of 0.002 is also the same as the one in Table S3.</p>
+</blockquote>
+<h2 class="page-break-before" id="part-32-before-and-after-comparisons-with-prices-in-other-areas">Part 3.2 Before-and-after comparisons with prices in other areas</h2>
+<p>When looking for any price patterns, it is possible that the observed changes in Berkeley were not solely due to the tax, but instead were also influenced by other events that happened in Berkeley and in neighbouring areas. To investigate whether this is the case, the researchers conducted another differences-in-differences analysis, using a different treatment and control group:</p>
+<ul>
+  <li><em>The treatment group</em>: Beverages in Berkeley</li>
+  <li><em>The control group</em>: Beverages in surrounding areas.</li>
+</ul>
+<p>The researchers collected price data from stores in the surrounding areas and compared them with prices in Berkeley. If prices changed in a similar way in nearby areas (which were not subject to the tax), then what we observed in Berkeley may not be primarily a result of the tax. 
+We will be using the data the researchers collected to make our own comparisons.</p>
+<p>Download the following files:</p>
+<ul>
+  <li>The Berkeley Point-of-Sale Stata file on the <a href="https://tinyco.re/7121674" class="show-url">Global Food Research Program’s website</a>, containing the price data they collected, including information on the date (year and month), location (Berkeley or Non-Berkeley), beverage group (soda, fruit drinks, milk substitutes, milk and water), and the average price for that month. Stata is another popular statistical software package, and the data is provided as a <code class="language-r highlighter-rouge"><span class="n">.dta</span></code> file.</li>
+  <li><a href="https://tinyco.re/7724734" class="show-url">‘S5 Table’</a> comparing the neighbourhood characteristics of the Berkeley and non-Berkeley stores.</li>
+</ul>
+<ol class="text-question">
+  <li>Based on ‘S5 Table’, do you think the researchers chose suitable comparison stores? Why or why not?</li>
+</ol>
+<p>We will now plot a line chart similar to Figure 3 in the journal paper, to compare prices of similar goods in different locations and see how they have changed over time. To do this, we will need to summarize the data so that there is one value (the mean price) for each location and type of good in each month.</p>
+<ol class="text-question">
+  <li>Assess the effects of a tax on prices:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Create a table similar to the one provided in Figure 3.5 to show the average price in each month for taxed and non-taxed beverages, according to location. Use ‘year and month’ as the row variables, and ‘tax’ and ‘location’ as the column variables. (<em>Hint:</em> You may find <a href="#r-walk-through-34-calculating-conditional-means" class="show-page-number">R walk-through 3.4</a> helpful.)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot the four columns of your table on the same line chart, with average price on the vertical axis and time (months) on the horizontal axis. Describe any differences you see between the prices of non-taxed goods in Berkeley and those outside Berkeley, both before the tax (January 2013 to December 2014) and after the tax (March 2015 onwards). Do the same for prices of taxed goods.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Based on your chart, is it reasonable to conclude that the sugar tax had an effect on prices?</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-3-5">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th></th>
+    <th colspan="2" class="align-center">Non-taxed</th>
+    <th colspan="2" class="align-center">Taxed</th>
+  </tr>
+  <tr>
+    <td>Year/Month</td>
+    <td class="align-center">Berkeley</td>
+    <td class="align-center">Non-Berkeley</td>
+    <td class="align-center">Berkeley</td>
+    <td class="align-center">Non-Berkeley</td>
+  </tr>
+  <tr>
+    <td>January 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>February 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>March 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>…</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>December 2013</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>January 2014</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>…</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>February 2016</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+The average price of taxed and non-taxed beverages, according to location and month.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.5 </span>
+The average price of taxed and non-taxed beverages, according to location and month.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><span> </span></p>
+<blockquote class="expandable-box">
+  <h3 id="r-walk-through-37-importing-data-from-a-stata-file-and-plotting-a-line-chart"><strong>R walk-through 3.7</strong> Importing data from a Stata file and plotting a line chart</h3>
+  <h4 class="add-1" id="import-data-and-create-a-table-of-average-monthly-prices">Import data and create a table of average monthly prices</h4>
+  <p>To import data from a Stata file (<code class="language-r highlighter-rouge"><span class="n">.dta</span></code> format) we need the <code class="language-r highlighter-rouge"><span class="n">readstata13</span></code> package.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readstata13</span><span class="p">)</span><span class="w">
+
+</span><span class="n">PoSd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.dta13</span><span class="p">(</span><span class="s2">"public_use_weighted_prices2.dta"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Before proceeding, use the command <code class="language-r highlighter-rouge"><span class="n">str</span><span class="p">(</span><span class="n">PoSd</span><span class="p">)</span></code> to look at the structure of this dataset (output not shown here). You will see that for each month and location (Berkeley or Non-Berkeley), there are prices for a variety of beverage categories, and we know whether the category is taxed or not. For any particular time-location-tax status combination we want the average price of all products.</p>
+  <p>To make the summary table, we use the piping technique again:</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">PoSd</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">month</span><span class="p">,</span><span class="w"> </span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">avg.price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">price</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">spread</span><span class="p">(</span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="n">avg.price</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">print</span><span class="p">()</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="language-r keep-together highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## # A tibble: 78 x 5</span><span class="w">
+</span><span class="c1">## # Groups:   year, month [39]</span><span class="w">
+</span><span class="c1">##     year month tax       Berkeley `Non-Berkeley`</span><span class="w">
+</span><span class="c1">##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;          &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">##  1  2013     1 Non-taxed     5.72           5.35</span><span class="w">
+</span><span class="c1">##  2  2013     1 Taxed         8.69           7.99</span><span class="w">
+</span><span class="c1">##  3  2013     2 Non-taxed     5.81           5.36</span><span class="w">
+</span><span class="c1">##  4  2013     2 Taxed         8.65           8.18</span><span class="w">
+</span><span class="c1">##  5  2013     3 Non-taxed     5.86           5.42</span><span class="w">
+</span><span class="c1">##  6  2013     3 Taxed         8.82           8.19</span><span class="w">
+</span><span class="c1">##  7  2013     4 Non-taxed     5.86           5.64</span><span class="w">
+</span><span class="c1">##  8  2013     4 Taxed         9.02           8.25</span><span class="w">
+</span><span class="c1">##  9  2013     5 Non-taxed     5.79           5.18</span><span class="w">
+</span><span class="c1">## 10  2013     5 Taxed         8.68           7.76</span><span class="w">
+</span><span class="c1">## # ... with 68 more rows</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>We have the necessary information, but the data is not quite in the right shape yet, because we need to separate the <code class="language-r highlighter-rouge"><span class="n">Taxed</span></code> from the <code class="language-r highlighter-rouge"><span class="n">Non</span><span class="o">-</span><span class="n">taxed</span></code> data (which we do using the <code class="language-r highlighter-rouge"><span class="n">subset</span></code> function).</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tax_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">table_test</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Taxed"</span><span class="p">)</span><span class="w">
+</span><span class="n">ntax_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">table_test</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Non-taxed"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+  <h4 id="plot-a-line-chart">Plot a line chart</h4>
+  <p>Now we can create a line chart. Before we do this, we will convert the <code class="language-r highlighter-rouge"><span class="n">Berkeley</span></code> and <code class="language-r highlighter-rouge"><span class="n">Non</span><span class="o">-</span><span class="n">Berkeley</span></code> columns of both datasets to time series data using the <code class="language-r highlighter-rouge"><span class="n">ts</span></code> function, which will make plotting a little easier. We can then plot <code class="language-r highlighter-rouge"><span class="n">tax_table</span><span class="o">$</span><span class="n">Berkeley</span></code> and add lines for the three other variables.</p>
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Use inverted commas ('') to refer to the 'Non-Berkeley' </span><span class="w">
+</span><span class="c1"># variable, since R interprets the hyphen as a minus sign.</span><span class="w">
+
+</span><span class="n">tax_table</span><span class="o">$</span><span class="n">Berkeley</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tax_table</span><span class="o">$</span><span class="n">Berkeley</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2013</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2016</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+</span><span class="n">tax_table</span><span class="o">$</span><span class="s1">'Non-Berkeley'</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">tax_table</span><span class="o">$</span><span class="s1">'Non-Berkeley'</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2013</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2016</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+</span><span class="n">ntax_table</span><span class="o">$</span><span class="n">Berkeley</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">ntax_table</span><span class="o">$</span><span class="n">Berkeley</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2013</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2016</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+</span><span class="n">ntax_table</span><span class="o">$</span><span class="s1">'Non-Berkeley'</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">ntax_table</span><span class="o">$</span><span class="s1">'Non-Berkeley'</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2013</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2016</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">tax_table</span><span class="o">$</span><span class="n">Berkeley</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"deepskyblue4"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> 
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average price"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Time"</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># \n creates a line break.</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="s2">"Average price of taxed and non-taxed beverages \n in Berkeley and non-Berkeley areas"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">lines</span><span class="p">(</span><span class="n">tax_table</span><span class="o">$</span><span class="s1">'Non-Berkeley'</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"deeppink"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">ntax_table</span><span class="o">$</span><span class="n">Berkeley</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkgreen"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">ntax_table</span><span class="o">$</span><span class="s1">'Non-Berkeley'</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkorange"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add vertical lines</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2015.1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2015.3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add labels</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">2014.6</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pre-tax"</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">2015.8</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"Post-tax"</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="m">2013.1</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Taxed (Berkeley)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Taxed (non-Berkeley)"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"Non-taxed (Berkeley)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Non-taxed (non-Berkeley)"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"deepskyblue4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"deeppink"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"darkgreen"</span><span class="p">,</span><span class="w"> </span><span class="s2">"darkorange"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>  </div>
+  <div class="figure figure-no-source" id="figure-3-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/r-figure-03-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/r-figure-03-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-03-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/r-figure-03-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average price of taxed and non-taxed beverages in Berkeley and non-Berkeley areas.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/r-figure-03-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/r-figure-03-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/r-figure-03-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average price of taxed and non-taxed beverages in Berkeley and non-Berkeley areas.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average price of taxed and non-taxed beverages in Berkeley and non-Berkeley areas.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.6 </span>
+Average price of taxed and non-taxed beverages in Berkeley and non-Berkeley areas.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<p class="keep-together">How strong is the evidence that the sugar tax affected prices? According to the journal paper, when comparing the mean Berkeley and non-Berkeley price of sugary beverages after the tax, the p-value is smaller than 0.00001, and it is 0.63 for non-sugary beverages after the tax.</p>
+<ol class="text-question">
+  <li>What do the p-values tell us about the difference in means and the effect of the sugar tax on the price of sugary beverages? (<em>Hint:</em> You may find the discussion in <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour" class="show-page-number">Part 2.3</a> helpful.)</li>
+</ol>
+<p class="tighten-15">The aim of the sugar tax was to decrease consumption of sugary beverages. Figure 3.7 shows the mean number of calories consumed and the mean volume consumed before and after the tax. The researchers reported the p-values for the difference in means before and after the tax in the last column.</p>
+<div class="figure wide" id="figure-3-7">
+<div class="figure-body">
+<div class="figure-html">
+<table>
+  <tr>
+    <th rowspan="2">Usual intake</th>
+    <th colspan="1">Pre-tax (Nov–Dec&#160;2014), <br /> <em>n</em> = 623</th>
+    <th colspan="1">Post-tax (Nov–Dec&#160;2015), <br /> <em>n</em> = 613 </th>
+    <th rowspan="1">Pre-tax–post-tax difference</th>
+  </tr>
+  <tr>
+    <td colspan="3"><strong>Caloric intake (kilocalories/capita/day)</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Taxed beverages</td>
+    <td class="align-right">45.1</td>
+    <td class="align-right">38.7</td>
+    <td class="align-right">−6.4, <em>p</em> = 0.56</td>
+  </tr>
+  <tr>
+    <td>Non-taxed beverages</td>
+    <td class="align-right">115.7</td>
+    <td class="align-right">147.6</td>
+    <td class="align-right">31.9, <em>p</em> = 0.04</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td colspan="3"><strong>Volume of intake (grams/capita/day)</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Taxed beverages</td>
+    <td class="align-right">121.0</td>
+    <td class="align-right">97.0</td>
+    <td class="align-right">−24.0, <em>p</em> = 0.24</td>
+  </tr>
+  <tr>
+    <td>Non-taxed beverages</td>
+    <td class="align-right">1,839.4</td>
+    <td class="align-right">1,896.5</td>
+    <td class="align-right">57.1, <em>p</em> = 0.22</td>
+  </tr>
+  <tr>
+    <td colspan="6">Models account for age, gender, race/ethnicity, income level, and educational attainment. <em>n</em> is the sample size at each round of the survey after excluding participants with missing values on self-reported race/ethnicity, age, education, income, or monthly intake of sugar-sweetened beverages.</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 3.7 </span>
+Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+<div class="figure-source">
+<p class="source">
+Lynn D. Silver, Shu Wen Ng, Suzanne Ryan-Ibarra, Lindsey Smith Taillie, Marta Induni, Donna R. Miles, Jennifer M. Poti, and Barry M. Popkin. 2017. Table 1 in <a href="https://tinyco.re/8147535" class="show-url">‘Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study’</a>. <em>PLoS Med 14</em> (4): e1002283.
+</p>
+</div><!--.figure-source-->
+</div>
+<ol class="text-question">
+  <li>Based on Figure 3.7, what can you say about consumption behaviour in Berkeley after the tax? Suggest some explanations for the evidence.</li>
+</ol>
+<ol class="text-question">
+  <li>Read the ‘Limitations’ in the <a href="https://tinyco.re/6616217" class="show-url">‘Discussions’ section</a> of the paper and discuss the strengths and limitations of this study. How could future studies on the sugar tax in Berkeley address these problems? (Some issues you may want to discuss are: the number of stores observed, number of people surveyed, and the reliability of the price data collected.)</li>
+</ol>
+<ol class="text-question tighten-15">
+  <li>Suppose that you have the authority to conduct your own sugar tax natural experiment in two neighbouring towns, Town A and Town B. Outline how you would conduct the experiment to ensure that any changes in outcomes (prices, consumption of sugary beverages) are due to the tax and not due to other factors. (<em>Hint:</em> think about what factors you need to hold constant.)</li>
+</ol>
+<div class="footnotes">
+  <ol>
+    <li id="fn:2">
+      <p>Lynn D. Silver, Shu Wen Ng, Suzanne Ryan-Ibarra, Lindsey Smith Taillie, Marta Induni, Donna R. Miles, Jennifer M. Poti, and Barry M. Popkin. 2017. S3 Table in <a href="https://tinyco.re/8147535" class="show-url">‘Changes in prices, sales, consumer spending, and beverage consumption one year after a tax on sugar-sweetened beverages in Berkeley, California, US: A before-and-after study’</a>. <em>PLoS Med 14</em> (4): e1002283. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in R
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="03-03.html"
+               class="active">
+                Getting started in R
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="active">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="active">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

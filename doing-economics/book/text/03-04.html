@@ -1,0 +1,3045 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 3 Solutions
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 3 Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/03-04.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter solutions"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-3-solutions"><strong>Empirical Project 3</strong> Solutions</h1>
+<p class="tighten-10">These are not model answers. They are provided to help students, including those doing the project outside a formal class, to check their progress while working through the questions using the Excel, R, or Google Sheets walk-throughs. There are also brief notes for the more interpretive questions. Students taking courses using <em>Doing Economics</em> should follow the guidance of their instructors.</p>
+<h2 id="part-31-before-and-after-comparisons-of-retail-prices">Part 3.1 Before-and-after comparisons of retail prices</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>Three Store Price Surveys (SPS) were conducted in a sample of stores to collect data on beverages, one before the tax was implemented, and two after. The sample of stores contains stores most visited by participants. To ensure that the sample is representative, additional stores within different categories of stores were added via random selection. Some selected stores refused to participate in the data collection, in which case randomly selected stores of the same type and neighbourhood were used as replacements.</p>
+    <p>A list of top-selling beverages was identified. Price data for each beverage was collected in each store by trained data collectors who followed standardized procedures. Some stores did not have any beverages in the list. Additional beverages similar to those in the list were therefore included in a supplementary panel.</p>
+    <p>Data were entered into a database using a tablet computer and paper forms. To avoid mistakes in transferring data from paper forms to the computer, the data on paper forms were double-entered. The two copies were compared and if results were dissimilar, the corresponding value in the paper forms was entered again.</p>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>There are 247 different products in the dataset.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figure 3.1 shows the frequency table for all store types in December 2014 and June 2015.</p>
+    <p>The number of observations for each store type is similar in each time period. Store type 4 is associated with the largest percentage change over time of about 32%.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-1">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Store Type</th>
+      <th>Dec 2014</th>
+      <th>Jun 2015</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>177</td>
+      <td>209</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>407</td>
+      <td>391</td>
+      <td>798</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>87</td>
+      <td>102</td>
+      <td>189</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>73</td>
+      <td>96</td>
+      <td>169</td>
+    </tr>
+    <tr>
+      <td><strong>Grand total</strong></td>
+      <td><strong>744</strong></td>
+      <td><strong>798</strong></td>
+      <td><strong>1,542</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Frequency table: All stores in December 2014 and June 2015.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.1 </span>
+Frequency table: All stores in December 2014 and June 2015.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figures 3.2 and 3.3 show the frequency tables for taxed and non-taxed beverages for December 2014 and June 2015 separately.</p>
+    <p>In both periods, the number of taxed and non-taxed beverages is similar for each store type.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-2">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Store Type</th>
+      <th>No Tax</th>
+      <th>Tax</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>92</td>
+      <td>85</td>
+      <td>177</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>196</td>
+      <td>211</td>
+      <td>407</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>44</td>
+      <td>43</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>34</td>
+      <td>39</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <td><strong>Grand total</strong></td>
+      <td><strong>366</strong></td>
+      <td><strong>378</strong></td>
+      <td><strong>744</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Numbers of taxed and untaxed beverages by store type, December 2014.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.2 </span>
+Numbers of taxed and untaxed beverages by store type, December 2014.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-3-3">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Store Type</th>
+      <th>No Tax</th>
+      <th>Tax</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>111</td>
+      <td>98</td>
+      <td>209</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>192</td>
+      <td>199</td>
+      <td>391</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>52</td>
+      <td>50</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>44</td>
+      <td>52</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <td><strong>Grand total</strong></td>
+      <td><strong>399</strong></td>
+      <td><strong>399</strong></td>
+      <td><strong>798</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Numbers of taxed and untaxed beverages by store type, June 2015.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.3 </span>
+Numbers of taxed and untaxed beverages by store type, June 2015.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figure 3.4 shows the number of product types available in December 2014 and June 2015.</p>
+    <p>The SODA type has the highest number of observations. The SPORT-DIET type has the lowest number of observations.</p>
+    <p>Beverages belonging to more popular types are more likely to be in the panel of beverages. More popular types therefore tend to have more observations, since they are likely to be available in a greater number of stores.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-4">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Row Labels</th>
+      <th>Dec 2014</th>
+      <th>Jun 2015</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Energy</td>
+      <td>56</td>
+      <td>58</td>
+      <td>114</td>
+    </tr>
+    <tr>
+      <td>Energy-diet</td>
+      <td>49</td>
+      <td>54</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <td>Juice</td>
+      <td>70</td>
+      <td>64</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <td>Juice Drink</td>
+      <td>19</td>
+      <td>17</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>Milk</td>
+      <td>63</td>
+      <td>61</td>
+      <td>124</td>
+    </tr>
+    <tr>
+      <td>Soda</td>
+      <td>239</td>
+      <td>262</td>
+      <td>501</td>
+    </tr>
+    <tr>
+      <td>Soda-diet</td>
+      <td>128</td>
+      <td>174</td>
+      <td>302</td>
+    </tr>
+    <tr>
+      <td>Sport</td>
+      <td>11</td>
+      <td>16</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>Sport-diet</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Tea</td>
+      <td>52</td>
+      <td>45</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <td>Tea-diet</td>
+      <td>6</td>
+      <td>6</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>Water</td>
+      <td>48</td>
+      <td>38</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <td>Water-sweet</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td><strong>Grand total</strong></td>
+      <td><strong>744</strong></td>
+      <td><strong>798</strong></td>
+      <td><strong>1,542</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Product types available, December 2014 and June 2015.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.4 </span>
+Product types available, December 2014 and June 2015.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 3.5 shows the average price per oz (ounce) for taxed and non-taxed beverages.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-5">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="2">Non-taxed</th>
+    <th colspan="2">Taxed</th>
+  </tr>
+  <tr>
+    <td>Store type</td>
+    <td>Dec 2014</td>
+    <td>Jun 2015</td>
+    <td>Dec 2014</td>
+    <td>Jun 2015</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>11.19</td>
+    <td>11.48</td>
+    <td>15.62</td>
+    <td>16.93</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>15.20</td>
+    <td>16.08</td>
+    <td>18.18</td>
+    <td>19.08</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Average price per ounce of taxed and non-taxed beverages, by time period and store type.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.5 </span>
+Average price per ounce of taxed and non-taxed beverages, by time period and store type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Average prices increase over time for both types, whether taxed or not. This suggests that there is an upward time trend in prices that is independent of the tax.</p>
+    <p>For both groups, before the tax was implemented, the average price for the taxed (treatment) group is higher than that for the non-taxed (control) group. This suggests that the beverages subject to the tax were the more expensive beverages.</p>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>No, because the difference in average price between the non-taxed group and the taxed group in any given period can be due to group-specific factors other than the tax. The difference in average price between the treatment and control groups in December 2014 before the implementation of the taxes suggests that the two groups are fundamentally different. The difference in June 2015 could be due to the differences between the groups rather than the taxes.</li>
+</ul>
+<ol class="text-question keep-with-next">
+  <li></li>
+</ol>
+<ul class="text-sub-question keep-with-next">
+  <li>Solution figure 3.6 shows the change in the mean price after the tax by store type.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-6">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Non-taxed</th>
+      <th>Taxed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Large supermarkets</td>
+      <td>0.29</td>
+      <td>1.31</td>
+    </tr>
+    <tr>
+      <td>Pharmacies</td>
+      <td>0.88</td>
+      <td>0.90</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Change in the mean price per oz ounce for taxed and non-taxed beverages, by store type.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.6 </span>
+Change in the mean price per oz ounce for taxed and non-taxed beverages, by store type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figure 3.7 shows the mean change in price per oz for taxed and non-taxed beverages, by store type.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Mean change in price per oz for taxed and non-taxed beverages, by store type.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-03-07.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Mean change in price per oz for taxed and non-taxed beverages, by store type.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Mean change in price per oz for taxed and non-taxed beverages, by store type.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.7 </span>
+Mean change in price per oz for taxed and non-taxed beverages, by store type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><em>Note:</em> When comparing these values to those in Silver et al. (2016), you will find that the data match for the ‘Large Supermarket’ and ‘Pharmacy store’ types, but not for the ‘Small Supermarket’ and ‘Gas Station store’ types. These discrepancies are due to the differences in categories used by Silver et al. (2016), for example, Silver et al. use ‘Independent corner stores and independent gas stations’ and ‘Small chain supermarkets and chain gas stations’ instead of ‘Small supermarkets’ and ‘Gas stations’.</p>
+<ol class="text-question">
+  <li>
+    <p>The p-value for large supermarkets is quite small, indicating that the data is not compatible with the hypothesis that there are no differences in the populations (before- and after-tax prices), as long as other assumptions about the data (e.g. stores were really sampled at random) were correct. Thus it is likely that the sugar tax had some effect on prices.</p>
+    <p>On the other hand, the p-value for pharmacies is quite large, so there is reasonably strong evidence in favour of our assumption that there are no differences in the populations.</p>
+  </li>
+</ol>
+<h2 class="page-break-before" id="part-32-before-and-after-comparisons-with-prices-in-other-areas">Part 3.2 Before-and-after comparisons with prices in other areas</h2>
+<ol class="text-question">
+  <li>
+    <p>Ideally, we would like the characteristics of the non-Berkeley stores to be the same as those of the Berkeley stores, so that patterns observed for the non-Berkeley stores can inform us about the patterns of Berkeley stores, if there had not been tax changes. If the two regions are sufficiently similar, then the differences in changes in the mean prices can be attributed to the tax policy.</p>
+    <p>The researchers chose suitable comparison stores, as the stores’ characteristics are very similar to those in Berkeley.</p>
+  </li>
+</ol>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 3.8 indicates the average price in each month for taxed and non-taxed beverages, according to location.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-8">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+<thead>
+  <tr>
+    <th></th>
+    <th colspan="2">Non-taxed</th>
+    <th colspan="2">Taxed</th>
+  </tr>
+  <tr>
+    <td>Year/Month</td>
+    <td>Berkeley</td>
+    <td>Non-Berkeley</td>
+    <td>Berkeley</td>
+    <td>Non-Berkeley</td>
+  </tr>
+</thead>
+  <tr>
+    <td colspan="5">2013</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>5.72</td>
+    <td>5.35</td>
+    <td>8.69</td>
+    <td>7.99</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5.81</td>
+    <td>5.37</td>
+    <td>8.66</td>
+    <td>8.19</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>5.86</td>
+    <td>5.42</td>
+    <td>8.82</td>
+    <td>8.19</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>5.86</td>
+    <td>5.65</td>
+    <td>9.02</td>
+    <td>8.25</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>5.83</td>
+    <td>5.21</td>
+    <td>8.73</td>
+    <td>7.81</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>5.79</td>
+    <td>5.06</td>
+    <td>8.61</td>
+    <td>7.46</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>5.97</td>
+    <td>5.15</td>
+    <td>8.32</td>
+    <td>7.27</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>5.90</td>
+    <td>5.14</td>
+    <td>8.92</td>
+    <td>7.57</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>5.91</td>
+    <td>5.15</td>
+    <td>9.13</td>
+    <td>7.90</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>5.87</td>
+    <td>5.24</td>
+    <td>9.10</td>
+    <td>7.85</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>6.08</td>
+    <td>5.37</td>
+    <td>9.23</td>
+    <td>8.07</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>6.09</td>
+    <td>5.34</td>
+    <td>9.06</td>
+    <td>7.89</td>
+  </tr>
+  <tr>
+    <td colspan="5">2014</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>6.12</td>
+    <td>5.37</td>
+    <td>8.98</td>
+    <td>8.00</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>6.20</td>
+    <td>5.53</td>
+    <td>9.20</td>
+    <td>7.95</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>6.47</td>
+    <td>5.84</td>
+    <td>9.53</td>
+    <td>8.17</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>6.38</td>
+    <td>5.80</td>
+    <td>9.64</td>
+    <td>8.35</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>6.52</td>
+    <td>5.73</td>
+    <td>9.66</td>
+    <td>8.50</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>6.56</td>
+    <td>5.80</td>
+    <td>9.19</td>
+    <td>8.11</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>6.48</td>
+    <td>5.59</td>
+    <td>9.29</td>
+    <td>8.24</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>6.37</td>
+    <td>5.66</td>
+    <td>9.34</td>
+    <td>8.10</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>6.65</td>
+    <td>5.84</td>
+    <td>9.32</td>
+    <td>8.60</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>6.38</td>
+    <td>5.60</td>
+    <td>9.48</td>
+    <td>8.58</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>5.85</td>
+    <td>5.65</td>
+    <td>8.03</td>
+    <td>8.47</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>6.19</td>
+    <td>5.52</td>
+    <td>9.67</td>
+    <td>8.53</td>
+  </tr>
+  <tr>
+    <td colspan="5">2015</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>6.41</td>
+    <td>5.85</td>
+    <td>10.02</td>
+    <td>8.82</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>6.39</td>
+    <td>5.66</td>
+    <td>9.24</td>
+    <td>8.49</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>6.51</td>
+    <td>5.71</td>
+    <td>10.02</td>
+    <td>8.82</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>6.48</td>
+    <td>5.83</td>
+    <td>10.38</td>
+    <td>8.76</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>6.64</td>
+    <td>5.82</td>
+    <td>10.34</td>
+    <td>8.94</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>6.64</td>
+    <td>5.83</td>
+    <td>10.42</td>
+    <td>8.69</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>6.37</td>
+    <td>5.73</td>
+    <td>10.58</td>
+    <td>8.90</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>6.45</td>
+    <td>5.69</td>
+    <td>11.10</td>
+    <td>9.03</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>6.51</td>
+    <td>5.67</td>
+    <td>10.44</td>
+    <td>8.71</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>6.54</td>
+    <td>5.67</td>
+    <td>10.70</td>
+    <td>8.79</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>6.67</td>
+    <td>5.85</td>
+    <td>10.71</td>
+    <td>8.98</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>6.56</td>
+    <td>5.76</td>
+    <td>10.54</td>
+    <td>8.59</td>
+  </tr>
+  <tr>
+    <td>2016</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>6.58</td>
+    <td>5.87</td>
+    <td>10.57</td>
+    <td>8.96</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>6.55</td>
+    <td>5.76</td>
+    <td>10.81</td>
+    <td>8.73</td>
+  </tr>
+  <tr>
+    <td><strong>Grand total</strong></td>
+    <td><strong>6.27</strong></td>
+    <td><strong>5.58</strong></td>
+    <td><strong>9.58</strong></td>
+    <td><strong>8.35</strong></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Average prices of taxed and non-taxed beverages in Berkeley vs non-Berkeley stores.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.8 </span>
+Average prices of taxed and non-taxed beverages in Berkeley vs non-Berkeley stores.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figure 3.9 shows the average price per month for taxed and non-taxed beverages, according to location.</p>
+    <p>Non-taxed goods in Berkeley are more expensive than those outside Berkeley. The difference in prices before the tax indicates there are fundamental differences between the two regions irrespective of the tax policy. The difference stays roughly the same after the tax. This suggests that there were probably no other changes in the period that affected the difference in prices.</p>
+    <p>Taxed goods in Berkeley are more expensive than those outside Berkeley. The difference in prices increased after the tax was implemented (March 2015 onwards).</p>
+    <p>The prices of taxed goods and non-taxed goods in non-Berkeley regions have similar time trends. The time trends of goods in non-Berkeley regions are also similar to those in Berkeley. If we strip away the time trend, the prices of taxed and non-taxed goods in non-Berkeley regions remain roughly the same before and after the tax. This means that any events that took place during the period did not affect the level of prices in Berkeley and its neighbouring areas.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-3-9">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average prices of taxed and non-taxed beverages in Berkeley vs non-Berkeley stores.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-03-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average prices of taxed and non-taxed beverages in Berkeley vs non-Berkeley stores.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average prices of taxed and non-taxed beverages in Berkeley vs non-Berkeley stores.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 3.9 </span>
+Average prices of taxed and non-taxed beverages in Berkeley vs non-Berkeley stores.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>It is reasonable to conclude that the sugar tax had an effect on prices. The difference between the prices of the taxed goods in Berkeley and those outside Berkeley after the tax was implemented reflects both the effect of the tax and the effects of other differences between the two regions. The difference between the prices before the tax reflects the effects of differences other than the tax policy between the two regions. The difference in prices after the implementation of the tax, subtracting the difference in prices before the tax, gives us the effect of the tax. The increase in the difference in prices suggests that the tax has a positive effect on prices.</p>
+    <p><em>Note:</em> When you compare this figure to Figure 3 in the Silver et al. paper you will notice that it is somewhat different. The effect of the tax is much more clearly visible in the paper. The reason for this difference is that the authors adjusted the prices for a number of factors (for example, see the notes to Figure 3) before they created the line chart. The adjustment process they used, however, is beyond the scope of this project.</p>
+  </li>
+</ul>
+<ol class="text-question keep-together">
+  <li>
+    <p>The difference between the mean Berkeley and non-Berkeley price of non-sugary beverages after the tax reflects the effect of being in Berkeley as opposed to being in non-Berkeley regions. The difference between the mean Berkeley and non-Berkeley price of sugary beverages after the tax reflects not only the effect of being in Berkeley but also the effect of the tax. The difference in differences is the effect of the tax.</p>
+    <p>Based on the p-value, we can be reasonably confident in our assumption that the mean Berkeley and non-Berkeley prices of non-sugary beverages after the tax (in the population) are the same. In other words, there is reasonably strong evidence in favour of our assumption that there are no differences in the population means of these two groups.</p>
+    <p>The p-value for sugary drinks, however, is small, implying that it is quite unlikely to see the sample differences we see (or more extreme ones) if in truth there were no differences.</p>
+    <p>As we come to different conclusions about the after-tax price differences in drinks, this evidence is consistent with the hypothesis that the tax had an effect on sugary drinks prices.</p>
+  </li>
+</ol>
+<ol class="text-question">
+  <li>
+    <p>Except for caloric intake of non-taxed beverages, the p-values of the other entries are fairly large. This implies that the differences in consumption behaviour we observe are likely to have occurred even if, in truth, there was no difference (the null hypothesis being no difference).</p>
+    <p>Beverages form a small proportion of the total budget of consumers. Consumers are unlikely to change their consumption by much given the tiny effect the price rise has on their budgets.</p>
+    <p>The two major ingredients in sugary beverages, water and sugar, are craved by the human body due to their importance for survival. Beverage companies have devoted tremendous efforts to make their beverages attractive to consumers. Many beverages have become part of people’s daily routines and have also become viewed as necessities for certain occasions. These factors mean that the demand for sugary beverages is price inelastic (not responsive to price changes).</p>
+    <p>People take time to change their consumption habits. Consumption patterns may change slowly over a long period of time. We need data for later periods to study the long-term effect of the tax.</p>
+  </li>
+</ol>
+<ol class="text-question">
+  <li>
+    <p>Some of the limitations listed in the paper are:</p>
+    <ul>
+      <li class="tighten-15">The study cannot fully distinguish the effect of the tax from the effect of other events, such as political campaigns related to the tax, which took place over the same period. The study cannot therefore establish the <em>ceteris paribus</em> causal effect of the tax. A more distant control (for example, another location that was not subject to these events) could be used to capture better the combined effects of the events and the tax.</li>
+      <li>The study cannot tell whether the changes in behaviours were due to anticipation of the tax or changes in prices and sales.</li>
+      <li>The sample of stores is too small and not representative. Consumption of SSB is small and the effect size is small relative to the high standard error. Future studies should use larger and more representative samples.</li>
+      <li>There are limitations in the data from independently-owned small corner stores. The possible effect of shifts in purchases to these stores cannot be studied using the data in the study.</li>
+    </ul>
+  </li>
+</ol>
+<ol class="text-question">
+  <li>A tax change could be implemented unexpectedly to reduce the effects of events such as campaigns in the periods of observation and to prevent behaviours from adjusting even before the experiment begins. If possible, ensure that there are no other policy changes that could affect the outcomes in the observation period. Also ensure that the treatment and control groups stay the same over the period, for example, by preventing the relocation of stores in response to the tax change. If possible, it is also important to prevent people from the taxed area from going to the neighbouring area to buy sugary drinks (which would be contrary to the purpose of the tax). Listing these factors helps to clarify the difficulties involved in establishing the conditions for a clean natural experiment in the real-world setting of policy implementation. In most countries, for example, it is not possible to prevent the relocation of stores and it would not be desirable to do so.</li>
+</ol>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Solutions
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="03-04.html"
+               class="active">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="active">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

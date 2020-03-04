@@ -1,0 +1,4162 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 6 Solutions
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 6 Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/06-04.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter solutions"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-6-solutions"><strong>Empirical Project 6</strong> Solutions</h1>
+<p class="tighten-10">These are not model answers. They are provided to help students, including those doing the project outside a formal class, to check their progress while working through the questions using the Excel, R, or Google Sheets walk-throughs. There are also brief notes for the more interpretive questions. Students taking courses using <em>Doing Economics</em> should follow the guidance of their instructors.</p>
+<h2 id="part-61-looking-for-patterns-in-the-survey-data">Part 6.1 Looking for patterns in the survey data</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>
+    <p>Interviews were conducted by teams of students from the countries surveyed who had business experience and training. The managers interviewed were middle managers, since they were familiar with day-to-day operations as well as the management practices of the firm (for example hiring and firing decisions, performance reviews).</p>
+    <p class="tighten-10">Some measures taken to improve reliability and validity of the data:</p>
+    <ul>
+      <li>Interviews were conducted in the manager’s native language, which would minimize misunderstandings.</li>
+      <li>Managers were not told they were being assessed on management practices, only that they were being interviewed on management, so they would be more likely to give honest responses.</li>
+      <li>Managers were also not shown the assessment criteria, so they could not have altered their responses in the hopes of getting a higher score.</li>
+      <li class="tighten-5">The firms selected were medium-sized firms that were rarely given press coverage, so interviewers were unlikely to have prior knowledge about firms that could bias their scoring.</li>
+      <li>To check for consistency between interviewers, each firm was scored independently by two people.</li>
+    </ul>
+  </li>
+</ul>
+<ul class="text-sub-question">
+  <li>
+    <p>While these three aspects of management practices are not comprehensive, they are relatively easy to measure, and the resulting definition of ‘good’ and ‘bad’ practice applies to firms across industries and countries. It is therefore possible to make cross-country and/or cross-industry comparisons.</p>
+    <p>There are many possible aspects of management that are not included, such as:</p>
+    <ul>
+      <li>leadership qualities that managers possess (although Bloom et al. (2012) admit that this is difficult to quantify)</li>
+      <li>management practices that support innovation</li>
+      <li>strategic decisions such as pricing or takeover decisions (these affect firm performance and survival, but whether a decision was ‘good’ or ‘bad’ depends on the context).</li>
+    </ul>
+  </li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="keep-together text-sub-question">
+  <li>
+    <p>Solution figures 6.1 and 6.2 provide the tables with countries listed in alphabetical order.</p>
+    <p>Countries tend to have similar ranks across individual criteria, and ranks for individual criteria are generally similar to overall management rank. We can therefore say that countries with a higher overall rank are better managed across all aspects.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-1">
+<div class="figure-body">
+<div class="figure-html">
+</div>
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Overall management (mean)</th>
+      <th>Monitoring management (mean)</th>
+      <th>Targets management (mean)</th>
+      <th>Incentives management (mean)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Argentina</td>
+      <td>2.76</td>
+      <td>3.08</td>
+      <td>2.68</td>
+      <td>2.56</td>
+    </tr>
+    <tr>
+      <td>Australia</td>
+      <td>3.02</td>
+      <td>3.29</td>
+      <td>3.02</td>
+      <td>2.74</td>
+    </tr>
+    <tr>
+      <td>Brazil</td>
+      <td>2.71</td>
+      <td>3.06</td>
+      <td>2.69</td>
+      <td>2.55</td>
+    </tr>
+    <tr>
+      <td>Canada</td>
+      <td>3.17</td>
+      <td>3.55</td>
+      <td>3.07</td>
+      <td>2.94</td>
+    </tr>
+    <tr>
+      <td>Chile</td>
+      <td>2.83</td>
+      <td>3.14</td>
+      <td>2.72</td>
+      <td>2.67</td>
+    </tr>
+    <tr>
+      <td>China</td>
+      <td>2.71</td>
+      <td>2.90</td>
+      <td>2.63</td>
+      <td>2.69</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>3.03</td>
+      <td>3.43</td>
+      <td>2.97</td>
+      <td>2.74</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>3.23</td>
+      <td>3.57</td>
+      <td>3.22</td>
+      <td>2.98</td>
+    </tr>
+    <tr>
+      <td>Greece</td>
+      <td>2.73</td>
+      <td>2.97</td>
+      <td>2.66</td>
+      <td>2.58</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>2.67</td>
+      <td>2.91</td>
+      <td>2.66</td>
+      <td>2.63</td>
+    </tr>
+    <tr>
+      <td>Italy</td>
+      <td>3.03</td>
+      <td>3.26</td>
+      <td>3.10</td>
+      <td>2.76</td>
+    </tr>
+    <tr>
+      <td>Japan</td>
+      <td>3.23</td>
+      <td>3.50</td>
+      <td>3.34</td>
+      <td>2.92</td>
+    </tr>
+    <tr>
+      <td>Mexico</td>
+      <td>2.92</td>
+      <td>3.29</td>
+      <td>2.88</td>
+      <td>2.71</td>
+    </tr>
+    <tr>
+      <td>New Zealand</td>
+      <td>2.93</td>
+      <td>3.18</td>
+      <td>2.96</td>
+      <td>2.63</td>
+    </tr>
+    <tr>
+      <td>Poland</td>
+      <td>2.90</td>
+      <td>3.12</td>
+      <td>2.94</td>
+      <td>2.83</td>
+    </tr>
+    <tr>
+      <td>Portugal</td>
+      <td>2.87</td>
+      <td>3.27</td>
+      <td>2.83</td>
+      <td>2.59</td>
+    </tr>
+    <tr>
+      <td>Republic of Ireland</td>
+      <td>2.89</td>
+      <td>3.14</td>
+      <td>2.81</td>
+      <td>2.79</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>3.21</td>
+      <td>3.64</td>
+      <td>3.19</td>
+      <td>2.83</td>
+    </tr>
+    <tr>
+      <td>UK</td>
+      <td>3.03</td>
+      <td>3.34</td>
+      <td>2.98</td>
+      <td>2.86</td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td>3.35</td>
+      <td>3.58</td>
+      <td>3.26</td>
+      <td>3.25</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Mean of management scores.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.1 </span>
+Mean of management scores.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-6-2">
+<div class="figure-body">
+<div class="figure-html">
+</div>
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Overall management (rank)</th>
+      <th>Monitoring management (rank)</th>
+      <th>Targets management (rank)</th>
+      <th>Incentives management (rank)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Argentina</td>
+      <td>16</td>
+      <td>16</td>
+      <td>17</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>Australia</td>
+      <td>9</td>
+      <td>8</td>
+      <td>7</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Brazil</td>
+      <td>19</td>
+      <td>17</td>
+      <td>16</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>Canada</td>
+      <td>5</td>
+      <td>4</td>
+      <td>6</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Chile</td>
+      <td>15</td>
+      <td>13</td>
+      <td>15</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>China</td>
+      <td>18</td>
+      <td>20</td>
+      <td>20</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>7</td>
+      <td>6</td>
+      <td>9</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Greece</td>
+      <td>17</td>
+      <td>18</td>
+      <td>19</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>20</td>
+      <td>19</td>
+      <td>18</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Italy</td>
+      <td>8</td>
+      <td>11</td>
+      <td>5</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>Japan</td>
+      <td>3</td>
+      <td>5</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Mexico</td>
+      <td>11</td>
+      <td>9</td>
+      <td>12</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>New Zealand</td>
+      <td>10</td>
+      <td>12</td>
+      <td>10</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>Poland</td>
+      <td>12</td>
+      <td>15</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Portugal</td>
+      <td>14</td>
+      <td>10</td>
+      <td>13</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>Republic of Ireland</td>
+      <td>13</td>
+      <td>14</td>
+      <td>14</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>UK</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Rank according to management scores.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.2 </span>
+Rank according to management scores.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figure 6.3 shows the average overall management score for each country.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Management practices in manufacturing firms around the world.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-03.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Management practices in manufacturing firms around the world.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Management practices in manufacturing firms around the world.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.3 </span>
+Management practices in manufacturing firms around the world.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The ranking of countries in Figure 1 of Bloom et al. (2012) is slightly different, indicating that the mean values are not the same as in Solution figure 6.1. This difference is due to the number of observations used: Figure 1 uses 9,079 observations, whereas the data we have has 9,207 observations.</li>
+</ul>
+<p>(<em>Note:</em> It is likely that Bloom et al. (2012) were using an earlier version of this survey data to create their Figure 1. The earlier version had not been updated to include data from the latest round of interviews.)</p>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Chile is used as an example in Solution figure 6.4.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-4">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>US</th>
+      <th>Frequency</th>
+      <th>Proportion of firms (%)</th>
+      <th>Chile</th>
+      <th>Frequency</th>
+      <th>Proportion of firms (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>1.20</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>1.20</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>1.40</td>
+      <td>1</td>
+      <td>0.08</td>
+      <td>1.40</td>
+      <td>1</td>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <td>1.60</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>1.60</td>
+      <td>3</td>
+      <td>0.95</td>
+    </tr>
+    <tr>
+      <td>1.80</td>
+      <td>10</td>
+      <td>0.82</td>
+      <td>1.80</td>
+      <td>6</td>
+      <td>1.89</td>
+    </tr>
+    <tr>
+      <td>2.00</td>
+      <td>9</td>
+      <td>0.73</td>
+      <td>2.00</td>
+      <td>24</td>
+      <td>7.57</td>
+    </tr>
+    <tr>
+      <td>2.20</td>
+      <td>28</td>
+      <td>2.29</td>
+      <td>2.20</td>
+      <td>15</td>
+      <td>4.73</td>
+    </tr>
+    <tr>
+      <td>2.40</td>
+      <td>46</td>
+      <td>3.76</td>
+      <td>2.40</td>
+      <td>30</td>
+      <td>9.46</td>
+    </tr>
+    <tr>
+      <td>2.60</td>
+      <td>58</td>
+      <td>4.73</td>
+      <td>2.60</td>
+      <td>25</td>
+      <td>7.89</td>
+    </tr>
+    <tr>
+      <td>2.80</td>
+      <td>96</td>
+      <td>7.84</td>
+      <td>2.80</td>
+      <td>49</td>
+      <td>15.46</td>
+    </tr>
+    <tr>
+      <td>3.00</td>
+      <td>139</td>
+      <td>11.35</td>
+      <td>3.00</td>
+      <td>52</td>
+      <td>16.40</td>
+    </tr>
+    <tr>
+      <td>3.20</td>
+      <td>118</td>
+      <td>9.63</td>
+      <td>3.20</td>
+      <td>28</td>
+      <td>8.83</td>
+    </tr>
+    <tr>
+      <td>3.40</td>
+      <td>164</td>
+      <td>13.39</td>
+      <td>3.40</td>
+      <td>27</td>
+      <td>8.52</td>
+    </tr>
+    <tr>
+      <td>3.60</td>
+      <td>111</td>
+      <td>9.06</td>
+      <td>3.60</td>
+      <td>21</td>
+      <td>6.62</td>
+    </tr>
+    <tr>
+      <td>3.80</td>
+      <td>145</td>
+      <td>11.84</td>
+      <td>3.80</td>
+      <td>20</td>
+      <td>6.31</td>
+    </tr>
+    <tr>
+      <td>4.00</td>
+      <td>114</td>
+      <td>9.31</td>
+      <td>4.00</td>
+      <td>9</td>
+      <td>2.84</td>
+    </tr>
+    <tr>
+      <td>4.20</td>
+      <td>60</td>
+      <td>4.90</td>
+      <td>4.20</td>
+      <td>6</td>
+      <td>1.89</td>
+    </tr>
+    <tr>
+      <td>4.40</td>
+      <td>60</td>
+      <td>4.90</td>
+      <td>4.40</td>
+      <td>1</td>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <td>4.60</td>
+      <td>31</td>
+      <td>2.53</td>
+      <td>4.60</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>4.80</td>
+      <td>31</td>
+      <td>2.53</td>
+      <td>4.80</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>5.00</td>
+      <td>4</td>
+      <td>0.33</td>
+      <td>5.00</td>
+      <td>0</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Frequency tables for the US and Chile.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.4 </span>
+Frequency tables for the US and Chile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figure 6.5 provides the column chart for the US and Chile.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Comparing the distribution of management scores for the US and Chile.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-05.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Comparing the distribution of management scores for the US and Chile.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Comparing the distribution of management scores for the US and Chile.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.5 </span>
+Comparing the distribution of management scores for the US and Chile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Similarities: The data is not evenly distributed across the scale: the proportion of observations tends to decrease for scores further away from the mean. The spread of the data and the range look similar.</p>
+    <p>Differences: The distribution of the US is more right-centred than that of Chile, with a larger proportion of observations at higher values.</p>
+  </li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 6.6 shows box and whisker plots for the US and Chile.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Box and whisker plots for the US and Chile.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Box and whisker plots for the US and Chile.
+" class="" />
+        </a>
+</div>
+<p class="title">
+</p>
+<p class="description">
+Box and whisker plots for the US and Chile.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.6 </span>
+Box and whisker plots for the US and Chile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>From the box and whisker plots, we can now see that the mean and median for the US is higher than that of Chile. In fact, all quartiles of the distribution of the US are higher than those for Chile. The width of the boxes and length of the whiskers indicates that the shapes of the two distributions are similar. There is also one outlier for the US, which was not clearly visible from the column chart.</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figures 6.7 and 6.8 show the tables for hospitals and schools.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-7">
+<div class="figure-body">
+<div class="figure-html">
+</div>
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Average of management</th>
+      <th>Average of monitoring</th>
+      <th>Average of targets</th>
+      <th>Average of people</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Canada</td>
+      <td>2.52</td>
+      <td>2.82</td>
+      <td>2.44</td>
+      <td>2.17</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>2.40</td>
+      <td>2.59</td>
+      <td>2.29</td>
+      <td>2.03</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>2.64</td>
+      <td>2.85</td>
+      <td>2.55</td>
+      <td>2.45</td>
+    </tr>
+    <tr>
+      <td>Italy</td>
+      <td>2.48</td>
+      <td>2.67</td>
+      <td>2.33</td>
+      <td>2.20</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>2.57</td>
+      <td>2.90</td>
+      <td>2.68</td>
+      <td>2.36</td>
+    </tr>
+    <tr>
+      <td>UK</td>
+      <td>2.82</td>
+      <td>3.07</td>
+      <td>2.71</td>
+      <td>2.62</td>
+    </tr>
+    <tr>
+      <td>US</td>
+      <td>3.00</td>
+      <td>3.21</td>
+      <td>2.87</td>
+      <td>2.92</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Mean scores for hospitals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.7 </span>
+Mean scores for hospitals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-6-8">
+<div class="figure-body">
+<div class="figure-html">
+</div>
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Average of management</th>
+      <th>Average of monitoring</th>
+      <th>Average of targets</th>
+      <th>Average of people</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Canada</td>
+      <td>2.78</td>
+      <td>2.92</td>
+      <td>2.86</td>
+      <td>2.33</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>2.54</td>
+      <td>2.70</td>
+      <td>2.49</td>
+      <td>2.26</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>2.80</td>
+      <td>3.09</td>
+      <td>2.72</td>
+      <td>2.51</td>
+    </tr>
+    <tr>
+      <td>UK</td>
+      <td>2.96</td>
+      <td>3.07</td>
+      <td>2.97</td>
+      <td>2.75</td>
+    </tr>
+    <tr>
+      <td>US</td>
+      <td>2.72</td>
+      <td>2.88</td>
+      <td>2.63</td>
+      <td>2.47</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Mean scores for schools.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.8 </span>
+Mean scores for schools.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>Solution figures 6.9 and 6.10 provide separate bar charts for hospitals and schools.</p>
+    <p>The country rankings for both hospitals and schools are different from that of manufacturing. For example, while the UK ranks below the US, Sweden, and Canada in manufacturing, it ranks above these countries in schools. Similarly, Germany has a high ranking for both manufacturing and hospitals, but a low ranking for schools.</p>
+  </li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-9">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Bar chart of mean management score for hospitals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-09.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Bar chart of mean management score for hospitals.
+" class="" />
+        </a>
+</div>
+<p class="title">
+</p>
+<p class="description">
+Bar chart of mean management score for hospitals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.9 </span>
+Bar chart of mean management score for hospitals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-6-10">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Bar chart of mean management score for schools.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Bar chart of mean management score for schools.
+" class="" />
+        </a>
+</div>
+<p class="title">
+</p>
+<p class="description">
+Bar chart of mean management score for schools.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.10 </span>
+Bar chart of mean management score for schools.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>
+    <p>There are many possible explanations for the observed patterns, for example:</p>
+    <p>UK schools have recently undergone some reforms to improve management, such as decentralization (allowing schools autonomy over their management policies) and sharing of better practices across different schools. These policies could explain why the average management score for schools in the UK is relatively high.</p>
+  </li>
+</ul>
+<h2 id="part-62-do-management-practices-differ-between-countries">Part 6.2 Do management practices differ between countries?</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Chile is used as an example in Solution figure 6.11.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Chile is used as an example. The width of the 95% confidence interval is 0.066.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-11">
+<div class="figure-body">
+<div class="figure-md">
+<table class="data-align-right">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Mean</th>
+      <th>Standard deviation</th>
+      <th>Number of firms</th>
+      <th>Width of CI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chile</td>
+      <td>2.83</td>
+      <td>0.60</td>
+      <td>317</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td>3.35</td>
+      <td>0.64</td>
+      <td>1,224</td>
+      <td>0.04</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+Mean management score in manufacturing firms for the US and Chile.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.11 </span>
+Mean management score in manufacturing firms for the US and Chile.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figure 6.12 shows the column chart for the US and Chile with 95% confidence intervals.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-12">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Bar chart of mean management score in manufacturing firms for the US and Chile, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-12.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="
+: Bar chart of mean management score in manufacturing firms for the US and Chile, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="title">
+</p>
+<p class="description">
+Bar chart of mean management score in manufacturing firms for the US and Chile, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.12 </span>
+Bar chart of mean management score in manufacturing firms for the US and Chile, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>The confidence interval for Chile is wider than that of the US, indicating the mean for Chile is less precisely estimated. Looking at Solution figure 6.11, the low precision is likely due to the smaller number of observations for Chile.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>The mean score for the US is likely to be different from that of Chile, since both means lie outside each other’s 95% confidence interval. Also, since the confidence intervals are quite far apart, we are quite sure that this result is not just because of our chosen probability of 95%. For example, even if we used 99% confidence intervals, which would be wider, the means would still not be inside each other’s confidence interval. In this case we say our result is robust to the choice of significance level. (In other cases, the results may change depending on the significance level (or probability) chosen.)</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>Solution figure 6.13 provides summary tables for both hospitals and schools.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-13">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th colspan="3">Hospitals</th>
+    <th colspan="3">Schools</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td>Average</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Average</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Width (hospitals)</td>
+    <td>Width (schools)</td>
+  </tr>
+  <tr>
+    <td>Canada</td>
+    <td>2.52</td>
+    <td>0.45</td>
+    <td>175</td>
+    <td>2.78</td>
+    <td>0.39</td>
+    <td>151</td>
+    <td>0.07</td>
+    <td>0.06</td>
+  </tr>
+  <tr>
+    <td>France</td>
+    <td>2.40</td>
+    <td>0.43</td>
+    <td>158</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>0.07</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Germany</td>
+    <td>2.64</td>
+    <td>0.39</td>
+    <td>130</td>
+    <td>2.54</td>
+    <td>0.43</td>
+    <td>143</td>
+    <td>0.07</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>Italy</td>
+    <td>2.48</td>
+    <td>0.52</td>
+    <td>166</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>0.08</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>2.57</td>
+    <td>0.44</td>
+    <td>43</td>
+    <td>2.80</td>
+    <td>0.44</td>
+    <td>89</td>
+    <td>0.13</td>
+    <td>0.09</td>
+  </tr>
+  <tr>
+    <td>UK</td>
+    <td>2.82</td>
+    <td>0.43</td>
+    <td>184</td>
+    <td>2.96</td>
+    <td>0.40</td>
+    <td>110</td>
+    <td>0.06</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>US</td>
+    <td>3.00</td>
+    <td>0.54</td>
+    <td>327</td>
+    <td>2.72</td>
+    <td>0.45</td>
+    <td>285</td>
+    <td>0.06</td>
+    <td>0.05</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Mean management score and 95% confidence interval width for hospitals and schools.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.13  </span>
+Mean management score and 95% confidence interval width for hospitals and schools.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figures 6.14 and 6.15 provide the bar charts for hospitals and schools, and the discussions follow.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="solution-figure-6-14">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for hospitals, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-14.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for hospitals, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bar chart of mean management score for hospitals, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.14 </span>
+Bar chart of mean management score for hospitals, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p>Solution figure 6.14 shows sample means for the management scores in different countries along with their 95% confidence intervals.</p>
+<p class="tighten-15">For hospitals, the mean for the US is likely to be higher than all other countries’ means as its confidence interval clearly does not overlap with any of the other countries’ confidence intervals. We would reach the same conclusion even if wider (99%) confidence intervals were used.</p>
+<div class="figure fixed figure-no-source" id="solution-figure-6-15">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for schools, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-15.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for schools, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bar chart of mean management score for schools, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.15 </span>
+Bar chart of mean management score for schools, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p>For schools (Solution figure 6.15), the UK is likely to have a higher mean than the US as their respective confidence intervals do not overlap, by a significant margin. For the same reason it is apparent that the average German management score is lower than that in the other countries shown in the figure. Sweden, Canada and the US have overlapping confidence intervals and hence there is no clear evidence that would point at substantial differences in the respective population means.</p>
+<ol class="text-question keep-together">
+  <li>
+    <p>Holding all other things fixed, we would expect the confidence intervals to be wider if the standard deviation was larger (the sample mean is estimated less precisely).</p>
+    <p>Holding all other things fixed, we would expect the confidence intervals to be narrower if the number of observations was larger (we sampled more of the whole population). The more observations we have, the closer we can approximate the population mean.</p>
+    <p>Looking at the confidence intervals, standard deviation, and number of observations in our data, we can confirm this relationship.</p>
+  </li>
+</ol>
+<h2 id="part-63-what-factors-affect-the-quality-of-management">Part 6.3 What factors affect the quality of management?</h2>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>As shown in Solution figures 6.16 and 6.17.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>As shown in Solution figures 6.16 and 6.17.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-16">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="3">Private</th>
+    <th colspan="3">Public</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td>Mean</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Mean</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Width (private)</td>
+    <td>Width (public)</td>
+  </tr>
+  <tr>
+    <td>Canada</td>
+    <td>2.78</td>
+    <td>0.79</td>
+    <td>4</td>
+    <td>2.52</td>
+    <td>0.45</td>
+    <td>171</td>
+    <td>1.25</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>France</td>
+    <td>2.65</td>
+    <td>0.51</td>
+    <td>20</td>
+    <td>2.37</td>
+    <td>0.41</td>
+    <td>138</td>
+    <td>0.24</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>Germany</td>
+    <td>2.61</td>
+    <td>0.39</td>
+    <td>68</td>
+    <td>2.68</td>
+    <td>0.38</td>
+    <td>62</td>
+    <td>0.09</td>
+    <td>0.10</td>
+  </tr>
+  <tr>
+    <td>Italy</td>
+    <td>2.71</td>
+    <td>0.50</td>
+    <td>33</td>
+    <td>2.42</td>
+    <td>0.51</td>
+    <td>133</td>
+    <td>0.17</td>
+    <td>0.09</td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>3.10</td>
+    <td>0.07</td>
+    <td>2</td>
+    <td>2.54</td>
+    <td>0.43</td>
+    <td>41</td>
+    <td>0.64</td>
+    <td>0.13</td>
+  </tr>
+  <tr>
+    <td>UK</td>
+    <td>3.00</td>
+    <td>0.39</td>
+    <td>64</td>
+    <td>2.73</td>
+    <td>0.42</td>
+    <td>120</td>
+    <td>0.10</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>US</td>
+    <td>3.14</td>
+    <td>0.53</td>
+    <td>164</td>
+    <td>2.87</td>
+    <td>0.52</td>
+    <td>163</td>
+    <td>0.08</td>
+    <td>0.08</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Mean management score and 95% confidence interval width for private and public hospitals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.16 </span>
+Mean management score and 95% confidence interval width for private and public hospitals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="solution-figure-6-17">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="3">Private</th>
+    <th colspan="3">Public</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td>Mean</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Mean</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Width (private)</td>
+    <td>Width (public)</td>
+  </tr>
+  <tr>
+    <td>Canada</td>
+    <td>2.76</td>
+    <td>0.45</td>
+    <td>21</td>
+    <td>2.78</td>
+    <td>0.38</td>
+    <td>129</td>
+    <td>0.21</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>Germany</td>
+    <td>2.73</td>
+    <td>0.49</td>
+    <td>16</td>
+    <td>2.51</td>
+    <td>0.41</td>
+    <td>127</td>
+    <td>0.26</td>
+    <td>0.07</td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>3.07</td>
+    <td>0.63</td>
+    <td>23</td>
+    <td>2.71</td>
+    <td>0.31</td>
+    <td>66</td>
+    <td>0.27</td>
+    <td>0.08</td>
+  </tr>
+  <tr>
+    <td>UK</td>
+    <td>2.89</td>
+    <td>0.41</td>
+    <td>11</td>
+    <td>2.97</td>
+    <td>0.40</td>
+    <td>99</td>
+    <td>0.28</td>
+    <td>0.08</td>
+  </tr>
+  <tr>
+    <td>US</td>
+    <td>2.66</td>
+    <td>0.48</td>
+    <td>74</td>
+    <td>2.75</td>
+    <td>0.44</td>
+    <td>211</td>
+    <td>0.11</td>
+    <td>0.06</td>
+  </tr>
+</table>
+</div>
+<div class="figure-md">
+</div>
+<p class="title">
+</p>
+<p class="description">
+Mean management score and 95% confidence interval width for private and public schools.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.17 </span>
+Mean management score and 95% confidence interval width for private and public schools.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>Solution figures 6.18 and 6.19 provide the bar charts for hospitals and schools, and the discussions follow.</li>
+</ul>
+<div class="figure figure-no-source" id="solution-figure-6-18">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for public and private hospitals, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-18.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for public and private hospitals, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bar chart of mean management score for public and private hospitals, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.18  </span>
+Bar chart of mean management score for public and private hospitals, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p class="tighten-10"><em>Hospitals:</em> After we condition on ownership type, the US still has the highest average score for public and private hospitals while France has the lowest average score for public and Germany for private hospitals. Compared to Question 2b in <a href="#part-62-do-management-practices-differ-between-countries" class="show-page-number">Part 6.2</a>, the rankings in the middle have changed. For example, among private hospitals, Sweden ranks higher than in the overall rankings (though we should interpret this result with caution as there are only two observations for private hospitals).</p>
+<p>In most countries, private hospitals are, on average, better managed than public hospitals (except for Germany). This is most obvious in the US and the UK, where the respective confidence intervals are non-overlapping. But in most countries reported the private and public confidence intervals are overlapping. In these countries, the data is compatible with a hypothesis that private and public hospitals have equally effective management.</p>
+<p>Note the very wide confidence intervals for Canada and Sweden, which have very few observations.</p>
+<div class="figure figure-no-source" id="solution-figure-6-19">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for public and private schools, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-19.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Bar chart of mean management score for public and private schools, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Bar chart of mean management score for public and private schools, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.19 </span>
+Bar chart of mean management score for public and private schools, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p class="loosen-15 keep-together"><em>Schools:</em> Looking across countries, there is no clear difference in the patterns of management practices in public vs private schools: in some countries public schools have a higher mean, in others, private schools have a higher mean. In fact, in the US, UK, Germany and Canada the confidence intervals for private and public schools are well overlapping, indicating that the data is compatible with a hypothesis of equal average management scores in private and public schools. The exception is Sweden, where the data indicates the possibility that the average management quality in private schools is higher than that in public schools. The confidence interval for the management score in private schools does not overlap with the confidence interval for public schools.</p>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>The solution depends on your software and is not shown.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Brazil and Canada are used as examples in Solution figure 6.20. Note that when there is only one observation in a group, there is no standard deviation.</li>
+</ul>
+<div class="figure wide figure-no-source" id="solution-figure-6-20">
+<div class="figure-body">
+<div class="figure-html">
+<table class="data-align-right">
+  <tr>
+    <th></th>
+    <th colspan="3">Larger</th>
+    <th colspan="3">Smaller</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Country; ownership type</td>
+    <td>Mean</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Mean</td>
+    <td>SD</td>
+    <td>Number</td>
+    <td>Width (Larger)</td>
+    <td>Width (Smaller)</td>
+  </tr>
+  <tr>
+    <td><strong>Brazil</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Dispersed shareholders</td>
+    <td>3.48</td>
+    <td>0.73</td>
+    <td>45</td>
+    <td>3.06</td>
+    <td>0.67</td>
+    <td>28</td>
+    <td>0.22</td>
+    <td>0.26</td>
+  </tr>
+  <tr>
+    <td>Family owned, external CEO</td>
+    <td>2.99</td>
+    <td>0.69</td>
+    <td>10</td>
+    <td>2.82</td>
+    <td>0.73</td>
+    <td>8</td>
+    <td>0.49</td>
+    <td>0.61</td>
+  </tr>
+  <tr>
+    <td>Family owned, family CEO</td>
+    <td>2.70</td>
+    <td>0.64</td>
+    <td>41</td>
+    <td>2.50</td>
+    <td>0.67</td>
+    <td>80</td>
+    <td>0.20</td>
+    <td>0.15</td>
+  </tr>
+  <tr>
+    <td>Founder</td>
+    <td>2.66</td>
+    <td>0.59</td>
+    <td>72</td>
+    <td>2.35</td>
+    <td>0.52</td>
+    <td>124</td>
+    <td>0.14</td>
+    <td>0.09</td>
+  </tr>
+  <tr>
+    <td>Government</td>
+    <td>2.44</td>
+    <td>1.18</td>
+    <td>2</td>
+    <td>4.00</td>
+    <td></td>
+    <td>1</td>
+    <td>10.59</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Managers</td>
+    <td>2.51</td>
+    <td>0.63</td>
+    <td>7</td>
+    <td>2.64</td>
+    <td>0.57</td>
+    <td>23</td>
+    <td>0.58</td>
+    <td>0.25</td>
+  </tr>
+  <tr>
+    <td>Other</td>
+    <td>3.01</td>
+    <td>0.54</td>
+    <td>29</td>
+    <td>2.57</td>
+    <td>0.40</td>
+    <td>13</td>
+    <td>0.21</td>
+    <td>0.24</td>
+  </tr>
+  <tr>
+    <td>Private equity</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>3.23</td>
+    <td>0.59</td>
+    <td>5</td>
+    <td></td>
+    <td>0.73</td>
+  </tr>
+  <tr>
+    <td>Private individuals</td>
+    <td>2.94</td>
+    <td>0.52</td>
+    <td>42</td>
+    <td>2.69</td>
+    <td>0.71</td>
+    <td>39</td>
+    <td>0.16</td>
+    <td>0.23</td>
+  </tr>
+  <tr>
+    <td><strong>Canada</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Dispersed shareholders</td>
+    <td>3.52</td>
+    <td>0.58</td>
+    <td>53</td>
+    <td>3.43</td>
+    <td>0.60</td>
+    <td>53</td>
+    <td>0.16</td>
+    <td>0.16</td>
+  </tr>
+  <tr>
+    <td>Family owned, external CEO</td>
+    <td>3.31</td>
+    <td>0.49</td>
+    <td>9</td>
+    <td>2.90</td>
+    <td>0.47</td>
+    <td>6</td>
+    <td>0.37</td>
+    <td>0.49</td>
+  </tr>
+  <tr>
+    <td>Family owned, family CEO</td>
+    <td>3.02</td>
+    <td>0.61</td>
+    <td>14</td>
+    <td>2.75</td>
+    <td>0.55</td>
+    <td>25</td>
+    <td>0.36</td>
+    <td>0.23</td>
+  </tr>
+  <tr>
+    <td>Founder</td>
+    <td>3.01</td>
+    <td>0.69</td>
+    <td>14</td>
+    <td>2.86</td>
+    <td>0.56</td>
+    <td>37</td>
+    <td>0.40</td>
+    <td>0.19</td>
+  </tr>
+  <tr>
+    <td>Government</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>3.00</td>
+    <td></td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Managers</td>
+    <td>3.01</td>
+    <td>0.57</td>
+    <td>5</td>
+    <td>3.17</td>
+    <td>0.49</td>
+    <td>5</td>
+    <td>0.70</td>
+    <td>0.61</td>
+  </tr>
+  <tr>
+    <td>Other</td>
+    <td>3.33</td>
+    <td>0.40</td>
+    <td>12</td>
+    <td>3.15</td>
+    <td>0.44</td>
+    <td>16</td>
+    <td>0.26</td>
+    <td>0.24</td>
+  </tr>
+  <tr>
+    <td>Private equity</td>
+    <td>3.12</td>
+    <td>0.58</td>
+    <td>21</td>
+    <td>3.34</td>
+    <td>0.67</td>
+    <td>11</td>
+    <td>0.26</td>
+    <td>0.45</td>
+  </tr>
+  <tr>
+    <td>Private individuals</td>
+    <td>3.46</td>
+    <td>0.45</td>
+    <td>37</td>
+    <td>2.90</td>
+    <td>0.60</td>
+    <td>66</td>
+    <td>0.15</td>
+    <td>0.15</td>
+  </tr>
+  <tr>
+    <td><strong>United States</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Dispersed Shareholders</td>
+    <td>3.50</td>
+    <td>0.56</td>
+    <td>295</td>
+    <td>3.45</td>
+    <td>0.56</td>
+    <td>158</td>
+    <td>0.06</td>
+    <td>0.09</td>
+  </tr>
+  <tr>
+    <td>Family owned, external CEO</td>
+    <td>3.45</td>
+    <td>0.54</td>
+    <td>22</td>
+    <td>2.86</td>
+    <td>0.63</td>
+    <td>6</td>
+    <td>0.24</td>
+    <td>0.66</td>
+  </tr>
+  <tr>
+    <td>Family owned, family CEO</td>
+    <td>3.44</td>
+    <td>0.58</td>
+    <td>42</td>
+    <td>2.96</td>
+    <td>0.68</td>
+    <td>73</td>
+    <td>0.18</td>
+    <td>0.16</td>
+  </tr>
+  <tr>
+    <td>Founder</td>
+    <td>3.14</td>
+    <td>0.51</td>
+    <td>28</td>
+    <td>3.14</td>
+    <td>0.61</td>
+    <td>60</td>
+    <td>0.20</td>
+    <td>0.16</td>
+  </tr>
+  <tr>
+    <td>Government</td>
+    <td>4.06</td>
+    <td></td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Managers</td>
+    <td>3.80</td>
+    <td>0.73</td>
+    <td>6</td>
+    <td>3.57</td>
+    <td>0.66</td>
+    <td>6</td>
+    <td>0.77</td>
+    <td>0.69</td>
+  </tr>
+  <tr>
+    <td>Other</td>
+    <td>3.48</td>
+    <td>0.48</td>
+    <td>31</td>
+    <td>3.06</td>
+    <td>0.74</td>
+    <td>21</td>
+    <td>0.17</td>
+    <td>0.33</td>
+  </tr>
+  <tr>
+    <td>Private equity</td>
+    <td>3.50</td>
+    <td>0.43</td>
+    <td>27</td>
+    <td>3.34</td>
+    <td>0.48</td>
+    <td>27</td>
+    <td>0.17</td>
+    <td>0.19</td>
+  </tr>
+  <tr>
+    <td>Private individuals</td>
+    <td>3.40</td>
+    <td>0.68</td>
+    <td>68</td>
+    <td>3.07</td>
+    <td>0.61</td>
+    <td>93</td>
+    <td>0.16</td>
+    <td>0.13</td>
+  </tr>
+</table>
+</div>
+<p class="description">
+Table of mean management score and 95% confidence interval width, according to ownership type.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.20 </span>
+Table of mean management score and 95% confidence interval width, according to ownership type.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<ul class="text-sub-question">
+  <li>As shown in Solution figure 6.20.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Solution figures 6.21, 6.22 and 6.23 provide the bar charts for Brazil, Canada and the US, and the discussions follow.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="solution-figure-6-21">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Brazil: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-21.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Brazil: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Brazil: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.21 </span>
+Brazil: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><em>For Brazil:</em> On average, larger firms tend to be managed better, regardless of ownership type. However, confidence intervals are largely overlapping and hence the data is compatible with the hypothesis that management quality does not correlate with organization size. (We cannot say anything meaningful about government-run firms because there are only a few observations.) Firms owned by shareholders (dispersed or private equity) have a higher mean management score than family-owned firms.</p>
+<div class="figure fixed figure-no-source" id="solution-figure-6-22">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Canada: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-22.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Canada: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Canada: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.22 </span>
+Canada: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p class="loosen-15"><em>For Canada:</em> No clear pattern between firm size and management practice is apparent: larger firms are managed better (on average) for some ownership types, while smaller firms are managed better for other types. For most ownership types, it is quite likely that we would observe the differences shown, under a hypothesis that the populations have the same mean using the rule of thumb. As with Brazil, shareholder-owned firms have higher average management scores than family-owned firms, though the differences are smaller in absolute terms and the respective confidence intervals are largely overlapping.</p>
+<div class="figure fixed figure-no-source" id="solution-figure-6-23">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="US: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/solution-figure-06-23.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="US: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+" class="" />
+        </a>
+</div>
+<p class="description">
+US: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+</p>
+<p class="caption">
+<span class="figure-reference">Solution figure 6.23 </span>
+US: Bar chart of mean management score by ownership type, with 95% confidence intervals.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><em>For the US:</em> Here there is a clearer pattern linking firm size and management practices, with larger firms being managed better (for founder-owned firms, the means are the same). For larger firms, the means for family-owned firms, shareholder-owned firms and most other ownership types are very similar. The overlapping confidence intervals indicate that the data provides little evidence that the underlying population means are different.</p>
+<p>Whenever you use confidence intervals in the above manner, to decide whether there are differences in subgroup populations, remember that 95% confidence intervals may not always contain the respective population means, so your conclusions are never definite.</p>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li><em>Education level of managers:</em> Better-educated managers may have a broader knowledge of management practices (for example, ideas learned from business school) and can therefore improve the management of the firm. However, it is possible that a well-managed firm would require managers to acquire more education (for example, it could be company policy for employees to have a degree before they can be promoted to managerial positions).</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li><em>Number of competitors:</em> The threat of being driven out by competition could motivate firms to seek better management practices (for example, adopting modern production techniques to cut costs, or retraining employees to increase productivity). However, if good management practices were easy to replicate in a given market, this would attract more firms into the market, resulting in more competition.</li>
+</ul>
+<ul class="text-sub-question">
+  <li><em>Firm size:</em> Better management practices might lead to larger firms because this would enable firms to grow while remaining productive. However, larger firms could lead to better management practices because managers have greater incentives to research and implement better management practices in order to find the most efficient way to manage their employees. (The efficiency gains from doing so increase with the number of employees.)</li>
+</ul>
+<ol class="text-question">
+  <li></li>
+</ol>
+<ul class="text-sub-question">
+  <li>In a randomized field experiment, subjects (in this case, firms in India) are randomly assigned to either a treatment or a control group. Researchers try to ensure that there are no other differences between the groups besides the treatment (as in laboratory experiments where researchers only change one thing). Since the assignment is random, we are more confident that any observed differences between the treatment and control groups after the treatment phase are due to the treatment itself (improved management practices), rather than other variables. As long as the randomization has been done properly, we can make causal statements such as ‘improved management practices caused a productivity increase’.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>The treatment and control groups had similar productivity before the management changes. After receiving ‘treatment’, the treatment group’s productivity increased whereas the control group’s productivity remained at roughly the same level. Using the rule of thumb, we can say that the improvement in productivity due to the treatment was unlikely to be due to chance after Week 32 (approximate estimate).</li>
+</ul>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Solutions
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="06-04.html"
+               class="active">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="active">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="active">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>

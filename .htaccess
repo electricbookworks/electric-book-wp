@@ -1,0 +1,41 @@
+# BEGIN WordPress
+# The directives (lines) between `BEGIN WordPress` and `END WordPress` are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+# BEGIN Electric Book WP
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} \.(?:html|htm)$ [NC]
+RewriteCond %{REQUEST_FILENAME} doing-economics/book/text/0-4-preface.html
+RewriteRule . /index.php?electric-book-wp-restricted-path=doing-economics/book/text/0-4-preface.html&electric-book-wp-serve=%{REQUEST_URI} [L]
+</IfModule>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} \.(?:html|htm)$ [NC]
+RewriteCond %{REQUEST_FILENAME} doing-economics/book/text/0-5-note-to-instructors.html
+RewriteRule . /index.php?electric-book-wp-restricted-path=doing-economics/book/text/0-5-note-to-instructors.html&electric-book-wp-serve=%{REQUEST_URI} [L]
+</IfModule>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} doing-economics/book/text/0-4-preface.html
+RewriteCond %{HTTP_REFERER} \.(gif|jpeg|jpg|png|svg|bmp|mov|webp|css|js)$ [NC]
+RewriteRule . /index.php?error=404
+</IfModule>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} doing-economics/book/text/0-5-note-to-instructors.html
+RewriteCond %{HTTP_REFERER} \.(gif|jpeg|jpg|png|svg|bmp|mov|webp|css|js)$ [NC]
+RewriteRule . /index.php?error=404
+</IfModule>
+# END Electric Book WP

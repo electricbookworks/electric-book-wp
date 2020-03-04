@@ -1,0 +1,3552 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>
+    Doing Economics: Empirical Project 2: Working in Google Sheets
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <meta property="og:title" content="Empirical Project 2: Working in Google Sheets" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.core-econ.org/doing-economics/book/text/02-05.html" />
+    <meta property="og:description" content="A unique resource for learning data handling, software and statistical skills by working through projects that address real-world policy problems." />
+    <meta property="og:image" content="https://www.core-econ.org/doing-economics/book/images/web/cover.jpg" />
+    <link rel="stylesheet" type="text/css" media="all" href="../styles/web.css?date=20200224120313" />
+    <script>
+        function delete_cookie(name) {
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            console.log('Expired and removed MathJax menu cookie.');
+        }
+        delete_cookie('mjx.menu')
+    </script>
+            <script id="MathJaxConfig" type="text/x-mathjax-config" >
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        availableFonts: [], // force use of webFont
+                        webFont: "Gyre-Pagella",
+                        scale: 90,
+                        styles: {
+                            ".MathJax [style*=border-top-width]": {
+                                "border-top-width": "0.5pt ! important"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+            <script id="MathJax"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML">
+            </script>
+<script>
+WebFontConfig = {
+     google: {
+         families: ['Amiri:400,400i,700', 'Source Sans Pro:400,700,700:latin-ext', 'Asap:400,400i,600,600i']
+     }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document)
+</script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71347024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-106812057-1');
+</script>
+</head>
+<body class="book chapter subchapter"
+>
+<div id="wrapper">
+<div class="masthead">
+        <ul>
+                <li class="masthead-book-title">
+                    <a href="../../index.html">Doing Economics</a>
+                </li>
+        </ul>
+    <div class="controls">
+    </div>
+</div><!--.masthead-->
+<div class="nav-buttons">
+	<a class="nav-back-button">←</a>
+	<a class="nav-button" href="#nav">Contents</a>
+</div>
+    <div class="chapter-opener-image chapter-opener-image-none">
+    </div>
+	<div id="content">
+<h1 id="empirical-project-2-working-in-google-sheets"><strong>Empirical Project 2</strong> Working in Google Sheets</h1>
+<h2 class="save-1" id="part-21-collecting-data-by-playing-a-public-goods-game">Part 2.1 Collecting data by playing a public goods game</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part">Learning objectives for this part</h3>
+  <ul>
+    <li>collect data from an experiment and enter it into Google Sheets</li>
+    <li>use summary measures, for example, mean and standard deviation, and line charts to describe and compare data.</li>
+  </ul>
+</blockquote>
+<blockquote class="info">
+  <h3 id="note">Note</h3>
+  <p>You can still do Parts 2.2 and 2.3 without completing this part of the project.</p>
+</blockquote>
+<p>Before taking a closer look at the experimental data, you will play a public goods game like the one in the introduction with your classmates to learn how experimental data can be collected. If your instructor has not set up a game, follow the instructions below to set up your own game.</p>
+<blockquote class="economists">
+  <h3 id="instructions-how-to-set-up-the-public-goods-game"><strong>Instructions</strong> How to set up the public goods game</h3>
+  <p>Form a group of at least four people. (You may also want to set a maximum of 8 or 10 players to make the game easier to play). Choose one person to be the game administrator. The administrator will monitor the game, while the other people play the game.</p>
+  <h4 id="administrator">Administrator</h4>
+  <ol class="allow-break">
+    <li><em>Create the game:</em> Go to <a href="https://tinyco.re/2938847" class="show-url">the ‘Economics Games’ website</a>, scroll down to the bottom of the page, and click ‘Create a Multiplayer Game and Get Logins’. Then click ‘Externalities and public goods’. Under the heading ‘Voluntary contribution to a public good’, click ‘Choose this Game’. Enter in the number of people playing the game, and select ‘1’ for the number of universes. Then click ‘Get Logins’. A pop-up will appear, showing the login IDs and passwords for the players and for the administrator.</li>
+    <li><em>Start the game:</em> Give each player a different login ID. The game should be played anonymously, so make sure that players do not know the login IDs of other players. You are now ready to start the first round of the game. There are ten rounds in total.</li>
+    <li><em>Confirm that all the rounds are complete:</em> On the top right corner of the webpage, click ‘Login’, enter your login ID and password, and then click the green ‘Login’ button. You will be taken to the game administration page, which will show the average contribution in each round, and the results of the round just played. Wait until all the players have finished playing ten rounds before refreshing this page.</li>
+    <li><em>Collect the game results:</em> Once the players have finished playing ten rounds, refresh this page. The table at the top of the page will now show the average contribution (in euros) for each of the ten rounds played. Select the whole table, then copy and paste it into a new worksheet in Google Sheets.</li>
+  </ol>
+  <h4 id="players">Players</h4>
+  <ol>
+    <li class="loosen-10"><em>Login:</em> Once the administrator has created the game, go to <a href="https://tinyco.re/2938847" class="show-url">the ‘Economics Games’ website</a>. On the top right corner, click ‘Login’, enter the login ID and password that your administrator has given you, then click the green ‘Login’ button. You will be taken to the public goods game that your administrator has set up.</li>
+    <li><em>Play the first round of the game:</em> Read the instructions at top of the page carefully before starting the game. In each round, you must decide how much to contribute to the public good. Enter your choice for each universe (group of players) that you are a part of (if the same players are in two universes, then make the same contribution in both), then click ‘Validate’.</li>
+    <li class="loosen-10"><em>View the results of the first round:</em> You will then be shown the results of the first round, including how much each player (including yourself) contributed, the payoffs, and the profits. Click ‘Next’ to start the next round.</li>
+    <li><em>Complete all the rounds of the game:</em> Repeat steps 2 and 3 until you have played ten rounds in total, then collect the results of the game from your administrator.</li>
+  </ol>
+</blockquote>
+<p>The results from your game will look like Figure 2.1. In the questions below you will compare your results with those in Figure 3 of Herrmann et al. (2008), but first you need to reformat your table to look like Figure 2.2. Follow the steps in Google Sheets walk-through 2.1 to reformat your table.</p>
+<div class="figure figure-no-source" id="figure-2-1">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Round</th>
+      <th>10</th>
+      <th>9</th>
+      <th>8</th>
+      <th>7</th>
+      <th>6</th>
+      <th>5</th>
+      <th>4</th>
+      <th>3</th>
+      <th>2</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Average contribution</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+A table formatted with ‘Round’ and ‘Average contribution’ as the row variables.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.1 </span>
+A table formatted with ‘Round’ and ‘Average contribution’ as the row variables.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="figure-2-2">
+<div class="figure-body">
+<div class="figure-html">
+<table class="align-right">
+  <tr>
+    <th>Round</th>
+    <th>Average contribution</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td></td>
+  </tr>
+</table>
+</div>
+<p class="description">
+A table formatted with ‘Round’ and ‘Average contribution’ as the column variables.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.2 </span>
+A table formatted with ‘Round’ and ‘Average contribution’ as the column variables.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<p><span> </span></p>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-21-reformatting-a-table"><strong>Google Sheets walk-through 2.1</strong> Reformatting a table</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-2-3">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to reformat a table.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to reformat a table.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 2.3 </span>
+How to reformat a table.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-3a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: The table generated from playing the public goods game will look like the one shown in Rows 1–2. We need to reformat it so that the columns show the different variables, rather than the rows.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: The table generated from playing the public goods game will look like the one shown in Rows 1–2. We need to reformat it so that the columns show the different variables, rather than the rows.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+The table generated from playing the public goods game will look like the one shown in Rows 1–2. We need to reformat it so that the columns show the different variables, rather than the rows.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.3a </span>
+The table generated from playing the public goods game will look like the one shown in Rows 1–2. We need to reformat it so that the columns show the different variables, rather than the rows.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-3b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Copy and paste the transposed table
+: The transpose option switches the rows and columns of the table, so the first column becomes the first row and so on.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Copy and paste the transposed table
+: The transpose option switches the rows and columns of the table, so the first column becomes the first row and so on.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Copy and paste the transposed table
+</p>
+<p class="description">
+The transpose option switches the rows and columns of the table, so the first column becomes the first row and so on.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.3b </span>
+The transpose option switches the rows and columns of the table, so the first column becomes the first row and so on.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-3c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Rearrange rows in the correct order
+: The rows in Column A are arranged in descending order (Round 10, Round 9, and so on), so we will sort the data in reverse order.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Rearrange rows in the correct order
+: The rows in Column A are arranged in descending order (Round 10, Round 9, and so on), so we will sort the data in reverse order.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Rearrange rows in the correct order
+</p>
+<p class="description">
+The rows in Column A are arranged in descending order (Round 10, Round 9, and so on), so we will sort the data in reverse order.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.3c </span>
+The rows in Column A are arranged in descending order (Round 10, Round 9, and so on), so we will sort the data in reverse order.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-3d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The reformatted table
+: The table is now reformatted as required.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-03-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The reformatted table
+: The table is now reformatted as required.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The reformatted table
+</p>
+<p class="description">
+The table is now reformatted as required.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.3d </span>
+The table is now reformatted as required.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<p>Use the results of the game you have played to answer the following questions.</p>
+<ol class="text-question">
+  <li>Make a line chart with average contribution as the vertical axis variable, and period (from 1 to 10) on the horizontal axis. Describe how average contributions have changed over the course of the game.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-22-drawing-a-line-chart-with-multiple-variables"><strong>Google Sheets walk-through 2.2</strong> Drawing a line chart with multiple variables</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-2-4">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to plot a line chart with multiple variables.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to plot a line chart with multiple variables.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 2.4 </span>
+How to plot a line chart with multiple variables.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-4a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. Each column has data for a particular country, and each row has data for a given time period (1 to 10). We will draw Figure 3 from Herrmann et al. as an example; the steps to do Figure 2A are identical.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. Each column has data for a particular country, and each row has data for a given time period (1 to 10). We will draw Figure 3 from Herrmann et al. as an example; the steps to do Figure 2A are identical.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+This is what the data looks like. Each column has data for a particular country, and each row has data for a given time period (1 to 10). We will draw Figure 3 from Herrmann et al. as an example; the steps to do Figure 2A are identical.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.4a </span>
+This is what the data looks like. Each column has data for a particular country, and each row has data for a given time period (1 to 10). We will draw Figure 3 from Herrmann et al. as an example; the steps to do Figure 2A are identical.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-4b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Draw a line graph
+: After completing step 4, the graph will look like this.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Draw a line graph
+: After completing step 4, the graph will look like this.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Draw a line graph
+</p>
+<p class="description">
+After completing step 4, the graph will look like this.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.4b </span>
+After completing step 4, the graph will look like this.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-4c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Move the legend to the right
+: After step 6, the legend will now be on the right-hand side of your chart. You can also experiment with the other positions to see which looks better.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Move the legend to the right
+: After step 6, the legend will now be on the right-hand side of your chart. You can also experiment with the other positions to see which looks better.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Move the legend to the right
+</p>
+<p class="description">
+After step 6, the legend will now be on the right-hand side of your chart. You can also experiment with the other positions to see which looks better.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.4c </span>
+After step 6, the legend will now be on the right-hand side of your chart. You can also experiment with the other positions to see which looks better.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-4d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Add horizontal axis labels for every period
+: After step 7, the horizontal axis will be labelled with all periods.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-04-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Add horizontal axis labels for every period
+: After step 7, the horizontal axis will be labelled with all periods.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Add horizontal axis labels for every period
+</p>
+<p class="description">
+After step 7, the horizontal axis will be labelled with all periods.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.4d </span>
+After step 7, the horizontal axis will be labelled with all periods.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<ol class="text-question keep-together">
+  <li>Compare your line chart with Figure 3 of Herrmann et al. (2008).<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> Comment on any similarities or differences between the results (for example, the amount contributed at the start and end, or the change in average contributions over the course of the game).</li>
+</ol>
+<ol class="text-question">
+  <li>Can you think of any reasons why your results are similar to (or different from) those in Figure 3? You may find it helpful to read the ‘Experiments’ section of the <a href="https://tinyco.re/3969457" class="show-url">Herrmann et al. (2008) study</a> for a more detailed description of how the experiments were conducted.</li>
+</ol>
+<h2 class="page-break-before" id="part-22-describing-the-data">Part 2.2 Describing the data</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-1">Learning objectives for this part</h3>
+  <ul>
+    <li>use summary measures, for example, mean and standard deviation, and column charts to describe and compare data.</li>
+  </ul>
+</blockquote>
+<blockquote class="info">
+  <h3 id="note-1">Note</h3>
+  <p>You can still do Parts 2.2 and 2.3 without completing this part of the project.</p>
+</blockquote>
+<p>We will now use the data for Figures 2A and 3 of Herrmann et al. (2008), and evaluate the effect of the punishment option on average contributions. Rather than compare two charts showing all of the data from each experiment, as the authors of the study did, we will use summary measures to compare the data, and show the data from both experiments (with and without punishment) on the same chart.</p>
+<dl class="definition">
+<dt class="definition-term">mean</dt><dd class="definition-description">A summary statistic for a set of observations, calculated by adding all values in the set and dividing by the number of observations.</dd><dt class="definition-term">variance</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the mean of the squares of the deviations from the arithmetic mean of the distribution. The variance is used to indicate how ‘spread out’ the data is. A higher variance means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has zero variance (no variation), while the set of numbers 1, 1, 999 has a high variance of 221,334 (large spread).</span></dd>
+</dl>
+<p>First, download and save <a href="https://tinyco.re/6011816" class="show-url">the data</a>. The spreadsheet contains two tables:</p>
+<ul>
+  <li>The first table shows average contributions in a public goods game without punishment (Figure 3).</li>
+  <li>The second shows average contributions in a public goods game with punishment (Figure 2A).</li>
+</ul>
+<p>You can see that in each period (row), the average contribution varies across countries, in other words, there is a distribution of average contributions in each period.</p>
+<p>The <strong data-term="mean">mean</strong> and <strong data-term="variance">variance</strong> are two ways to summarize distributions. We will now use these measures, along with other measures (range and standard deviation) to summarize and compare the distribution of contributions in both experiments.</p>
+<blockquote class="sidenote">
+  <p>Before answering these questions, make sure you understand mean and variance, and how to calculate these measures in Google Sheets.</p>
+  <ul>
+    <li>See <a href="https://tinyco.re/2182040" class="show-url">Figure 1.5 in Exercise 1.3</a> of <em>Economy, Society, and Public Policy</em> for more information about the mean.</li>
+    <li>See <a href="01-05.html#google-sheets-walk-through-16-calculating-and-understanding-the-variance">Google Sheets walk-through 1.6</a> for more information about the variance.</li>
+  </ul>
+</blockquote>
+<ol class="text-question">
+  <li>Using the data for Figures 2A and 3 of Herrmann et al. (2008):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the mean contribution in each period (row) separately for both experiments, using the AVERAGE function.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Plot a line chart of mean contribution on the vertical axis and time period (from 1 to 10) on the horizontal axis (with a separate line for each experiment). Make sure the lines in the legend are clearly labelled according to the experiment (with punishment or without punishment).</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Describe any differences and similarities you see in the mean contribution over time in both experiments.</li>
+</ul>
+<ol class="text-question">
+  <li>Instead of looking at all periods, we can focus on contributions in the first and last period. Plot a column chart showing the mean contribution in the first and last period for both experiments. Your chart should look like <a href="#figure-2-6" class="show-page-number">Figure 2.6</a>.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-23-drawing-a-column-chart-to-compare-two-groups"><strong>Google Sheets walk-through 2.3</strong> Drawing a column chart to compare two groups</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-2-5">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to draw a column chart to compare two groups.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to draw a column chart to compare two groups.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 2.5 </span>
+How to draw a column chart to compare two groups.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-5a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. Column R has the means for Figure 3 (without punishment). Column S has the means for Figure 2A (with punishment). We will use the cells in bold font (Cells R3, R12, S3, and S12) to make the chart.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: This is what the data looks like. Column R has the means for Figure 3 (without punishment). Column S has the means for Figure 2A (with punishment). We will use the cells in bold font (Cells R3, R12, S3, and S12) to make the chart.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+This is what the data looks like. Column R has the means for Figure 3 (without punishment). Column S has the means for Figure 2A (with punishment). We will use the cells in bold font (Cells R3, R12, S3, and S12) to make the chart.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.5a </span>
+This is what the data looks like. Column R has the means for Figure 3 (without punishment). Column S has the means for Figure 2A (with punishment). We will use the cells in bold font (Cells R3, R12, S3, and S12) to make the chart.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-5b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Create a table with relevant data only
+: When creating a new table, make sure that all the adjacent cells are empty as shown. Otherwise, Google Sheets might misinterpret your data and draw the chart incorrectly.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Create a table with relevant data only
+: When creating a new table, make sure that all the adjacent cells are empty as shown. Otherwise, Google Sheets might misinterpret your data and draw the chart incorrectly.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Create a table with relevant data only
+</p>
+<p class="description">
+When creating a new table, make sure that all the adjacent cells are empty as shown. Otherwise, Google Sheets might misinterpret your data and draw the chart incorrectly.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.5b </span>
+When creating a new table, make sure that all the adjacent cells are empty as shown. Otherwise, Google Sheets might misinterpret your data and draw the chart incorrectly.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-5c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Draw the column chart
+: Use the new table you created to make the column chart.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Draw the column chart
+: Use the new table you created to make the column chart.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Draw the column chart
+</p>
+<p class="description">
+Use the new table you created to make the column chart.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.5c </span>
+Use the new table you created to make the column chart.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-5d">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Move the legend to the bottom and add axis titles
+: After step 4, the legend will now be underneath your chart. You can also experiment with the other positions to see which looks better.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-d.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Move the legend to the bottom and add axis titles
+: After step 4, the legend will now be underneath your chart. You can also experiment with the other positions to see which looks better.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Move the legend to the bottom and add axis titles
+</p>
+<p class="description">
+After step 4, the legend will now be underneath your chart. You can also experiment with the other positions to see which looks better.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.5d </span>
+After step 4, the legend will now be underneath your chart. You can also experiment with the other positions to see which looks better.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-5e">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Add data labels on top of the columns
+: After completing step 7, numbers showing the height of the column will appear in the columns selected. Your chart should now look like Figure 2.6.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-05-e.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Add data labels on top of the columns
+: After completing step 7, numbers showing the height of the column will appear in the columns selected. Your chart should now look like Figure 2.6.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Add data labels on top of the columns
+</p>
+<p class="description">
+After completing step 7, numbers showing the height of the column will appear in the columns selected. Your chart should now look like Figure 2.6.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.5e </span>
+After completing step 7, numbers showing the height of the column will appear in the columns selected. Your chart should now look like Figure 2.6.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+  <div class="figure fixed figure-no-source" id="figure-2-6">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-02-06.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-02-06.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-06-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-06-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-06-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average contributions in Periods 1 and 10, with and without punishment.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-02-06.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-06-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-06-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-06-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-06.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Average contributions in Periods 1 and 10, with and without punishment.
+" class="" />
+        </a>
+</div>
+<p class="description">
+Average contributions in Periods 1 and 10, with and without punishment.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.6 </span>
+Average contributions in Periods 1 and 10, with and without punishment.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">variance</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the mean of the squares of the deviations from the arithmetic mean of the distribution. The variance is used to indicate how ‘spread out’ the data is. A higher variance means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has zero variance (no variation), while the set of numbers 1, 1, 999 has a high variance of 221,334 (large spread).</span></dd>
+</dl>
+<p>The mean is one useful measure of the ‘middle’ of a distribution, but is not a complete description of what our data looks like. We also need to know how ‘spread out’ the data is in order to get a clearer picture and make comparisons between the distributions. The <strong data-term="variance">variance</strong> is one way to measure spread—the higher the variance, the more spread out the data is.</p>
+<dl class="definition">
+<dt class="definition-term">standard deviation</dt><dd class="definition-description">A measure of dispersion in a frequency distribution, equal to the square root of the variance. The standard deviation has a similar interpretation to the variance. A larger standard deviation means that the data is more spread out. <span class="definition-example">Example: The set of numbers 1, 1, 1 has a standard deviation of zero (no variation or spread), while the set of numbers 1, 1, 999 has a standard deviation of 46.7 (large spread).</span></dd>
+</dl>
+<p>A similar measure is <strong data-term="standard deviation">standard deviation</strong>, which is the square root of the variance. Standard deviation is commonly used because it provides a handy rule of thumb for large datasets—most of the data (95% if there are many observations) will be less than two standard deviations away from the mean.</p>
+<ol class="text-question">
+  <li>Using the data for Figures 2A and 3 of Herrmann et al. (2008):</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Calculate the standard deviation for Periods 1 and 10 separately, for both experiments. Does the rule of thumb apply? (In other words, are most values within two standard deviations of the mean?)</li>
+</ul>
+<ul class="text-sub-question">
+  <li>As shown in Figure 2.6, the mean contribution for both experiments was 10.6 in Period 1. With reference to your standard deviation calculations, explain whether this means that the two sets of data are the same.</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-24-calculating-the-standard-deviation"><strong>Google Sheets walk-through 2.4</strong> Calculating the standard deviation</h3>
+  <div class="slides slides-show-figures">
+<div class="figure summary figure-no-source" id="figure-2-7">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to calculate and understand the standard deviation.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to calculate and understand the standard deviation.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 2.7 </span>
+How to calculate and understand the standard deviation.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-7a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: We will compare the example data from Google Sheets walk-through 2.1 with some new data that is less spread out. You can see from Column H that all the values are between 10 to 12 (inclusive).
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: We will compare the example data from Google Sheets walk-through 2.1 with some new data that is less spread out. You can see from Column H that all the values are between 10 to 12 (inclusive).
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+We will compare the example data from Google Sheets walk-through 2.1 with some new data that is less spread out. You can see from Column H that all the values are between 10 to 12 (inclusive).
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.7a </span>
+We will compare the example data from Google Sheets walk-through 2.1 with some new data that is less spread out. You can see from Column H that all the values are between 10 to 12 (inclusive).
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-7b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Standard deviation calculation and interpretation
+: The STDEVP function will calculate the standard deviation over the selected cells. To enter in the formula, click on an empty cell.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Standard deviation calculation and interpretation
+: The STDEVP function will calculate the standard deviation over the selected cells. To enter in the formula, click on an empty cell.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Standard deviation calculation and interpretation
+</p>
+<p class="description">
+The STDEVP function will calculate the standard deviation over the selected cells. To enter in the formula, click on an empty cell.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.7b </span>
+The STDEVP function will calculate the standard deviation over the selected cells. To enter in the formula, click on an empty cell.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-7c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The relationship between the standard deviation and the variance
+: Both the variance and standard deviation measure spread. We need the variance to calculate the standard deviation, but we usually use the standard deviation to describe distributions because of the handy rule of thumb.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-07-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The relationship between the standard deviation and the variance
+: Both the variance and standard deviation measure spread. We need the variance to calculate the standard deviation, but we usually use the standard deviation to describe distributions because of the handy rule of thumb.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The relationship between the standard deviation and the variance
+</p>
+<p class="description">
+Both the variance and standard deviation measure spread. We need the variance to calculate the standard deviation, but we usually use the standard deviation to describe distributions because of the handy rule of thumb.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.7c </span>
+Both the variance and standard deviation measure spread. We need the variance to calculate the standard deviation, but we usually use the standard deviation to describe distributions because of the handy rule of thumb.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<dl class="definition">
+<dt class="definition-term">range</dt><dd class="definition-description">The interval formed by the smallest (minimum) and the largest (maximum) value of a particular variable. The range shows the two most extreme values in the distribution, and can be used to check whether there are any outliers in the data. (Outliers are a few observations in the data that are very different from the rest of the observations.)</dd>
+</dl>
+<p>Another measure of spread is the <strong data-term="range">range</strong>, the interval formed by the smallest (minimum) and the largest (maximum) values of a particular variable. For example, we might say that the number of periods in the public goods experiment ranges from 1 to 10. Once we know the most extreme values in our dataset, we have a better picture of what our data looks like.</p>
+<ol class="text-question">
+  <li>Calculate the maximum and minimum value for Periods 1 and 10 separately, for both experiments.</li>
+</ol>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-25-finding-the-minimum-maximum-and-range-of-a-variable"><strong>Google Sheets walk-through 2.5</strong> Finding the minimum, maximum, and range of a variable</h3>
+  <div class="slides slides-show-figures slides-show-figures-compact">
+<div class="figure summary figure-no-source" id="figure-2-8">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to find the minimum, maximum, and range of a variable.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to find the minimum, maximum, and range of a variable.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 2.8 </span>
+How to find the minimum, maximum, and range of a variable.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-8a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: Here we are going to calculate the minimum and maximum value of the example data in Google Sheets walk-through 2.1.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: Here we are going to calculate the minimum and maximum value of the example data in Google Sheets walk-through 2.1.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+Here we are going to calculate the minimum and maximum value of the example data in Google Sheets walk-through 2.1.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.8a </span>
+Here we are going to calculate the minimum and maximum value of the example data in Google Sheets walk-through 2.1.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-8b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the minimum value
+: The MIN function calculates the minimum value of the selected cells. Here, the minimum value is 4.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the minimum value
+: The MIN function calculates the minimum value of the selected cells. Here, the minimum value is 4.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Calculate the minimum value
+</p>
+<p class="description">
+The MIN function calculates the minimum value of the selected cells. Here, the minimum value is 4.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.8b </span>
+The MIN function calculates the minimum value of the selected cells. Here, the minimum value is 4.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-8c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the maximum value and the range
+: The MAX function calculates the maximum value. The maximum value here is 18. The range is the interval formed by the minimum and the maximum value. In words, we say ‘the range is 4 to 18’ or ‘the average contribution ranges from 4 to 18’. In numbers, we say ‘the range is [4,18]’.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-08-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the maximum value and the range
+: The MAX function calculates the maximum value. The maximum value here is 18. The range is the interval formed by the minimum and the maximum value. In words, we say ‘the range is 4 to 18’ or ‘the average contribution ranges from 4 to 18’. In numbers, we say ‘the range is [4,18]’.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Calculate the maximum value and the range
+</p>
+<p class="description">
+The MAX function calculates the maximum value. The maximum value here is 18. The range is the interval formed by the minimum and the maximum value. In words, we say ‘the range is 4 to 18’ or ‘the average contribution ranges from 4 to 18’. In numbers, we say ‘the range is [4,18]’.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.8c </span>
+The MAX function calculates the maximum value. The maximum value here is 18. The range is the interval formed by the minimum and the maximum value. In words, we say ‘the range is 4 to 18’ or ‘the average contribution ranges from 4 to 18’. In numbers, we say ‘the range is [4,18]’.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<ol class="text-question">
+  <li>A concise way to describe the data is in a summary table. With just four numbers (mean, standard deviation, minimum value, maximum value), we can get a general idea of what the data looks like.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>In Google Sheets, create a summary table as shown in Figure 2.9 below. Make three more summary tables, for Period 10 (without punishment), Period 1 (with punishment), and Period 10 (with punishment). Use your answers to Questions 2 to 4 to complete the summary tables.</li>
+</ul>
+<ul class="text-sub-question">
+  <li>Comment on any similarities and differences in the distributions, both across time and across experiments.</li>
+</ul>
+<div class="figure fixed figure-no-source" id="figure-2-9">
+<div class="figure-body">
+<div class="figure-md">
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Mean</th>
+      <th>Standard deviation</th>
+      <th>Minimum</th>
+      <th>Maximum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Contribution (Period 1, without punishment)</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="description">
+A summary table for contributions in a given period.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.9 </span>
+A summary table for contributions in a given period.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<h2 id="part-23-did-changing-the-rules-of-the-game-affect-behaviour">Part 2.3 Did changing the rules of the game affect behaviour?</h2>
+<blockquote class="box fixed">
+  <h3 id="learning-objectives-for-this-part-2">Learning objectives for this part</h3>
+  <ul>
+    <li>calculate and interpret the p-value</li>
+    <li>evaluate the usefulness of experiments for determining causality, and the limitations of these experiments.</li>
+  </ul>
+</blockquote>
+<p>The punishment option was introduced into the public goods game in order to see whether it could help sustain contributions, compared to the game without a punishment option. We will now use a calculation called a p-value to compare the results from both experiments more formally.</p>
+<p>By comparing the results in Period 10 of both experiments, we can see that the mean contribution in the experiment with punishment is 8.5 units higher than in the experiment without punishment (see Figure 2.6). Is it more likely that this behaviour is due to chance, or is it more likely to be due to the difference in experimental conditions?</p>
+<ol class="text-question">
+  <li>You can conduct another experiment to understand why we might see differences in behaviour that are due to chance.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>First, flip a coin six times, using one hand only, and record the results (for example, Heads, Heads, Tails, etc.). Then, using the same hand, flip a coin six times and record the results again.</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li>Compare the outcomes from Question 1<em>(a)</em>. Did you get the same number of heads in both cases? Even if you did, was the sequence of the outcomes (for example, Heads, Tails, Tails …) the same in both cases?</li>
+</ul>
+<p>The important point to note is that even when we conduct experiments under the same controlled conditions, due to an element of randomness, we may not observe the exact same behaviour each time we do the experiment.</p>
+<p>Randomness arises because the statistical analysis is conducted on a sample of data (for example, a small group of people from the entire population), and the sample we observe is only one of many possible samples. Whatever differences we calculate between two samples would almost certainly change if we had observed another pair of samples. Importantly, economists aren’t really interested in whether two samples are actually different, but rather whether the underlying populations, from which the samples were drawn, differ in the characteristics we are interested in (for example, age, income, contributions to the public good). And this is the challenge faced by the empirical economist.</p>
+<p>When we are interested in whether a treatment works — in this case, whether having the punishment option makes a difference in how much people contribute to the public good — we want a way to check whether any observed differences could just be due to sample variation.</p>
+<p class="tighten-15">The size of the difference alone cannot tell us whether it might just be due to chance. Even if the observed difference seems large, it could be small relative to how much the data vary. Figures 2.10 and 2.11 show the mean exam score of two groups of high school students and the size of house in which they live (represented by the height of the columns, and reported in the boxes above the columns), with the dots representing the underlying data. Figure 2.10 shows a relatively large difference in means that could have arisen by chance because the data is widely spread out (the standard deviation is large), while Figure 2.11 shows a relatively small difference that looks unlikely to be due to chance because the data is tightly clustered together (the standard deviation is very small). Note that we are looking at two distinct questions here: first, is there a large or small difference in exam score associated with the size of house of the student and second, is that difference likely to have arisen by chance. A social scientist is interested in the answer to both questions. If the difference is large but could easily have occurred by chance or if the difference is very small and unlikely to have occurred by chance, then the results are not suggestive of an important relationship between size of house and exam grade.</p>
+<div class="figure fixed figure-no-source" id="figure-2-10">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-10-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-10-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-10-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a large difference in means that is likely to have happened by chance.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-10-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-10-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-10-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-10.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a large difference in means that is likely to have happened by chance.
+" class="" />
+        </a>
+</div>
+<p class="description">
+An example of a large difference in means that is likely to have happened by chance.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.10 </span>
+An example of a large difference in means that is likely to have happened by chance.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure fixed figure-no-source" id="figure-2-11">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-11-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-11-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-11-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a small difference in means that is unlikely to have happened by chance.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/figure-02-11-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-11-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-11-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/figure-02-11.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="An example of a small difference in means that is unlikely to have happened by chance.
+" class="" />
+        </a>
+</div>
+<p class="description">
+An example of a small difference in means that is unlikely to have happened by chance.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.11 </span>
+An example of a small difference in means that is unlikely to have happened by chance.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<dl class="definition">
+<dt class="definition-term">p-value</dt><dd class="definition-description">The probability of observing data at least as extreme as the data collected if a particular hypothesis about the population is true. The p-value ranges from 0 to 1: the lower the probability (the lower the p-value), the less likely it is to observe the given data, and therefore the less compatible the data are with the hypothesis.</dd>
+</dl>
+<p>To help us decide, we consider the hypothesis that the difference occurred by chance – in other words, we start by hypothesizing that house size does not matter for exam scores. Then we ask how likely it is that we would observe differences at least as extreme as those we actually observe in our sample groups, <em>assuming</em> that our hypothesis is true. The answer to this question is called a <strong data-term="p-value">p-value</strong>. The smaller the p-value, the less likely that we would observe differences at least as extreme as those we did, given our hypothesis. So the smaller this p-value, the smaller our confidence will be in the hypothesis that in the population house size does not matter for exam grades.</p>
+<p>Notice that the p-value is not the probability that the hypothesis is correct – the data cannot tell us that probability.  It is the probability that we would find a difference as big as the one we have observed <em>if</em> the hypothesis were correct.</p>
+<p>We can estimate the p-value from the data, using the sample means and sample deviations. It is calculated by comparing the difference in the means with the amount of variation in the data as measured by the standard deviations. This is a well-established method, although some other statistical assumptions, which we do not discuss, are required to ensure that it gives a good estimate.</p>
+<p>When we look at the data in Figure 2.10, we cannot be absolutely certain that there really is a link between house size and exam scores. But if the p-value for the difference in means is very small (for example, 0.02) then we know that there would only be a 2% probability of seeing differences at least as extreme as those we did observe in the sample, given our hypothesis that in the population there was no relationship between house size and exam scores.</p>
+<dl class="definition">
+<dt class="definition-term">hypothesis test</dt><dd class="definition-description">A test in which a null (default) and an alternative hypothesis are posed about some characteristic of the population. Sample data is then used to test how likely it is that these sample data would be seen if the null hypothesis was true.</dd>
+</dl>
+<blockquote class="expandable-box allow-break">
+  <h3 id="find-out-more-hypothesis-testing-and-p-values"><strong>Find out more</strong> Hypothesis testing and p-values</h3>
+  <p>The process of formulating a hypothesis about the data, calculating the p-value, and using it to assess whether what we observe is consistent with the hypothesis, is known as a <strong data-term="hypothesis test">hypothesis test</strong>. When we conduct a hypothesis test, we consider two hypotheses: either there is no difference between the populations, in which case the differences we observe must have happened by chance (known as the ’null hypothesis’); or the populations really are different (known as the ‘alternative hypothesis’). The smaller the p-value, the lower is the probability that the differences we observe could have happened simply by chance, i.e. if the null hypothesis was true. The smaller the p-value, the stronger is the evidence in favour of the alternative hypothesis.</p>
+  <p>It is a common, but highly debatable practice, to pick a cutoff level for the p-value, and reject the null hypothesis if the p-value is below this cutoff. <a href="https://tinyco.re/6156097">This approach has been criticized recently by statisticians and social scientists</a> because the cutoff level is quite arbitrary.</p>
+  <p>Instead of using a cutoff, we prefer to calculate p-values and use them to assess the strength of the evidence. Whether the statistical evidence is strong enough for us to draw a firm conclusion about the data will always be a matter of judgement.</p>
+  <p class="tighten-10">In particular, you want to make sure that you understand the consequences of concluding that the null hypothesis is not true, and hence that the alternative is true. You may be quite easily prepared to conclude that house sizes and exam scores are related, but much more cautious about deciding that a new medication is more effective than an existing one if you know that this new medication has severe side effects. In the case of the medication, you might want to see stronger evidence against the null hypothesis before deciding that doctors should be advised to prescribe the new medication.</p>
+</blockquote>
+<p>To calculate the p-value in Google Sheets, we use a function called TTEST.</p>
+<ol class="text-question">
+  <li>Using the data for Figures 2A and 3:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Use Google Sheet’s TTEST function to calculate the p-value for the difference in means in Period 1 (with and without punishment). What is the p-value?</li>
+</ul>
+<ul class="text-sub-question tighten-15">
+  <li>What does this p-value tell us about the difference in means in Period 1?</li>
+</ul>
+<blockquote class="expandable-box">
+  <h3 id="google-sheets-walk-through-26-calculating-and-interpreting-the-p-value"><strong>Google Sheets walk-through 2.6</strong> Calculating and interpreting the p-value</h3>
+  <div class="slides slides-show-figures">
+<div class="figure summary figure-no-source" id="figure-2-12">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to calculate and interpret the p-value.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="How to calculate and interpret the p-value.
+" class="" />
+        </a>
+</div>
+<p class="caption">
+<span class="figure-reference">Figure 2.12 </span>
+How to calculate and interpret the p-value.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-12a">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: Here we are going to calculate the p-values we need.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-a.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="The data
+: Here we are going to calculate the p-values we need.
+" class="" />
+        </a>
+</div>
+<p class="title">
+The data
+</p>
+<p class="description">
+Here we are going to calculate the p-values we need.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.12a </span>
+Here we are going to calculate the p-values we need.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-12b">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the p-value for Period 1 data
+: The TTEST function will calculate the p-value for the two groups of cells selected. In the example shown, the formula to type is =TTEST(B3:Q3,B17:Q17,2,1). In this example there is a high probability that the difference we observe could have happened simply by chance.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-b.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the p-value for Period 1 data
+: The TTEST function will calculate the p-value for the two groups of cells selected. In the example shown, the formula to type is =TTEST(B3:Q3,B17:Q17,2,1). In this example there is a high probability that the difference we observe could have happened simply by chance.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Calculate the p-value for Period 1 data
+</p>
+<p class="description">
+The TTEST function will calculate the p-value for the two groups of cells selected. In the example shown, the formula to type is =TTEST(B3:Q3,B17:Q17,2,1). In this example there is a high probability that the difference we observe could have happened simply by chance.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.12b </span>
+The TTEST function will calculate the p-value for the two groups of cells selected. In the example shown, the formula to type is =TTEST(B3:Q3,B17:Q17,2,1). In this example there is a high probability that the difference we observe could have happened simply by chance.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+<div class="figure figure-no-source" id="figure-2-12c">
+<div class="figure-body">
+<div class="figure-images contains-1">
+        <a href="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c.jpg" class="figure-image-link">
+                <noscript>
+                    <img src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c.jpg" srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c-320.jpg 320w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c-640.jpg 640w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c-1024.jpg 1024w,
+                                    https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the p-value for Period 10 data
+: Follow these steps to calculate the p-value for Period 10 (the cells in the dotted boxes). The only difference from the previous formula (for Period 1) is the data selected.
+" class="" />
+                </noscript>
+                <img data-src="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c.jpg" data-srcset="https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c-320.jpg 320w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c-640.jpg 640w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c-1024.jpg 1024w,
+                                     https://core-econ.org/doing-economics/book/images/web/gs-figure-02-12-c.jpg 1280w" sizes="(min-width: 600px) 1300px, 100vw" alt="Calculate the p-value for Period 10 data
+: Follow these steps to calculate the p-value for Period 10 (the cells in the dotted boxes). The only difference from the previous formula (for Period 1) is the data selected.
+" class="" />
+        </a>
+</div>
+<p class="title">
+Calculate the p-value for Period 10 data
+</p>
+<p class="description">
+Follow these steps to calculate the p-value for Period 10 (the cells in the dotted boxes). The only difference from the previous formula (for Period 1) is the data selected.
+</p>
+<p class="caption">
+<span class="figure-reference">Figure 2.12c </span>
+Follow these steps to calculate the p-value for Period 10 (the cells in the dotted boxes). The only difference from the previous formula (for Period 1) is the data selected.
+        <span class="figure-download">
+        </span>
+</p>
+</div><!--.figure-body-->
+</div>
+</div>
+</blockquote>
+<ol class="text-question keep-with-next">
+  <li>Using the data for Period 10:</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Use Google Sheet’s TTEST function to calculate the p-value for the difference in means in Period 10 (with and without punishment). What is the p-value?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>What does this p-value tell us about the relationship between punishment, and behaviour in the public goods game?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>With reference to Figures 2.10 and 2.11, explain why we cannot use the size of the difference to directly conclude whether the difference could be due to chance.</li>
+</ul>
+<dl class="definition">
+<dt class="definition-term">spurious correlation</dt><dd class="definition-description">A strong linear association between two variables that does not result from any direct relationship, but instead may be due to coincidence or to another unseen factor.</dd>
+</dl>
+<p>An important point to note is that calculating p-values may not tell us anything about causation. The example of house size and exam scores shown in Figure 2.11, gives us evidence that some kind of relationship between house size and exam scores is very likely. However, we would not conclude that building an extra room automatically makes someone smarter. P-values cannot help us detect these <strong data-term="spurious correlation">spurious correlations</strong>.</p>
+<p>However, calculating p-values for experimental evidence can help us determine whether there is a causal link between two variables. If we conduct an experiment and find a difference in outcomes with a low p-value, then we may conclude that the change in experimental conditions is likely to have caused the difference.</p>
+<ol class="text-question">
+  <li>Refer to the results from the public goods games.</li>
+</ol>
+<ul class="text-sub-question">
+  <li>Which characteristics of the experimental setting make it likely that the punishment option was the cause of the change in behaviour?</li>
+</ul>
+<ul class="text-sub-question">
+  <li>With reference to Figure 2.6, explain why we need to compare the two groups in Period 1 in order to conclude that there is a causal link between the punishment option and behaviour in the game.</li>
+</ul>
+<p>Experiments can be useful for identifying causal links. However, if people’s behaviour in experimental conditions were different from their behaviour in the real world, our results would not be applicable anywhere outside the experiment.</p>
+<ol class="text-question">
+  <li>Discuss some limitations of lab experiments, and suggest some ways to address (or partially address) them. (You may find pages 158–171 of the paper <a href="https://tinyco.re/9601240" class="show-url">‘What do laboratory experiments measuring social preferences reveal about the real world?’</a> helpful, as well as the discussion on free riding and altruism in <a href="https://tinyco.re/8816977" class="show-url">Section 2.6</a> of <em>Economy, Society, and Public Policy</em>.)</li>
+</ol>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Benedikt Herrmann, Christian Thöni, and Simon Gächter. 2008. Figure 3 in <a href="https://tinyco.re/3969457" class="show-url">‘Antisocial punishment across societies’</a>. <em>Science</em> Magazine 319 (5868): p. 1365. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+	</div><!--#content-->
+    <div id="nav" class="non-printing">
+            <h2>Doing Economics</h2>
+            <div class="search">
+<form class="search" action="../../search.html" method="get">
+  <label for="search-box"></label>
+  <input type="text" id="search-box" class="search-box" name="query" placeholder="Search">
+  <input id="search-language" type="hidden" name="lang" value="en">
+</form>
+            </div><!--.search-->
+            <div class="nav-list">
+                    <ol class="nav-series-home">
+                        <li><a href="../../index.html">Home</a></li>
+                    </ol>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="0-3-contents.html#contents"
+               class="">
+                Table of contents
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-4-preface.html#preface"
+               class="">
+                Preface
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-5-note-to-instructors.html#a-note-to-instructors"
+               class="">
+                A note to instructors
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-6-contributors.html#producing-doing-economics"
+               class="">
+                Producing <em>Doing Economics</em>
+            </a>
+        </li>
+        <li class="
+        no-children
+        toc-frontmatter">
+            <a href="0-7-resources.html#resources"
+               class="">
+                List of resources
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                1—Measuring climate change
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-02.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-11-the-behaviour-of-average-surface-temperature-over-time"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-03.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-05.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html"
+               class="">
+                Part 1.1 The behaviour of average surface temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-12-variation-in-temperature-over-time"
+               class="">
+                Part 1.2 Variation in temperature over time
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="01-04.html#part-13-carbon-emissions-and-the-environment"
+               class="">
+                Part 1.3 Carbon emissions and the environment
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                2—Collecting and analysing data from experiments
+            </a>
+    <ol class="active">
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-02.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-21-collecting-data-by-playing-a-public-goods-game"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-03.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="active
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="active">
+                Working in Google Sheets
+            </a>
+    <ol class="active">
+        <li class="active
+        no-children
+        ">
+            <a href="02-05.html"
+               class="active">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="02-05.html#part-22-describing-the-data"
+               class="active">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="active
+        no-children
+        ">
+            <a href="02-05.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="active">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html"
+               class="">
+                Part 2.1 Collecting data by playing a public goods game
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-22-describing-the-data"
+               class="">
+                Part 2.2 Describing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="02-04.html#part-23-did-changing-the-rules-of-the-game-affect-behaviour"
+               class="">
+                Part 2.3 Did changing the rules of the game affect behaviour?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                3—Measuring the effect of a sugar tax
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-02.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-03.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-31-before-and-after-comparisons-of-retail-prices"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-05.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html"
+               class="">
+                Part 3.1 Before-and-after comparisons of retail prices
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="03-04.html#part-32-before-and-after-comparisons-with-prices-in-other-areas"
+               class="">
+                Part 3.2 Before-and-after comparisons with prices in other areas
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                4—Measuring wellbeing
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-02.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-03.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-05.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html"
+               class="">
+                Part 4.1 GDP and its components as a measure of material wellbeing
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="04-04.html#part-42-the-hdi-as-a-measure-of-wellbeing"
+               class="">
+                Part 4.2 The HDI as a measure of wellbeing
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                5—Measuring inequality: Lorenz curves and Gini coefficients
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-02.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html"
+               class="">
+                R-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#getting-started-in-r"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-51-measuring-income-inequality"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-03.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        has-children
+        ">
+            <a href="05-05.html#empirical-project-5-working-in-google-sheets"
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-05.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html"
+               class="">
+                Part 5.1 Measuring income inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="05-04.html#part-52-measuring-other-kinds-of-inequality"
+               class="">
+                Part 5.2 Measuring other kinds of inequality
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                6—Measuring management practices
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-02.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-61-looking-for-patterns-in-the-survey-data"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-03.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-05.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html"
+               class="">
+                Part 6.1 Looking for patterns in the survey data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-62-do-management-practices-differ-between-countries"
+               class="">
+                Part 6.2 Do management practices differ between countries?
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="06-04.html#part-63-what-factors-affect-the-quality-of-management"
+               class="">
+                Part 6.3 What factors affect the quality of management?
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                7—Supply and demand
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-02.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-71-drawing-supply-and-demand-diagrams"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-03.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-05.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html"
+               class="">
+                Part 7.1 Drawing supply and demand diagrams
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="07-04.html#part-72-interpreting-supply-and-demand-curves"
+               class="">
+                Part 7.2 Interpreting supply and demand curves
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                8—Measuring the non-monetary cost of unemployment
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-02.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-81-cleaning-and-summarizing-the-data"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-03.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-05.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html"
+               class="">
+                Part 8.1 Cleaning and summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-82-visualizing-the-data"
+               class="">
+                Part 8.2 Visualizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="08-04.html#part-83-confidence-intervals-for-difference-in-the-mean"
+               class="">
+                Part 8.3 Confidence intervals for difference in the mean
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                9—Credit-excluded households in a developing country
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-02.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-03.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-91-households-that-did-not-get-a-loan"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-05.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html"
+               class="">
+                Part 9.1 Households that did not get a loan
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="09-04.html#part-92-households-that-got-a-loan"
+               class="">
+                Part 9.2 Households that got a loan
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                10—Characteristics of banking systems around the world
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-02.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-101-summarizing-the-data"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-03.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-05.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html"
+               class="">
+                Part 10.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="10-04.html#part-102-comparing-financial-stability-before-and-after-the-2008-global-financial-crisis"
+               class="">
+                Part 10.2 Comparing financial stability before and after the 2008 global financial crisis
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                11—Measuring willingness to pay for climate change mitigation
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-02.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-111-summarizing-the-data"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-03.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-05.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html"
+               class="">
+                Part 11.1 Summarizing the data
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="11-04.html#part-112-comparing-willingness-to-pay-across-methods-and-individual-characteristics"
+               class="">
+                Part 11.2 Comparing willingness to pay across methods and individual characteristics
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                12—Government policies and popularity: Hong Kong cash handout
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html"
+               class="">
+                Learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-01.html#introduction"
+               class="">
+                Introduction
+            </a>
+        </li>
+        <li class="
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Excel
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html"
+               class="">
+                Excel-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-02.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in R
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html"
+               class="">
+                Getting started in R
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-03.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Working in Google Sheets
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html"
+               class="">
+                Google Sheets-specific learning objectives
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-121-inequality"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-05.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-link
+        has-children
+        ">
+            <a 
+               class="">
+                Solutions
+            </a>
+    <ol>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html"
+               class="">
+                Part 12.1 Inequality
+            </a>
+        </li>
+        <li class="
+        no-children
+        ">
+            <a href="12-04.html#part-122-government-popularity"
+               class="">
+                Part 12.2 Government popularity
+            </a>
+        </li>
+    </ol>
+        </li>
+    </ol>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-00-technical-reference.html"
+               class="">
+                Technical Reference
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-01-glossary.html#glossary"
+               class="">
+                Glossary
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-02-bibliography.html#bibliography"
+               class="">
+                Bibliography
+            </a>
+        </li>
+        <li class="
+        no-file
+        no-children
+        toc-endmatter">
+            <a href="50-03-copyright-acknowledgements.html#copyright-acknowledgements"
+               class="">
+                Copyright acknowledgements
+            </a>
+        </li>
+    </ol>
+            </div><!--.nav-list-->
+            <div class="widgets">
+            </div><!--.widgets-->
+    </div><!--#nav-->
+    <div id="footer" dir="ltr">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <a href="http://core-econ.org">
+                    <img src="../../assets/coreecon_logo_bw.png">
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>This ebook is developed by the CORE project. More information and additional resources for learning and teaching can be found at <a href="https://www.core-econ.org">www.core-econ.org</a>.</p>
+            </div>
+            <div class="footer-licence">
+                <a title="Licensed under Creative Commons BY NC ND" alt="Licensed under Creative Commons BY NC ND" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="../../assets/cc-byncnd.png"></a>
+                <br />
+                Version 1.0.0 &bull; Produced by <a href='https://electricbookworks.com'>Electric Book Works</a>
+            </div>
+        </div><!--.footer-content-->
+    </div><!--#footer-->
+    <script src="../../assets/js/bundle.js?date=20200224120313"></script>
+    <style>
+        .js-mcq .mcq-correct .mcq-feedback:before {
+            content: "Correct!";
+        }
+        .js-mcq .mcq-incorrect .mcq-feedback:before {
+            content: "Incorrect";
+        }
+        .js-mcq .mcq-partially-correct .mcq-feedback:before {
+            content: "You haven't selected all the correct answers.";
+        }
+    </style>
+</div><!--#wrapper-->
+</body>
+</html>
