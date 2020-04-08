@@ -28,13 +28,13 @@ function electric_book_wp_serve_restricted_html($get_restricted_path) {
     readfile(ABSPATH . $requested_url);
   } elseif (is_user_logged_in()) {
     if (isset($current_setting['redirect'])) {
-      wp_redirect('/' . $current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=role', 302);
+      wp_redirect($current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=role', 302);
     } else {
       echo 'This is a restricted page. Although you are logged in, your profile lacks the necessary role required to view this page.';
     }
   } else {
     if (isset($current_setting['redirect'])) {
-      wp_redirect('/' . $current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=logged-out', 302);
+      wp_redirect($current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=logged-out', 302);
     } else {
       wp_redirect('/wp-login.php?redirect_to=' . urlencode($requested_url), 302);
     }

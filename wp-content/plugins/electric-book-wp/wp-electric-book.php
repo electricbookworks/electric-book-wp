@@ -96,7 +96,7 @@ function electric_book_wp_field_restrict_roles_cb($args) {
 }
 
 function electric_book_wp_field_restrict_redirect_cb($args) { ?>
-  <input id="<?=esc_attr($args['label_for'])?>" type="text" name="electric_book_wp_restrict[<?=esc_attr($args['label_for'])?>]" placeholder="E.g. custom-file.php or custom/page/" class="regular-text">
+  <input id="<?=esc_attr($args['label_for'])?>" type="text" name="electric_book_wp_restrict[<?=esc_attr($args['label_for'])?>]" placeholder="E.g. '/custom-file.php' or '/custom/page/'" class="regular-text">
   <p>Leave blank to redirect to the WordPress login page. The path provided must either be relative to the root of your site or an absolute URL.</p>
   <p>Two GET parameters will be passed to your custom page:</p>
   <ol>
