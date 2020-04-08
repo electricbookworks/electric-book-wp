@@ -3,10 +3,14 @@
 function electric_book_wp_can_user_view($current_setting) {
   $can_they = false;
   $user = wp_get_current_user();
-  foreach($current_setting['roles'] as $role) {
-    if (in_array($role, (array) $user->roles)) {
-      $can_they = true;
+  if (!empty($current_setting['roles'])) {
+    foreach($current_setting['roles'] as $role) {
+      if (in_array($role, (array) $user->roles)) {
+        $can_they = true;
+      }
     }
+  } else {
+    $can_they = true;
   }
   return $can_they;
 }
