@@ -12,6 +12,7 @@ I'm not a fan of how WP lays out forms by default, but it may be worth accepting
 1. WordPress site needs to have rewrite rules enabled for this to work.
 2. I have to forbid direct access to asset files (e.g. CSS, JS, images) that fall under restricted URLs, regardless of logged-in status. Only HTML files are served. This is due to `readfile()` restrictions when handed over to WP/PHP and the fact that I can't do any properly secure logged-in checks before it gets to WordPress.
 3. While testing, your browser may cache the HTML page and therefore serve it to you without going back to the server again. So please keep this in mind when testing logged-in and user roles behaviour on newly configured path settings.
+4. Fragment links can't be persisted if they are in the originating URL before a redirect to login. Hash values aren't sent to the server, so there's no way of persisting them during the validation journey. Once or if a user has access, they will work normally.
 
 ## Why it uses PHP `readfile()` to serve the files
 
