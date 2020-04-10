@@ -8,7 +8,8 @@ In terms of the visual/interaction design, the saved paths can still be laid out
 
 I'm not a fan of how WP lays out forms by default, but it may be worth accepting to make the plugin more robust to future updates.
 
-## Caveats:
+## Caveats
+
 1. WordPress site needs to have rewrite rules enabled for this to work.
 2. I have to forbid direct access to asset files (e.g. CSS, JS, images) that fall under restricted URLs, regardless of logged-in status. Only HTML files are served. This is due to `readfile()` restrictions when handed over to WP/PHP and the fact that I can't do any properly secure logged-in checks before it gets to WordPress.
 3. While testing, your browser may cache the HTML page and therefore serve it to you without going back to the server again. So please keep this in mind when testing logged-in and user roles behaviour on newly configured path settings.
@@ -52,10 +53,10 @@ Running `$ docker-compose up` again will bring the container back to life, regar
 
 ## Using your own WordPress instance
 
-If Docker isn't available to you, you need to test this with some manual steps. These also clearly demonstrate the POC plugin's minimum requirements.
+If Docker isn't available to you, you need to test this with some manual steps.
 
 1. Set up your own vanilla WordPress installation.
-2. Copy the `doing-economics` folder to the WordPress root. This is our POC's sample content.
-3. Copy the `.htaccess` folder to the WordPress root (overwriting the default one from your original installation).
-4. Copy `wp-content/plugins/serve-restricted-html.php` to the `wp-content/plugins/` folder in your WordPress installation.
-5. In WordPress admin, as described above, go to Settings > Permalinks and select anything other than 'Plain'. (This enables the rewrite rules we need.)
+2. Optionally, copy the `doing-economics` folder to the WordPress root. This is only sample content for testing.
+3. Copy `wp-content/plugins/electric-book-wp` to the `wp-content/plugins/` folder in your WordPress installation.
+4. Optionally, to test the redirect-page functionality, copy `ebwp-redirect-example.php` to your WordPress root. When creating a restricted-page path, set 'Redirect users to' to `/ebwp-redirect-example.php`.
+5. In the WordPress admin, activate the plugin.
