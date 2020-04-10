@@ -1,10 +1,12 @@
 <?php
 
+defined('ABSPATH') || exit;
+
 function electric_book_wp_can_user_view($current_setting) {
   $can_they = false;
   $user = wp_get_current_user();
   if (!empty($current_setting['roles'])) {
-    foreach($current_setting['roles'] as $role) {
+    foreach ($current_setting['roles'] as $role) {
       if (in_array($role, (array) $user->roles)) {
         $can_they = true;
       }
@@ -28,13 +30,17 @@ function electric_book_wp_serve_restricted_html($get_restricted_path) {
     readfile(ABSPATH . $requested_url);
   } elseif (is_user_logged_in()) {
     if (isset($current_setting['redirect'])) {
-      wp_redirect($current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=role', 302);
+      $redirect_url = $current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=role';
+      $redirect_url = add_query_arg('_wpnonce', wp_create_nonce('electric_book_wp_redirect'), $redirect_url);
+      wp_redirect($redirect_url, 302);
     } else {
       echo 'This is a restricted page. Although you are logged in, your profile lacks the necessary role required to view this page.';
     }
   } else {
     if (isset($current_setting['redirect'])) {
-      wp_redirect($current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=logged-out', 302);
+      $redirect_url = $current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=logged-out';
+      $redirect_url = add_query_arg('_wpnonce', wp_create_nonce('electric_book_wp_redirect'), $redirect_url);
+      wp_redirect($redirect_url, 302);
     } else {
       wp_redirect('/wp-login.php?redirect_to=' . urlencode($requested_url), 302);
     }

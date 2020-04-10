@@ -14,6 +14,7 @@ I'm not a fan of how WP lays out forms by default, but it may be worth accepting
 2. I have to forbid direct access to asset files (e.g. CSS, JS, images) that fall under restricted URLs, regardless of logged-in status. Only HTML files are served. This is due to `readfile()` restrictions when handed over to WP/PHP and the fact that I can't do any properly secure logged-in checks before it gets to WordPress.
 3. While testing, your browser may cache the HTML page and therefore serve it to you without going back to the server again. So please keep this in mind when testing logged-in and user roles behaviour on newly configured path settings.
 4. Fragment links can't be persisted if they are in the originating URL before a redirect to login. Hash values aren't sent to the server, so there's no way of persisting them during the validation journey. Once or if a user has access, they will work normally.
+5. Please take special note of the token validation required when creating a redirect template of your own. This is to guard against potential XSS and CSRF hacks directed at your redirect page. The `/ebwp-redirect-example.php` is an example this implementation in a file external to WP templating, and [the default page template](https://github.com/alexmaughan/electric-book-wp/blob/master/wp-content/themes/serve-restricted-html/page.php) in the default theme is an example of a WP template implementation.
 
 ## Why it uses PHP `readfile()` to serve the files
 
@@ -58,5 +59,5 @@ If Docker isn't available to you, you need to test this with some manual steps.
 1. Set up your own vanilla WordPress installation.
 2. Optionally, copy the `doing-economics` folder to the WordPress root. This is only sample content for testing.
 3. Copy `wp-content/plugins/electric-book-wp` to the `wp-content/plugins/` folder in your WordPress installation.
-4. Optionally, to test the redirect-page functionality, copy `ebwp-redirect-example.php` to your WordPress root. When creating a restricted-page path, set 'Redirect users to' to `/ebwp-redirect-example.php`.
-5. In the WordPress admin, activate the plugin.
+4. In the WordPress admin, activate the plugin.
+5. Optionally, to test the redirect-page functionality, copy `ebwp-redirect-example.php` to your WordPress root. When creating a restricted-page path, set 'Redirect users to' to `/ebwp-redirect-example.php`. You can also use [the default page template](https://github.com/alexmaughan/electric-book-wp/blob/master/wp-content/themes/serve-restricted-html/page.php) used by the default theme to test the redirect functionality. So, for example, by setting the 'Redirect users to' field to `/sample-page`.

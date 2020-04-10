@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') || exit;
+
 function electric_book_wp_htaccess_restricted_paths() {
   $begin_Comment = "\n" . '# BEGIN Electric Book WP' . "\n";
   $end_Comment = '# END Electric Book WP' . "\n";
