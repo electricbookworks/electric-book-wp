@@ -1,36 +1,42 @@
 version: '3.1'
 
 services:
-  mysql:
-    image: mariadb:latest
-    volumes:
-     - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:5.4-php7.4-apache
+    restart: always
+    ports:
+      - 8080:80
     environment:
-     - MYSQL_ROOT_PASSWORD=root
-     - MYSQL_DATABASE=wordpress
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: dev
+      WORDPRESS_DB_PASSWORD: dev
+      WORDPRESS_DB_NAME: ebwp.demo
+    volumes:
+      - ./:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: ebwp.demo
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-     - PMA_ARBITRARY=1
+      - PMA_ARBITRARY=1
     restart: always
     ports:
-     - 8181:80
+      - 8181:80
     volumes:
-     - /sessions
+      - /sessions
     depends_on:
-     - mysql
-  web:
-    depends_on:
-     - mysql
-    image: wordpress:latest
-    links:
-     - mysql
-    environment:
-     - WORDPRESS_DB_PASSWORD=root
-    ports:
-     - "8080:80"
-    volumes:
-     - ./:/var/www/html/
-     - ./wp-content/:/var/www/html/wp-content
+      - db
+
 volumes:
-  db_data:
+  db:
