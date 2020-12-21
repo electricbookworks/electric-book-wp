@@ -12,6 +12,9 @@ To restrict pages, after installing the plugin, in WordPress admin go to the Ele
 
 ## Setup
 
+1. To install the plugin, copy `wp-content/plugins/electric-book-wp` here to the `wp-content/plugins/` folder in your WordPress installation.
+2. In the WordPress admin, activate the plugin.
+
 Depending on your needs, you may need to check and change some WordPress server settings for this to work. And you may want to develop your own landing pages for users who aren't logged in, or don't have the necessary user privileges to see a restricted page.
 
 For example, if you visit [core-econ.org/experiencing-economics](https://www.core-econ.org/experiencing-economics/) and click 'Instructors' without being logged in (or logged in, but without a teacher's user registration), you'll see a landing page that was custom-built for CORE explaining that content is restricted to teachers.
