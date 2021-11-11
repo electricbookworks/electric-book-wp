@@ -14,6 +14,7 @@ require_once('includes/helpers.php');
 require_once('includes/serve-restricted-html.php');
 require_once('includes/htaccess-restricted-paths.php');
 require_once('includes/delete-restricted-path.php');
+require_once('includes/user-profile.php');
 
 /**
  * Create settings fields
