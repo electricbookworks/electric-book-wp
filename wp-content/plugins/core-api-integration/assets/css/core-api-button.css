@@ -1,0 +1,85 @@
+.ui-front { z-index: 1000 !important; } 
+.ui-dialog { z-index: 1001 !important; }
+
+div.core-api-modal-dialog {
+    min-width: 30em;
+    max-width: 45em;
+}
+
+div.core-api-modal-dialog table{
+    width: 100%;
+}
+
+div.core-api-modal-dialog table tr {
+    padding: 6px 0;
+}
+
+div.core-api-modal-dialog table td.divider {
+    text-align: center;
+    padding: 6px;
+    font-size: 14px;
+}
+
+div.core-api-modal-dialog table td input, 
+div.core-api-modal-dialog table td select {
+    width: 100%;
+}
+
+div.core-api-media-wrap {
+    display: inline-block;
+    position: relative;
+}
+
+#core-api-insert-shortcode {
+    margin-bottom: 0;
+    min-width: 10em;
+}
+
+div.core-api-media-shortcode-type {
+    display: none;
+    position: absolute;
+    top: 99%;
+    left: 0;
+    min-width: 99%;
+    max-height: 410px;
+    font-size: 14px;
+    box-shadow: 0 3px 5px rgba(0,0,0,.2);
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    overflow: auto;
+    overflow-x: auto;
+    overflow-x: hidden;
+    padding: 5px 0;
+    margin: -1px 0 0;
+    z-index: 1002;
+}
+
+div.core-api-media-shortcode-type.active {
+    display: block;
+}
+
+div.core-api-media-shortcode-type ul {
+    margin: 0;
+}
+
+div.core-api-media-shortcode-type li {
+    margin-bottom: 0;
+}
+
+div.core-api-media-shortcode-type li:hover {
+    background-color: #f2f2f2;
+}
+
+div.core-api-media-shortcode-type li a {
+    line-height: 24px;
+    font-size: 14px;
+    padding: 0 12px;
+    display: block;
+    text-decoration: none;
+    text-align: left;
+    outline: none;
+}
+div.core-api-media-shortcode-type li a:after {
+    font-size: 10px;
+    padding-left: 6px;
+}
