@@ -26,5 +26,7 @@ node_modules
 debug.log
 
 # books
-doing-economics
-the-economy-south-asia
+/doing-economics
+/the-economy-south-asia
+/electric-book
+/the-economy

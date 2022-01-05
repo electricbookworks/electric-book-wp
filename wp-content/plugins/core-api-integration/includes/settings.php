@@ -10,9 +10,6 @@ function core_api_add_admin_menu()
     add_submenu_page('core_api_integration', 'Core API Integration test', 'Test', 'manage_options', 'core_api_integration_test', 'core_api_test_page');
 }
 
-
-
-
 function core_api_settings_init()
 {
 
