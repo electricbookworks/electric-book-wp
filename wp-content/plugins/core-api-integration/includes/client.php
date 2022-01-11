@@ -1,8 +1,8 @@
 <?php
 
-const CORE_API_URL = "https://core-api.electricbook.works/";
-
 global $jwt;
+
+require_once('constants.php');
 
 function ensure_resource_exist($type = "questions", $id = null, $work = "the-economy", $language = "en", $unit = null)
 {
@@ -32,6 +32,7 @@ function ensure_resource_exist($type = "questions", $id = null, $work = "the-eco
 
     $response = wp_remote_get($url, $args);
 
+
     if (is_wp_error($response)) {
         return $response;
     }
@@ -42,9 +43,9 @@ function ensure_resource_exist($type = "questions", $id = null, $work = "the-eco
     return $result;
 }
 
-function fetch_available_resources($type = "questions") 
+function fetch_available_resources($type = "questions")
 {
-    $url = sprintf("%s%s%s", CORE_API_URL, "resources/available/", $type);   
+    $url = sprintf("%s%s%s", CORE_API_URL, "resources/available/", $type);
     $response = wp_remote_get($url);
 
     if (is_wp_error($response)) {

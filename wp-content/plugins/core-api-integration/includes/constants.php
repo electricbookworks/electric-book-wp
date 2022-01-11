@@ -186,3 +186,5 @@ const LANGUAGES = [
     "zh" => "Chinese",
     "zu" => "Zulu",
 ];
+
+const CORE_API_URL = "https://core-api.electricbook.works/";

@@ -124,7 +124,7 @@ function core_api_test_page()
 <?php
     print do_shortcode("[core-api-question id='1']");
     print "<br/><br/>";
-    print do_shortcode("[core-api-question work='the-economy' language='en' unit='02' number='8']");
+    print do_shortcode("[core-api-question work='the-economy' language='en' unit='02']");
     print "<br/><br/>";
-    print do_shortcode("[core-api-question work='the-economy' language='fr' unit='1' number='1']");
+    print do_shortcode("[core-api-question work='the-economy' language='fr' unit='1']");
 }

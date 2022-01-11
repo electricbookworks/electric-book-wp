@@ -44,7 +44,7 @@ function generate_question_button($atts)
     $resources = ensure_resource_exist(...array_values($params));
 
     if ($resources) {
-        $url = $resources->api_url;
+        $url = "";
 
         $html = "<div class='core-api-question-wrap'>";
         $html .= "<button class='button button--red button--core-api button--core-api-question core-api-question-download'>Download Questions</button>";
