@@ -10,7 +10,7 @@ button.addEventListener("click", function (event) {
 }, false);
 
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     const active_button = document.querySelector("button#core-api-insert-shortcode.active");
     if (active_button && !active_button.contains(event.target)) {
         active_button.classList.remove("active");
@@ -22,8 +22,8 @@ document.addEventListener('click', function(event) {
 });
 
 
-(function($) {
-    $(document).ready(function() {
+(function ($) {
+    $(document).ready(function () {
         var question_dialog = $('#core-api-question-dialog');
 
         question_dialog.dialog({
@@ -34,7 +34,7 @@ document.addEventListener('click', function(event) {
             width: 'auto',
             modal: true,
             resizable: false,
-            closeOnEscape : true,
+            closeOnEscape: true,
             position: {
                 my: "center",
                 at: "center",
@@ -42,35 +42,41 @@ document.addEventListener('click', function(event) {
             },
             buttons: {
                 insert: {
-                    click: function(event) {
+                    click: function (event) {
                         let sc_text = "";
 
                         id_val = question_dialog.find("#id").val()
 
+
                         if (id_val) {
                             sc_text = `[core-api-question id='${id_val}']`;
                         } else {
-                            work_val = question_dialog.find("#work").val()
-                            language_val = question_dialog.find("#language").val()
-                            unit_val = question_dialog.find("#unit").val()
-                            number_val = question_dialog.find("#number").val()
+                            series_val = question_dialog.find("#core-api-opt-series").val();
+                            works_val = question_dialog.find("#core-api-opt-works").val();
+                            languages_val = question_dialog.find("#core-api-opt-languages").val();
+                            units_val = question_dialog.find("#core-api-opt-units").val();
+
+                            console.log(series_val)
+                            console.log(works_val)
+                            console.log(languages_val)
+                            console.log(units_val)
 
                             sc_text = "[core-api-question";
 
-                            if (work_val) {
-                                sc_text += ` work='${work_val}'`
+                            if (series_val) {
+                                sc_text += ` series='${series_val}'`
                             }
 
-                            if (language_val) {
-                                sc_text += ` language='${language_val}'`
+                            if (works_val) {
+                                sc_text += ` work='${works_val}'`
                             }
 
-                            if (unit_val) {
-                                sc_text += ` unit='${unit_val}'`
+                            if (languages_val) {
+                                sc_text += ` language='${languages_val}'`
                             }
 
-                            if (number_val) {
-                                sc_text += ` number='${number_val}'`
+                            if (units_val) {
+                                sc_text += ` unit='${units_val}'`
                             }
 
                             sc_text += "]"
@@ -87,24 +93,24 @@ document.addEventListener('click', function(event) {
                     class: 'button-primary'
                 },
                 cancel: {
-                    click: function(event) {
+                    click: function (event) {
                         question_dialog.dialog('close');
                     },
                     text: 'Cancel',
                     class: 'button'
                 }
             },
-            create: function(){
+            create: function () {
                 $('.ui-dialog-titlebar-close').addClass('ui-button');
             },
-            open: function(){
-                $('.ui-widget-overlay').bind('click',function(){
+            open: function () {
+                $('.ui-widget-overlay').bind('click', function () {
                     question_dialog.dialog('close');
                 })
             }
         });
 
-        $('a.core-api-question').click(function(e) {
+        $('a.core-api-question').click(function (e) {
             e.preventDefault();
             question_dialog.dialog('open').dialog('moveToTop');
         });

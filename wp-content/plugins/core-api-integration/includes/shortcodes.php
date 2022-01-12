@@ -13,7 +13,8 @@ function core_api_shortcodes_register_questions_assets()
 }
 add_action('init', 'core_api_shortcodes_register_questions_assets');
 
-function core_api_shortcodes_enqueue_questions_assets() {
+function core_api_shortcodes_enqueue_questions_assets()
+{
     wp_enqueue_script('core-api-questions-js');
     wp_enqueue_style('core-api-questions-css');
 }
@@ -41,34 +42,31 @@ function generate_question_button($atts)
     ];
 
     $params = shortcode_atts($default, $atts);
-    $resources = ensure_resource_exist(...array_values($params));
 
-    if ($resources) {
-        $url = "";
+    $html = "<div class='core-api-question-wrap'>";
+    $html .= "<button class='button button--red button--core-api button--core-api-question core-api-question-download'>Download Questions</button>";
+    if ($params['formats']) {
+        $html .= "<div class='core-api-question-download-formats'><ul>";
+        foreach ($params['formats'] as $key => $value) {
+            $atts["format"] = $key;
+            $query_string = http_build_query($atts);
+            $url = sprintf("%s%s?%s", CORE_API_URL, "questions", $query_string);
 
-        $html = "<div class='core-api-question-wrap'>";
-        $html .= "<button class='button button--red button--core-api button--core-api-question core-api-question-download'>Download Questions</button>";
-        if ($params['formats']) {
-            $html .= "<div class='core-api-question-download-formats'><ul>";
-            foreach ($params['formats'] as $key => $value) {
-                $html .= "<li><a href='{$url}?format={$key}'>{$value}</a></li>";
-            }
-            $html .= "</ul></div>"; 
+            $html .= "<li><a href='{$url}'>{$value}</a></li>";
         }
-        $html .= "</div>";
-    
-        if ($params["debug"]) {
-            $json = json_encode(compact("params", "resource"), JSON_PRETTY_PRINT);
-            $html .= "<br/><br/>";
-            $html .= "<div class='core-api-debug'><pre>{$json}</pre></div>";
-        }
-    
-        core_api_shortcodes_enqueue_questions_assets();
-    
-        return $html;
+        $html .= "</ul></div>";
     }
-    
-    return;
+    $html .= "</div>";
+
+    if ($params["debug"]) {
+        $json = json_encode(compact("params", "resource"), JSON_PRETTY_PRINT);
+        $html .= "<br/><br/>";
+        $html .= "<div class='core-api-debug'><pre>{$json}</pre></div>";
+    }
+
+    core_api_shortcodes_enqueue_questions_assets();
+
+    return $html;
 }
 
 add_shortcode('core-api-question', 'generate_question_button');

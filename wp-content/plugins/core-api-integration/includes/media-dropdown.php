@@ -47,47 +47,41 @@ function core_api_media_enqueue_assets()
 
 function core_api_media_shortcode_question_dialog()
 {
-    $available_questions = fetch_available_resources("questions");
+    $resourceOptions = fetch_options("questions");
 
-    $work_options = implode(
-        "/n",
-        array_unique(
-            array_map(
-                function ($q) {
-                    return "<option value='{$q->work_slug}'>{$q->work_title}</option>";
-                },
-                $available_questions
-            )
-        )
-    );
+    $optionHtml = "";
+    foreach ($resourceOptions as $name => $option) {
 
-    $language_options = implode(
-        "/n",
-        array_unique(
-            array_map(
-                function ($q) {
-                    $lang = (is_null($q->translation_language)) ? $q->work_language : $q->translation_language;
-                    $langName = LANGUAGES[$lang];
-                    return "<option value='{$lang}'>{$langName}</option>";
-                },
-                $available_questions
-            )
-        )
-    );
+        $options = [];
+        foreach ($option as $key => $value) {
+            if (array_keys($option) !== range(0, count($option) - 1)) { // assoc array         
+                if (is_array($value)) {
+                    foreach ($value as $a_key => $a_value) {
+                        $options[] = "<option value='{$a_key}'>{$a_value}</option>";
+                    }
+                    $options = array_unique($options);
+                } else {
+                    $options[] = "<option value='{$key}'>{$value}</option>";
+                }
+            } else {
+                $options[] = "<option value='{$value}'>{$value}</option>";
+            }
+        }
 
-    $units = array_unique(
-        array_map(
-            function ($q) {
-                $matches = [];
-                preg_match('/question-(.\d)-.\d/', $q->name, $matches);
-                $unit = $matches[1];
-                return "<option value='{$unit}'>{$unit}</option>";
-            },
-            $available_questions
-        )
-    );
-    sort($units);
-    $unit_options = implode("/n", $units);
+        $optionValueHtml = implode("\n", $options);
+        $title = ucfirst($name);
+        $optionHtml .= <<<EOT
+        <tr>
+            <td><label for="{$name}">{$title}</label></td>
+            <td>
+                <select name="{$name}" id="core-api-opt-{$name}" class="select ui-widget-content ui-corner-all">
+                    <option selected disabled hidden>Select...</option>
+                    {$optionValueHtml}
+                </select>
+            </td>
+        </tr>
+EOT;
+    }
 
     $html = <<<EOT
 <div id='core-api-question-dialog' class='core-api-modal-dialog hidden'>
@@ -108,33 +102,8 @@ function core_api_media_shortcode_question_dialog()
                         <td>&nbsp;</td>
                         <td class="divider"><i>or</i></td>
                     </tr>
-                    <tr>
-                        <td><label for="work">Work</label></td>
-                        <td>
-                            <select name="work" id="work" class="select ui-widget-content ui-corner-all">
-                                <option selected disabled hidden>Select...</option>
-                                {$work_options}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="language">Language</label></td>
-                        <td>
-                            <select name="language" id="language" class="select ui-widget-content ui-corner-all">
-                                <option selected disabled hidden>Select...</option>
-                                {$language_options}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="unit">Unit</label></td>
-                        <td>
-                            <select name="unit" id="unit" class="select ui-widget-content ui-corner-all">
-                                <option selected disabled hidden>Select...</option>
-                                {$unit_options}
-                            </select>
-                        </td>
-                    </tr>
+                    
+                    {$optionHtml}
                 </tbody>
             </table>
         </fieldset>

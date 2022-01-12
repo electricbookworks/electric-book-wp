@@ -43,9 +43,9 @@ function ensure_resource_exist($type = "questions", $id = null, $work = "the-eco
     return $result;
 }
 
-function fetch_available_resources($type = "questions")
+function fetch_options($type = "questions")
 {
-    $url = sprintf("%s%s%s", CORE_API_URL, "resources/available/", $type);
+    $url = sprintf("%s%s%s", CORE_API_URL, "resources/options/", $type);
     $response = wp_remote_get($url);
 
     if (is_wp_error($response)) {
@@ -53,7 +53,7 @@ function fetch_available_resources($type = "questions")
     }
 
     $responseBody = wp_remote_retrieve_body($response);
-    $result = json_decode($responseBody);
+    $result = json_decode($responseBody, true);
 
     return $result;
 }
