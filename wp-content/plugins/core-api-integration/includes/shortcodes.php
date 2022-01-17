@@ -30,6 +30,7 @@ function generate_question_button($atts)
     $default = [
         'type' => 'questions',
         'id' => null,
+        'series' => "the-economy",
         'work' => "the-economy",
         'language' => "en",
         'unit' => null,

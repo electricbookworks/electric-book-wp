@@ -6,11 +6,13 @@ defined('ABSPATH') || exit;
 
 require_once('constants.php');
 
+if (!function_exists('fetch_options')) {
+    require_once 'client.php';
+}
 
 const CORE_API_SHORTCODES = [
     'core-api-question' => "Question",
 ];
-
 
 function core_api_media_shortcodes_button()
 {

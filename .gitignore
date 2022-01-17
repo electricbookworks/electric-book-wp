@@ -26,6 +26,8 @@ node_modules
 /vendor
 debug.log
 
+/output/
+
 # books
 /doing-economics
 /the-economy-south-asia
