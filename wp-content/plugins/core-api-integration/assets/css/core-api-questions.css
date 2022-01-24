@@ -1,15 +1,31 @@
-
-
 button.core-api-question-download {
     margin-left: 5px;
 }
 
-button.core-api-question-download:after {
-    content: " \1F783";
+button.core-api-question-download .arrow-icon {
+    border: solid #d24341;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    margin-left: 7px;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition: 0.3s ease transform;
 }
 
-button.core-api-question-download.active:after {
-    content: " \1F781";
+button.core-api-question-download:hover .arrow-icon,
+button.core-api-question-download:focus .arrow-icon {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transition: 0.3s ease all;
+}
+
+button.core-api-question-download.active .arrow-icon {
+    border: solid white;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    border-width: 0 3px 3px 0;
+    transition: 0.3s ease all;
 }
 
 div.core-api-question-wrap {
@@ -26,12 +42,10 @@ div.core-api-question-download-formats {
     min-width: 75%;
     max-height: 410px;
     font-size: 14px;
-    box-shadow: 0 3px 5px rgba(0,0,0,.2);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     background: #fff;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, .15);
     overflow: auto;
-        overflow-x: auto;
-    overflow-x: auto;
     overflow-x: hidden;
     padding: 5px 0;
     margin: -2px 13% 0 13%;
@@ -64,6 +78,5 @@ div.core-api-question-download-formats li a {
 }
 
 div.core-api-question-download-formats li a:after {
-    content: " \1F5B9";
     padding-left: 4px;
 }
