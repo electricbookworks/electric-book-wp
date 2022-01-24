@@ -6,6 +6,24 @@ if (!function_exists('ensure_resource_exist')) {
     require_once 'client.php';
 }
 
+const EXPECTED_ATTS = ["id", "series", "work", "unit", "language", "format"];
+
+const DEFAULT_PARAMS = [
+    'type' => 'questions',
+    'id' => null,
+    'series' => "the-economy",
+    'work' => "the-economy",
+    'language' => "en",
+    'unit' => null,
+    'formats' => [
+        "csv" => "CSV file",
+        "gift" => "Moodle (GIFT)",
+        "canvas" => "Canvas (QTI)",
+    ],
+    "text" => "Download questions",
+    "debug" => false,
+];
+
 function core_api_shortcodes_register_questions_assets()
 {
     wp_register_script('core-api-questions-js', plugins_url('../assets/js/core-api-questions.js', __FILE__), ["jquery"], "v1.0", true);
@@ -27,30 +45,20 @@ function generate_question_button($atts)
         return;
     }
 
-    $default = [
-        'type' => 'questions',
-        'id' => null,
-        'series' => "the-economy",
-        'work' => "the-economy",
-        'language' => "en",
-        'unit' => null,
-        'formats' => [
-            "csv" => "CSV file",
-            "gift" => "Moodle (GIFT)",
-            "canvas" => "Canvas (QTI)",
-        ],
-        "debug" => false,
-    ];
-
-    $params = shortcode_atts($default, $atts);
+    $params = shortcode_atts(DEFAULT_PARAMS, $atts);
 
     $html = "<div class='core-api-question-wrap'>";
-    $html .= "<button class='button button--red button--core-api button--core-api-question core-api-question-download'>Download Questions</button>";
+    $html .= "<button class='button button--red button--core-api button--core-api-question core-api-question-download'>{$params['text']}<span class='arrow-icon down'></span></button>";
     if ($params['formats']) {
         $html .= "<div class='core-api-question-download-formats'><ul>";
         foreach ($params['formats'] as $key => $value) {
             $atts["format"] = $key;
-            $query_string = http_build_query($atts);
+
+            $clean_atts = array_filter($atts, function ($at) {
+                return (in_array($at, EXPECTED_ATTS));
+            }, ARRAY_FILTER_USE_KEY);
+
+            $query_string = http_build_query($clean_atts);
             $url = sprintf("%s%s?%s", CORE_API_URL, "questions", $query_string);
 
             $html .= "<li><a href='{$url}'>{$value}</a></li>";
