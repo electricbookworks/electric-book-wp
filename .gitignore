@@ -9,6 +9,7 @@
 /wp-content/ccwpsc_plugins
 /wp-content/advanced-cache.php
 /wp-content/wp-cache-config.php
+/wp-content/plugins/akismet
 cache
 /wp-content/ewww
 /wp-admin
@@ -24,3 +25,11 @@ node_modules
 /designs
 /vendor
 debug.log
+
+/output/
+
+# books
+/doing-economics
+/the-economy-south-asia
+/electric-book
+/the-economy
