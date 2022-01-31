@@ -1,0 +1,28 @@
+.core-api-glossary-term {
+    font-size: 20px;
+    margin-bottom: 0.5em;
+    border: 1px solid #4a414b;
+    padding: 0.75em 1em 1.25em 1em;
+    border-radius: 0.25em;
+    position: relative;
+}
+
+.core-api-glossary-term .term {
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.core-api-glossary-term .definition {
+    font-weight: normal;
+}
+
+.core-api-glossary-term .definition a {
+    font-style: italic;
+}
+
+.core-api-glossary-term .more-link {
+    right: 1em;
+    bottom: 0.5em;
+    font-size: 0.8em;
+    position: absolute;
+}
