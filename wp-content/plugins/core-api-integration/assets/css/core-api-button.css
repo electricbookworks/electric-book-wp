@@ -40,7 +40,7 @@ div.core-api-media-shortcode-type {
     position: absolute;
     top: 99%;
     left: 0;
-    min-width: 99%;
+    min-width: 152px;
     max-height: 410px;
     font-size: 14px;
     box-shadow: 0 3px 5px rgba(0,0,0,.2);

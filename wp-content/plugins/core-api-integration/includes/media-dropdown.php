@@ -10,15 +10,21 @@ if (!function_exists('fetch_options')) {
     require_once 'client.php';
 }
 
+if (!function_exists('is_associative_array')) {
+    require_once 'helpers.php';
+}
+
 const CORE_API_SHORTCODES = [
     'core-api-question' => "Question",
+    'core-api-glossary_term' => "Glossary term",
 ];
 
 function core_api_media_shortcodes_button()
 {
     core_api_media_enqueue_assets();
 
-    echo core_api_media_shortcode_question_dialog();
+    echo core_api_generate_shortcode_dialog("questions");
+    echo core_api_generate_shortcode_dialog("glossary_terms");
 
     $html = "<div class='core-api-media-wrap'>";
     $html .= "<button id='core-api-insert-shortcode' class='button core-api core-api-insert-shortcode'>Core Shortcodes</button>";
@@ -47,65 +53,74 @@ function core_api_media_enqueue_assets()
     wp_enqueue_style('core-api-media-button-css');
 }
 
-function core_api_media_shortcode_question_dialog()
+function core_api_generate_shortcode_dialog($type)
 {
-    $resourceOptions = fetch_options("questions");
+    $resourceInputs = [];
+    if (array_key_exists($type, CORE_API_CUSTOM_INPUTS)) { 
+        // Custom inputs in dialog form
+        foreach (CORE_API_CUSTOM_INPUTS[$type] as $key => $input) {
+            $resourceInputs[] = <<<EOT
+            <tr>
+                <td><label for="{$input['name']}">{$input['label']}</label></td>
+                <td>
+                    <input name="{$input['name']}" id="core-api-input-{$input['name']}" type="{$input['type']}">{$input['default']}</input>
+                </td>
+            </tr>
+EOT;
+        }
+    } else {
+        // Fetch options from API directly
+        $resourceOptions = fetch_options($type);
 
-    $optionHtml = "";
-    foreach ($resourceOptions as $name => $option) {
-
-        $options = [];
-        foreach ($option as $key => $value) {
-            if (array_keys($option) !== range(0, count($option) - 1)) { // assoc array         
-                if (is_array($value)) {
-                    foreach ($value as $a_key => $a_value) {
-                        $options[] = "<option value='{$a_key}'>{$a_value}</option>";
+        foreach ($resourceOptions as $name => $option) {
+            $options = [];
+            if (is_associative_array($option)) {
+                foreach ($option as $optKey => $optVal) {
+                    if (is_array($optVal)) {
+                        foreach ($optVal as $a_key => $a_value) {
+                            $options[] = "<option value='{$a_key}'>{$a_value}</option>";
+                        }
+                        $options = array_unique($options);
+                    } else {
+                        $options[] = "<option value='{$optKey}'>{$optVal}</option>";
                     }
-                    $options = array_unique($options);
-                } else {
-                    $options[] = "<option value='{$key}'>{$value}</option>";
                 }
             } else {
                 $options[] = "<option value='{$value}'>{$value}</option>";
             }
+        
+            $optionsHtml = implode("\n\n\n\n\n\n", $options);
+            
+            $title = ucfirst($name);
+            $resourceInputs[] = <<<EOT
+            <tr>
+                <td><label for="{$name}">{$title}</label></td>
+                <td>
+                    <select name="{$name}" id="core-api-inputs-{$name}" class="select ui-widget-content ui-corner-all">
+                        <option selected disabled hidden>Select...</option>
+                        {$optionsHtml}
+                    </select>
+                </td>
+            </tr>
+EOT;
         }
 
-        $optionValueHtml = implode("\n", $options);
-        $title = ucfirst($name);
-        $optionHtml .= <<<EOT
-        <tr>
-            <td><label for="{$name}">{$title}</label></td>
-            <td>
-                <select name="{$name}" id="core-api-opt-{$name}" class="select ui-widget-content ui-corner-all">
-                    <option selected disabled hidden>Select...</option>
-                    {$optionValueHtml}
-                </select>
-            </td>
-        </tr>
-EOT;
     }
 
+    $inputsHtml = implode("\n\n\n\n\n", $resourceInputs);
+
     $html = <<<EOT
-<div id='core-api-question-dialog' class='core-api-modal-dialog hidden'>
+<div id='core-api-{$type}-dialog' class='core-api-modal-dialog hidden'>
     <form>
         <fieldset>
-            <table>
+            <table class="form-table">
                 <colgroup>
                     <col span="1" style="width: 25%;">
                     <col span="1" style="width: 75%;">
-                 </colgroup>
+                </colgroup>
 
-                 <tbody>
-                    <tr>
-                        <td><label for="id">ID</label></td>
-                        <td><input type="text" name="id" id="id" class="text ui-widget-content ui-corner-all"></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td class="divider"><i>or</i></td>
-                    </tr>
-                    
-                    {$optionHtml}
+                <tbody>                    
+                    {$inputsHtml}
                 </tbody>
             </table>
         </fieldset>
