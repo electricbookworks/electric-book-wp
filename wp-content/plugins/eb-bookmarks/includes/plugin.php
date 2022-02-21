@@ -68,5 +68,5 @@ function eb_bookmarks_deactivate()
 add_action('init', 'eb_bookmarks_plugin_init');
 add_action('plugins_loaded', 'eb_bookmarks_update');
 
-register_activation_hook(eb_BOOKMARK_MAIN_FILE, 'eb_bookmarks_install');
-register_deactivation_hook(eb_BOOKMARK_MAIN_FILE, 'eb_bookmarks_deactivate');
+register_activation_hook(EB_BOOKMARK_MAIN_FILE, 'eb_bookmarks_install');
+register_deactivation_hook(EB_BOOKMARK_MAIN_FILE, 'eb_bookmarks_deactivate');

@@ -1,6 +1,14 @@
 <?php
 
-const LANGUAGES = [
+const CORE_API_CUSTOM_INPUTS = [
+    "glossary_terms" => [
+        ["name" => "glossary_term", "label" => "Glossary term", "type" => "text", "default" => NULL],
+    ]
+];
+
+const CORE_API_URL = "https://core-api.electricbook.works/";
+
+const CORE_API_LANGUAGES = [
     "aa" => "Afar",
     "ab" => "Abkhazian",
     "af" => "Afrikaans",
@@ -186,5 +194,3 @@ const LANGUAGES = [
     "zh" => "Chinese",
     "zu" => "Zulu",
 ];
-
-const CORE_API_URL = "https://core-api.electricbook.works/";

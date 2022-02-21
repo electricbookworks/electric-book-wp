@@ -52,6 +52,14 @@ function core_api_settings_init()
         'core_api_plugin_page',
         'core_api_plugin_feature_section'
     );
+
+    add_settings_field(
+        'core_api_checkbox_field_glossary_term_integration',
+        __('Glossary terms', 'core_api'),
+        'core_api_checkbox_field_glossary_term_integration_render',
+        'core_api_plugin_page',
+        'core_api_plugin_feature_section'
+    );
 }
 
 function core_api_text_field_app_name_render()
@@ -80,6 +88,17 @@ function core_api_checkbox_field_question_integration_render()
 <?php
 
 }
+
+function core_api_checkbox_field_glossary_term_integration_render()
+{
+
+    $options = get_option('core_api_settings');
+?>
+    <input type='checkbox' name='core_api_settings[core_api_checkbox_field_glossary_term_integration]' <?php checked($options['core_api_checkbox_field_glossary_term_integration'], 1); ?> value='1'>
+<?php
+
+}
+
 
 
 function core_api_settings_section_auth_callback()
@@ -122,9 +141,16 @@ function core_api_test_page()
 ?>
     <h2>Core API Integration test page</h2>
 <?php
-    print do_shortcode("[core-api-question id='1']");
-    print "<br/><br/>";
+    print "<h3>Questions</h3>";
+    print "<h4>English question from Unit 02 of The Economy:</h4>";
     print do_shortcode("[core-api-question work='the-economy' language='en' unit='02']");
-    print "<br/><br/>";
+    print "<br/>";
+    print "<h4>French question from Unit 01 of The Economy:</h4>";
     print do_shortcode("[core-api-question work='the-economy' language='fr' unit='1']");
+    print "<h3>Glossary terms</h3>";
+    print "<h4>Abatement:</h4>";
+    print do_shortcode("[core-api-glossary-term term='abatement']");
+    print "<h4>Fiscal policy:</h4>";
+    print do_shortcode("[core-api-glossary-term term='fiscal policy']");
+    
 }

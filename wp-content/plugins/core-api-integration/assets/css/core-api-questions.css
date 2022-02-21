@@ -32,6 +32,7 @@ div.core-api-question-wrap {
     position: relative;
     display: inline-block;
     margin-right: 5px;
+    margin-bottom: 20px;
 }
 
 div.core-api-question-download-formats {
