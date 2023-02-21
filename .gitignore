@@ -10,6 +10,7 @@
 /wp-content/advanced-cache.php
 /wp-content/wp-cache-config.php
 /wp-content/plugins/akismet
+/wp-content/plugins/hello.php
 cache
 /wp-content/ewww
 /wp-admin
@@ -30,6 +31,7 @@ debug.log
 
 # books
 /doing-economics
+/experiencing-economics
 /the-economy-south-asia
 /electric-book
 /the-economy

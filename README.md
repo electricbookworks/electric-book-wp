@@ -68,7 +68,7 @@ You can use Docker to run the plugin for development, or run your own WordPress 
 Docker generates a WordPress instance with all core files and LAMP requirements. It also installs phpMyAdmin. Follow these installation steps:
 
 1. Make sure [Docker is installed](https://www.docker.com) on your machine, and you have started it.
-2. Navigate to the root of the repo and spin up the container by running, `$ docker-compose up`. You can use the `-d` flag after `up` to daemonise the process.
+2. Navigate to the root of the repo and spin up the container by running, `$ docker-compose up`. You can use [the `-d` flag](https://docs.docker.com/engine/reference/run/#detached--d) after `up` to daemonise the process.
 3. Once you have done an initial Grunt compilation (see above), you'll be able to view the site at http://localhost:8080.
 4. You can navigate to phpMyAdmin on port 8181: http://localhost:8181.
 
