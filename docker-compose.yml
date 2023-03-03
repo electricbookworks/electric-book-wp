@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   wordpress:
-    image: wordpress:5.4-php7.4-apache
+    image: wordpress:6.1.1-php8.0-apache
     restart: always
     ports:
       - 8080:80
@@ -16,10 +16,8 @@ services:
       - ./:/var/www/html
 
   db:
-    image: mysql:5.7
+    image: mariadb:10.5.8
     restart: always
-    ports:
-      - 3306:3306
     environment:
       MYSQL_DATABASE: ebwp.demo
       MYSQL_USER: dev
