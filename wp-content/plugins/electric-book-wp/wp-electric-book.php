@@ -135,14 +135,14 @@ function electric_book_wp_restrict_options_page_html() {
     return;
   }
 
-  // check if the user have submitted the settings
+  // check if the user has submitted the settings
   // wordpress will add the "settings-updated" $_GET parameter to the url
   if (isset($_GET['settings-updated'])) {
 
     // add latest addition to saved settings
     $restrict_options = get_option('electric_book_wp_restrict');
 
-    // clean user inputted path
+    // get path field
     $restrict_path_added = $restrict_options[$electric_book_wp_field_path_id];
     // remove fragment links (don't get passed to server)
     $restrict_path_added = strtok($restrict_path_added, '#');
