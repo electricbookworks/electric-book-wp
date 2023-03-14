@@ -19,7 +19,6 @@ function electric_book_wp_htaccess_restricted_paths() {
     foreach ($restrict_options_all as $path) {
       $path_rules .= '<IfModule mod_rewrite.c>' . "\n";
       $path_rules .= 'RewriteEngine On' . "\n";
-      $path_rules .= 'RewriteCond %{REQUEST_URI} \.(?:html|htm)$ [NC]' . "\n";
       $path_rules .= 'RewriteCond %{REQUEST_FILENAME} ' . $path['path'] . "\n";
       // serve the html via PHP
       $path_rules .= 'RewriteRule . /index.php?electric-book-wp-restricted-path=' . $path['path'] . '&electric-book-wp-serve=%{REQUEST_URI} [L]' . "\n";
