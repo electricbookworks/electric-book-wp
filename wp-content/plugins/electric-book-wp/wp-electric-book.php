@@ -159,8 +159,14 @@ function electric_book_wp_restrict_options_page_html()
     // remove leading and trailing slashes
     $restrict_path_added = trim($restrict_path_added, '/');
 
+    // check path exists and doesn't coflict with any WP URIs in DB
+    $restrict_path_added_abspath = ABSPATH . '/' . $restrict_path_added;
+    $file_folder_exists = file_exists($restrict_path_added_abspath) || is_dir($restrict_path_added_abspath);
+    $is_wp_uri = get_page_by_path($restrict_path_added, OBJECT, ['page', 'post']);
+
     $restricted_path_url = get_option('siteurl') . '/' .  $restrict_path_added;
-    if (!empty($restrict_path_added) && filter_var($restricted_path_url, FILTER_VALIDATE_URL)) {
+
+    if (!empty($restrict_path_added) && $file_folder_exists && !$is_wp_uri && filter_var($restricted_path_url, FILTER_VALIDATE_URL)) {
       $saved_restricted_roles = array();
       foreach ($restrict_options as $key => $option) {
         if (startsWith($electric_book_wp_field_roles_id, $key)) {
@@ -188,7 +194,7 @@ function electric_book_wp_restrict_options_page_html()
         add_settings_error('electric_book_wp_messages', 'electric_book_wp_message', __('That particular restricted path setting already exists. No changes to existing settings were made.', 'electric_book_wp'), 'info');
       }
     } else {
-      add_settings_error('electric_book_wp_messages', 'electric_book_wp_message', __('A valid path value has not been entered', 'electric_book_wp'), 'error');
+      add_settings_error('electric_book_wp_messages', 'electric_book_wp_message', __('A valid path value has not been entered or it conflicts with an existing WordPress permalink.', 'electric_book_wp'), 'error');
     }
   }
 
