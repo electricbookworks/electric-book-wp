@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Plugin Name:       Electric Book WP
  * Description:       Manage static HTML publications inside WordPress
- * Version:           1.0.0
+ * Version:           2.0.0
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -26,7 +27,8 @@ $electric_book_wp_field_path_id = 'restrict_path';
 $electric_book_wp_field_roles_id = 'restrict_roles';
 $electric_book_wp_field_redirect_id = 'restrict_redirect';
 
-function electric_book_wp_settings_init() {
+function electric_book_wp_settings_init()
+{
 
   global $electric_book_wp_field_path_id, $electric_book_wp_field_roles_id, $electric_book_wp_field_redirect_id;
 
@@ -72,32 +74,35 @@ function electric_book_wp_settings_init() {
       'label_for' => $electric_book_wp_field_redirect_id
     ]
   );
-
 }
 
 add_action('admin_init', 'electric_book_wp_settings_init');
 
 // restrict section callback
 // $args is the last parameter defined by add_settings_section()
-function electric_book_wp_section_restrict_access_cb($args) { ?>
+function electric_book_wp_section_restrict_access_cb($args)
+{ ?>
   <p>Paths should be relative to the root of your WordPress installation. A path to a directory will automatically include all subdirectories and files inside it.</p>
 <?php }
 
 // restrict section field callbacks
 // $args is the last parameter defined by add_settings_field()
-function electric_book_wp_field_restrict_path_cb($args) { ?>
-  <input id="<?=esc_attr($args['label_for'])?>" type="text" name="electric_book_wp_restrict[<?=esc_attr($args['label_for'])?>]" placeholder="your/path/goes/here.html" class="regular-text">
-<?php }
+function electric_book_wp_field_restrict_path_cb($args)
+{ ?>
+  <input id="<?= esc_attr($args['label_for']) ?>" type="text" name="electric_book_wp_restrict[<?= esc_attr($args['label_for']) ?>]" placeholder="your/path/goes/here.html" class="regular-text">
+  <?php }
 
-function electric_book_wp_field_restrict_roles_cb($args) {
+function electric_book_wp_field_restrict_roles_cb($args)
+{
   global $wp_roles;
   foreach ($wp_roles->roles as $key => $role) { ?>
-    <p><label><input type="checkbox" name="electric_book_wp_restrict[<?=esc_attr($args['label_for']) . '_' . esc_attr($key)?>]" value="<?=esc_attr($key)?>"><?=$role['name']?></label></p>
+    <p><label><input type="checkbox" name="electric_book_wp_restrict[<?= esc_attr($args['label_for']) . '_' . esc_attr($key) ?>]" value="<?= esc_attr($key) ?>"><?= $role['name'] ?></label></p>
   <?php }
 }
 
-function electric_book_wp_field_restrict_redirect_cb($args) { ?>
-  <input id="<?=esc_attr($args['label_for'])?>" type="text" name="electric_book_wp_restrict[<?=esc_attr($args['label_for'])?>]" placeholder="E.g. '/custom-file.php' or '/custom/page/'" class="regular-text">
+function electric_book_wp_field_restrict_redirect_cb($args)
+{ ?>
+  <input id="<?= esc_attr($args['label_for']) ?>" type="text" name="electric_book_wp_restrict[<?= esc_attr($args['label_for']) ?>]" placeholder="E.g. '/custom-file.php' or '/custom/page/'" class="regular-text">
   <p>Leave blank to redirect to the WordPress login page. The path provided must either be relative to the root of your site or an absolute URL.</p>
   <p>Two GET parameters will be passed to your custom page:</p>
   <ol>
@@ -109,7 +114,8 @@ function electric_book_wp_field_restrict_redirect_cb($args) { ?>
 /**
  * Create settings menu item
  */
-function electric_book_wp_restrict_options_page() {
+function electric_book_wp_restrict_options_page()
+{
   // add top level menu page
   add_menu_page(
     'Electric Book WP',
@@ -126,7 +132,8 @@ add_action('admin_menu', 'electric_book_wp_restrict_options_page');
 /**
  * Create settings page via callback from add_menu_page()
  */
-function electric_book_wp_restrict_options_page_html() {
+function electric_book_wp_restrict_options_page_html()
+{
 
   global $wp_roles, $electric_book_wp_field_path_id, $electric_book_wp_field_roles_id, $electric_book_wp_field_redirect_id;
 
@@ -152,10 +159,16 @@ function electric_book_wp_restrict_options_page_html() {
     // remove leading and trailing slashes
     $restrict_path_added = trim($restrict_path_added, '/');
 
+    // check path exists and doesn't coflict with any WP URIs in DB
+    $restrict_path_added_abspath = ABSPATH . '/' . $restrict_path_added;
+    $file_folder_exists = file_exists($restrict_path_added_abspath) || is_dir($restrict_path_added_abspath);
+    $is_wp_uri = get_page_by_path($restrict_path_added, OBJECT, ['page', 'post']);
+
     $restricted_path_url = get_option('siteurl') . '/' .  $restrict_path_added;
-    if (!empty($restrict_path_added) && filter_var($restricted_path_url, FILTER_VALIDATE_URL)) {
+
+    if (!empty($restrict_path_added) && $file_folder_exists && !$is_wp_uri && filter_var($restricted_path_url, FILTER_VALIDATE_URL)) {
       $saved_restricted_roles = array();
-      foreach($restrict_options as $key => $option) {
+      foreach ($restrict_options as $key => $option) {
         if (startsWith($electric_book_wp_field_roles_id, $key)) {
           array_push($saved_restricted_roles, $option);
         }
@@ -180,15 +193,14 @@ function electric_book_wp_restrict_options_page_html() {
       } else {
         add_settings_error('electric_book_wp_messages', 'electric_book_wp_message', __('That particular restricted path setting already exists. No changes to existing settings were made.', 'electric_book_wp'), 'info');
       }
-
     } else {
-      add_settings_error('electric_book_wp_messages', 'electric_book_wp_message', __('A valid path value has not been entered', 'electric_book_wp'), 'error');
+      add_settings_error('electric_book_wp_messages', 'electric_book_wp_message', __('A valid path value has not been entered or it conflicts with an existing WordPress permalink.', 'electric_book_wp'), 'error');
     }
   }
 
   // show error/update messages
   settings_errors('electric_book_wp_messages');
-  ?>
+?>
   <div class="wrap">
     <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
     <form action="options.php" method="post">
@@ -206,27 +218,27 @@ function electric_book_wp_restrict_options_page_html() {
       <hr>
       <h2>Saved restricted paths</h2>
       <form method="post">
-      <?php
-      foreach ($restrict_options_all as $key => $path) {
-        $path_properties = $path; ?>
-        <p>Restricted path: <?=esc_html($path_properties['path'])?></p>
-        <p>Permitted user roles:
-          <?php
-          if (empty($path_properties['roles'])) {
-            echo 'All';
-          } else {
-            foreach ($path_properties['roles'] as $role) {
-              echo $wp_roles->roles[$role]['name'] . ', ';
-            }
-          } ?>
-        </p>
-        <p>Redirect to: <code><?= isset($path['redirect']) ? $path['redirect'] : 'wp-login.php'?></code></p>
-        <p><button type="submit" value="<?=esc_attr($path_properties['path'])?>" name="delete_restricted_path">Delete</button></p>
-        <hr>
-      <?php } ?>
+        <?php
+        foreach ($restrict_options_all as $key => $path) {
+          $path_properties = $path; ?>
+          <p>Restricted path: <?= esc_html($path_properties['path']) ?></p>
+          <p>Permitted user roles:
+            <?php
+            if (empty($path_properties['roles'])) {
+              echo 'All';
+            } else {
+              foreach ($path_properties['roles'] as $role) {
+                echo $wp_roles->roles[$role]['name'] . ', ';
+              }
+            } ?>
+          </p>
+          <p>Redirect to: <code><?= isset($path['redirect']) ? $path['redirect'] : 'wp-login.php' ?></code></p>
+          <p><button type="submit" value="<?= esc_attr($path_properties['path']) ?>" name="delete_restricted_path">Delete</button></p>
+          <hr>
+        <?php } ?>
       </form>
     <?php } ?>
 
   </div>
-  <?php
+<?php
 }

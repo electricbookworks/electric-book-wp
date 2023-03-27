@@ -2,7 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-function electric_book_wp_can_user_view($current_setting) {
+function electric_book_wp_can_user_view($current_setting)
+{
   $can_they = false;
   $user = wp_get_current_user();
   if (!empty($current_setting['roles'])) {
@@ -17,7 +18,8 @@ function electric_book_wp_can_user_view($current_setting) {
   return $can_they;
 }
 
-function electric_book_wp_serve_restricted_html($get_restricted_path) {
+function electric_book_wp_serve_restricted_html($get_restricted_path)
+{
   $restrict_options_all = get_option('electric_book_wp_restrict_all');
   $current_setting = $restrict_options_all['"' . $get_restricted_path . '"'];
   $requested_url = $_GET['electric-book-wp-serve'];
@@ -25,7 +27,7 @@ function electric_book_wp_serve_restricted_html($get_restricted_path) {
     $requested_url .= '/index.html';
   }
   $mime_type = mime_content_type(ABSPATH . $requested_url);
-  if (is_user_logged_in() && electric_book_wp_can_user_view($current_setting) && $mime_type == 'text/html') {
+  if (is_user_logged_in() && electric_book_wp_can_user_view($current_setting)) {
     header('Content-Type: ' . $mime_type);
     readfile(ABSPATH . $requested_url);
   } elseif (is_user_logged_in()) {
@@ -48,7 +50,8 @@ function electric_book_wp_serve_restricted_html($get_restricted_path) {
   exit;
 }
 
-function electric_book_wp_check_incoming() {
+function electric_book_wp_check_incoming()
+{
   $get_restricted_path = isset($_GET['electric-book-wp-restricted-path']) && !empty($_GET['electric-book-wp-restricted-path']) ? $_GET['electric-book-wp-restricted-path'] : false;
   if ($get_restricted_path !== false) {
     electric_book_wp_serve_restricted_html($get_restricted_path);
