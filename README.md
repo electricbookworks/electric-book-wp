@@ -4,11 +4,9 @@ This plugin is for WordPress sites that include Electric Book publications in su
 
 For example, [core.econ.org](https://core.econ.org) is a WordPress site, and [core-econ.org/experiencing-economics](https://core-econ.org/experiencing-economics) is an Electric Book publication. This plugin restricts access to the 'Instructors' pages to users who are logged into core-econ.org and have teacher's accounts.
 
-
 ## Usage
 
 To restrict pages, after installing the plugin, in WordPress admin go to the Electric Book menu and follow the instructions. You'll add the URLs of the book pages you want to restrict, and the types of users who should have access to them.
-
 
 ## Setup
 
@@ -22,18 +20,15 @@ For example, if you visit [core-econ.org/experiencing-economics](https://www.cor
 Here are some technical notes on implementation.
 
 1. WordPress site needs to have rewrite rules enabled for this to work.
-2. We have to forbid direct access to asset files (e.g. CSS, JS, images) that fall under restricted URLs, regardless of logged-in status. Only HTML files are served. This is due to `readfile()` restrictions when handed over to WP/PHP and the fact that the plugin can't do any properly secure logged-in checks before it gets to WordPress.
-3. While testing, your browser may cache the HTML page and therefore serve it to you without going back to the server again. So keep this in mind when testing logged-in and user roles behaviour on newly configured path settings.
-4. Fragment links can't be persisted if they are in the originating URL before a redirect to login. Hash values aren't sent to the server, so there's no way of persisting them during the validation journey, unless the hash value is saved in the client via JS. Once or if a user has access, they will work normally.
-5. Take special note of the token validation required when creating a redirect template of your own. This is to guard against potential XSS and CSRF hacks directed at your redirect page. The `/ebwp-redirect-example.php` is an example this implementation in a file external to WP templating, and [the default page template](https://github.com/electricbookworks/electric-book-wp/blob/master/wp-content/themes/serve-restricted-html/page.php) in the default theme is an example of a WP template implementation.
-
+2. While testing, your browser may cache the HTML page and therefore serve it to you without going back to the server again. So keep this in mind when testing logged-in and user roles behaviour on newly configured path settings.
+3. Fragment links can't be persisted if they are in the originating URL before a redirect to login. Hash values aren't sent to the server, so there's no way of persisting them during the validation journey, unless the hash value is saved in the client via JS. Once or if a user has access, they will work normally.
+4. Take special note of the token validation required when creating a redirect template of your own. This is to guard against potential XSS and CSRF hacks directed at your redirect page. The `/ebwp-redirect-example.php` is an example this implementation in a file external to WP templating, and [the default page template](https://github.com/electricbookworks/electric-book-wp/blob/master/wp-content/themes/serve-restricted-html/page.php) in the default theme is an example of a WP template implementation.
 
 ## Future development
 
 This plugin may be extended in future to handle other interactions between Electric Book publications and their WordPress hosts. For example, it might save and sync users' bookmarks, or allow WordPress editors to post user notifications to book pages.
 
 In addition, the code here should be made more object orientated and DRY, using classes and a greater separation of concerns.
-
 
 ## Technical background
 
@@ -57,11 +52,9 @@ This is easily hackable. Just create a wordpress_logged_in cookie in your client
 
 Result: using PHP `readfile()` to serve the files seems to be most efficient way to do this that is actually secure.
 
-
 ## Development
 
 You can use Docker to run the plugin for development, or run your own WordPress instance.
-
 
 ### Using docker
 
@@ -77,7 +70,6 @@ To stop the docker container, run `$ docker-compose stop` in the root of the pro
 To remove the container entirely, run `$ docker-compose down`. This option allows for better housekeeping.
 
 Running `$ docker-compose up` again will bring the container back to life, regardless of whether you used `stop` or `down`.
-
 
 ### Using your own WordPress instance
 
