@@ -27,6 +27,11 @@ function electric_book_wp_htaccess_restricted_paths($action = null, $pathPassed 
         $path_rules = '<IfModule mod_rewrite.c>' . "\n";
         $path_rules .= 'RewriteEngine On' . "\n";
         $path_rules .= 'RewriteCond %{REQUEST_URI} \.(?:html|htm)$ [NC]' . "\n";
+        $path_rules .= 'RewriteRule . ' . get_site_url() . '/$1 [R=301]' . "\n";
+        $path_rules .= '</IfModule>' . "\n";
+        $path_rules .= '<IfModule mod_rewrite.c>' . "\n";
+        $path_rules .= 'RewriteEngine On' . "\n";
+        $path_rules .= 'RewriteCond %{REQUEST_URI} \.(?:html|htm)$ [NC]' . "\n";
         $path_rules .= 'RewriteRule . /index.php?electric-book-wp-restricted-path=' . $path['path'] . '&electric-book-wp-serve=%{REQUEST_URI} [L]' . "\n";
         $path_rules .= '</IfModule>' . "\n";
         $rules .= $path_rules;
