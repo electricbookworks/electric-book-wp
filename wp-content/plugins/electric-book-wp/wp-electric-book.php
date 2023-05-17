@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Electric Book WP
  * Description:       Manage static HTML publications inside WordPress
- * Version:           2.0.0
+ * Version:           2.1.0
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -74,6 +74,9 @@ function electric_book_wp_settings_init()
       'label_for' => $electric_book_wp_field_redirect_id
     ]
   );
+
+  // run htaccess writer on initialisation to clean up legacy rules and to make sure site URL is up to date
+  electric_book_wp_htaccess_restricted_paths();
 }
 
 add_action('admin_init', 'electric_book_wp_settings_init');
