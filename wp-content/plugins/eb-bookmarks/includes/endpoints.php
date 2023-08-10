@@ -7,9 +7,9 @@ function eb_bookmarks_get_user_bookmarks()
     global $eb_bookmarks_user_id;
 
     if ($eb_bookmarks_user_id < 1) {
-        return new WP_REST_Response(["message" => "Sorry, you are not allowed to do that."], 401 );
+        return new WP_REST_Response(["message" => "Sorry, you are not allowed to do that."], 401);
     }
-    
+
     $table_name = $wpdb->prefix . 'eb_bookmarks';
 
     $query = $wpdb->prepare(
@@ -22,7 +22,11 @@ function eb_bookmarks_get_user_bookmarks()
     );
 
     $row = $wpdb->get_row($query);
-    return json_decode($row->payload);
+    if ($row && $row->payload) {
+        return json_decode($row->payload);
+    } else {
+        return json_encode(null);
+    }
 }
 
 function eb_bookmarks_update_user_bookmarks(WP_REST_Request $request)
@@ -31,7 +35,7 @@ function eb_bookmarks_update_user_bookmarks(WP_REST_Request $request)
     global $eb_bookmarks_user_id;
 
     if ($eb_bookmarks_user_id < 1) {
-        return new WP_REST_Response(["message" => "Sorry, you are not allowed to do that."], 401 );
+        return new WP_REST_Response(["message" => "Sorry, you are not allowed to do that."], 401);
     }
 
     $table_name = $wpdb->prefix . 'eb_bookmarks';
@@ -44,7 +48,7 @@ function eb_bookmarks_update_user_bookmarks(WP_REST_Request $request)
     $rowsChanged = $wpdb->replace(
         $table_name,
         [
-            'user_id' => $eb_bookmarks_user_id, 
+            'user_id' => $eb_bookmarks_user_id,
             'payload' => json_encode($bookmarks)
         ]
     );
@@ -61,7 +65,7 @@ function eb_bookmarks_register_routes()
             'permission_callback' => function () {
                 return true;
             },
-        ], 
+        ],
         [
             'methods' => 'POST',
             'callback' => 'eb_bookmarks_update_user_bookmarks',
