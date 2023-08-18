@@ -91,6 +91,10 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
 
 define('WP_DEFAULT_THEME', 'serve-restricted-html');
 
+// Basic auth credentials for access to all resticted HTML regardless of WP user status
+define('ELECTRIC_BOOK_WP_BASIC_AUTH_USER', 'ebwpclient');
+define('ELECTRIC_BOOK_WP_BASIC_AUTH_PW', 'pV0zIfE13b%$');
+
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
