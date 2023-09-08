@@ -2,35 +2,18 @@
 
 defined('ABSPATH') || exit;
 
-function electric_book_wp_basic_auth()
-{
-  $AUTH_USER = ELECTRIC_BOOK_WP_BASIC_AUTH_USER;
-  $AUTH_PASS = ELECTRIC_BOOK_WP_BASIC_AUTH_PW;
-  header('Cache-Control: no-cache, must-revalidate, max-age=0');
-  $has_supplied_credentials = !(empty($_SERVER['PHP_AUTH_USER']) && empty($_SERVER['PHP_AUTH_PW']));
-  $is_not_authenticated = (!$has_supplied_credentials ||
-    $_SERVER['PHP_AUTH_USER'] != $AUTH_USER ||
-    $_SERVER['PHP_AUTH_PW']   != $AUTH_PASS
-  );
-  return !$is_not_authenticated;
-}
-
 function electric_book_wp_can_user_view($current_setting)
 {
   $can_they = false;
-  if (electric_book_wp_basic_auth()) {
-    $can_they = true;
-  } elseif (is_user_logged_in()) {
-    $user = wp_get_current_user();
-    if (!empty($current_setting['roles'])) {
-      foreach ($current_setting['roles'] as $role) {
-        if (in_array($role, (array) $user->roles)) {
-          $can_they = true;
-        }
+  $user = wp_get_current_user();
+  if (!empty($current_setting['roles'])) {
+    foreach ($current_setting['roles'] as $role) {
+      if (in_array($role, (array) $user->roles)) {
+        $can_they = true;
       }
-    } else {
-      $can_they = true;
     }
+  } else {
+    $can_they = true;
   }
   return $can_they;
 }
@@ -44,7 +27,7 @@ function electric_book_wp_serve_restricted_html($get_restricted_path)
     $requested_url .= '/index.html';
   }
   $mime_type = mime_content_type(ABSPATH . $requested_url);
-  if (electric_book_wp_can_user_view($current_setting)) {
+  if (is_user_logged_in() && electric_book_wp_can_user_view($current_setting)) {
     header('Content-Type: ' . $mime_type);
     readfile(ABSPATH . $requested_url);
   } elseif (is_user_logged_in()) {
