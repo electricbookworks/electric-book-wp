@@ -4,8 +4,8 @@ defined('ABSPATH') || exit;
 
 function electric_book_wp_basic_auth()
 {
-  $AUTH_USER = ELECTRIC_BOOK_WP_BASIC_AUTH_USER;
-  $AUTH_PASS = ELECTRIC_BOOK_WP_BASIC_AUTH_PW;
+  $AUTH_USER = 'ebwpclient';
+  $AUTH_PASS = 'pV0zIfE13b%$';
   header('Cache-Control: no-cache, must-revalidate, max-age=0');
   $has_supplied_credentials = !(empty($_SERVER['PHP_AUTH_USER']) && empty($_SERVER['PHP_AUTH_PW']));
   $is_not_authenticated = (!$has_supplied_credentials ||
