@@ -5,8 +5,8 @@ defined('ABSPATH') || exit;
 function electric_book_wp_htaccess_restricted_paths($action = null, $pathPassed = null)
 {
 
-  $begin_Comment = "\n" . '# BEGIN Electric Book WP' . "\n";
-  $end_Comment = '# END Electric Book WP' . "\n";
+  $begin_Comment = '# BEGIN Electric Book WP';
+  $end_Comment = '# END Electric Book WP';
 
   if ($action === 'delete' && $pathPassed) {
     $htaccess_path = ABSPATH . '/' . $pathPassed . '/.htaccess';
@@ -22,7 +22,7 @@ function electric_book_wp_htaccess_restricted_paths($action = null, $pathPassed 
       foreach ($restrict_options_all as $path) {
         $htaccess_path = ABSPATH . '/' . $path['path'] . '/.htaccess';
         $htaccess_content = file_get_contents($htaccess_path);
-        $rules = $begin_Comment;
+        $rules = $begin_Comment . "\n";
         // serve the html via PHP
         $path_rules = '<IfModule mod_rewrite.c>' . "\n";
         $path_rules .= 'RewriteEngine On' . "\n";
