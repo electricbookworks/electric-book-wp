@@ -5,11 +5,12 @@ defined('ABSPATH') || exit;
 function electric_book_wp_htaccess_restricted_paths($action = null, $pathPassed = null)
 {
 
+
   $begin_Comment = '# BEGIN Electric Book WP';
   $end_Comment = '# END Electric Book WP';
 
   if ($action === 'delete' && $pathPassed) {
-    $htaccess_path = ABSPATH . '/' . $pathPassed . '/.htaccess';
+    $htaccess_path = ABSPATH . '/' . dirname($pathPassed) . '/.htaccess';
     $htaccess_content = file_get_contents($htaccess_path);
     $existing_rules = between($begin_Comment, $end_Comment, $htaccess_content);
     $htaccess_content_updated = str_replace($begin_Comment . $existing_rules . $end_Comment, '', $htaccess_content);
@@ -20,7 +21,7 @@ function electric_book_wp_htaccess_restricted_paths($action = null, $pathPassed 
     if ($has_saved_paths) {
       // create htaccess file/rules for each path
       foreach ($restrict_options_all as $path) {
-        $path = endsWith('html', $path['path']) || endsWith('htm', $path['path']) ? dirname($path['path']) : $path['path'];
+        $path = dirname($path['path']);
         $htaccess_path = ABSPATH . '/' . $path . '/.htaccess';
         $htaccess_content = file_get_contents($htaccess_path);
         $rules = "\n" . $begin_Comment . "\n";
