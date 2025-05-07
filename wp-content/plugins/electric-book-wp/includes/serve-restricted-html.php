@@ -37,39 +37,58 @@ function electric_book_wp_can_user_view($current_setting)
 
 function electric_book_wp_serve_restricted_html($get_restricted_path)
 {
-  $restrict_options_all = get_option('electric_book_wp_restrict_all');
-  $current_setting = $restrict_options_all['"' . $get_restricted_path . '"'];
-  $requested_url = $_GET['electric-book-wp-serve'];
+  
+  $requested_url = trim($_GET['electric-book-wp-serve'], '/');
+  $requested_dir = dirname($requested_url);
   if (is_dir($requested_url)) {
     $requested_url .= '/index.html';
   }
   $mime_type = mime_content_type(ABSPATH . $requested_url);
-  if (electric_book_wp_can_user_view($current_setting)) {
+  $restrict_options_all = get_option('electric_book_wp_restrict_all');
+  
+  // Try specific file match
+  $file_match = $restrict_options_all['"' . $requested_url . '"'];
+  $current_setting = $restrict_options_all['"' . $requested_url . '"'];
+  // Otherwise see if it is a dir catch all
+  if (!isset($current_setting['path'])) {
+    $current_setting = $restrict_options_all['"' . $requested_dir . '"'];
+  }
+  
+  if (!isset($current_setting['path'])) {
     header('Content-Type: ' . $mime_type);
     readfile(ABSPATH . $requested_url);
+    exit;
+  } elseif (electric_book_wp_can_user_view($current_setting)) {
+    header('Content-Type: ' . $mime_type);
+    readfile(ABSPATH . $requested_url);
+    exit;
   } elseif (is_user_logged_in()) {
     if (isset($current_setting['redirect'])) {
       $redirect_url = $current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=role';
       $redirect_url = add_query_arg('_wpnonce', wp_create_nonce('electric_book_wp_redirect'), $redirect_url);
       wp_redirect($redirect_url, 302);
+      exit;
     } else {
       echo 'This is a restricted page. Although you are logged in, your profile lacks the necessary role required to view this page.';
+      exit;
     }
   } else {
     if (isset($current_setting['redirect'])) {
       $redirect_url = $current_setting['redirect'] . '?redirect_to=' . urlencode($requested_url) . '&reason=logged-out';
       $redirect_url = add_query_arg('_wpnonce', wp_create_nonce('electric_book_wp_redirect'), $redirect_url);
       wp_redirect($redirect_url, 302);
+      exit;
     } else {
       wp_redirect('/wp-login.php?redirect_to=' . urlencode($requested_url), 302);
+      exit;
     }
   }
-  exit;
+
 }
 
 function electric_book_wp_check_incoming()
 {
-  $get_restricted_path = isset($_GET['electric-book-wp-restricted-path']) && !empty($_GET['electric-book-wp-restricted-path']) ? $_GET['electric-book-wp-restricted-path'] : false;
+  $get_restricted_path = !empty($_GET['electric-book-wp-restricted-path']) ? $_GET['electric-book-wp-restricted-path'] : false;
   if ($get_restricted_path !== false) {
     electric_book_wp_serve_restricted_html($get_restricted_path);
   }

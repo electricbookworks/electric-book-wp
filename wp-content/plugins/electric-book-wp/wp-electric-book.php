@@ -93,7 +93,6 @@ function electric_book_wp_section_restrict_access_cb($args)
 function electric_book_wp_field_restrict_path_cb($args)
 { ?>
   <input id="<?= esc_attr($args['label_for']) ?>" type="text" name="electric_book_wp_restrict[<?= esc_attr($args['label_for']) ?>]" placeholder="your/path/goes/here" class="regular-text">
-  <p>Please note that the entire terminal directory will be restricted. E.g. 'your/path/file.html' will result in the entire 'your/path/' being restricted.</p>
   <?php }
 
 function electric_book_wp_field_restrict_roles_cb($args)
@@ -155,15 +154,14 @@ function electric_book_wp_restrict_options_page_html()
     
     $restrict_path_added = trim($restrict_options[$electric_book_wp_field_path_id], '/');
     $restrict_path_added_abspath = ABSPATH . '/' . $restrict_path_added;
-    $restrict_path_added = is_file($restrict_path_added_abspath) ? dirname($restrict_path_added) : $restrict_path_added;
 
     // check path exists and doesn't coflict with any WP URIs in DB
-    $folder_exists = is_dir(ABSPATH . '/' . $restrict_path_added);
+    $path_exists = is_dir(ABSPATH . '/' . $restrict_path_added) || is_file(ABSPATH . '/' . $restrict_path_added);
     $is_wp_uri = get_page_by_path($restrict_path_added, OBJECT, ['page', 'post']);
 
     $restricted_path_url = get_option('siteurl') . '/' .  $restrict_path_added;
 
-    if (!empty($restrict_path_added) && $folder_exists && !$is_wp_uri && filter_var($restricted_path_url, FILTER_VALIDATE_URL)) {
+    if (!empty($restrict_path_added) && $path_exists && !$is_wp_uri && filter_var($restricted_path_url, FILTER_VALIDATE_URL)) {
       $saved_restricted_roles = array();
       foreach ($restrict_options as $key => $option) {
         if (startsWith($electric_book_wp_field_roles_id, $key)) {

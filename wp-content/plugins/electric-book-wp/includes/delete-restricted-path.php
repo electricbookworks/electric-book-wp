@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 
 function electric_book_wp_delete_restricted_path()
 {
-  if (isset($_POST['delete_restricted_path']) && !empty($_POST['delete_restricted_path'])) {
+  if (!empty($_POST['delete_restricted_path'])) {
     $restrict_path_key = '"' . esc_attr(stripslashes($_POST['delete_restricted_path'])) . '"';
     $restrict_options_all = get_option('electric_book_wp_restrict_all');
     $restricted_path_string = $restrict_options_all[$restrict_path_key]['path'];
