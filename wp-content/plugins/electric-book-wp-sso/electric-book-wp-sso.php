@@ -11,24 +11,24 @@
 // Exit if accessed directly
 defined('ABSPATH') || exit;
 
-function electric_book_wp_sso_load_env() {
-  $dotenv_file = __DIR__ . '/.env';
-  if (file_exists($dotenv_file)) {
-    $lines = file($dotenv_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-      if (strpos($line, '=') !== false && strpos($line, '#') !== 0) {
-        [$key, $value] = explode('=', $line, 2);
-        $_ENV[trim($key)] = trim($value);
-      }
-    }
+function electric_book_wp_sso_get_oauth_credentials($client_id) {
+  // Check if wp-oauth-server is active and function exists
+  if (!function_exists('get_client_by_client_id')) {
+    return false;
   }
+  $client = get_client_by_client_id($client_id);
+  return $client ? ['client_id' => $client['client_id'], 'client_secret' => $client['client_secret']] : false;
 }
 
 function electric_book_wp_sso_set_shared_session($user_login, $user) {
 
-  electric_book_wp_sso_load_env();
+  $client_id = 'LxkHtvSCopIXha8StEr8sfNq9CXtbMykUXDqww0m';
+  $domains = '.core-econ.org';
   
-  if ($_ENV['ENCRYPTION_KEY'] && $_ENV['DOMAIN']) {
+  // Get OAuth client credentials
+  $oauth_credentials = electric_book_wp_sso_get_oauth_credentials($client_id);
+  
+  if ($oauth_credentials && $oauth_credentials['client_secret']) {
 
     $json_object = json_encode([
       "ID" => $user->ID,
@@ -40,29 +40,22 @@ function electric_book_wp_sso_set_shared_session($user_login, $user) {
       "display_name" => $user->display_name,
       "user_role" => $user->roles[0] ?? 'subscriber'
     ]);
-  
-    $key = $_ENV['ENCRYPTION_KEY'];
+
+    $key = $client_id . $oauth_credentials['client_secret'];
     $cipher_method = 'aes-256-cbc';
     $iv_length = openssl_cipher_iv_length($cipher_method);
     $iv = openssl_random_pseudo_bytes($iv_length);
     $encrypted_data = openssl_encrypt($json_object, $cipher_method, $key, 0, $iv);
     $encrypted_object_and_iv = base64_encode($iv . $encrypted_data);
-  
-    $cookie_name = "ebwp_sso_session";
     $cookie_value = $encrypted_object_and_iv;
     
-    // Support multiple domains (comma-separated)
-    $domains = array_map('trim', explode(',', $_ENV['DOMAIN']));
-    
-    foreach ($domains as $domain) {
-      setcookie($cookie_name, $cookie_value, [
-        'expires' => time() + (86400 * 30),
-        'path' => '/',
-        'domain' => $domain,
-        'secure' => false,
-        'httponly' => true
-      ]);
-    }
+    setcookie('ebwp_sso_session', $cookie_value, [
+      'expires' => time() + (86400 * 30),
+      'path' => '/',
+      'domain' => '.core-econ.org',
+      'secure' => false,
+      'httponly' => true
+    ]);
 
   }
 
@@ -70,29 +63,14 @@ function electric_book_wp_sso_set_shared_session($user_login, $user) {
 
 add_action('wp_login', 'electric_book_wp_sso_set_shared_session', 10, 2);
 
-function electric_book_wp_sso_unset_shared_session() {
-
-  electric_book_wp_sso_load_env();
-  
-  $cookie_name = "ebwp_sso_session";
-  
-  if ($_ENV['DOMAIN']) {
-    // Support multiple domains (comma-separated)
-    $domains = array_map('trim', explode(',', $_ENV['DOMAIN']));
-    
-    foreach ($domains as $domain) {
-      setcookie($cookie_name, "", [
-        'expires' => time() - 3600,
-        'path' => '/',
-        'domain' => $domain,
-        'secure' => false,
-        'httponly' => true
-      ]);
-    }
-  } else {
-    // Fallback: clear for current domain only
-    setcookie($cookie_name, "", time() - 3600, "/");
-  }
+function electric_book_wp_sso_unset_shared_session() {  
+  setcookie('ebwp_sso_session', "", [
+    'expires' => time() - 3600,
+    'path' => '/',
+    'domain' => '.core-econ.org',
+    'secure' => false,
+    'httponly' => true
+  ]);
 }
 
 add_action('wp_logout', 'electric_book_wp_sso_unset_shared_session');
